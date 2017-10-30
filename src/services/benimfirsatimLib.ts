@@ -20,10 +20,7 @@ export class BenimfirsatimLib{
         return;
       }
 
-      return this.http.get(this.api_address + '/'+page_code+'.json',{}).do((res)=>(console.log(res.json()))).map((res)=>{
-        res.json()
-      });
-
+      return this.http.get(this.api_address + '/'+page_code+'.json',{});
 
   }
 

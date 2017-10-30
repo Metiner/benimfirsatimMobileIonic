@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {BenimfirsatimLib} from "../../app/benimfirsatimLib";
+import {Component, OnInit} from '@angular/core';
+import { IonicPage, NavController } from 'ionic-angular';
+import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {Opportunity} from "../../modals/opportunity";
+
 
 /**
  * Generated class for the HighlightsPage page.
@@ -14,19 +16,29 @@ import {BenimfirsatimLib} from "../../app/benimfirsatimLib";
   selector: 'page-highlights',
   templateUrl: 'highlights.html',
 })
-export class HighlightsPage {
+export class HighlightsPage implements OnInit{
 
-  hotDeals = null;
+  opportunities: Opportunity[] = [];
 
   constructor(public navCtrl: NavController,benimfirsatimLib:BenimfirsatimLib) {
     benimfirsatimLib.getPage('hot').subscribe((data)=>{
-      this.hotDeals = data;
+
+    data.json().forEach(element => {
+        let u:Opportunity = new Opportunity();
+        Object.assign(u,element);
+        this.opportunities.push(u);
+    });
+    console.log(this.opportunities);
+
+
+
+
     })
   }
 
+  ngOnInit(){
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HighlightsPage');
   }
-  
+
+
 }

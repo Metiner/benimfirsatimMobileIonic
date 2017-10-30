@@ -7,7 +7,7 @@ import {CategoriesPage} from "../categories/categories";
 @Component({
   selector: 'page-tabs',
   template: `
-    <ion-tabs tabsPlacement ="top" padding>
+    <ion-tabs tabsPlacement ="top">
       <ion-tab [root]="highlightsPage" tabTitle= "Highlights"></ion-tab>
       <ion-tab [root]="risingPage" tabTitle="Rising" ></ion-tab>
       <ion-tab [root]="topPage" tabTitle="Top" ></ion-tab>

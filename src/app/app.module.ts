@@ -13,7 +13,7 @@ import {TopPage} from "../pages/top/top";
 import {HttpModule} from "@angular/http";
 
 
-import {BenimfirsatimLib} from "./benimfirsatimLib";
+import {BenimfirsatimLib} from "../services/benimfirsatimLib";
 
 @NgModule({
   declarations: [

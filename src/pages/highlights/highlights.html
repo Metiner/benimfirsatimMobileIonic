@@ -14,5 +14,35 @@
 
 
 <ion-content padding>
-
+  <ion-card *ngFor="let opportunity of opportunities">
+    <ion-item>
+      <h2>{{opportunity.title}}</h2>
+      <p>{{opportunity.link}}</p>
+    </ion-item>
+    <img padding="" src="{{opportunity.image_url}}">
+    <ion-card-content>
+      <p>{{opportunity.details}}</p>
+    </ion-card-content>
+    <ion-row text-center>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="pricetag"></ion-icon>
+          <div>{{opportunity.price}}$</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>{{opportunity.comments_count}} Comments</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button
+                (click)="onItemClick()"
+                ion-button
+                round
+                small>Fırsata git</button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
 </ion-content>
