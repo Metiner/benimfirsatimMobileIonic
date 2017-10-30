@@ -10,6 +10,10 @@ import {HighlightsPage} from "../pages/highlights/highlights";
 import {RisingPage} from "../pages/rising/rising";
 import {CategoriesPage} from "../pages/categories/categories";
 import {TopPage} from "../pages/top/top";
+import {HttpModule} from "@angular/http";
+
+
+import {BenimfirsatimLib} from "./benimfirsatimLib";
 
 @NgModule({
   declarations: [
@@ -22,6 +26,7 @@ import {TopPage} from "../pages/top/top";
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -35,6 +40,7 @@ import {TopPage} from "../pages/top/top";
   ],
   providers: [
     StatusBar,
+    BenimfirsatimLib,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

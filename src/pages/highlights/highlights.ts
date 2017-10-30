@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {BenimfirsatimLib} from "../../app/benimfirsatimLib";
 
 /**
  * Generated class for the HighlightsPage page.
@@ -15,11 +16,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class HighlightsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  hotDeals = null;
+
+  constructor(public navCtrl: NavController,benimfirsatimLib:BenimfirsatimLib) {
+    benimfirsatimLib.getPage('hot').subscribe((data)=>{
+      this.hotDeals = data;
+    })
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HighlightsPage');
   }
-
+  
 }
