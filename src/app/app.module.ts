@@ -2,32 +2,40 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {HttpModule} from "@angular/http";
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import {BenimfirsatimLib} from "./benimfirsatimLib";
+import {TabsPage} from "../pages/tabs/tabs";
+import {HighlightsPage} from "../pages/highlights/highlights";
+import {RisingPage} from "../pages/rising/rising";
+import {CategoriesPage} from "../pages/categories/categories";
+import {TopPage} from "../pages/top/top";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    TabsPage,
+    HighlightsPage,
+    RisingPage,
+    CategoriesPage,
+    TopPage
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    TabsPage,
+    HighlightsPage,
+    RisingPage,
+    CategoriesPage,
+    TopPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    BenimfirsatimLib,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
