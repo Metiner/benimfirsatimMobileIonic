@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Loading,NavController } from 'ionic-angular';
+import {BenimfirsatimLib} from "../../app/benimfirsatimLib";
+
 
 @Component({
   selector: 'page-home',
@@ -7,8 +9,14 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  hotDeals = null;
 
+  constructor(public navCtrl: NavController,benimfirsatimLib:BenimfirsatimLib) {
+    benimfirsatimLib.getPage('hot').subscribe((data)=>{
+      this.hotDeals = data;
+    })
   }
+
+
 
 }

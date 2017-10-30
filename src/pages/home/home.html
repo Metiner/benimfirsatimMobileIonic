@@ -11,4 +11,11 @@
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
   </p>
+
+  <ion-list *ngIf="(hotDeals | async)?.length > 0">
+    <ion-item *ngFor="let deal of hotDeals">
+      <h1>{{deal['title']}}</h1>
+      <p>{{deal['title']}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>
