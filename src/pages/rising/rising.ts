@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {Opportunity} from "../../modals/opportunity";
 
 /**
  * Generated class for the RisingPage page.
@@ -15,11 +17,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RisingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  opportunities: Opportunity[] = [];
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RisingPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams,benimfirsatimLib:BenimfirsatimLib) {
+    benimfirsatimLib.getPage('rising').subscribe((data)=>{
+
+      data.json().forEach(element => {
+        let u:Opportunity = new Opportunity();
+        Object.assign(u,element);
+        this.opportunities.push(u);
+      });
+    })
   }
 
 }

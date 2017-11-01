@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Opportunity} from "../../modals/opportunity";
+import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 
 /**
  * Generated class for the TopPage page.
@@ -15,11 +17,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TopPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  opportunities: Opportunity[] = [];
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TopPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams,benimfirsatimLib:BenimfirsatimLib) {
+    benimfirsatimLib.getPage('newcomers').subscribe((data)=>{
+      data.json().forEach(element => {
+        let u:Opportunity = new Opportunity();
+        Object.assign(u,element);
+        this.opportunities.push(u);
+      });
+    })
   }
 
 }
