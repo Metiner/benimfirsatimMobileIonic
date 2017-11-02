@@ -19,7 +19,7 @@ export class BenimfirsatimLib{
         return;
 
       }
-      return this.http.get(this.api_address + '/'+page_code+'.json',{});
+      return this.http.get(this.api_address + '/'+page_code+'.json');
   }
 
 
@@ -30,6 +30,26 @@ export class BenimfirsatimLib{
 
   public signIn(email,password){
     return this.http.post(this.api_address + '/users/sing_in',{"user[email]":email,"user[password]":password});
+  }
+
+  public getDeal(deal_id){
+    return this.http.get(this.api_address + '/deals/0/'+deal_id.toString() + '/');
+  }
+
+  public upvoteDeal(deal_id){
+    return this.http.get(this.api_address + '/deals/'+deal_id.toString() + '/upvote');
+  }
+
+  public downvoteDeal(deal_id){
+    return this.http.get(this.api_address + '/deals/'+deal_id.toString() + '/downvote');
+  }
+
+  public createComment(deal_id,parent_comment_id){
+    return this.http.post(this.api_address + '/deals/' + deal_id +'/comments',{parent_comment_id:parent_comment_id});
+  }
+
+  public commentVote(comment_id){
+    return this.http.post(this.api_address + '/comments/'+comment_id+'/vote');
   }
 
 
