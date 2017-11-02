@@ -16,6 +16,8 @@ import {HttpModule} from "@angular/http";
 import {BenimfirsatimLib} from "../services/benimfirsatimLib";
 import {OpportunityPage} from "../pages/opportunity/opportunity";
 import {DenemePage} from "../pages/deneme/deneme";
+import {SignupPage} from "../pages/signup/signup";
+import {LoginPage} from "../pages/login/login";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {DenemePage} from "../pages/deneme/deneme";
     CategoriesPage,
     TopPage,
     OpportunityPage,
-    DenemePage
+    DenemePage,
+    SignupPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,9 @@ import {DenemePage} from "../pages/deneme/deneme";
     CategoriesPage,
     TopPage,
     OpportunityPage,
-    DenemePage
+    DenemePage,
+    LoginPage,
+    SignupPage
   ],
   providers: [
     StatusBar,

@@ -24,6 +24,7 @@ export class BenimfirsatimLib{
 
 
   public signUp(email,password){
+    console.log(email +' '+ password);
     return this.http.post(this.api_address + '/users',{"user[email]":email,"user[password]":password,"user[password_again]":password});
   }
 
