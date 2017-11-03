@@ -16,7 +16,7 @@ export class SignupPage {
   onSignUp(form: NgForm){
     console.log(form.value);
     this.benimFirsatimLib.signUp(form.value.email, form.value.password).subscribe(data=>{
-      console.log(data.json());
+      console.log(data);
     });
 
   }

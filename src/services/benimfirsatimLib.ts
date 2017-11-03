@@ -49,7 +49,7 @@ export class BenimfirsatimLib{
   }
 
   public commentVote(comment_id){
-    return this.http.post(this.api_address + '/comments/'+comment_id+'/vote');
+    return this.http.post(this.api_address + '/comments/'+comment_id+'/vote',{});
   }
 
 
