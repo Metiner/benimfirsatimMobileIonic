@@ -6,7 +6,7 @@ import 'rxjs/add/operator/do'
 
 @Injectable()
 export class BenimfirsatimLib{
-  api_address = "http://localhost:3000/";
+  api_address = "https://benimfirsatim.com";
 
   constructor(private http:Http){}
 
