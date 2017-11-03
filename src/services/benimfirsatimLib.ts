@@ -6,8 +6,7 @@ import 'rxjs/add/operator/do'
 
 @Injectable()
 export class BenimfirsatimLib{
-  api_address = "https://benimfirsatim.com";
-
+  api_address = "http://localhost:3000/";
 
   constructor(private http:Http){}
 
@@ -25,11 +24,11 @@ export class BenimfirsatimLib{
 
   public signUp(email,password){
     console.log(email +' '+ password);
-    return this.http.post(this.api_address + '/users',{"user[email]":email,"user[password]":password,"user[password_again]":password});
+    return this.http.post(this.api_address + '/users.json',{"user":{"email":email,"password":password}});
   }
 
   public signIn(email,password){
-    return this.http.post(this.api_address + '/users/sing_in',{"user[email]":email,"user[password]":password});
+    return this.http.post(this.api_address + '/users/sing_in.json',{"user":{"email":email,"password":password}});
   }
 
   public getDeal(deal_id){
@@ -45,11 +44,11 @@ export class BenimfirsatimLib{
   }
 
   public createComment(deal_id,parent_comment_id){
-    return this.http.post(this.api_address + '/deals/' + deal_id +'/comments',{parent_comment_id:parent_comment_id});
+    return this.http.post(this.api_address + '/deals/' + deal_id +'/comments.json',{parent_comment_id:parent_comment_id});
   }
 
   public commentVote(comment_id){
-    return this.http.post(this.api_address + '/comments/'+comment_id+'/vote');
+    return this.http.post(this.api_address + '/comments/'+comment_id+'/vote',{});
   }
 
 
