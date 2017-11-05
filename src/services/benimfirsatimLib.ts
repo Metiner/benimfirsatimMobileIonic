@@ -2,13 +2,18 @@ import {Http} from "@angular/http";
 import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do'
+import {AlertController, ToastController} from "ionic-angular";
+import { Storage} from "@ionic/storage";
 
 
 @Injectable()
 export class BenimfirsatimLib{
   api_address = "https://benimfirsatim.com";
 
-  constructor(private http:Http){}
+  constructor(private http:Http,
+              private alertCtrl:AlertController,
+              private toastCtrl:ToastController,
+              private storageCtrl:Storage){}
 
   //Page code can be,
   //'hot','rising' or 'newcomers'
@@ -28,7 +33,7 @@ export class BenimfirsatimLib{
   }
 
   public signIn(email,password){
-    return this.http.post(this.api_address + '/users/sing_in.json',{"user":{"email":email,"password":password}});
+    return this.http.post(this.api_address + '/users/sign_in.json',{"user":{"email":email,"password":password}});
   }
 
   public getDeal(deal_id){
@@ -51,5 +56,67 @@ export class BenimfirsatimLib{
     return this.http.post(this.api_address + '/comments/'+comment_id+'/vote',{});
   }
 
+  public showAlert(title:string,subTitle:string,buttons:string[]) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: subTitle,
+      buttons: buttons
+    });
+    alert.present();
+  }
 
+  public showToast(message: string,duration:number,position:string){
+
+    const toast = this.toastCtrl.create({
+      message : message,
+      duration : duration,
+      position : position
+    })
+   toast.present();
+  }
+
+  // Function for setting key and value on devices storage.
+  public storageControl(key:string,value:string){
+    this.storageCtrl.set(key,value)
+      .then( success =>{
+        console.log(success);
+        return success;
+        }
+      )
+      .catch(
+        err => {
+          this.showToast(err,3000,"bottom");
+        }
+      );
+  }
+
+  //It checks if any email is stored on devices local storage.
+  public checkAuthFromStorage(){
+    this.storageCtrl.get("email").then(
+      data =>{
+        if(data != null && data != undefined){
+          return true;
+        }else{
+          return false;
+        }
+      }
+    )
+      .catch(err=>{
+        this.showToast(err,3000,"bottom");
+      });
+
+  }
+
+  //It removes all of mails from device local storage.
+  public logOutFromStorageAndAuth(){
+    this.storageCtrl.clear().then(
+      data => {
+        return true;
+      }
+    ).catch(err =>{
+      this.showToast(err,3000,"bottom");
+      return false;
+    })
+  }
 }
+

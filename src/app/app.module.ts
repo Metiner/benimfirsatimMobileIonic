@@ -18,6 +18,7 @@ import {OpportunityPage} from "../pages/opportunity/opportunity";
 import {DenemePage} from "../pages/deneme/deneme";
 import {SignupPage} from "../pages/signup/signup";
 import {LoginPage} from "../pages/login/login";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {LoginPage} from "../pages/login/login";
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

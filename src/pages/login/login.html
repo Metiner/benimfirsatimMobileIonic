@@ -20,7 +20,7 @@
       ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Password</ion-label>
+      <ion-label floating>Parola</ion-label>
       <ion-input
         type="password"
         name="password"
@@ -29,7 +29,16 @@
         [minlength]="6"
       ></ion-input>
     </ion-item>
-    <button margin-top="10px" ion-button clear type="submit" [disabled]="!f.valid">Log in</button>
-    <button margin-top="10px" ion-button clear (click)="onSignUpButton()">Sign Up</button>
+    <ion-item no-lines>
+      <ion-grid no-padding>
+        <ion-row margin-top="10px">
+          <button no-margin no-padding ion-button clear type="submit" [disabled]="!f.valid">Giriş</button>
+        </ion-row>
+        <ion-row>
+          <button no-margin no-padding ion-button clear type ="button" (click)="onSignUpButton()">Hesap Oluştur</button>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
   </form>
+
 </ion-content>
