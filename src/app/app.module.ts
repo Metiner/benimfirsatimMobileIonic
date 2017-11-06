@@ -19,6 +19,7 @@ import {DenemePage} from "../pages/deneme/deneme";
 import {SignupPage} from "../pages/signup/signup";
 import {LoginPage} from "../pages/login/login";
 import {IonicStorageModule} from "@ionic/storage";
+import {CommentProvider} from "../providers/CommentProvider";
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {IonicStorageModule} from "@ionic/storage";
     StatusBar,
     BenimfirsatimLib,
     SplashScreen,
+    CommentProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

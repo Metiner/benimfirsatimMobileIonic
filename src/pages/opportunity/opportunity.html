@@ -1,6 +1,5 @@
 
 <ion-header>
-
   <ion-navbar>
     <ion-buttons start>
       <button ion-button
@@ -12,9 +11,7 @@
     </ion-buttons>
     <ion-title>Opportunity</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <ion-grid>
@@ -49,5 +46,30 @@
         <img src="{{opportunity.image_url}}">
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-card>
+        <ion-card-content>
+          {{opportunity.details}}
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
   </ion-grid>
+  <div>
+    <ion-list>
+      <ion-list-header>
+        <ion-header padding-top="10px">Yorumlar</ion-header>
+      </ion-list-header>
+      <ion-item *ngFor="let comment of comments" (click) = "toExpandItem(comment)">
+        <ion-avatar>
+          <h3 text-justify><img src="assets/img/logo.png" margin-right="10px">{{comment.owned}}</h3>
+        </ion-avatar>
+        <div text-left *ngIf="!comment.showContent">
+          <p>{{comment.content}}</p>
+        </div>
+        <div *ngIf="comment.showContent" text-wrap>
+          <p>{{comment.content}}</p>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

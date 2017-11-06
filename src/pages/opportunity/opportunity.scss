@@ -1,3 +1,10 @@
 page-opportunity {
+  ion-avatar img {
+    display: unset;
+  }
 
+  p {
+    padding-top: 10px !important;
+    padding-left : 0 !important;
+  }
 }

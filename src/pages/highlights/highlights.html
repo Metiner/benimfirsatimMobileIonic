@@ -33,13 +33,13 @@
       <p>{{opportunity.details}}</p>
     </ion-card-content>
     <ion-row text-center>
-      <ion-col>
+      <ion-col col-auto>
         <button ion-button icon-left clear small>
           <ion-icon name="pricetag"></ion-icon>
           <div>{{opportunity.price}}$</div>
         </button>
       </ion-col>
-      <ion-col>
+      <ion-col col-auto>
         <button ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
           <div>{{opportunity.comments_count}} Comments</div>
@@ -50,10 +50,7 @@
                 [navPush] = "opportunityPage" [navParams] = "opportunity"
                 ion-button
                 round
-                small>Fırsata git</button>
-        <button ion-button
-                [navPush]="denemePage" [navParams] = "opportunity"
-        >asdasd</button>
+                small>Fırsat Detayları</button>
       </ion-col>
     </ion-row>
   </ion-card>
