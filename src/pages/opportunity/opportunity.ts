@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Opportunity} from "../../modals/opportunity";
-import {CommentProvider} from "../../providers/CommentProvider";
 import {Comment} from "../../modals/comment";
+import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 
 /**
  * Generated class for the OpportunityPage page.
@@ -21,11 +21,10 @@ export class OpportunityPage {
   opportunity: Opportunity;
   comments: Comment[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private commentProvider:CommentProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
 
     this.opportunity = navParams.data;
-    this.comments = commentProvider.getComments(this.opportunity.id,1);
-
+    benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{ this.comments = data.json()});
   }
 
   toExpandItem(comment){
@@ -38,12 +37,21 @@ export class OpportunityPage {
   }
 
   doInfinite(infiniteScroll:InfiniteScroll){
-    this.commentProvider.getAsyncComment(this.opportunity.id,1).then(data=>{
-      for(let comment of data){
-        console.log(comment);
-      }
-      infiniteScroll.complete();
-    })
+
+
+      this.benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
+
+          data.json().forEach(element =>{
+            let u:Comment = new Comment();
+            Object.assign(u,element);
+            this.comments.push(u);
+          })
+
+        infiniteScroll.complete();
+      });
+
+
+
   }
 
 

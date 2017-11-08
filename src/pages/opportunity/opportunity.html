@@ -54,28 +54,26 @@
       </ion-card>
     </ion-row>
   </ion-grid>
-  <div>
-    <ion-list>
-      <ion-list-header>
-        <ion-header padding-top="10px">Yorumlar</ion-header>
-      </ion-list-header>
-      <ion-item *ngFor="let comment of comments" (click) = "toExpandItem(comment)">
-        <ion-avatar>
-          <h3 text-justify><img src="assets/img/logo.png" margin-right="10px">{{comment.user_id}}</h3>
-        </ion-avatar>
-        <div text-left *ngIf="!comment.showContent">
-          <p>{{comment.text}}</p>
-        </div>
-        <div *ngIf="comment.showContent" text-wrap>
-          <p>{{comment.text}}</p>
-        </div>
-      </ion-item>
-    </ion-list>
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="Yükleniyor...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </div>
+  <ion-list>
+    <ion-list-header>
+      <ion-header padding-top="10px">Yorumlar</ion-header>
+    </ion-list-header>
+    <ion-item *ngFor="let comment of comments" (click) = "toExpandItem(comment)">
+      <ion-avatar>
+        <h3 text-justify><img src="assets/img/logo.png" margin-right="10px">{{comment.user_id}}</h3>
+      </ion-avatar>
+      <div text-left *ngIf="!comment.showContent">
+        <p>{{comment.text}}</p>
+      </div>
+      <div *ngIf="comment.showContent" text-wrap>
+        <p>{{comment.text}}</p>
+      </div>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Yükleniyor...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
