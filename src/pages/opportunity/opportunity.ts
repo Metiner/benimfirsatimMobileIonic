@@ -20,6 +20,7 @@ export class OpportunityPage {
 
   opportunity: Opportunity;
   comments: Comment[] = [];
+  static pageCount = 1;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
 
@@ -38,27 +39,28 @@ export class OpportunityPage {
 
   doInfinite(infiniteScroll:InfiniteScroll){
 
+      this.benimFirsatimLib.getComments(this.opportunity.id,OpportunityPage.pageCount).subscribe(data =>{
 
-      this.benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
 
-          data.json().forEach(element =>{
-            let u:Comment = new Comment();
-            Object.assign(u,element);
+        if(data.json().length > 0) {
+          OpportunityPage.pageCount++;
+          data.json().forEach(element => {
+            let u: Comment = new Comment();
+            Object.assign(u, element);
             this.comments.push(u);
           })
+        }else
+        {
+          infiniteScroll.enable(false);
+          OpportunityPage.pageCount = 1;
+        }
+
 
         infiniteScroll.complete();
+
       });
 
-
-
   }
-
-
-
-
-
-
 
 
 }
