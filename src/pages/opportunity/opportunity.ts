@@ -22,7 +22,7 @@ export class OpportunityPage {
   comments: Comment[] = [];
   static pageCount = 1;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
+  constructor( public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
 
     this.opportunity = navParams.data;
     benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{ this.comments = data.json()});
