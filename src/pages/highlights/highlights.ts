@@ -22,9 +22,8 @@ export class HighlightsPage {
 
   opportunities: Opportunity[] = [];
   opportunityPage = OpportunityPage;
-  denemePage= DenemePage;
 
-  constructor(public navCtrl: NavController,benimfirsatimLib:BenimfirsatimLib) {
+  constructor(benimfirsatimLib:BenimfirsatimLib) {
     benimfirsatimLib.getPage('hot').subscribe((data)=>{
 
     data.json().forEach(element => {

@@ -56,7 +56,7 @@ export class BenimfirsatimLib{
     return this.http.post(this.api_address + '/comments/'+comment_id+'/vote',{});
   }
   public getComments(deal_id,page){
-    return this.http.post(this.api_address + '/deals/'+deal_id+'/comments?page='+page+'&per_page=3',{});
+    return this.http.get(this.api_address + '/deals/'+deal_id+'/comments?page='+page+'&per_page=3');
   }
 
   public showAlert(title:string,subTitle:string,buttons:string[]) {
