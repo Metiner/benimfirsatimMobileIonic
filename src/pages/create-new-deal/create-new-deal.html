@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Yeni Fırsat Ekle</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-item>
+      <ion-label>Url *</ion-label>
+      <ion-input type="url"  required name="deal_url" placeholder="www.alisverissitem.com/urun.aspx?kod=1123"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Fiyat</ion-label>
+      <ion-input type="number"  name="deal_price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Kupon Codu</ion-label>
+      <ion-input type="text"  name="deal_coupon_code"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Başlık</ion-label>
+      <ion-input type="text"  required name="deal_title" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Detaylar *</ion-label>
+      <ion-textarea required name="deal_details" ></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tarih</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="myDate"></ion-datetime>
+    </ion-item>
+</ion-content>

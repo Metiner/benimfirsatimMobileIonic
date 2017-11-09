@@ -19,6 +19,7 @@ import {DenemePage} from "../pages/deneme/deneme";
 import {SignupPage} from "../pages/signup/signup";
 import {LoginPage} from "../pages/login/login";
 import {IonicStorageModule} from "@ionic/storage";
+import {CreateNewDealPage} from "../pages/create-new-deal/create-new-deal";
 
 @NgModule({
   declarations: [
@@ -31,13 +32,15 @@ import {IonicStorageModule} from "@ionic/storage";
     OpportunityPage,
     DenemePage,
     SignupPage,
-    LoginPage
+    LoginPage,
+    CreateNewDealPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{backButtonText: 'Geri'}),
     IonicStorageModule.forRoot()
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,7 +53,8 @@ import {IonicStorageModule} from "@ionic/storage";
     OpportunityPage,
     DenemePage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    CreateNewDealPage
   ],
   providers: [
     StatusBar,

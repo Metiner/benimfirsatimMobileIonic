@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Opportunity} from "../../modals/opportunity";
+import {OpportunityPage} from "../opportunity/opportunity";
 
 /**
  * Generated class for the RisingPage page.
@@ -18,6 +19,7 @@ import {Opportunity} from "../../modals/opportunity";
 export class RisingPage {
 
   opportunities: Opportunity[] = [];
+  opportunityPage = OpportunityPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,benimfirsatimLib:BenimfirsatimLib) {
     benimfirsatimLib.getPage('rising').subscribe((data)=>{

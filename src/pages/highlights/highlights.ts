@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Opportunity} from "../../modals/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
-import {DenemePage} from "../deneme/deneme";
+import {CreateNewDealPage} from "../create-new-deal/create-new-deal";
 
 
 /**

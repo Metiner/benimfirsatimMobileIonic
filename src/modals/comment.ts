@@ -1,3 +1,5 @@
+import {User} from "./user";
+
 export class Comment{
 
   comment_votes_count: number;
@@ -7,4 +9,5 @@ export class Comment{
   text:string;
   updated_at:string;
   user_id:number;
+  user: User;
 }

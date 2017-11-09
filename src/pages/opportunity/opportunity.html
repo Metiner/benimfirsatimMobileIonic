@@ -25,18 +25,18 @@
     <ion-row align-items-start>
       <ion-col>
         <div>
-          <h3>{{opportunity.votes_count}}
+          <h3>{{opportunity.votes_sum}}
             <ion-icon name="pulse"></ion-icon>
           </h3>
         </div>
       </ion-col>
       <ion-col>
         <div>
-          <button ion-button clear small>
-            <ion-icon name="arrow-down"></ion-icon>
-          </button>
-          <button ion-button clear small>
+          <button ion-button clear small (click)="upVoteDeal(opportunity.id)">
             <ion-icon name="arrow-up"></ion-icon>
+          </button>
+          <button ion-button clear small (click)="downVoteDeal(opportunity.id)">
+            <ion-icon name="arrow-down"></ion-icon>
           </button>
         </div>
       </ion-col>
@@ -63,14 +63,14 @@
         <ion-row>
           <ion-col col-auto>
             <ion-avatar>
-              <img src="assets/img/logo.png">
+              <img src="{{comment.user.avatar_url}}">
             </ion-avatar>
           </ion-col>
           <ion-col col-auto>
-              <p class="nickname">{{comment.user_id}}</p>
+              <p class="nickname">{{comment.user.name}}</p>
           </ion-col>
           <ion-col col-auto>
-              <p class="votes">{{comment.comment_votes_count}} Points</p>
+              <p class="votes"> - {{comment.comment_votes_count}} Puan</p>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -83,7 +83,7 @@
         </ion-row>
         <ion-row>
           <ion-col class="thumbs" col-auto>
-            <button ion-button clear small>
+            <button ion-button clear small (click)="upVoteComment()">
               <ion-icon name="thumbs-up"></ion-icon>
             </button>
           </ion-col>
