@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the CreateNewDealPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {IonicPage, ModalController} from 'ionic-angular';
+import {NgForm} from "@angular/forms";
+import {SetLocationPage} from "../set-location/set-location";
+import {Location} from "../../models/location";
 
 @IonicPage()
 @Component({
@@ -15,11 +11,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CreateNewDealPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  location:Location = {
+    ltt: 39.9334,
+    lng: 32.8597
+  };
+
+  constructor(private modalCtrl:ModalController){}
+
+
+  onSubmit(form:NgForm){
+    console.log(form.value);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CreateNewDealPage');
-  }
+  onOpenMap(){
 
+    const modal = this.modalCtrl.create(SetLocationPage,{location:this.location});
+    modal.present();
+
+  }
 }

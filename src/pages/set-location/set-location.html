@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Konum Seç</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <sebm-google-map
+        [latitude]="location.ltt"
+        [longitude]="location.lng"
+        [zoom]="16"
+        (mapClick)="onSetMarker($event)">
+          <sebm-google-map-marker [longitude]="marker.lng"
+                                  [latitude]="marker.ltt"
+                                  *ngIf="marker">
+          </sebm-google-map-marker>
+
+        </sebm-google-map>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -20,6 +20,8 @@ import {SignupPage} from "../pages/signup/signup";
 import {LoginPage} from "../pages/login/login";
 import {IonicStorageModule} from "@ionic/storage";
 import {CreateNewDealPage} from "../pages/create-new-deal/create-new-deal";
+import {SetLocationPage} from "../pages/set-location/set-location";
+import {AgmCoreModule} from "angular2-google-maps/core";
 
 @NgModule({
   declarations: [
@@ -33,13 +35,17 @@ import {CreateNewDealPage} from "../pages/create-new-deal/create-new-deal";
     DenemePage,
     SignupPage,
     LoginPage,
-    CreateNewDealPage
+    CreateNewDealPage,
+    SetLocationPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp,{backButtonText: 'Geri'}),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyB4HjxYVe5iOu4dzGhaDfq1vtCzmiMCg1U'
+    })
 
   ],
   bootstrap: [IonicApp],
@@ -54,7 +60,8 @@ import {CreateNewDealPage} from "../pages/create-new-deal/create-new-deal";
     DenemePage,
     LoginPage,
     SignupPage,
-    CreateNewDealPage
+    CreateNewDealPage,
+    SetLocationPage
   ],
   providers: [
     StatusBar,

@@ -8,28 +8,97 @@
 
 
 <ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-item>
       <ion-label>Url *</ion-label>
-      <ion-input type="url"  required name="deal_url" placeholder="www.alisverissitem.com/urun.aspx?kod=1123"></ion-input>
+      <ion-input ngModel type="url"  required name="deal_url" placeholder="www.alisverissitem.com/urun.aspx?kod=1123"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Fiyat</ion-label>
-      <ion-input type="number"  name="deal_price"></ion-input>
+      <ion-input ngModel type="number"  name="deal_price"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Kupon Codu</ion-label>
-      <ion-input type="text"  name="deal_coupon_code"></ion-input>
+      <ion-input ngModel type="text"  name="deal_coupon_code"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Başlık</ion-label>
-      <ion-input type="text"  required name="deal_title" ></ion-input>
+      <ion-label>Başlık *</ion-label>
+      <ion-input ngModel type="text"  required name="deal_title" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Detaylar *</ion-label>
-      <ion-textarea required name="deal_details" ></ion-textarea>
+      <ion-textarea ngModel required name="deal_details" ></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label>Tarih</ion-label>
-      <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="myDate"></ion-datetime>
+      <ion-datetime ngModel displayFormat="MMM DD, YYYY HH:mm" name="deal_date"></ion-datetime>
     </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button
+            ion-button
+            outline
+            block
+            type="button"
+            icon-left
+            (click)="onLocate()">
+            <ion-icon name="locate"></ion-icon>
+            Konumumu ekle
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button
+                  outline
+                  block
+                  icon-left
+                  (click)="onOpenMap()"
+                  type="button"
+                  >
+            <ion-icon name="map"></ion-icon>
+            Haritada seç
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p>selected place..</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center>
+          <h5>Fotoğraf yükle</h5>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button block
+                  ion-button
+                  (click)="onTakePhoto()"
+                  outline
+                  icon-left
+                  type="button"
+          ><ion-icon name="camera"></ion-icon>
+          Kamerayı Aç
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <img [src]="">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button
+                  type="submit"
+                  block
+                  color="secondary"
+                  [disabled]="!f.valid">
+            Fırsatı Yarat
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

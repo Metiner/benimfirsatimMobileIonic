@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
-import {Opportunity} from "../../modals/opportunity";
+import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
 
 /**

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
-import {Opportunity} from "../../modals/opportunity";
+import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
 import {CreateNewDealPage} from "../create-new-deal/create-new-deal";
 
