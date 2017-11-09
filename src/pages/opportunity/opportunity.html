@@ -58,16 +58,43 @@
     <ion-list-header>
       <ion-header padding-top="10px">Yorumlar</ion-header>
     </ion-list-header>
-    <ion-item *ngFor="let comment of comments" (click) = "toExpandItem(comment)">
-      <ion-avatar>
-        <h3 text-justify><img src="assets/img/logo.png" margin-right="10px">{{comment.user_id}}</h3>
-      </ion-avatar>
-      <div text-left *ngIf="!comment.showContent">
-        <p>{{comment.text}}</p>
-      </div>
-      <div *ngIf="comment.showContent" text-wrap>
-        <p>{{comment.text}}</p>
-      </div>
+    <ion-item *ngFor="let comment of comments">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-auto>
+            <ion-avatar>
+              <img src="assets/img/logo.png">
+            </ion-avatar>
+          </ion-col>
+          <ion-col col-auto>
+              <p class="nickname">{{comment.user_id}}</p>
+          </ion-col>
+          <ion-col col-auto>
+              <p class="votes">{{comment.comment_votes_count}} Points</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div (click) = "toExpandItem(comment)" text-left *ngIf="!comment.showContent">
+            <p>{{comment.text}}</p>
+          </div>
+          <div (click) = "toExpandItem(comment)" *ngIf="comment.showContent" text-wrap>
+            <p>{{comment.text}}</p>
+          </div>
+        </ion-row>
+        <ion-row>
+          <ion-col class="thumbs" col-auto>
+            <button ion-button clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col class="thumbs" col-auto>
+            <button ion-button clear small>
+              <ion-icon name="thumbs-down"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">

@@ -22,12 +22,13 @@ export class OpportunityPage {
   comments: Comment[] = [];
   static pageCount = 1;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
+  constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
 
     this.opportunity = navParams.data;
     benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{ this.comments = data.json()});
   }
 
+  // Toggle to expand comments.
   toExpandItem(comment){
     if(!comment.showContent){
       console.log(comment.showContent);
@@ -37,10 +38,10 @@ export class OpportunityPage {
     }
   }
 
+  //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 
       this.benimFirsatimLib.getComments(this.opportunity.id,OpportunityPage.pageCount).subscribe(data =>{
-
 
         if(data.json().length > 0) {
           OpportunityPage.pageCount++;
@@ -55,9 +56,7 @@ export class OpportunityPage {
           OpportunityPage.pageCount = 1;
         }
 
-
         infiniteScroll.complete();
-
       });
 
   }
