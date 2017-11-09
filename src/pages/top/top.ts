@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Opportunity} from "../../modals/opportunity";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {OpportunityPage} from "../opportunity/opportunity";
 
 /**
  * Generated class for the TopPage page.
@@ -18,8 +19,9 @@ import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 export class TopPage {
 
   opportunities: Opportunity[] = [];
+  opportunityPage = OpportunityPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,benimfirsatimLib:BenimfirsatimLib) {
+  constructor(public navParams: NavParams,benimfirsatimLib:BenimfirsatimLib) {
     benimfirsatimLib.getPage('newcomers').subscribe((data)=>{
       data.json().forEach(element => {
         let u:Opportunity = new Opportunity();

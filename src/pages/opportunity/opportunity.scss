@@ -1,10 +1,19 @@
 page-opportunity {
-  ion-avatar img {
-    display: unset;
-  }
 
-  p {
-    padding-top: 10px !important;
-    padding-left : 0 !important;
+  //.col{
+  //  background: whitesmoke;
+  //  border:  solid black;
+  //}
+
+  .nickname{
+    padding: 0px 0px 0px 0px !important;
+    color: #222222;
+  }
+  .votes{
+    padding: 0px 0px 0px 0px !important;
+    font-size: x-small;
+  }
+  .thumbs{
+    padding: 7px 0px 0px 0px !important;
   }
 }

@@ -15,7 +15,7 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Rising</ion-title>
+    <ion-title>Yükselenler</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -35,21 +35,21 @@
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="pricetag"></ion-icon>
-          <div>{{opportunity.price}}$</div>
+          <div>{{opportunity.price}} ₺ </div>
         </button>
       </ion-col>
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
-          <div>{{opportunity.comments_count}} Comments</div>
+          <div>{{opportunity.comments_count}} Yorum</div>
         </button>
       </ion-col>
       <ion-col>
         <button
-          (click)="onItemClick()"
+          [navPush] = "opportunityPage" [navParams] = "opportunity"
           ion-button
           round
-          small>Fırsata git</button>
+          small>Fırsat Detayları</button>
       </ion-col>
     </ion-row>
   </ion-card>

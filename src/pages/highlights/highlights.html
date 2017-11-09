@@ -9,14 +9,15 @@
 
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button
+      <button
+              ion-button
               icon-only
               clear
               menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Highlights</ion-title>
+    <ion-title>Öne Çıkanlar</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -33,16 +34,16 @@
       <p>{{opportunity.details}}</p>
     </ion-card-content>
     <ion-row text-center>
-      <ion-col col-auto>
+      <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="pricetag"></ion-icon>
-          <div>{{opportunity.price}}$</div>
+          <div>{{opportunity.price}} ₺ </div>
         </button>
       </ion-col>
-      <ion-col col-auto>
+      <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
-          <div>{{opportunity.comments_count}} Comments</div>
+          <div>{{opportunity.comments_count}} Yorum</div>
         </button>
       </ion-col>
       <ion-col>
