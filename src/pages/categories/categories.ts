@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the CategoriesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage} from 'ionic-angular';
+import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {SelectedCategoryPage} from "../selected-category/selected-category";
+import {Category} from "../../models/category";
 
 @IonicPage()
 @Component({
@@ -15,11 +11,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CategoriesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  categories: Category[] = [];
+  selectedCategoryPage = SelectedCategoryPage;
+  constructor(private benimFirsatimLib:BenimfirsatimLib) {
+
+    this.benimFirsatimLib.getCategories().subscribe(data=>{
+      data.json().forEach(element=>{
+        let u:Category = new Category();
+        Object.assign(u,element);
+        this.categories.push(u);
+      })
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CategoriesPage');
-  }
+
 
 }

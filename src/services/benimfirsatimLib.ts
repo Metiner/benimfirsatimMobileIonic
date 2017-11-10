@@ -59,6 +59,9 @@ export class BenimfirsatimLib{
     return this.http.get(this.api_address + '/deals/'+deal_id+'/comments?page='+page+'&per_page=3');
   }
 
+  public getCategories(){
+    return this.http.get(this.api_address + '/categories');
+  }
   public showAlert(title:string,subTitle:string,buttons:string[]) {
     let alert = this.alertCtrl.create({
       title: title,

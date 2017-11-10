@@ -3,6 +3,8 @@ import {IonicPage, ModalController} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
 import {SetLocationPage} from "../set-location/set-location";
 import {Location} from "../../models/location";
+import {Category} from "../../models/category";
+import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 
 @IonicPage()
 @Component({
@@ -15,8 +17,17 @@ export class CreateNewDealPage {
     ltt: 39.9334,
     lng: 32.8597
   };
+  categories: Category[] = [];
 
-  constructor(private modalCtrl:ModalController){}
+  constructor(private modalCtrl:ModalController,private benimFirsatimLib:BenimfirsatimLib){
+    benimFirsatimLib.getCategories().subscribe(data=>{
+      data.json().forEach(element=>{
+        let u: Category = new Category();
+        Object.assign(u,element);
+        this.categories.push(u);
+      })
+    })
+  }
 
   isLocationSet = false;
 

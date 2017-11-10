@@ -22,6 +22,7 @@ import {IonicStorageModule} from "@ionic/storage";
 import {CreateNewDealPage} from "../pages/create-new-deal/create-new-deal";
 import {SetLocationPage} from "../pages/set-location/set-location";
 import {AgmCoreModule} from "angular2-google-maps/core";
+import {SelectedCategoryPage} from "../pages/selected-category/selected-category";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {AgmCoreModule} from "angular2-google-maps/core";
     SignupPage,
     LoginPage,
     CreateNewDealPage,
-    SetLocationPage
+    SetLocationPage,
+    SelectedCategoryPage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import {AgmCoreModule} from "angular2-google-maps/core";
     LoginPage,
     SignupPage,
     CreateNewDealPage,
-    SetLocationPage
+    SetLocationPage,
+    SelectedCategoryPage
   ],
   providers: [
     StatusBar,
