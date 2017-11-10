@@ -60,9 +60,16 @@
           </button>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row  *ngIf="isLocationSet">
         <ion-col>
-          <p>selected place..</p>
+          <sebm-google-map
+            [longitude]="location.lng"
+            [latitude]="location.ltt"
+            [zoom]="16">
+            <sebm-google-map-marker
+              [longitude]="location.lng"
+              [latitude]="location.ltt"></sebm-google-map-marker>
+          </sebm-google-map>
         </ion-col>
       </ion-row>
       <ion-row>

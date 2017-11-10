@@ -24,5 +24,23 @@
         </sebm-google-map>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col>
+        <button
+          ion-button
+          block
+          outline
+          [disabled]="!marker"
+          (click)="onConfirm()">Belirle</button>
+      </ion-col>
+      <ion-col>
+        <button
+          ion-button
+          block
+          outline
+          color="danger"
+          (click)="onAbort()">Vazgeç</button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

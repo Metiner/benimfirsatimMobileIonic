@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {Location} from "../../models/location";
 
 @IonicPage()
@@ -12,14 +12,25 @@ export class SetLocationPage {
   location: Location;
   marker: Location;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public viewCtrl:ViewController, public navParams: NavParams) {
 
     this.location = navParams.get('location');
+    if(navParams.get('isSet')){
+      this.marker = this.location;
+    }
   }
 
   onSetMarker(event:any){
     console.log(event);
     this.marker = new Location(event.coords.lat,event.coords.lng);
+  }
+
+  onAbort(){
+      this.viewCtrl.dismiss();
+  }
+
+  onConfirm(){
+      this.viewCtrl.dismiss({location:this.marker});
   }
 
 }

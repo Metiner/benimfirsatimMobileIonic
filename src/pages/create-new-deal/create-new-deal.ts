@@ -18,6 +18,7 @@ export class CreateNewDealPage {
 
   constructor(private modalCtrl:ModalController){}
 
+  isLocationSet = false;
 
   onSubmit(form:NgForm){
     console.log(form.value);
@@ -25,8 +26,15 @@ export class CreateNewDealPage {
 
   onOpenMap(){
 
-    const modal = this.modalCtrl.create(SetLocationPage,{location:this.location});
+    const modal = this.modalCtrl.create(SetLocationPage,{location:this.location,
+                                                              isSet:this.isLocationSet});
     modal.present();
+    modal.onDidDismiss(data=>{
+      if(data){
+        this.location = data.location;
+        this.isLocationSet = true;
+      }
+    })
 
   }
 }
