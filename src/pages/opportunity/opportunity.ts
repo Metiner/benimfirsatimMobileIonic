@@ -3,6 +3,7 @@ import {InfiniteScroll, IonicPage, NavParams} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {NgForm} from "@angular/forms";
 
 /**
  * Generated class for the OpportunityPage page.
@@ -24,8 +25,12 @@ export class OpportunityPage {
 
   constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
     this.opportunity = navParams.data;
-    benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
-      this.comments = data.json();
+    benimFirsatimLib.getComments(this.opportunity.id,3).subscribe(data =>{
+      data.json().forEach(element=>{
+        let u:Comment = new Comment();
+        Object.assign(u,element);
+        this.comments.push(u);
+      })
     });
   }
 
@@ -57,6 +62,7 @@ export class OpportunityPage {
 
       this.benimFirsatimLib.getComments(this.opportunity.id,OpportunityPage.pageCount).subscribe(data =>{
 
+
         if(data.json().length > 0) {
           OpportunityPage.pageCount++;
           data.json().forEach(element => {
@@ -73,6 +79,11 @@ export class OpportunityPage {
         infiniteScroll.complete();
       });
 
+  }
+  onCommentSubmit(form:NgForm){
+    let u:Comment = new Comment();
+    u.text = form.value.comment;
+    this.comments.push(u);
   }
 
 

@@ -32,6 +32,11 @@ export class BenimfirsatimLib{
     return this.http.post(this.api_address + '/users.json',{"user":{"email":email,"password":password}});
   }
 
+  public checkLogin(){
+    return this.http.get(this.api_address + '/users/login_check');
+  }
+
+
   public signIn(email,password){
     return this.http.post(this.api_address + '/users/sign_in.json',{"user":{"email":email,"password":password}});
   }

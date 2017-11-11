@@ -38,6 +38,7 @@
           <button ion-button clear small (click)="downVoteDeal(opportunity.id)">
             <ion-icon name="arrow-down"></ion-icon>
           </button>
+          <button ion-button clear small (click)="checkLogin()"> alksfjaslkf</button>
         </div>
       </ion-col>
     </ion-row>
@@ -93,8 +94,42 @@
             </button>
           </ion-col>
         </ion-row>
+          <div style="padding-left: 15%;padding-top: 5%" *ngFor="let subComment of comment.comments">
+            <ion-row>
+              <ion-col col-auto>
+                <ion-avatar>
+                  <img src="{{subComment.user.avatar_url}}">
+                </ion-avatar>
+              </ion-col>
+              <ion-col col-auto>
+                <p class="nickname">{{subComment.user.name}}</p>
+              </ion-col>
+              <ion-col col-auto>
+                <p class="votes"> - {{subComment.comment_votes_count}} Puan</p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <div (click) = "toExpandItem(subComment)" text-left *ngIf="!subComment.showContent">
+                <p>{{comment.text}}</p>
+              </div>
+              <div (click) = "toExpandItem(subComment)" *ngIf="subComment.showContent" text-wrap>
+                <p>{{comment.text}}</p>
+              </div>
+            </ion-row>
+            <ion-row>
+              <ion-col class="thumbs" col-auto>
+                <button ion-button clear small (click)="upVoteComment()">
+                  <ion-icon name="thumbs-up"></ion-icon>
+                </button>
+              </ion-col>
+              <ion-col class="thumbs" col-auto>
+                <button ion-button clear small>
+                  <ion-icon name="thumbs-down"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </div>
       </ion-grid>
-
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
@@ -104,3 +139,29 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
+
+<ion-footer>
+  <form #f="ngForm" (ngSubmit)="onCommentSubmit(f)">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-input style="padding-top: 5%;padding-left: 10%"
+                     [ngModel] type="text"
+                     placeholder="Yorum yaz..."
+                     name="comment"
+                     required></ion-input>
+        </ion-col>
+        <ion-col>
+          <button style="padding-left: 5%"
+                  ion-button
+                  [disabled]="!f.valid"
+                  type="submit"
+                  clear>
+            <ion-icon style="font-size: 2.6em"
+                      name="send"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

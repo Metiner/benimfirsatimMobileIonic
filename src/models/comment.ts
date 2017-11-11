@@ -10,4 +10,6 @@ export class Comment{
   updated_at:string;
   user_id:number;
   user: User;
+  comments: Comment[] = [];
+
 }
