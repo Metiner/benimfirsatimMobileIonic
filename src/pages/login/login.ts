@@ -27,8 +27,9 @@ export class LoginPage {
       loading.present();
       if(data.json() != null && data.json().success == true ){
 
+
         this.eventCtrl.publish('user.login',' ');
-        this.benimFirsatimLib.storageControl("email",data.json().email);
+        this.benimFirsatimLib.storageControl("user",data.json());
         this.navCtrl.push(TabsPage);
         loading.dismiss();
         this.benimFirsatimLib.showToast("Giriş yapıldı",1500,"bottom");

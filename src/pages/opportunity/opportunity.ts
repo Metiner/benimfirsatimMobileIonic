@@ -36,13 +36,13 @@ export class OpportunityPage {
 
   upVoteDeal(dealId:number){
     this.benimFirsatimLib.upvoteDeal(dealId).subscribe(data=>{
-      console.log(data);
+      this.opportunity.votes_sum = data.json().deal_score;
     });
   }
 
   downVoteDeal(dealId:number){
     this.benimFirsatimLib.downvoteDeal(dealId).subscribe(data=>{
-      console.log(data);
+      this.opportunity.votes_sum = data.json().deal_score;
     });
   }
 
@@ -86,5 +86,10 @@ export class OpportunityPage {
     this.comments.push(u);
   }
 
+  checkLogin(){
+    this.benimFirsatimLib.checkLogin().subscribe(data=>{
+      console.log(data.json());
+    })
+  }
 
 }
