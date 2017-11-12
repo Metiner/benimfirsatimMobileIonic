@@ -5,6 +5,7 @@ import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {NgForm} from "@angular/forms";
 
+
 /**
  * Generated class for the OpportunityPage page.
  *
@@ -25,10 +26,12 @@ export class OpportunityPage {
 
   constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
     this.opportunity = navParams.data;
-    benimFirsatimLib.getComments(this.opportunity.id,3).subscribe(data =>{
+    benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
+      OpportunityPage.pageCount++;
       data.json().forEach(element=>{
         let u:Comment = new Comment();
         Object.assign(u,element);
+        console.log(element);
         this.comments.push(u);
       })
     });
@@ -82,8 +85,15 @@ export class OpportunityPage {
   }
   onCommentSubmit(form:NgForm){
     let u:Comment = new Comment();
+    u.user = BenimfirsatimLib.user;
     u.text = form.value.comment;
-    this.comments.push(u);
+    u.created_at = (new Date()).toString().split(' ').splice(1,3).join(' ');
+    u.deal_id = this.opportunity.id;
+    u.user_id = BenimfirsatimLib.user.id;
+    this.benimFirsatimLib.createComment(this.opportunity.id,null,form.value.comment).subscribe(data=>{
+      console.log(data.json());
+    });
+    form.resetForm();
   }
 
   checkLogin(){

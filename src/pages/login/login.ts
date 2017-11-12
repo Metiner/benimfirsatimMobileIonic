@@ -4,6 +4,7 @@ import {NgForm} from "@angular/forms";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {SignupPage} from "../signup/signup";
 import {TabsPage} from "../tabs/tabs";
+import {Facebook, FacebookLoginResponse} from "@ionic-native/facebook";
 @IonicPage()
 
 @Component({
@@ -12,11 +13,13 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class LoginPage {
 
+
+
   constructor(private benimFirsatimLib: BenimfirsatimLib,
               private navCtrl: NavController,
               private loadingCtrl:LoadingController,
-              private eventCtrl:Events
-              ){}
+              private eventCtrl:Events,
+              private fb:Facebook){}
 
   onLogIn(form:NgForm){
 
@@ -28,6 +31,7 @@ export class LoginPage {
       if(data.json() != null && data.json().success == true ){
 
 
+        this.benimFirsatimLib.setUserInfoAfterLogin(data.json().user);
         this.eventCtrl.publish('user.login',' ');
         this.benimFirsatimLib.storageControl("user",data.json());
         this.navCtrl.push(TabsPage);
@@ -44,6 +48,18 @@ export class LoginPage {
 
   onSignUpButton(){
     this.navCtrl.push(SignupPage);
+  }
+
+
+  onFacebookLogin(){
+
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+      .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
+      .catch(e => console.log('Error logging into Facebook', e));
+
+
+    this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
+
   }
 
 }

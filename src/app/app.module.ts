@@ -23,6 +23,7 @@ import {CreateNewDealPage} from "../pages/create-new-deal/create-new-deal";
 import {SetLocationPage} from "../pages/set-location/set-location";
 import {AgmCoreModule} from "angular2-google-maps/core";
 import {SelectedCategoryPage} from "../pages/selected-category/selected-category";
+import {Facebook} from "@ionic-native/facebook";
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import {SelectedCategoryPage} from "../pages/selected-category/selected-category
     StatusBar,
     BenimfirsatimLib,
     SplashScreen,
+    Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

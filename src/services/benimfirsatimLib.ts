@@ -5,17 +5,21 @@ import 'rxjs/add/operator/do'
 import {AlertController, ToastController} from "ionic-angular";
 import { Storage} from "@ionic/storage";
 import {Headers} from '@angular/http';
+import {User} from "../models/user";
 
 
 @Injectable()
 export class BenimfirsatimLib{
   api_address = "https://benimfirsatim.com";
-  token:string ="";
+  static token:string ="";
+  static user:User = new User;
+
 
   constructor(private http:Http,
               private alertCtrl:AlertController,
               private toastCtrl:ToastController,
-              private storageCtrl:Storage){}
+              private storageCtrl:Storage,
+              ){}
 
   //Page code can be,
   //'hot','rising' or 'newcomers'
@@ -61,9 +65,9 @@ export class BenimfirsatimLib{
     return this.http.get(this.api_address + '/deals/'+deal_id.toString() + '/downvote',opt);
   }
 
-  public createComment(deal_id,parent_comment_id){
+  public createComment(deal_id,parent_comment_id,comment){
     let opt = this.setHeader();
-    return this.http.post(this.api_address + '/deals/' + deal_id +'/comments.json',{parent_comment_id:parent_comment_id},opt);
+    return this.http.post(this.api_address + '/deals/' + deal_id +'/comments.json',{parent_comment_id:parent_comment_id,comment:comment},opt);
   }
 
   public commentVote(comment_id){
@@ -102,7 +106,7 @@ export class BenimfirsatimLib{
   public storageControl(key:string,value:string){
     this.storageCtrl.set(key,value)
       .then( success =>{
-        this.getTokenFromStorage();
+        this.setTokenFromStorage();
         return success;
         }
       )
@@ -143,11 +147,11 @@ export class BenimfirsatimLib{
     })
   }
 
-
-  public getTokenFromStorage():string{
+// sets token to static variable named token in this class after login.
+  public setTokenFromStorage():string{
     this.storageCtrl.get("user").then(data=>{
-      this.token = data.token;
-      return this.token;
+      BenimfirsatimLib.token= data.token;
+      return BenimfirsatimLib.token;
       }
     ).catch(err=> {
      this.showToast(err,300,"bottom");
@@ -161,7 +165,7 @@ export class BenimfirsatimLib{
     let opt:RequestOptions;
     let myHeaders: Headers = new Headers;
 
-    myHeaders.set('Authorization',this.token);
+    myHeaders.set('Authorization',BenimfirsatimLib.token);
 
     opt = new RequestOptions({
       headers:myHeaders
@@ -170,5 +174,12 @@ export class BenimfirsatimLib{
     return opt;
   }
 
+
+  // sets user object to user static variable which locates in this class after login.
+  public setUserInfoAfterLogin(user:any){
+    let u:User=new User();
+    Object.assign(u,user);
+    BenimfirsatimLib.user = u;
+  }
 }
 
