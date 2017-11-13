@@ -25,6 +25,7 @@ import {AgmCoreModule} from "angular2-google-maps/core";
 import {SelectedCategoryPage} from "../pages/selected-category/selected-category";
 import {Facebook} from "@ionic-native/facebook";
 import {OnCommentReplyPage} from "../pages/on-comment-reply/on-comment-reply";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {OnCommentReplyPage} from "../pages/on-comment-reply/on-comment-reply";
   imports: [
     BrowserModule,
     HttpModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(MyApp,{backButtonText: 'Geri'}),
     IonicStorageModule.forRoot(),
     AgmCoreModule.forRoot({

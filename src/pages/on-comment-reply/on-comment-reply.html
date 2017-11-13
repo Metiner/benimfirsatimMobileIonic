@@ -15,12 +15,12 @@
 
 <ion-content padding>
   <ion-item text-wrap>
-    <p><b>{{comment.user.name}}</b> tarafından yazılan yoruma cevap vermektesiniz.</p>
+    <p><b>{{comment.user.name}}</b> tarafından yapılan yoruma cevap vermektesiniz.</p>
     <ion-grid>
       <ion-row>
         <ion-col col-auto>
           <ion-avatar>
-            <img src="https://benimfirsatim.com/{{comment.user.avatar_url}}">
+            <img src="{{comment.user.avatar_url}}">
           </ion-avatar>
         </ion-col>
         <ion-col col-auto>
@@ -66,10 +66,10 @@
         </ion-row>
         <ion-row>
           <div (click) = "toExpandItem(subComment)" text-left *ngIf="!subComment.showContent">
-            <p>{{comment.text}}</p>
+            <p>{{subComment.text}}</p>
           </div>
           <div (click) = "toExpandItem(subComment)" *ngIf="subComment.showContent" text-wrap>
-            <p>{{comment.text}}</p>
+            <p>{{subComment.text}}</p>
           </div>
         </ion-row>
         <ion-row>

@@ -59,12 +59,12 @@
     <ion-list-header>
       <ion-header padding-top="10px">Yorumlar</ion-header>
     </ion-list-header>
-    <ion-item *ngFor="let comment of comments">
+    <ion-item *ngFor="let comment of comments" [ngClass]="{favourite:isFavourite}" (click)="isFavourite = !isFavourite">
       <ion-grid>
         <ion-row>
           <ion-col col-auto>
             <ion-avatar>
-              <img src="https://benimfirsatim.com/{{comment.user.avatar_url}}">
+              <img src="{{comment.user.avatar_url}}">
             </ion-avatar>
           </ion-col>
           <ion-col col-auto>
@@ -96,7 +96,7 @@
           <ion-col class="thumbs"col-auto>
             <button ion-button clear small style="color: #222222"
                     [navPush]="onCommentReplyPage"
-                    [navParams]="comment">
+                    [navParams]="{comment:comment,opportunity:opportunity}">
               <ion-icon name="undo"></ion-icon>
             </button>
           </ion-col>
@@ -105,7 +105,7 @@
             <ion-row>
               <ion-col col-auto>
                 <ion-avatar>
-                  <img src="https://benimfirsatim.com/{{subComment.user.avatar_url}}">
+                  <img src="{{subComment.user.avatar_url}}">
                 </ion-avatar>
               </ion-col>
               <ion-col col-auto>
@@ -117,10 +117,10 @@
             </ion-row>
             <ion-row>
               <div (click) = "toExpandItem(subComment)" text-left *ngIf="!subComment.showContent">
-                <p>{{comment.text}}</p>
+                <p>{{subComment.text}}</p>
               </div>
               <div (click) = "toExpandItem(subComment)" *ngIf="subComment.showContent" text-wrap>
-                <p>{{comment.text}}</p>
+                <p>{{subComment.text}}</p>
               </div>
             </ion-row>
             <ion-row>
@@ -132,11 +132,6 @@
               <ion-col  col-auto>
                 <button ion-button clear small>
                   <ion-icon name="thumbs-down"></ion-icon>
-                </button>
-              </ion-col>
-              <ion-col col-auto>
-                <button ion-button clear small>
-                  <ion-icon name="undo"></ion-icon>
                 </button>
               </ion-col>
             </ion-row>

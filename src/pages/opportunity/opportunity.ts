@@ -6,14 +6,6 @@ import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {NgForm} from "@angular/forms";
 import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
 
-
-/**
- * Generated class for the OpportunityPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-opportunity',
@@ -25,7 +17,7 @@ export class OpportunityPage {
   comments: Comment[] = [];
   onCommentReplyPage= OnCommentReplyPage;
   static pageCount = 1;
-
+  isFavourite = false;
 
   constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
     this.opportunity = navParams.data;

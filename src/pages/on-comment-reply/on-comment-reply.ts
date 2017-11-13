@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams } from 'ionic-angular';
+import {NgForm} from "@angular/forms";
+import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {Opportunity} from "../../models/opportunity";
+import {Comment} from "../../models/comment";
 
 /**
  * Generated class for the OnCommentReplyPage page.
@@ -16,9 +20,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class OnCommentReplyPage {
 
   comment: Comment;
+  opportunity: Opportunity;
+  constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
+    this.comment = this.navParams.get('comment');
+    this.opportunity = this.navParams.get('opportunity');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.comment = this.navParams.data;
+  }
+
+
+
+  onCommentSubmit(form:NgForm){
+      this.benimFirsatimLib.createComment(this.opportunity.id,this.comment.id,form.value.comment).subscribe(data=>{
+        this.comment.comments.push(data.json())
+        form.reset();
+      });
   }
 
 }
