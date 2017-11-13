@@ -24,6 +24,7 @@ import {SetLocationPage} from "../pages/set-location/set-location";
 import {AgmCoreModule} from "angular2-google-maps/core";
 import {SelectedCategoryPage} from "../pages/selected-category/selected-category";
 import {Facebook} from "@ionic-native/facebook";
+import {OnCommentReplyPage} from "../pages/on-comment-reply/on-comment-reply";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {Facebook} from "@ionic-native/facebook";
     LoginPage,
     CreateNewDealPage,
     SetLocationPage,
-    SelectedCategoryPage
+    SelectedCategoryPage,
+    OnCommentReplyPage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import {Facebook} from "@ionic-native/facebook";
     SignupPage,
     CreateNewDealPage,
     SetLocationPage,
-    SelectedCategoryPage
+    SelectedCategoryPage,
+    OnCommentReplyPage
   ],
   providers: [
     StatusBar,

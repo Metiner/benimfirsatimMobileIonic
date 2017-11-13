@@ -4,6 +4,7 @@ import {Opportunity} from "../../models/opportunity";
 import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {NgForm} from "@angular/forms";
+import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
 
 
 /**
@@ -22,7 +23,9 @@ export class OpportunityPage {
 
   opportunity: Opportunity;
   comments: Comment[] = [];
+  onCommentReplyPage= OnCommentReplyPage;
   static pageCount = 1;
+
 
   constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
     this.opportunity = navParams.data;
@@ -94,12 +97,6 @@ export class OpportunityPage {
       console.log(data.json());
     });
     form.resetForm();
-  }
-
-  checkLogin(){
-    this.benimFirsatimLib.checkLogin().subscribe(data=>{
-      console.log(data.json());
-    })
   }
 
 }

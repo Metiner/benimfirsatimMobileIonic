@@ -38,13 +38,13 @@
           <button ion-button clear small (click)="downVoteDeal(opportunity.id)">
             <ion-icon name="arrow-down"></ion-icon>
           </button>
-          <button ion-button clear small (click)="checkLogin()"> alksfjaslkf</button>
+          <button ion-button clear small (click)="checkLogin()"></button>
         </div>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <img src="{{opportunity.image_url}}">
+        <img src="https://benimfirsatim.com/{{opportunity.image_url}}">
       </ion-col>
     </ion-row>
     <ion-row>
@@ -64,7 +64,7 @@
         <ion-row>
           <ion-col col-auto>
             <ion-avatar>
-              <img src="{{comment.user.avatar_url}}">
+              <img src="https://benimfirsatim.com/{{comment.user.avatar_url}}">
             </ion-avatar>
           </ion-col>
           <ion-col col-auto>
@@ -93,12 +93,19 @@
               <ion-icon name="thumbs-down"></ion-icon>
             </button>
           </ion-col>
+          <ion-col class="thumbs"col-auto>
+            <button ion-button clear small style="color: #222222"
+                    [navPush]="onCommentReplyPage"
+                    [navParams]="comment">
+              <ion-icon name="undo"></ion-icon>
+            </button>
+          </ion-col>
         </ion-row>
           <div style="padding-left: 15%;padding-top: 5%" *ngFor="let subComment of comment.comments">
             <ion-row>
               <ion-col col-auto>
                 <ion-avatar>
-                  <img src="{{subComment.user.avatar_url}}">
+                  <img src="https://benimfirsatim.com/{{subComment.user.avatar_url}}">
                 </ion-avatar>
               </ion-col>
               <ion-col col-auto>
@@ -117,17 +124,17 @@
               </div>
             </ion-row>
             <ion-row>
-              <ion-col class="thumbs" col-auto>
+              <ion-col  col-auto>
                 <button ion-button clear small (click)="upVoteComment()">
                   <ion-icon name="thumbs-up"></ion-icon>
                 </button>
               </ion-col>
-              <ion-col class="thumbs" col-auto>
+              <ion-col  col-auto>
                 <button ion-button clear small>
                   <ion-icon name="thumbs-down"></ion-icon>
                 </button>
               </ion-col>
-              <ion-col class="thumbs" col-auto>
+              <ion-col col-auto>
                 <button ion-button clear small>
                   <ion-icon name="undo"></ion-icon>
                 </button>

@@ -27,8 +27,10 @@ export class HighlightsPage {
     benimfirsatimLib.getPage('hot').subscribe((data)=>{
 
     data.json().forEach(element => {
+
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
+        console.log(u);
         this.opportunities.push(u);
     });
     })
