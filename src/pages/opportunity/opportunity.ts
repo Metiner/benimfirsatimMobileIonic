@@ -5,19 +5,23 @@ import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {NgForm} from "@angular/forms";
 import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
+import {expandedComment} from "../../app/animations";
 
 @IonicPage()
 @Component({
   selector: 'page-opportunity',
   templateUrl: 'opportunity.html',
+  animations:[
+    expandedComment
+  ]
 })
 export class OpportunityPage {
 
   opportunity: Opportunity;
   comments: Comment[] = [];
   onCommentReplyPage= OnCommentReplyPage;
+  onExpandComment;
   static pageCount = 1;
-  isFavourite = false;
 
   constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
     this.opportunity = navParams.data;
@@ -42,17 +46,6 @@ export class OpportunityPage {
     this.benimFirsatimLib.downvoteDeal(dealId).subscribe(data=>{
       this.opportunity.votes_sum = data.json().deal_score;
     });
-  }
-
-
-  // Toggle to expand comments.
-  toExpandItem(comment){
-    if(!comment.showContent){
-      console.log(comment.showContent);
-      comment.showContent = true;
-    }else{
-      comment.showContent = false;
-    }
   }
 
   //Async calls new comments from database.
@@ -89,6 +82,11 @@ export class OpportunityPage {
       console.log(data.json());
     });
     form.resetForm();
+  }
+
+  onCommentExpand(i:any,comment:any){
+    comment.showContent = !comment.showContent;
+    this.onExpandComment = i;
   }
 
 }
