@@ -5,14 +5,14 @@ import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {NgForm} from "@angular/forms";
 import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
-import {expandedComment} from "../../app/animations";
+import {onItemBump} from "../../app/animations";
 
 @IonicPage()
 @Component({
   selector: 'page-opportunity',
   templateUrl: 'opportunity.html',
   animations:[
-    expandedComment
+    onItemBump
   ]
 })
 export class OpportunityPage {
@@ -20,7 +20,6 @@ export class OpportunityPage {
   opportunity: Opportunity;
   comments: Comment[] = [];
   onCommentReplyPage= OnCommentReplyPage;
-  onExpandComment;
   static pageCount = 1;
 
   constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
@@ -84,9 +83,12 @@ export class OpportunityPage {
     form.resetForm();
   }
 
-  onCommentExpand(i:any,comment:any){
-    comment.showContent = !comment.showContent;
-    this.onExpandComment = i;
+  onItemBump(i:any,item:any){
+    item.showContent = !item.showContent;
+    item.i = i;
+    setTimeout(()=>{
+      item.i=-1
+    },200)
   }
 
 }

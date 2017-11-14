@@ -1,11 +1,12 @@
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
-export const expandedComment = trigger('onCommentExpand',[
+export const onItemBump = trigger('onItemBump',[
   state('default',style({
     backgroundColor:'white'
   })),
-  state('onExpand',style({
-    backgroundColor:'Gold'
+  state('onBump',style({
+    transform:'scale(0.5)'
   })),
-  transition('default <=> onExpand',animate(300),style({backgroundColor:'white'}))
+  transition('default <=> onBump',[
+    animate(300)])
 ])

@@ -61,7 +61,7 @@
     </ion-list-header>
     <ion-item *ngFor="let comment of comments;let i = index">
       <ion-grid>
-        <div [@onCommentExpand]="onExpandComment === i ? 'onExpand' : 'default'">
+        <div   >
             <ion-row>
               <ion-col col-auto>
                 <ion-avatar>
@@ -76,21 +76,18 @@
               </ion-col>
             </ion-row>
             <ion-row>
-              <div (click) = "onCommentExpand(i,comment)" text-left>
-                <p *ngIf="!comment.showContent">{{comment.text}}</p>
-              </div>
-              <div (click) = "onCommentExpand(i,comment)"  text-wrap>
-                <p *ngIf="comment.showContent">{{comment.text}}</p>
+              <div  [ngClass]="{'wrap':comment.showContent}">
+                <p>{{comment.text}}</p>
               </div>
             </ion-row>
             <ion-row>
               <ion-col class="thumbs" col-auto>
-                <button ion-button clear small (click)="upVoteComment()">
+                <button ion-button clear small [@onItemBump]="comment.i === i ? 'onBump' : 'default'" (click) = "onItemBump(i,comment)">
                   <ion-icon name="thumbs-up"></ion-icon>
                 </button>
               </ion-col>
               <ion-col class="thumbs" col-auto>
-                <button ion-button clear small>
+                <button ion-button clear small [@onItemBump]="comment.i === i ? 'onBump' : 'default'" (click) = "onItemBump(i,comment)">
                   <ion-icon name="thumbs-down"></ion-icon>
                 </button>
               </ion-col>
@@ -103,7 +100,9 @@
               </ion-col>
             </ion-row>
         </div>
-          <div style="padding-left: 15%;padding-top: 5%" *ngFor="let subComment of comment.comments">
+          <div  style="padding-left: 15%;
+                padding-top: 5%"
+                *ngFor="let subComment of comment.comments;let i=index">
             <ion-row>
               <ion-col col-auto>
                 <ion-avatar>
@@ -118,21 +117,20 @@
               </ion-col>
             </ion-row>
             <ion-row>
-              <div (click) = "toExpandItem(subComment)" text-left *ngIf="!subComment.showContent">
-                <p>{{subComment.text}}</p>
-              </div>
-              <div (click) = "toExpandItem(subComment)" *ngIf="subComment.showContent" text-wrap>
+              <div [ngClass]="{'wrap':subComment.showContent}">
                 <p>{{subComment.text}}</p>
               </div>
             </ion-row>
             <ion-row>
               <ion-col  col-auto>
-                <button ion-button clear small (click)="upVoteComment()">
+                <button ion-button clear small [@onItemBump]="subComment.i === i ? 'onBump' : 'default'"
+                        (click) = "onItemBump(i,subComment)">
                   <ion-icon name="thumbs-up"></ion-icon>
                 </button>
               </ion-col>
               <ion-col  col-auto>
-                <button ion-button clear small>
+                <button ion-button clear small [@onItemBump]="subComment.i === i ? 'onBump' : 'default'"
+                        (click) = "onItemBump(i,subComment)">
                   <ion-icon name="thumbs-down"></ion-icon>
                 </button>
               </ion-col>
