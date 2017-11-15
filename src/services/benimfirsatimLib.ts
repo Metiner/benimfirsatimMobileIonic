@@ -23,14 +23,14 @@ export class BenimfirsatimLib{
 
   //Page code can be,
   //'hot','rising' or 'newcomers'
-  public getPage(page_code){
+  public getPage(page_code,pagination){
       let opt = this.setHeader();
       let possible_page_codes = ['hot','rising','newcomers'];
       if(possible_page_codes.indexOf(page_code)=== -1){
         return;
 
       }
-      return this.http.get(this.api_address + '/'+page_code+'.json',opt);
+      return this.http.get(this.api_address + '/'+page_code+'.json?page='+pagination+'&per_page=3',opt);
   }
 
 
@@ -83,13 +83,18 @@ export class BenimfirsatimLib{
     let opt = this.setHeader();
     return this.http.get(this.api_address + '/categories',opt);
   }
-  public showAlert(title:string,subTitle:string,buttons:string[]) {
+  public showAlert(title:string,subTitle:string,buttons:any[]) {
     let alert = this.alertCtrl.create({
       title: title,
       subTitle: subTitle,
       buttons: buttons
     });
     alert.present();
+  }
+
+  public getCategoryDeals(categoryIndex,pagination){
+    let opt = this.setHeader();
+    return this.http.get(this.api_address+'/categories/'+categoryIndex+'/deals.json?page='+pagination+'&per_page=3',opt);
   }
 
   public showToast(message: string,duration:number,position:string){

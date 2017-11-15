@@ -27,8 +27,6 @@ export class OnCommentReplyPage {
 
   }
 
-
-
   onCommentSubmit(form:NgForm){
       this.benimFirsatimLib.createComment(this.opportunity.id,this.comment.id,form.value.comment).subscribe(data=>{
         this.comment.comments.push(data.json())

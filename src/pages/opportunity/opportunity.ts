@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import {InfiniteScroll, IonicPage, NavParams} from 'ionic-angular';
+import {InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {NgForm} from "@angular/forms";
 import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
 import {onItemBump} from "../../app/animations";
+import {LoginPage} from "../login/login";
 
 @IonicPage()
 @Component({
@@ -20,9 +21,10 @@ export class OpportunityPage {
   opportunity: Opportunity;
   comments: Comment[] = [];
   onCommentReplyPage= OnCommentReplyPage;
+  loginPage = LoginPage;
   static pageCount = 1;
 
-  constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
+  constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib,private navCtrl:NavController) {
     this.opportunity = navParams.data;
     benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
       OpportunityPage.pageCount++;
@@ -35,7 +37,14 @@ export class OpportunityPage {
     });
   }
 
-  upVoteDeal(dealId:number){
+  upVoteDeal(dealId:number,upVote:any){
+
+    upVote.stateChanger = !upVote.stateChanger;
+
+    setTimeout(()=>{
+      upVote.stateChanger = !upVote.stateChanger;
+
+    },500)
     this.benimFirsatimLib.upvoteDeal(dealId).subscribe(data=>{
       this.opportunity.votes_sum = data.json().deal_score;
     });
@@ -79,6 +88,16 @@ export class OpportunityPage {
     u.user_id = BenimfirsatimLib.user.id;
     this.benimFirsatimLib.createComment(this.opportunity.id,null,form.value.comment).subscribe(data=>{
       console.log(data.json());
+    },error2 =>{
+      this.benimFirsatimLib.showAlert("Uyarı","Yorum yapmak için üye girişi yapmalısınız.",[
+      {
+        text:'Giriş Yap',handler:()=>{
+        this.navCtrl.push(this.loginPage);
+        }
+      },
+      {
+        text:'Vazgeç'
+      }])
     });
     form.resetForm();
   }

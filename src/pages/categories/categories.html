@@ -20,6 +20,6 @@
   <ion-item *ngFor="let category of categories"
             [navPush]="selectedCategoryPage"
             [navParams]="category">
-    <h5>{{category.name}}</h5>
+    <h5 text-capitalize>{{category.name}}</h5>
   </ion-item>
 </ion-content>

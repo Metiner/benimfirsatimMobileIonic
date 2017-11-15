@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import {InfiniteScroll, IonicPage} from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
@@ -22,18 +22,44 @@ export class HighlightsPage {
 
   opportunities: Opportunity[] = [];
   opportunityPage = OpportunityPage;
+  static pagination = 1;
 
-  constructor(benimfirsatimLib:BenimfirsatimLib) {
-    benimfirsatimLib.getPage('hot').subscribe((data)=>{
+  constructor(private benimfirsatimLib:BenimfirsatimLib) {
+    this.benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe((data)=>{
 
+      HighlightsPage.pagination++;
     data.json().forEach(element => {
+
 
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
-        console.log(u);
         this.opportunities.push(u);
     });
     })
+  }
+
+  //Async calls new comments from database.
+  doInfinite(infiniteScroll:InfiniteScroll){
+
+    this.benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe(data =>{
+
+
+      if(data.json().length > 0) {
+        HighlightsPage.pagination++;
+        data.json().forEach(element => {
+          let u: Opportunity = new Opportunity();
+          Object.assign(u, element);
+          this.opportunities.push(u);
+        })
+      }else
+      {
+        infiniteScroll.enable(false);
+        OpportunityPage.pageCount = 1;
+      }
+
+      infiniteScroll.complete();
+    });
+
   }
 
 

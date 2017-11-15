@@ -17,29 +17,31 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <div>
+        <div style="border-bottom: 0.55px solid #c8c7cc">
           <h6>{{opportunity.title}}</h6>
         </div>
       </ion-col>
     </ion-row>
-    <ion-row align-items-start>
+    <ion-row style="text-align: center">
       <ion-col>
-        <div>
-          <h3>{{opportunity.votes_sum}}
-            <ion-icon name="pulse"></ion-icon>
-          </h3>
-        </div>
-      </ion-col>
-      <ion-col>
-        <div>
-          <button ion-button clear small (click)="upVoteDeal(opportunity.id)">
-            <ion-icon name="arrow-up"></ion-icon>
-          </button>
-          <button ion-button clear small (click)="downVoteDeal(opportunity.id)">
-            <ion-icon name="arrow-down"></ion-icon>
-          </button>
-          <button ion-button clear small (click)="checkLogin()"></button>
-        </div>
+        <button #upVote
+                ion-button
+                clear
+                (click)="upVoteDeal(opportunity.id,upVote)"
+                [@onItemBump] = "upVote.stateChanger ? 'onBump' : 'default'"
+                >
+          <ion-icon name="arrow-up"></ion-icon>
+        </button>
+        <span style="font-size: xx-large">{{opportunity.votes_sum}}
+          <ion-icon name="flame" style="color: red"></ion-icon>
+        </span>
+        <button #downVote
+                ion-button
+                clear
+                (click)="upVoteDeal(opportunity.id,downVote)"
+                [@onItemBump] = "downVote.stateChanger ? 'onBump' : 'default'">
+          <ion-icon name="arrow-down"></ion-icon>
+        </button>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -82,17 +84,30 @@
             </ion-row>
             <ion-row>
               <ion-col class="thumbs" col-auto>
-                <button ion-button clear small [@onItemBump]="comment.i === i ? 'onBump' : 'default'" (click) = "onItemBump(i,comment)">
+                <button #thumbsUp
+                        ion-button
+                        clear
+                        small
+                        [@onItemBump]="thumbsUp.i === i ? 'onBump' : 'default'"
+                        (click) = "onItemBump(i,thumbsUp)">
                   <ion-icon name="thumbs-up"></ion-icon>
                 </button>
               </ion-col>
               <ion-col class="thumbs" col-auto>
-                <button ion-button clear small [@onItemBump]="comment.i === i ? 'onBump' : 'default'" (click) = "onItemBump(i,comment)">
+                <button #thumbsDown
+                        ion-button
+                        clear
+                        small
+                        [@onItemBump]="thumbsDown.i === i ? 'onBump' : 'default'"
+                        (click) = "onItemBump(i,thumbsDown)">
                   <ion-icon name="thumbs-down"></ion-icon>
                 </button>
               </ion-col>
               <ion-col class="thumbs"col-auto>
-                <button ion-button clear small style="color: #222222"
+                <button ion-button
+                        clear
+                        small
+                        style="color: #222222"
                         [navPush]="onCommentReplyPage"
                         [navParams]="{comment:comment,opportunity:opportunity}">
                   <ion-icon name="undo"></ion-icon>
@@ -123,14 +138,22 @@
             </ion-row>
             <ion-row>
               <ion-col  col-auto>
-                <button ion-button clear small [@onItemBump]="subComment.i === i ? 'onBump' : 'default'"
-                        (click) = "onItemBump(i,subComment)">
+                <button #thumbsUp
+                        ion-button
+                        clear
+                        small
+                        [@onItemBump]="thumbsUp.i === i ? 'onBump' : 'default'"
+                        (click) = "onItemBump(i,thumbsUp)">
                   <ion-icon name="thumbs-up"></ion-icon>
                 </button>
               </ion-col>
               <ion-col  col-auto>
-                <button ion-button clear small [@onItemBump]="subComment.i === i ? 'onBump' : 'default'"
-                        (click) = "onItemBump(i,subComment)">
+                <button #thumbsDown
+                        ion-button
+                        clear
+                        small
+                        [@onItemBump]="thumbsDown.i === i ? 'onBump' : 'default'"
+                        (click) = "onItemBump(i,thumbsDown)">
                   <ion-icon name="thumbs-down"></ion-icon>
                 </button>
               </ion-col>
