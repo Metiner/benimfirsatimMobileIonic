@@ -21,6 +21,14 @@
           <ion-icon name="log-out"></ion-icon>Çıkış
         </button>
       </ion-item>
+      <ion-item *ngIf="isAuthenticated">
+        <button ion-button
+                clear
+                (click) = "onSettings()"
+                icon-left>
+          <ion-icon name="settings"></ion-icon>Ayarlar
+        </button>
+      </ion-item>
   </ion-content>
 </ion-menu>
 <ion-nav [root]="rootPage" #nav></ion-nav>

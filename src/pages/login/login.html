@@ -32,10 +32,20 @@
     <ion-item no-lines>
       <ion-grid no-padding>
         <ion-row margin-top="10px">
-          <button no-margin no-padding ion-button clear type="submit" [disabled]="!f.valid">Giriş</button>
+          <button no-margin
+                  no-padding
+                  ion-button
+                  clear
+                  type="submit"
+                  [disabled]="!f.valid">Giriş</button>
         </ion-row>
         <ion-row>
-          <button no-margin no-padding ion-button clear type ="button" (click)="onSignUpButton()">Hesap Oluştur</button>
+          <button no-margin
+                  no-padding
+                  ion-button
+                  clear
+                  type ="button"
+                  (click)="onSignUpButton()">Hesap Oluştur</button>
         </ion-row>
       </ion-grid>
     </ion-item>
@@ -48,7 +58,15 @@
               block
               style="font-size: small;background-color: #3b5998;"
               (click)="onFacebookLogin()">Facebook</button>
-
+      <div style="padding-top: 0.5%">
+        <button ion-button
+        round
+        type="button"
+        block
+        style="font-size: small;
+        background-color: #d34836;"
+        (click)="onGooglePlusLogin()">Google Plus</button>
+      </div>
     </ion-item>
   </form>
 

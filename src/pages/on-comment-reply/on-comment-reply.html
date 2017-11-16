@@ -31,26 +31,36 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <div (click) = "toExpandItem(comment)" text-left *ngIf="!comment.showContent">
+        <div (click) = "toExpandItem(comment)"
+             text-left
+             *ngIf="!comment.showContent">
           <p>{{comment.text}}</p>
         </div>
-        <div (click) = "toExpandItem(comment)" *ngIf="comment.showContent" text-wrap>
+        <div (click) = "toExpandItem(comment)"
+             *ngIf="comment.showContent"
+             text-wrap>
           <p>{{comment.text}}</p>
         </div>
       </ion-row>
       <ion-row>
         <ion-col class="thumbs" col-auto>
-          <button ion-button clear small (click)="upVoteComment()">
+          <button ion-button
+                  clear
+                  small
+                  (click)="upVoteComment()">
             <ion-icon name="thumbs-up"></ion-icon>
           </button>
         </ion-col>
         <ion-col class="thumbs" col-auto>
-          <button ion-button clear small>
+          <button ion-button
+                  clear
+                  small>
             <ion-icon name="thumbs-down"></ion-icon>
           </button>
         </ion-col>
       </ion-row>
-      <div style="padding-left: 15%;padding-top: 5%" *ngFor="let subComment of comment.comments">
+      <div style="padding-left: 15%;padding-top: 5%"
+           *ngFor="let subComment of comment.comments">
         <ion-row>
           <ion-col col-auto>
             <ion-avatar>
@@ -65,21 +75,30 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <div (click) = "toExpandItem(subComment)" text-left *ngIf="!subComment.showContent">
+          <div (click) = "toExpandItem(subComment)"
+               text-left
+               *ngIf="!subComment.showContent">
             <p>{{subComment.text}}</p>
           </div>
-          <div (click) = "toExpandItem(subComment)" *ngIf="subComment.showContent" text-wrap>
+          <div (click) = "toExpandItem(subComment)"
+               *ngIf="subComment.showContent"
+               text-wrap>
             <p>{{subComment.text}}</p>
           </div>
         </ion-row>
         <ion-row>
           <ion-col  col-auto>
-            <button ion-button clear small (click)="upVoteComment()">
+            <button ion-button
+                    clear
+                    small
+                    (click)="upVoteComment()">
               <ion-icon name="thumbs-up"></ion-icon>
             </button>
           </ion-col>
           <ion-col  col-auto>
-            <button ion-button clear small>
+            <button ion-button
+                    clear
+                    small>
               <ion-icon name="thumbs-down"></ion-icon>
             </button>
           </ion-col>
@@ -89,7 +108,8 @@
   </ion-item>
 </ion-content>
 <ion-footer>
-  <form #f="ngForm" (ngSubmit)="onCommentSubmit(f)">
+  <form #f="ngForm"
+        (ngSubmit)="onCommentSubmit(f)">
     <ion-grid>
       <ion-row>
         <ion-col>

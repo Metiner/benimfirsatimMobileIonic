@@ -62,4 +62,8 @@ export class LoginPage {
 
   }
 
+  onGooglePlusLogin(){
+
+  }
+
 }

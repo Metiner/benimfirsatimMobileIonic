@@ -2,7 +2,7 @@ import {Http, RequestOptions} from "@angular/http";
 import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do'
-import {AlertController, ToastController} from "ionic-angular";
+import {ActionSheetController, AlertController, ToastController} from "ionic-angular";
 import { Storage} from "@ionic/storage";
 import {Headers} from '@angular/http';
 import {User} from "../models/user";
@@ -19,6 +19,7 @@ export class BenimfirsatimLib{
               private alertCtrl:AlertController,
               private toastCtrl:ToastController,
               private storageCtrl:Storage,
+              private actionSheetCtrl:ActionSheetController
               ){}
 
   //Page code can be,
@@ -185,6 +186,15 @@ export class BenimfirsatimLib{
     let u:User=new User();
     Object.assign(u,user);
     BenimfirsatimLib.user = u;
+  }
+
+  // displays a action sheet with given parameters
+    presentActionSheet(title:string,buttons:any[]) {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: title,
+        buttons: buttons
+      });
+      actionSheet.present();
   }
 }
 

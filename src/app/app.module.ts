@@ -26,6 +26,7 @@ import {SelectedCategoryPage} from "../pages/selected-category/selected-category
 import {Facebook} from "@ionic-native/facebook";
 import {OnCommentReplyPage} from "../pages/on-comment-reply/on-comment-reply";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {SettingsPage} from "../pages/settings/settings";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     CreateNewDealPage,
     SetLocationPage,
     SelectedCategoryPage,
-    OnCommentReplyPage
+    OnCommentReplyPage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     CreateNewDealPage,
     SetLocationPage,
     SelectedCategoryPage,
-    OnCommentReplyPage
+    OnCommentReplyPage,
+    SettingsPage
   ],
   providers: [
     StatusBar,

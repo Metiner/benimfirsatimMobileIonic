@@ -5,12 +5,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {TabsPage} from "../pages/tabs/tabs";
 import {LoginPage} from "../pages/login/login";
 import {BenimfirsatimLib} from "../services/benimfirsatimLib";
+import {SettingsPage} from "../pages/settings/settings";
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any = TabsPage;
   public isAuthenticated = false;
+  settingsPage = SettingsPage;
   @ViewChild('nav') nav: NavController;
 
 
@@ -49,6 +51,11 @@ export class MyApp {
         this.isAuthenticated = false;
       },1000)
 
+    }
+
+    onSettings(){
+      this.nav.push(this.settingsPage);
+      this.menuCtrl.close();
     }
 
 }

@@ -27,13 +27,21 @@
     </ion-card-content>
     <ion-row text-center>
       <ion-col>
-        <button ion-button icon-left clear small>
+        <button ion-button
+                icon-left
+                [navPush] = "opportunityPage" [navParams] = "opportunity"
+                clear
+                small>
           <ion-icon name="pricetag"></ion-icon>
           <div>{{opportunity.price}} ₺ </div>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button icon-left clear small>
+        <button ion-button
+                [navPush] = "opportunityPage" [navParams] = "opportunity"
+                icon-left
+                clear
+                small>
           <ion-icon name="text"></ion-icon>
           <div>{{opportunity.comments_count}} Yorum</div>
         </button>

@@ -39,7 +39,8 @@
                 ion-button
                 clear
                 (click)="upVoteDeal(opportunity.id,downVote)"
-                [@onItemBump] = "downVote.stateChanger ? 'onBump' : 'default'">
+                [@onItemBump] = "downVote.stateChanger ? 'onBump' : 'default'"
+                style="padding-left: 8px">
           <ion-icon name="arrow-down"></ion-icon>
         </button>
       </ion-col>
