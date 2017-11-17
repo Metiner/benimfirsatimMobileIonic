@@ -79,7 +79,10 @@
               </ion-col>
             </ion-row>
             <ion-row>
-              <div  [ngClass]="{'wrap':comment.showContent}">
+              <div  text-wrap *ngIf="comment.showContent" [@onCommentExpand]="comment.showContent ? 'toExpand' : 'asd'" >
+                <p>{{comment.text}}</p>
+              </div>
+              <div (click)="comment.showContent = !comment.showContent" *ngIf="!comment.showContent">
                 <p>{{comment.text}}</p>
               </div>
             </ion-row>
@@ -133,7 +136,10 @@
               </ion-col>
             </ion-row>
             <ion-row>
-              <div [ngClass]="{'wrap':subComment.showContent}">
+              <div  text-wrap *ngIf="subComment.showContent" [@onCommentExpand]="subComment.showContent ? 'toExpand' : 'asd'" >
+                <p>{{subComment.text}}</p>
+              </div>
+              <div (click)="subComment.showContent = !subComment.showContent" *ngIf="!subComment.showContent">
                 <p>{{subComment.text}}</p>
               </div>
             </ion-row>

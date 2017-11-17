@@ -5,16 +5,18 @@ import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {NgForm} from "@angular/forms";
 import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
-import {onItemBump} from "../../app/animations";
+import {onCommentExpand, onItemBump} from "../../app/animations";
 import {LoginPage} from "../login/login";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @IonicPage()
 @Component({
   selector: 'page-opportunity',
   templateUrl: 'opportunity.html',
   animations:[
-    onItemBump
-  ]
+    onItemBump,
+    onCommentExpand
+]
 })
 export class OpportunityPage {
 
@@ -31,7 +33,6 @@ export class OpportunityPage {
       data.json().forEach(element=>{
         let u:Comment = new Comment();
         Object.assign(u,element);
-        console.log(element);
         this.comments.push(u);
       })
     });
@@ -103,11 +104,14 @@ export class OpportunityPage {
   }
 
   onItemBump(i:any,item:any){
-    item.showContent = !item.showContent;
     item.i = i;
     setTimeout(()=>{
       item.i=-1
     },200)
   }
 
+  showCommentText(comment:any){
+    console.log(comment.showContent);
+    comment.showContent = !comment.showContent;
+  }
 }
