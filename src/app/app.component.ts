@@ -6,6 +6,7 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {LoginPage} from "../pages/login/login";
 import {BenimfirsatimLib} from "../services/benimfirsatimLib";
 import {SettingsPage} from "../pages/settings/settings";
+import {GoogleAnalytics} from "@ionic-native/google-analytics";
 @Component({
   templateUrl: 'app.html'
 })
@@ -19,7 +20,9 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private menuCtrl:MenuController,
               private benimFirsatimLib:BenimfirsatimLib,
-              private eventCtrl:Events) {
+              private eventCtrl:Events,
+              private gA:GoogleAnalytics) {
+
     this.eventCtrl.subscribe("user.login", () => { this.isAuthenticated = true});
     if(benimFirsatimLib.checkAuthFromStorage()){
       this.isAuthenticated = true;
@@ -32,6 +35,17 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+
+      // for starting google analytics
+
+      this.gA.startTrackerWithId('UA-44910726-2')
+        .then(() => {
+          console.log('Google analytics is ready now');
+          this.gA.trackView('test');
+          // Tracker is ready
+          // You can now track pages or set additional information such as AppVersion or UserId
+        })
+        .catch(e => console.log('Error starting GoogleAnalytics', e));
     });
   }
   onSignin(){

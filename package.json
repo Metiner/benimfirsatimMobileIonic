@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "4.4.4",
     "@ionic-native/core": "4.3.2",
     "@ionic-native/facebook": "^4.4.0",
+    "@ionic-native/google-analytics": "^4.4.2",
     "@ionic-native/splash-screen": "4.3.2",
     "@ionic-native/status-bar": "4.3.2",
     "@ionic/storage": "^2.1.3",
@@ -32,6 +33,7 @@
     "cordova-ios": "^4.5.3",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-facebook4": "^1.9.1",
+    "cordova-plugin-google-analytics": "^1.8.3",
     "cordova-plugin-ionic-webview": "^1.1.16",
     "cordova-plugin-splashscreen": "^4.1.0",
     "cordova-plugin-whitelist": "^1.3.3",
@@ -52,16 +54,17 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-sqlite-storage": {},
-      "cordova-plugin-facebook4": {
-        "APP_ID": "1909773262383115",
-        "APP_NAME": "benimFirsatim-mobile"
-      },
       "ionic-plugin-keyboard": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {}
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-google-analytics": {},
+      "cordova-plugin-facebook4": {
+        "APP_ID": "113944349294618",
+        "APP_NAME": "benimfirsatim.com"
+      },
+      "cordova-sqlite-storage": {}
     },
     "platforms": [
       "ios",

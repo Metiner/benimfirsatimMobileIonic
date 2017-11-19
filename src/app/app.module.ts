@@ -27,6 +27,7 @@ import {Facebook} from "@ionic-native/facebook";
 import {OnCommentReplyPage} from "../pages/on-comment-reply/on-comment-reply";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SettingsPage} from "../pages/settings/settings";
+import {GoogleAnalytics} from "@ionic-native/google-analytics";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import {SettingsPage} from "../pages/settings/settings";
     HttpModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp,{backButtonText: 'Geri'}),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({driverOrder: ['indexeddb', 'websql', 'sqlite']}),
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyB4HjxYVe5iOu4dzGhaDfq1vtCzmiMCg1U'
     })
@@ -80,6 +81,7 @@ import {SettingsPage} from "../pages/settings/settings";
     BenimfirsatimLib,
     SplashScreen,
     Facebook,
+    GoogleAnalytics,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

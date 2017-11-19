@@ -8,6 +8,7 @@ import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
 import {onCommentExpand, onItemBump} from "../../app/animations";
 import {LoginPage} from "../login/login";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {MyApp} from "../../app/app.component";
 
 @IonicPage()
 @Component({
@@ -81,26 +82,30 @@ export class OpportunityPage {
 
   }
   onCommentSubmit(form:NgForm){
-    let u:Comment = new Comment();
-    u.user = BenimfirsatimLib.user;
-    u.text = form.value.comment;
-    u.created_at = (new Date()).toString().split(' ').splice(1,3).join(' ');
-    u.deal_id = this.opportunity.id;
-    u.user_id = BenimfirsatimLib.user.id;
-    this.benimFirsatimLib.createComment(this.opportunity.id,null,form.value.comment).subscribe(data=>{
-      console.log(data.json());
-    },error2 =>{
+    if(!this.benimFirsatimLib.checkAuthFromStorage()){
       this.benimFirsatimLib.showAlert("Uyarı","Yorum yapmak için üye girişi yapmalısınız.",[
-      {
-        text:'Giriş Yap',handler:()=>{
-        this.navCtrl.push(this.loginPage);
+        {
+          text:'Giriş Yap',handler:()=>{
+          this.navCtrl.push(this.loginPage);
         }
-      },
-      {
-        text:'Vazgeç'
-      }])
-    });
-    form.resetForm();
+        },
+        {
+          text:'Vazgeç'
+        }])
+    }else{
+        let u:Comment = new Comment();
+        u.user = BenimfirsatimLib.user;
+        u.text = form.value.comment;
+        u.created_at = (new Date()).toString().split(' ').splice(1,3).join(' ');
+        u.deal_id = this.opportunity.id;
+        u.user_id = BenimfirsatimLib.user.id;
+        this.benimFirsatimLib.createComment(this.opportunity.id,null,form.value.comment).subscribe(data=>{
+          console.log(data.json());
+        },error2 =>{
+          console.log(error2);
+        });
+        form.resetForm();
+    }
   }
 
   onItemBump(i:any,item:any){

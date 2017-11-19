@@ -6,6 +6,7 @@ import {ActionSheetController, AlertController, ToastController} from "ionic-ang
 import { Storage} from "@ionic/storage";
 import {Headers} from '@angular/http';
 import {User} from "../models/user";
+import {GoogleAnalytics} from "@ionic-native/google-analytics";
 
 
 @Injectable()
@@ -46,6 +47,10 @@ export class BenimfirsatimLib{
     return this.http.get(this.api_address + '/users/login_check',opt);
   }
 
+  public signupOrLogin(email,name,avatar_url,uid,provider_name){
+    let opt = this.setHeader();
+    return this.http.post(this.api_address+'/users/auto_oauth',{"email":email,"name":name,"avatar_url":avatar_url,"uid":uid,"provider":provider_name},opt);
+  }
 
   public signIn(email,password){
     return this.http.post(this.api_address + '/users/sign_in.json',{"user":{"email":email,"password":password}});
@@ -124,7 +129,7 @@ export class BenimfirsatimLib{
 
   }
 
-  //It checks if any email is stored on devices local storage.
+  //It checks if any user is stored on devices local storage.
   public checkAuthFromStorage(){
     this.storageCtrl.get("user").then(
       data =>{
@@ -141,7 +146,7 @@ export class BenimfirsatimLib{
 
   }
 
-  //It removes all of mails from device local storage.
+  //It removes all of users from device local storage.
   public logOutFromStorageAndAuth(){
     this.storageCtrl.clear().then(
       data => {
