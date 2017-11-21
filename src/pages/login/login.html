@@ -1,74 +1,92 @@
 
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-  <form #f="ngForm" (submit)="onLogIn(f)">
-    <ion-item>
-      <ion-label floating>E-mail</ion-label>
-      <ion-input
-        type="email"
-        name="email"
-        required
-        ngModel
-      ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Parola</ion-label>
-      <ion-input
-        type="password"
-        name="password"
-        ngModel
-        required
-        [minlength]="6"
-      ></ion-input>
-    </ion-item>
-    <ion-item no-lines>
-      <ion-grid no-padding>
-        <ion-row margin-top="10px">
-          <button no-margin
-                  no-padding
-                  ion-button
+  <ion-grid>
+    <ion-row style="margin-top: 30px">
+      <ion-col offset-3 col-6>
+        <img src="../../assets/imgs/Benim_Fırsatım_Logo.png">
+      </ion-col>
+    </ion-row>
+    <form #f="ngForm" (submit)="onLogIn(f)">
+      <ion-item no-lines class="inputBox">
+        <ion-input type="text" placeholder="Kullanıcı Adı veya E-posta"></ion-input>
+      </ion-item>
+      <ion-item no-lines class="inputBox">
+        <ion-input type="password" placeholder="parola"></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col col-7>
+          <ion-item no-lines class="rememberMe">
+            <ion-label>Beni Hatırla</ion-label>
+            <ion-checkbox style="margin-right: 8px" [ngModel] name="rememberMe"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-5>
+          <button ion-button
                   clear
-                  type="submit"
-                  [disabled]="!f.valid">Giriş</button>
-        </ion-row>
-        <ion-row>
-          <button no-margin
-                  no-padding
-                  ion-button
-                  clear
-                  type ="button"
-                  (click)="onSignUpButton()">Hesap Oluştur</button>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-    <ion-item no-lines text-center>
-      <p>Aşağıdaki servislerle de giriş yapabilirsiniz.</p>
-      <br>
+                  (click)="onForgotPassword()"
+                  type="button"
+                  style="font-size: small;
+                  color: white"
+          >Parolamı unuttum</button>
+        </ion-col>
+      </ion-row>
       <button ion-button
+              type="submit"
+              outline
+              color="light"
+              [disabled]="!f.valid"
+              block
+              round
+      >Giriş Yap</button>
+    </form>
+    <ion-row>
+      <ion-col text-center>
+        <ion-label style="font-style: italic;color: whitesmoke;">yada..</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <button ion-button
+              block
+              round
+              small
+              type="button"
+              (click)="onFacebookLogin()"
+              style="background-color: #3b5998"
+      >Facebook</button>
+    </ion-row>
+    <ion-row>
+      <button ion-button
+              small
+              block
+              (click)="onGooglePlusLogin()"
               round
               type="button"
+              style="background-color: #d34836"
+      >Google Plus</button>
+    </ion-row>
+    <ion-row>
+      <button ion-button
+              small
               block
-              style="font-size: small;background-color: #3b5998;"
-              (click)="onFacebookLogin()">Facebook</button>
-      <div style="padding-top: 0.5%">
-        <button ion-button
-        round
-        type="button"
-        block
-        style="font-size: small;
-        background-color: #d34836;"
-        (click)="onGooglePlusLogin()">Google Plus</button>
-      </div>
-    </ion-item>
-  </form>
-
-
+              type="button"
+              round
+              (click)="onSignUpButton()"
+              style="background-color: whitesmoke;color: darkred"
+      >Hesap Oluştur</button>
+    </ion-row>
+    <ion-row>
+      <button ion-button
+              small
+              block
+              round
+              clear
+              style="background-color: whitesmoke"
+      >Misafir Olarak Devam Et</button>
+    </ion-row>
+  </ion-grid>
 </ion-content>

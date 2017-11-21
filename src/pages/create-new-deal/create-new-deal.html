@@ -15,6 +15,7 @@
                  type="url"
                  required
                  name="deal_url"
+                 (ionChange)="onUrlChange($event)"
                  placeholder="www.alisverissitem.com/urun.aspx?kod=1123"></ion-input>
     </ion-item>
     <ion-item>
@@ -33,18 +34,29 @@
       </ion-select>
     </ion-item>
     <ion-item>
+      <ion-label>Şehir</ion-label>
+      <ion-select required
+                  [(ngModel)]="selectedCategory"
+                  name="selectedCity">
+        <ion-option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label>Kupon Codu</ion-label>
       <ion-input ngModel type="text"
-                 name="deal_coupon_code"></ion-input>
+                 name="deal_coupon_code"
+      ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Başlık *</ion-label>
-      <ion-input ngModel type="text"
-                 required name="deal_title" ></ion-input>
+      <ion-input [ngModel] = 'deal_title'
+                 type="text"
+                 required
+                 name="deal_title" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Detaylar *</ion-label>
-      <ion-textarea ngModel
+      <ion-textarea [ngModel] ='deal_details'
                     required
                     name="deal_details" ></ion-textarea>
     </ion-item>
@@ -52,71 +64,76 @@
     <ion-item>
       <ion-label>Tarih</ion-label>
       <ion-datetime ngModel
-                    displayFormat="MMM DD, YYYY HH:mm"
+                    displayFormat="DD MM, YYYY"
                     name="deal_date"></ion-datetime>
     </ion-item>
+    <!--<ion-grid>-->
+      <!--<ion-row>-->
+        <!--<ion-col>-->
+          <!--<button-->
+            <!--ion-button-->
+            <!--outline-->
+            <!--block-->
+            <!--type="button"-->
+            <!--icon-left-->
+            <!--(click)="onLocate()">-->
+            <!--<ion-icon name="locate"></ion-icon>-->
+            <!--Konumumu ekle-->
+          <!--</button>-->
+        <!--</ion-col>-->
+        <!--<ion-col>-->
+          <!--<button ion-button-->
+                  <!--outline-->
+                  <!--block-->
+                  <!--icon-left-->
+                  <!--(click)="onOpenMap()"-->
+                  <!--type="button"-->
+                  <!--&gt;-->
+            <!--<ion-icon name="map"></ion-icon>-->
+            <!--Haritada seç-->
+          <!--</button>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+      <!--<ion-row  *ngIf="isLocationSet">-->
+        <!--<ion-col>-->
+          <!--<sebm-google-map-->
+            <!--[longitude]="location.lng"-->
+            <!--[latitude]="location.ltt"-->
+            <!--[zoom]="16">-->
+            <!--<sebm-google-map-marker-->
+              <!--[longitude]="location.lng"-->
+              <!--[latitude]="location.ltt"></sebm-google-map-marker>-->
+          <!--</sebm-google-map>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+      <!--<ion-row>-->
+        <!--<ion-col text-center>-->
+          <!--<h5>Fotoğraf yükle</h5>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+      <!--<ion-row>-->
+        <!--<ion-col>-->
+          <!--<button block-->
+                  <!--ion-button-->
+                  <!--(click)="onTakePhoto()"-->
+                  <!--outline-->
+                  <!--icon-left-->
+                  <!--type="button"-->
+          <!--&gt;<ion-icon name="camera"></ion-icon>-->
+          <!--Kamerayı Aç-->
+          <!--</button>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
     <ion-grid>
-      <ion-row>
-        <ion-col>
-          <button
-            ion-button
-            outline
-            block
-            type="button"
-            icon-left
-            (click)="onLocate()">
-            <ion-icon name="locate"></ion-icon>
-            Konumumu ekle
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button
-                  outline
-                  block
-                  icon-left
-                  (click)="onOpenMap()"
-                  type="button"
-                  >
-            <ion-icon name="map"></ion-icon>
-            Haritada seç
-          </button>
-        </ion-col>
-      </ion-row>
-      <ion-row  *ngIf="isLocationSet">
-        <ion-col>
-          <sebm-google-map
-            [longitude]="location.lng"
-            [latitude]="location.ltt"
-            [zoom]="16">
-            <sebm-google-map-marker
-              [longitude]="location.lng"
-              [latitude]="location.ltt"></sebm-google-map-marker>
-          </sebm-google-map>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col text-center>
-          <h5>Fotoğraf yükle</h5>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <button block
-                  ion-button
-                  (click)="onTakePhoto()"
-                  outline
-                  icon-left
-                  type="button"
-          ><ion-icon name="camera"></ion-icon>
-          Kamerayı Aç
-          </button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <img [src]="">
-        </ion-col>
-      </ion-row>
+      <ion-scroll scrollX="true" direction="x">
+        <ion-row>
+          <ion-col>
+            <ion-card *ngFor="let image of images">
+              <img src="{{image}}">
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-scroll>
       <ion-row>
         <ion-col>
           <button ion-button
