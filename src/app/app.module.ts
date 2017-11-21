@@ -28,6 +28,7 @@ import {OnCommentReplyPage} from "../pages/on-comment-reply/on-comment-reply";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SettingsPage} from "../pages/settings/settings";
 import {GoogleAnalytics} from "@ionic-native/google-analytics";
+import {GooglePlus} from "@ionic-native/google-plus";
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import {GoogleAnalytics} from "@ionic-native/google-analytics";
     BenimfirsatimLib,
     SplashScreen,
     Facebook,
+    GooglePlus,
     GoogleAnalytics,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

@@ -91,4 +91,7 @@
         <variable name="APP_NAME" value="benimfirsatim.com" />
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="^2.1.2" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.57374298212-r1h4ovakq9qrimg8k53p5kqh24lnounm" />
+    </plugin>
 </widget>

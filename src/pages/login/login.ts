@@ -6,6 +6,7 @@ import {SignupPage} from "../signup/signup";
 import {TabsPage} from "../tabs/tabs";
 import {Facebook, FacebookLoginResponse} from "@ionic-native/facebook";
 import {Http} from "@angular/http";
+import {GooglePlus} from "@ionic-native/google-plus";
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -20,7 +21,7 @@ export class LoginPage {
               private loadingCtrl:LoadingController,
               private eventCtrl:Events,
               private fb:Facebook,
-              private http:Http){}
+              private googlePlus:GooglePlus){}
 
   onLogIn(form:NgForm){
 
@@ -73,9 +74,10 @@ export class LoginPage {
           let id = response.id;
           let picture = response.picture.data.url;
           this.benimFirsatimLib.signupOrLogin(email,name,picture,id,"facebook").subscribe(response=>{
-            console.log(response.json());
+
             // It means, email is already being used by another user.
-            if(response.json().email == ''){
+            if(!response.json().success){
+              this.benimFirsatimLib.showToast(response.json().message,3000,"bottom");
 
             }
             if(response.json() != null && response.json().success == true ) {
@@ -94,6 +96,11 @@ export class LoginPage {
 
   onGooglePlusLogin(){
 
+    this.googlePlus.login().catch(response=>{
+      console.log(response);
+    }).catch(error=>{
+      console.log(error);
+    })
   }
 
 }
