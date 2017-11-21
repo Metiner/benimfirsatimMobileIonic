@@ -6,8 +6,6 @@ import {ActionSheetController, AlertController, ToastController} from "ionic-ang
 import { Storage} from "@ionic/storage";
 import {Headers} from '@angular/http';
 import {User} from "../models/user";
-import {GoogleAnalytics} from "@ionic-native/google-analytics";
-
 
 @Injectable()
 export class BenimfirsatimLib{
@@ -85,10 +83,21 @@ export class BenimfirsatimLib{
     return this.http.get(this.api_address + '/deals/'+deal_id+'/comments?page='+page+'&per_page=3',opt);
   }
 
+  public getCities(){
+    let opt = this.setHeader();
+    return this.http.get(this.api_address + '/data/cities',opt);
+  }
+
   public getCategories(){
     let opt = this.setHeader();
     return this.http.get(this.api_address + '/categories',opt);
   }
+
+  //Gets information from given deal link.
+  public getPullMeta(url){
+    return this.http.get(this.api_address + '/deals/pull_meta?target=' + url);
+  }
+
   public showAlert(title:string,subTitle:string,buttons:any[]) {
     let alert = this.alertCtrl.create({
       title: title,
