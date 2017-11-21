@@ -7,8 +7,6 @@ import {NgForm} from "@angular/forms";
 import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
 import {onCommentExpand, onItemBump} from "../../app/animations";
 import {LoginPage} from "../login/login";
-import {animate, state, style, transition, trigger} from "@angular/animations";
-import {MyApp} from "../../app/app.component";
 
 @IonicPage()
 @Component({

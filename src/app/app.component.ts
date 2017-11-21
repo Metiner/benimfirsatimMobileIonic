@@ -36,6 +36,24 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
+
+
+      // OneSignal Code start:
+      // Enable to debug issues:
+      // window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+
+      var notificationOpenedCallback = function(jsonData) {
+        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+      };
+
+      window["plugins"].OneSignal
+        .startInit("e3b6a1f6-1826-4015-a0c5-99665f5a9589", "57374298212")
+        .handleNotificationOpened(notificationOpenedCallback)
+        .endInit();
+
+
+
+
       // for starting google analytics
 
       this.gA.startTrackerWithId('UA-44910726-2')

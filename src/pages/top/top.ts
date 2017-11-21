@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {InfiniteScroll, IonicPage, NavParams} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {OpportunityPage} from "../opportunity/opportunity";

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage,NavParams } from 'ionic-angular';
 import {User} from "../../models/user";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 
