@@ -11,7 +11,7 @@ import {GoogleAnalytics} from "@ionic-native/google-analytics";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any = LoginPage;
   public isAuthenticated = false;
   settingsPage = SettingsPage;
   @ViewChild('nav') nav: NavController;
@@ -26,7 +26,7 @@ export class MyApp {
     this.eventCtrl.subscribe("user.login", () => { this.isAuthenticated = true});
     if(benimFirsatimLib.checkAuthFromStorage()){
       this.isAuthenticated = true;
-      this.nav.setRoot(TabsPage);
+      this.nav.setRoot(LoginPage);
     }else{
       this.isAuthenticated = false;
     }

@@ -4,7 +4,7 @@ import {NgForm} from "@angular/forms";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {SignupPage} from "../signup/signup";
 import {TabsPage} from "../tabs/tabs";
-import {Facebook, FacebookLoginResponse} from "@ionic-native/facebook";
+import {Facebook} from "@ionic-native/facebook";
 import {Http} from "@angular/http";
 @IonicPage()
 @Component({
@@ -94,6 +94,10 @@ export class LoginPage {
 
   onGooglePlusLogin(){
 
+  }
+
+  toTabsPage(){
+    this.navCtrl.push(TabsPage);
   }
 
 }

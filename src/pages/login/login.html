@@ -6,8 +6,8 @@
 
 <ion-content padding>
   <ion-grid>
-    <ion-row style="margin-top: 30px">
-      <ion-col offset-3 col-6>
+    <ion-row style="margin-bottom: 20px">
+      <ion-col offset-sm-3 col-sm-6>
         <img src="../../assets/imgs/Benim_Fırsatım_Logo.png">
       </ion-col>
     </ion-row>
@@ -16,16 +16,16 @@
         <ion-input type="text" placeholder="Kullanıcı Adı veya E-posta"></ion-input>
       </ion-item>
       <ion-item no-lines class="inputBox">
-        <ion-input type="password" placeholder="parola"></ion-input>
+        <ion-input type="password" placeholder="Parola"></ion-input>
       </ion-item>
-      <ion-row>
-        <ion-col col-7>
+      <ion-row nowrap>
+        <ion-col col-auto>
           <ion-item no-lines class="rememberMe">
             <ion-label>Beni Hatırla</ion-label>
-            <ion-checkbox style="margin-right: 8px" [ngModel] name="rememberMe"></ion-checkbox>
+            <ion-checkbox no-padding style="margin-right: 8px" [ngModel] name="rememberMe"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-5>
+        <ion-col col-auto>
           <button ion-button
                   clear
                   (click)="onForgotPassword()"
@@ -39,6 +39,7 @@
               type="submit"
               outline
               color="light"
+              style="font-size: large;border: 2px white solid"
               [disabled]="!f.valid"
               block
               round
@@ -85,6 +86,7 @@
               block
               round
               clear
+              (click)="toTabsPage()"
               style="background-color: whitesmoke"
       >Misafir Olarak Devam Et</button>
     </ion-row>
