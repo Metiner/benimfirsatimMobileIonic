@@ -9,9 +9,9 @@ import {User} from "../models/user";
 
 @Injectable()
 export class BenimfirsatimLib{
-  //api_address = "https://benimfirsatim.com";
+  api_address = "https://benimfirsatim.com";
 
-  api_address = "https://benimfirsatim.cleverapps.io/";
+  //api_address = "https://benimfirsatim.cleverapps.io/";
   static token:string ="";
   static user:User = new User;
 
@@ -53,6 +53,7 @@ export class BenimfirsatimLib{
   }
 
   public signIn(email,password){
+    console.log(email,password);
     return this.http.post(this.api_address + '/users/sign_in.json',{"user":{"email":email,"password":password}});
   }
 
@@ -74,6 +75,12 @@ export class BenimfirsatimLib{
   public createComment(deal_id,parent_comment_id,comment){
     let opt = this.setHeader();
     return this.http.post(this.api_address + '/deals/' + deal_id +'/comments.json',{parent_comment_id:parent_comment_id,comment:comment},opt);
+  }
+
+  public createDeal(starts_at,price,categories,image,link,image_url,title,details,coupon_code,city){
+    let opt = this.setHeader();
+    let body = {starts_at:starts_at,price:price,categories:categories,image:image,link:link,image_url,title:title,details:details,coupon_code:coupon_code,city:city};
+    return this.http.post(this.api_address + '/deals/create',body);
   }
 
   public commentVote(comment_id){

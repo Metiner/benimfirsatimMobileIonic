@@ -24,6 +24,7 @@ export class LoginPage {
 
   onLogIn(form:NgForm){
 
+    console.log(form)
     this.benimFirsatimLib.signIn(form.value.email, form.value.password).subscribe(data=>{
 
       console.log(data.json());

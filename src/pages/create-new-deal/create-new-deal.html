@@ -124,11 +124,14 @@
           <!--</button>-->
         <!--</ion-col>-->
       <!--</ion-row>-->
+    <ion-item>
+      <ion-label style="white-space: normal;color: #aaaaaa">Lütfen fırsatta görünmesini istediğiniz görseli seçin.</ion-label>
+    </ion-item>
     <ion-grid>
       <ion-scroll scrollX="true" direction="x">
         <ion-row>
           <ion-col>
-            <ion-card *ngFor="let image of images">
+            <ion-card #picture *ngFor="let image of images" (click)="onPictureSelect(picture)" [@onPictureSelectAnimation]="picture.isSelected ? 'toSelected' : 'default'">
               <img src="{{image}}">
             </ion-card>
           </ion-col>

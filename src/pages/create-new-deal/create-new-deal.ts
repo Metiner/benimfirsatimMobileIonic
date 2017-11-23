@@ -5,11 +5,15 @@ import {SetLocationPage} from "../set-location/set-location";
 import {Location} from "../../models/location";
 import {Category} from "../../models/category";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {onPictureSelectAnimation} from "../../app/animations";
 
 @IonicPage()
 @Component({
   selector: 'page-create-new-deal',
   templateUrl: 'create-new-deal.html',
+  animations:[
+    onPictureSelectAnimation
+  ]
 })
 export class CreateNewDealPage {
 
@@ -23,6 +27,8 @@ export class CreateNewDealPage {
   deal_details : string ='';
   images : any[] = [];
   isLinkEmpty: boolean = true;
+  selectedImage:string ='';
+  selectedImages:any[] = [];
 
   constructor(private modalCtrl:ModalController,
               private benimFirsatimLib:BenimfirsatimLib,
@@ -95,5 +101,17 @@ export class CreateNewDealPage {
       for(let i=0;i<4;i++){
         this.images.push('https://benimfirsatim.com/product_placeholder.png');
     }
+  }
+
+  onPictureSelect(picture){
+
+
+    this.selectedImages.forEach(element=>{
+      element.isSelected = false;
+    })
+    picture.isSelected = !picture.isSelected;
+    this.selectedImages.push(picture);
+    this.selectedImage = picture.children[0].currentSrc;
+
   }
 }

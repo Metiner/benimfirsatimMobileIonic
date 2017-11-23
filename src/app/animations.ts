@@ -9,10 +9,17 @@ export const onItemBump = trigger('onItemBump',[
   })),
   transition('default <=> onBump',[
     animate(300)])
-])
+]);
 
 export const onCommentExpand = trigger("onCommentExpand",[
   state('toExpand',style({transform:'scale(1.05)'})),
   transition('void <=> toExpand',animate(300)
 
   )]);
+
+export const onPictureSelectAnimation = trigger('onPictureSelectAnimation',[
+  state('toSelected',style({marginRight:'20px',marginLeft:'20px',transform:'scale(1.15)'})),
+  transition('* <=> *', animate(500))
+]);
+
+
