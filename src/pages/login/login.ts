@@ -5,8 +5,6 @@ import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {SignupPage} from "../signup/signup";
 import {TabsPage} from "../tabs/tabs";
 import {Facebook} from "@ionic-native/facebook";
-import {Http} from "@angular/http";
-import {Facebook} from "@ionic-native/facebook";
 import {GooglePlus} from "@ionic-native/google-plus";
 @IonicPage()
 @Component({

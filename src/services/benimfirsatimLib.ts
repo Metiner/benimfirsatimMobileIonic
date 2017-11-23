@@ -9,7 +9,9 @@ import {User} from "../models/user";
 
 @Injectable()
 export class BenimfirsatimLib{
-  api_address = "https://benimfirsatim.com";
+  //api_address = "https://benimfirsatim.com";
+
+  api_address = "https://benimfirsatim.cleverapps.io/";
   static token:string ="";
   static user:User = new User;
 

@@ -18,6 +18,10 @@
 <ion-content padding>
   <ion-card *ngFor="let opportunity of opportunities">
     <ion-item>
+      <div style="text-align: center;margin-bottom: 10px">
+        <i class="fa fa-heartbeat fa-4x"></i>
+        <span style="font-size: xx-large">{{opportunity.votes_sum}}</span>
+      </div>
       <h2>{{opportunity.title}}</h2>
       <p>{{opportunity.link}}</p>
     </ion-item>

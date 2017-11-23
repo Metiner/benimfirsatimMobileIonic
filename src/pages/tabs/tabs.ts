@@ -19,7 +19,8 @@ import {CreateNewDealPage} from "../create-new-deal/create-new-deal";
       <ion-tab [tabsHideOnSubPages]="true" [root]="highlightsPage" tabTitle= "Öne Çıkanlar"></ion-tab>
       <ion-tab [tabsHideOnSubPages]="true" [root]="risingPage" tabTitle="Yükselenler" ></ion-tab>
       <ion-tab [tabsHideOnSubPages]="true" [root]="topPage" tabTitle="Yeniler" ></ion-tab>
-      <ion-tab [tabsHideOnSubPages]="true" [root]="categoriesPage" tabTitle="Kategoriler"></ion-tab>
+      <ion-tab [tabsHideOnSubPages]="true" [root]="categoriesPage" tabTitle="Kategoriler"></ion-tab>  
+
     </ion-tabs>
     `,
 })

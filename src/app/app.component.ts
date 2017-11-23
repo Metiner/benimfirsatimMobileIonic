@@ -7,11 +7,12 @@ import {LoginPage} from "../pages/login/login";
 import {BenimfirsatimLib} from "../services/benimfirsatimLib";
 import {SettingsPage} from "../pages/settings/settings";
 import {GoogleAnalytics} from "@ionic-native/google-analytics";
+import {OneSignal} from "@ionic-native/onesignal";
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LoginPage;
+  rootPage:any = TabsPage;
   public isAuthenticated = false;
   settingsPage = SettingsPage;
   @ViewChild('nav') nav: NavController;
@@ -21,12 +22,13 @@ export class MyApp {
               private menuCtrl:MenuController,
               private benimFirsatimLib:BenimfirsatimLib,
               private eventCtrl:Events,
-              private gA:GoogleAnalytics) {
+              private gA:GoogleAnalytics,
+              private oneSignal:OneSignal) {
 
     this.eventCtrl.subscribe("user.login", () => { this.isAuthenticated = true});
     if(benimFirsatimLib.checkAuthFromStorage()){
       this.isAuthenticated = true;
-      this.nav.setRoot(LoginPage);
+      this.nav.setRoot(TabsPage);
     }else{
       this.isAuthenticated = false;
     }
@@ -38,20 +40,20 @@ export class MyApp {
 
 
 
-      // OneSignal Code start:
-      // Enable to debug issues:
-      // window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+     /* // OneSignal Code start:
+      this.oneSignal.startInit('e3b6a1f6-1826-4015-a0c5-99665f5a9589', '57374298212');
 
-      var notificationOpenedCallback = function(jsonData) {
-        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-      };
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
-      window["plugins"].OneSignal
-        .startInit("e3b6a1f6-1826-4015-a0c5-99665f5a9589", "57374298212")
-        .handleNotificationOpened(notificationOpenedCallback)
-        .endInit();
+      this.oneSignal.handleNotificationReceived().subscribe(() => {
+        // do something when notification is received
+      });
 
+      this.oneSignal.handleNotificationOpened().subscribe(() => {
+        // do something when a notification is opened
+      });
 
+      this.oneSignal.endInit();*/
 
 
       // for starting google analytics

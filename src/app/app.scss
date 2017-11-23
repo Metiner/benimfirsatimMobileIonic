@@ -1,5 +1,36 @@
 // http://ionicframework.com/docs/theming/
+@keyframes heartbeat
+{
+  0%
+  {
+    transform: scale( .95 );
+  }
+  20%
+  {
+    transform: scale( 1 );
+  }
+  40%
+  {
+    transform: scale( .95 );
+  }
+  60%
+  {
+    transform: scale( 1 );
+  }
+  80%
+  {
+    transform: scale( .95 );
+  }
+  100%
+  {
+    transform: scale( .95 );
+  }
+}
 
+.fa-heartbeat{
+  animation: heartbeat 1s infinite;
+  color: #E2222C;
+}
 
 // App Global Sass
 // --------------------------------------------------

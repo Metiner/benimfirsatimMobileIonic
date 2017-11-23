@@ -8,6 +8,38 @@ page-opportunity {
   //  background: whitesmoke;
   //  border:  solid blue;
   //}
+@keyframes heartbeat
+{
+  0%
+  {
+    transform: scale( .95 );
+  }
+  20%
+  {
+    transform: scale( 1 );
+  }
+  40%
+  {
+    transform: scale( .95 );
+  }
+  60%
+  {
+    transform: scale( 1 );
+  }
+  80%
+  {
+    transform: scale( .95 );
+  }
+  100%
+  {
+    transform: scale( .95 );
+  }
+}
+
+  .fa-heartbeat{
+    animation: heartbeat 1s infinite;
+    color:red;
+  }
 
   .nickname{
     padding: 0px 0px 0px 0px !important;

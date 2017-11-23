@@ -29,6 +29,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SettingsPage} from "../pages/settings/settings";
 import {GoogleAnalytics} from "@ionic-native/google-analytics";
 import {GooglePlus} from "@ionic-native/google-plus";
+import {OneSignal} from "@ionic-native/onesignal";
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import {GooglePlus} from "@ionic-native/google-plus";
     Facebook,
     GooglePlus,
     GoogleAnalytics,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
