@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {Content, InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
@@ -23,9 +23,15 @@ export class OpportunityPage {
   comments: Comment[] = [];
   onCommentReplyPage= OnCommentReplyPage;
   loginPage = LoginPage;
+  toHighlight = false;
+  comment = "ne düşünüyorsun";
   static pageCount = 1;
+  @ViewChild(Content) content:Content;
 
-  constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib,private navCtrl:NavController) {
+
+  constructor(public navParams: NavParams,
+              private benimFirsatimLib:BenimfirsatimLib,
+              private navCtrl:NavController) {
     this.opportunity = navParams.data;
     benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
       OpportunityPage.pageCount++;
@@ -79,8 +85,10 @@ export class OpportunityPage {
       });
 
   }
+
+
   onCommentSubmit(form:NgForm){
-    if(!this.benimFirsatimLib.checkAuthFromStorage()){
+    if(this.benimFirsatimLib.checkAuthFromStorage()){
       this.benimFirsatimLib.showAlert("Uyarı","Yorum yapmak için üye girişi yapmalısınız.",[
         {
           text:'Giriş Yap',handler:()=>{
@@ -91,14 +99,25 @@ export class OpportunityPage {
           text:'Vazgeç'
         }])
     }else{
-        let u:Comment = new Comment();
-        u.user = BenimfirsatimLib.user;
-        u.text = form.value.comment;
-        u.created_at = (new Date()).toString().split(' ').splice(1,3).join(' ');
-        u.deal_id = this.opportunity.id;
-        u.user_id = BenimfirsatimLib.user.id;
+        let newlyAdded:Comment = new Comment();
+        newlyAdded.user = BenimfirsatimLib.user;
+        newlyAdded.text = form.value.comment;
+        newlyAdded.created_at = (new Date()).toString().split(' ').splice(1,3).join(' ');
+        newlyAdded.deal_id = this.opportunity.id;
+        newlyAdded.user_id = BenimfirsatimLib.user.id;
+        newlyAdded.comment_votes_count = 0;
         this.benimFirsatimLib.createComment(this.opportunity.id,null,form.value.comment).subscribe(data=>{
-          console.log(data.json());
+          newlyAdded.newlyAdded = 'newlyAdded';
+          const tempComments=this.comments;
+          this.comments = [];
+          this.comments.push(newlyAdded);
+          tempComments.forEach(element=>{
+            this.comments.push(element);
+          })
+          setTimeout(()=>{
+            this.scrollToNewlyAddedComment();
+          },200)
+
         },error2 =>{
           console.log(error2);
         });
@@ -113,8 +132,11 @@ export class OpportunityPage {
     },200)
   }
 
-  showCommentText(comment:any){
-    console.log(comment.showContent);
-    comment.showContent = !comment.showContent;
+  scrollToNewlyAddedComment(){
+
+    let newlyAddedComment:any = document.getElementById('newlyAdded');
+    this.content.scrollTo(0,newlyAddedComment.offsetTop,1000);
+
+
   }
 }

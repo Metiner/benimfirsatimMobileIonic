@@ -53,7 +53,7 @@
     </ion-row>
     <ion-row>
       <ion-card>
-        <ion-card-content>
+        <ion-card-content (click)="scrollToNewlyAddedComment()">
           {{opportunity.details}}
         </ion-card-content>
       </ion-card>
@@ -63,9 +63,9 @@
     <ion-list-header>
       <ion-header padding-top="10px">Yorumlar</ion-header>
     </ion-list-header>
-    <ion-item *ngFor="let comment of comments;let i = index">
+    <ion-item *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" ngClass="highlighted">
       <ion-grid>
-        <div   >
+        <div>
             <ion-row>
               <ion-col col-auto>
                 <ion-avatar>
@@ -184,8 +184,8 @@
       <ion-row>
         <ion-col>
           <ion-input style="padding-top: 5%;padding-left: 10%"
-                     [ngModel] type="text"
-                     placeholder="Yorum yaz..."
+                     [ngModel]
+                     placeholder="Ne düşünüyorsun?"
                      name="comment"
                      required></ion-input>
         </ion-col>
@@ -194,7 +194,8 @@
                   ion-button
                   [disabled]="!f.valid"
                   type="submit"
-                  clear>
+                  clear
+                  (click)="toHighlight = true">
             <ion-icon style="font-size: 2.6em"
                       name="send"></ion-icon>
           </button>

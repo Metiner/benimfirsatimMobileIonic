@@ -11,5 +11,6 @@ export class Comment{
   user_id:number;
   user: User;
   comments: Comment[] = [];
+  newlyAdded:string = '';
 
 }

@@ -149,6 +149,7 @@ export class BenimfirsatimLib{
 
   //It checks if any user is stored on devices local storage.
   public checkAuthFromStorage(){
+
     this.storageCtrl.get("user").then(
       data =>{
         if(data != null && data != undefined){
@@ -202,7 +203,6 @@ export class BenimfirsatimLib{
 
     return opt;
   }
-
 
   // sets user object to user static variable which locates in this class after login.
   public setUserInfoAfterLogin(user:any){

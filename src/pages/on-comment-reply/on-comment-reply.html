@@ -60,7 +60,7 @@
         </ion-col>
       </ion-row>
       <div style="padding-left: 15%;padding-top: 5%"
-           *ngFor="let subComment of comment.comments">
+           *ngFor="let subComment of comment.comments" id="{{subComment.newlyAdded}}" ngClass="highlighted">
         <ion-row>
           <ion-col col-auto>
             <ion-avatar>

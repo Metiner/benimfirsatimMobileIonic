@@ -41,6 +41,22 @@ page-opportunity {
     color:red;
   }
 
+
+  #newlyAdded.highlighted {
+    background-color: lightgoldenrodyellow;
+    animation: toHighlight 1s;
+  }
+  @keyframes toHighlight {
+    0%
+    {
+      opacity: 0;
+    }
+    100%
+    {
+      opacity: 1;
+    }
+  }
+
   .nickname{
     padding: 0px 0px 0px 0px !important;
     color: #222222;
