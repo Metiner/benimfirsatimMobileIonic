@@ -8,6 +8,8 @@ import {BenimfirsatimLib} from "../services/benimfirsatimLib";
 import {SettingsPage} from "../pages/settings/settings";
 import {GoogleAnalytics} from "@ionic-native/google-analytics";
 import {OneSignal} from "@ionic-native/onesignal";
+import {GooglePlus} from "@ionic-native/google-plus";
+import {Facebook} from "@ionic-native/facebook";
 @Component({
   templateUrl: 'app.html'
 })
@@ -23,7 +25,9 @@ export class MyApp {
               private benimFirsatimLib:BenimfirsatimLib,
               private eventCtrl:Events,
               private gA:GoogleAnalytics,
-              private oneSignal:OneSignal) {
+              private oneSignal:OneSignal,
+              private googlePlusLogin:GooglePlus,
+              private facebookLogin:Facebook) {
 
     this.eventCtrl.subscribe("user.login", () => { this.isAuthenticated = true});
     if(benimFirsatimLib.checkAuthFromStorage()){
@@ -35,7 +39,7 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
+      statusBar.hide();
       splashScreen.hide();
 
 
@@ -74,6 +78,16 @@ export class MyApp {
   }
 
   onLogout(){
+
+      // sign out if user signed in with google account
+      if(BenimfirsatimLib.isLoggedInWihGoogle){
+        this.googlePlusLogin.logout();
+      }
+
+    // sign out if user signed in with Facebook account
+    if(BenimfirsatimLib.isLoggedInWithFacebook){
+        this.facebookLogin.logout();
+      }
 
       this.benimFirsatimLib.logOutFromStorageAndAuth();
       this.menuCtrl.close();

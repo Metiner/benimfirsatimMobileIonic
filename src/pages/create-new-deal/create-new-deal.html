@@ -11,7 +11,7 @@
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-item>
       <ion-label>Url *</ion-label>
-      <ion-input ngModel
+      <ion-input [ngModel]
                  type="url"
                  required
                  name="deal_url"
@@ -20,30 +20,30 @@
     </ion-item>
     <ion-item>
       <ion-label>Fiyat</ion-label>
-      <ion-input ngModel
+      <ion-input [ngModel]
                  type="number"
                  name="deal_price"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Kategori</ion-label>
+      <ion-label>Kategori *</ion-label>
       <ion-select required
-                  [(ngModel)]="selectedCategory"
+                  [ngModel]
                   name="selectedCategory"
                   multiple="true">
         <ion-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Şehir</ion-label>
+      <ion-label>Şehir *</ion-label>
       <ion-select required
-                  [(ngModel)]="selectedCategory"
+                  [ngModel]
                   name="selectedCity">
         <ion-option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Kupon Codu</ion-label>
-      <ion-input ngModel type="text"
+      <ion-input [ngModel] type="text"
                  name="deal_coupon_code"
       ></ion-input>
     </ion-item>
@@ -62,8 +62,9 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Tarih</ion-label>
-      <ion-datetime ngModel
+      <ion-label>Tarih *</ion-label>
+      <ion-datetime [ngModel]
+                    required
                     displayFormat="DD MM, YYYY"
                     name="deal_date"></ion-datetime>
     </ion-item>

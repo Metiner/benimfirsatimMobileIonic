@@ -27,7 +27,7 @@ export class CreateNewDealPage {
   deal_details : string ='';
   images : any[] = [];
   isLinkEmpty: boolean = true;
-  selectedImage:string ='';
+  selectedImageUrl:string ='';
   selectedImages:any[] = [];
 
   constructor(private modalCtrl:ModalController,
@@ -51,7 +51,15 @@ export class CreateNewDealPage {
   isLocationSet = false;
 
   onSubmit(form:NgForm){
-    console.log(form.value);
+
+    // Warn if user doesnt select any image for deal.
+    if(this.selectedImageUrl == ''){
+      this.benimFirsatimLib.showToast("Lütfen bir görsel seçiniz",3000,"bottom");
+    }else{
+      this.benimFirsatimLib.createDeal(form,this.selectedImageUrl).subscribe(response=>{
+        console.log(response);
+      })
+    }
   }
 
   onOpenMap(){
@@ -111,7 +119,7 @@ export class CreateNewDealPage {
     })
     picture.isSelected = !picture.isSelected;
     this.selectedImages.push(picture);
-    this.selectedImage = picture.children[0].currentSrc;
+    this.selectedImageUrl = picture.children[0].currentSrc;
 
   }
 }

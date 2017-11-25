@@ -2,11 +2,10 @@ page-login {
 
 
   .scroll-content{
-
-    background: url("../../assets/imgs/background2.png") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
+    background-image: url('../assets/imgs/background2.png');
+    background-repeat:no-repeat;
+    background-size:cover;
+    width:100%;
 
   }
   .inputBox{

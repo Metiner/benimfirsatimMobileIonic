@@ -6,6 +6,7 @@ import {ActionSheetController, AlertController, ToastController} from "ionic-ang
 import { Storage} from "@ionic/storage";
 import {Headers} from '@angular/http';
 import {User} from "../models/user";
+import {NgForm} from "@angular/forms";
 
 @Injectable()
 export class BenimfirsatimLib{
@@ -14,6 +15,8 @@ export class BenimfirsatimLib{
   //api_address = "https://benimfirsatim.cleverapps.io/";
   static token:string ="";
   static user:User = new User;
+  static isLoggedInWithFacebook = false;
+  static isLoggedInWihGoogle = false;
 
 
   constructor(private http:Http,
@@ -77,10 +80,18 @@ export class BenimfirsatimLib{
     return this.http.post(this.api_address + '/deals/' + deal_id +'/comments.json',{parent_comment_id:parent_comment_id,comment:comment},opt);
   }
 
-  public createDeal(starts_at,price,categories,image,link,image_url,title,details,coupon_code,city){
+  public createDeal(form:NgForm,selectedImageUrl){
     let opt = this.setHeader();
-    let body = {starts_at:starts_at,price:price,categories:categories,image:image,link:link,image_url,title:title,details:details,coupon_code:coupon_code,city:city};
-    return this.http.post(this.api_address + '/deals/create',body);
+    let body = {starts_at:form.value.deal_date,
+      price:form.value.deal_price,
+      categories:form.value.selectedCategory,
+      image:null,link:form.value.deal_url,
+      image_url:selectedImageUrl,
+      title:form.value.deal_title,
+      details:form.value.deal_details,
+      coupon_code:form.value.deal_coupon_code,
+      city:form.value.selectedCity};
+    return this.http.post(this.api_address + '/deals/create',body,opt);
   }
 
   public commentVote(comment_id){

@@ -6,6 +6,7 @@ import {SignupPage} from "../signup/signup";
 import {TabsPage} from "../tabs/tabs";
 import {Facebook} from "@ionic-native/facebook";
 import {GooglePlus} from "@ionic-native/google-plus";
+import {HighlightsPage} from "../highlights/highlights";
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -82,6 +83,9 @@ export class LoginPage {
             }
             if(response.json() != null && response.json().success == true ) {
               this.setStorageAndUserInfoAfterSuccessLogin(response.json());
+              BenimfirsatimLib.isLoggedInWithFacebook = true;
+              this.navCtrl.push(TabsPage);
+
             }
           }, error=>{
             this.benimFirsatimLib.showToast("Bir hata oluştu",1500,"bottom");
@@ -96,14 +100,38 @@ export class LoginPage {
 
   onGooglePlusLogin(){
 
-    this.googlePlus.login().catch(response=>{
-      console.log(response);
-    }).catch(error=>{
-      console.log(error);
-    })
+    this.googlePlus.login({}).then(response=>{
+      let email = response.email;
+      let name = response.displayName;
+      let id = response.userId;
+      let picture = response.imageUrl;
+
+      this.benimFirsatimLib.signupOrLogin(email,name,picture,id,"google").subscribe(response=>{
+
+
+
+        // It means, email is already being used by another user.
+        if(!response.json().success){
+          this.benimFirsatimLib.showToast(response.json().message,3000,"bottom");
+
+        }
+        if(response.json() != null && response.json().success == true ) {
+          this.setStorageAndUserInfoAfterSuccessLogin(response.json());
+          BenimfirsatimLib.isLoggedInWihGoogle = true;
+          this.navCtrl.push(TabsPage);
+        }
+
+      }, error=>{
+        this.benimFirsatimLib.showToast("Bir hata oluştu",1500,"bottom");
+        console.log(error.toLocaleString());
+      })
+    }).catch(e=>{
+      console.log('Error logging into Google Plus', e)});
+
   }
 
   toTabsPage(){
+    this.googlePlus.logout();
     this.navCtrl.push(TabsPage);
   }
 
