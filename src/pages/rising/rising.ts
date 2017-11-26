@@ -37,7 +37,7 @@ export class RisingPage {
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 
-    this.benimfirsatimLib.getPage('hot',RisingPage.pagination).subscribe(data =>{
+    this.benimfirsatimLib.getPage('rising',RisingPage.pagination).subscribe(data =>{
 
 
       if(data.json().length > 0) {

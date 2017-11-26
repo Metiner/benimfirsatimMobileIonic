@@ -39,7 +39,7 @@
         <button #downVote
                 ion-button
                 clear
-                (click)="upVoteDeal(opportunity.id,downVote)"
+                (click)="downVoteDeal(opportunity.id,downVote)"
                 [@onItemBump] = "downVote.stateChanger ? 'onBump' : 'default'"
                 style="padding-left: 8px">
           <ion-icon name="arrow-down"></ion-icon>
@@ -47,7 +47,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
+      <ion-col style="text-align: center">
         <img src="https://benimfirsatim.com/{{opportunity.image_url}}">
       </ion-col>
     </ion-row>

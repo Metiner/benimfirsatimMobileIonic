@@ -82,16 +82,21 @@ export class BenimfirsatimLib{
 
   public createDeal(form:NgForm,selectedImageUrl){
     let opt = this.setHeader();
+    let categories = '';
+    form.value.selectedCategory.forEach(element =>{
+      categories +=element +',';
+    })
+    categories.substr(categories.length,1);
     let body = {starts_at:form.value.deal_date,
       price:form.value.deal_price,
-      categories:form.value.selectedCategory,
+      categories:categories,
       image:null,link:form.value.deal_url,
       image_url:selectedImageUrl,
       title:form.value.deal_title,
       details:form.value.deal_details,
       coupon_code:form.value.deal_coupon_code,
       city:form.value.selectedCity};
-    return this.http.post(this.api_address + '/deals/create',body,opt);
+    return this.http.post(this.api_address + '/deals/create.json',body,opt);
   }
 
   public commentVote(comment_id){
@@ -159,21 +164,9 @@ export class BenimfirsatimLib{
   }
 
   //It checks if any user is stored on devices local storage.
-  public checkAuthFromStorage(){
+  public checkAuthFromStorage() {
 
-    this.storageCtrl.get("user").then(
-      data =>{
-        if(data != null && data != undefined){
-          return true;
-        }else{
-          return false;
-        }
-      }
-    )
-      .catch(err=>{
-        this.showToast(err,3000,"bottom");
-      });
-
+    return this.storageCtrl.get("user")
   }
 
   //It removes all of users from device local storage.
@@ -229,6 +222,19 @@ export class BenimfirsatimLib{
         buttons: buttons
       });
       actionSheet.present();
+  }
+
+  //Get user logs, notifications.
+  public getUserLog(){
+    let opt = this.setHeader();
+    return this.http.get(this.api_address + '/user/logs', opt);
+  }
+
+
+  //Gets deals which created by current logged user.
+  public getDealFromUser(pagination){
+    let opt = this.setHeader();
+    return this.http.get(this.api_address+'/user/'+BenimfirsatimLib.user.id+'/deals.json?page='+pagination+'&per_page=3',opt);
   }
 }
 

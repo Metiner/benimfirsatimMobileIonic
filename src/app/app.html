@@ -16,9 +16,17 @@
       <ion-item *ngIf="isAuthenticated">
         <button ion-button
                 clear
-                (click)="onLogout()"
+                (click) = "onMyDeals()"
                 icon-left>
-          <ion-icon name="log-out"></ion-icon>Çıkış
+          <ion-icon name="pulse"></ion-icon>Fırsatlarım
+        </button>
+      </ion-item>
+      <ion-item *ngIf="isAuthenticated">
+        <button ion-button
+                clear
+                (click) = "onNotifications()"
+                icon-left>
+          <ion-icon name="notifications"></ion-icon>Bildirimler
         </button>
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
@@ -27,6 +35,14 @@
                 (click) = "onSettings()"
                 icon-left>
           <ion-icon name="settings"></ion-icon>Ayarlar
+        </button>
+      </ion-item>
+      <ion-item *ngIf="isAuthenticated">
+        <button ion-button
+                clear
+                (click)="onLogout()"
+                icon-left>
+          <ion-icon name="log-out"></ion-icon>Çıkış
         </button>
       </ion-item>
   </ion-content>

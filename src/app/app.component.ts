@@ -7,9 +7,10 @@ import {LoginPage} from "../pages/login/login";
 import {BenimfirsatimLib} from "../services/benimfirsatimLib";
 import {SettingsPage} from "../pages/settings/settings";
 import {GoogleAnalytics} from "@ionic-native/google-analytics";
-import {OneSignal} from "@ionic-native/onesignal";
 import {GooglePlus} from "@ionic-native/google-plus";
 import {Facebook} from "@ionic-native/facebook";
+import {OneSignal} from "@ionic-native/onesignal";
+import {MyDealsPage} from "../pages/my-deals/my-deals";
 @Component({
   templateUrl: 'app.html'
 })
@@ -17,6 +18,7 @@ export class MyApp {
   rootPage:any = TabsPage;
   public isAuthenticated = false;
   settingsPage = SettingsPage;
+  myDealsPage = MyDealsPage;
   @ViewChild('nav') nav: NavController;
 
 
@@ -29,22 +31,30 @@ export class MyApp {
               private googlePlusLogin:GooglePlus,
               private facebookLogin:Facebook) {
 
+
     this.eventCtrl.subscribe("user.login", () => { this.isAuthenticated = true});
-    if(benimFirsatimLib.checkAuthFromStorage()){
-      this.isAuthenticated = true;
-      this.nav.setRoot(TabsPage);
-    }else{
-      this.isAuthenticated = false;
-    }
+    benimFirsatimLib.checkAuthFromStorage().then( response=>{
+      if(response != null){
+        this.isAuthenticated = true;
+      }
+      else{
+        this.isAuthenticated = false;
+      }
+      }).catch(error=>{
+        this.benimFirsatimLib.showToast(error.toLocaleString(),3000,'bottom');
+      }
+    )
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.hide();
       splashScreen.hide();
 
+    this.nav.setRoot(TabsPage);
 
 
-     /* // OneSignal Code start:
+      // onesignal code start:
       this.oneSignal.startInit('e3b6a1f6-1826-4015-a0c5-99665f5a9589', '57374298212');
 
       this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
@@ -57,8 +67,7 @@ export class MyApp {
         // do something when a notification is opened
       });
 
-      this.oneSignal.endInit();*/
-
+      this.oneSignal.endInit();
 
       // for starting google analytics
 
@@ -104,6 +113,19 @@ export class MyApp {
     onSettings(){
       this.nav.push(this.settingsPage);
       this.menuCtrl.close();
+    }
+
+    onNotifications(){
+      this.benimFirsatimLib.getUserLog().subscribe( response =>{
+        console.log(response.json());
+      },
+        error =>{
+        console.log(error.toLocaleString());
+        })
+    }
+
+    onMyDeals(){
+      this.nav.push(this.myDealsPage);
     }
 
 }

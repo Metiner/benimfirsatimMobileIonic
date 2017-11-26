@@ -30,6 +30,7 @@ import {SettingsPage} from "../pages/settings/settings";
 import {GoogleAnalytics} from "@ionic-native/google-analytics";
 import {GooglePlus} from "@ionic-native/google-plus";
 import {OneSignal} from "@ionic-native/onesignal";
+import {MyDealsPage} from "../pages/my-deals/my-deals";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {OneSignal} from "@ionic-native/onesignal";
     SetLocationPage,
     SelectedCategoryPage,
     OnCommentReplyPage,
-    SettingsPage
+    SettingsPage,
+    MyDealsPage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,8 @@ import {OneSignal} from "@ionic-native/onesignal";
     SetLocationPage,
     SelectedCategoryPage,
     OnCommentReplyPage,
-    SettingsPage
+    SettingsPage,
+    MyDealsPage
   ],
   providers: [
     StatusBar,

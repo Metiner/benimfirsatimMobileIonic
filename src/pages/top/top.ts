@@ -36,7 +36,7 @@ export class TopPage {
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 
-    this.benimfirsatimLib.getPage('hot',TopPage.pagination).subscribe(data =>{
+    this.benimfirsatimLib.getPage('newcomers',TopPage.pagination).subscribe(data =>{
 
 
       if(data.json().length > 0) {

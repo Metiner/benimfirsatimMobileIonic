@@ -32,6 +32,7 @@ export class OpportunityPage {
   constructor(public navParams: NavParams,
               private benimFirsatimLib:BenimfirsatimLib,
               private navCtrl:NavController) {
+    OpportunityPage.pageCount = 1;
     this.opportunity = navParams.data;
     benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
       OpportunityPage.pageCount++;
@@ -56,7 +57,13 @@ export class OpportunityPage {
     });
   }
 
-  downVoteDeal(dealId:number){
+  downVoteDeal(dealId:number,downVote:any){
+    downVote.stateChanger = !downVote.stateChanger;
+
+    setTimeout(()=>{
+      downVote.stateChanger = !downVote.stateChanger;
+
+    },500)
     this.benimFirsatimLib.downvoteDeal(dealId).subscribe(data=>{
       this.opportunity.votes_sum = data.json().deal_score;
     });
@@ -88,17 +95,11 @@ export class OpportunityPage {
 
 
   onCommentSubmit(form:NgForm){
-    if(this.benimFirsatimLib.checkAuthFromStorage()){
-      this.benimFirsatimLib.showAlert("Uyarı","Yorum yapmak için üye girişi yapmalısınız.",[
-        {
-          text:'Giriş Yap',handler:()=>{
-          this.navCtrl.push(this.loginPage);
-        }
-        },
-        {
-          text:'Vazgeç'
-        }])
-    }else{
+
+
+    this.benimFirsatimLib.checkAuthFromStorage().then(response => {
+      if(response != null){
+
         let newlyAdded:Comment = new Comment();
         newlyAdded.user = BenimfirsatimLib.user;
         newlyAdded.text = form.value.comment;
@@ -122,7 +123,22 @@ export class OpportunityPage {
           console.log(error2);
         });
         form.resetForm();
-    }
+      }
+      else{
+        this.benimFirsatimLib.showAlert("Uyarı", "Yorum yapmak için giriş yapmalısınız.", [
+          {
+            text: 'Giriş Yap', handler: () => {
+            this.navCtrl.push(this.loginPage);
+          }
+          },
+          {
+            text: 'Vazgeç'
+          }])
+      }
+    }).catch(error => {
+      this.benimFirsatimLib.showToast(error.toLocaleString(),3000,'bottom')
+    })
+
   }
 
   onItemBump(i:any,item:any){

@@ -1,12 +1,11 @@
-import {Component} from '@angular/core';
-import {InfiniteScroll, IonicPage} from 'ionic-angular';
-import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import { Component } from '@angular/core';
+import {InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
-
+import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 
 /**
- * Generated class for the HighlightsPage page.
+ * Generated class for the MyDealsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -14,38 +13,40 @@ import {OpportunityPage} from "../opportunity/opportunity";
 
 @IonicPage()
 @Component({
-  selector: 'page-highlights',
-  templateUrl: 'highlights.html',
+  selector: 'page-my-deals',
+  templateUrl: 'my-deals.html',
 })
-export class HighlightsPage {
+export class MyDealsPage {
 
   opportunities: Opportunity[] = [];
   opportunityPage = OpportunityPage;
   static pagination = 1;
 
   constructor(private benimfirsatimLib:BenimfirsatimLib) {
-    this.benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe((data)=>{
+    MyDealsPage.pagination = 1;
+    this.benimfirsatimLib.getDealFromUser(MyDealsPage.pagination).subscribe((data)=>{
 
-      HighlightsPage.pagination++;
+      console.log(data);
       console.log(data.json());
-    data.json().forEach(element => {
+      MyDealsPage.pagination++;
+      data.json().forEach(element => {
 
 
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
         this.opportunities.push(u);
-    });
+      });
     })
   }
 
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 
-    this.benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe(data =>{
+    this.benimfirsatimLib.getDealFromUser(MyDealsPage.pagination).subscribe(data =>{
 
 
       if(data.json().length > 0) {
-        HighlightsPage.pagination++;
+        MyDealsPage.pagination++;
         data.json().forEach(element => {
           let u: Opportunity = new Opportunity();
           Object.assign(u, element);
@@ -61,6 +62,5 @@ export class HighlightsPage {
     });
 
   }
-
 
 }
