@@ -95,7 +95,6 @@
     <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.57374298212-r1h4ovakq9qrimg8k53p5kqh24lnounm" />
     </plugin>
-    <plugin name="cordova-plugin-console" spec="^1.1.0" />
     <plugin name="onesignal-cordova-plugin" spec="2.2.2" />
     <allow-navigation href="http://192.168.0.29:8100" />
 </widget>

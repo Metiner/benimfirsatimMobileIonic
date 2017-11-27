@@ -34,7 +34,6 @@
     "cordova-android": "6.4.0",
     "cordova-browser": "5.0.1",
     "cordova-ios": "4.5.4",
-    "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-facebook4": "^1.9.1",
     "cordova-plugin-google-analytics": "^1.8.3",
@@ -76,7 +75,6 @@
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.57374298212-r1h4ovakq9qrimg8k53p5kqh24lnounm"
       },
-      "cordova-plugin-console": {},
       "onesignal-cordova-plugin": {}
     },
     "platforms": [
