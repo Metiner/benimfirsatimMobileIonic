@@ -78,7 +78,6 @@
     </platform>
     <allow-navigation href="http://192.168.0.29:8101" />
     <allow-navigation href="http://10.10.10.129:8101" />
-    <engine name="browser" spec="5.0.1" />
     <engine name="android" spec="6.4.0" />
     <engine name="ios" spec="4.5.4" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
@@ -97,4 +96,6 @@
     </plugin>
     <plugin name="onesignal-cordova-plugin" spec="2.2.2" />
     <allow-navigation href="http://192.168.0.29:8100" />
+    <engine name="browser" spec="~5.0.1" />
+    <allow-navigation href="http://192.168.0.7:8100" />
 </widget>

@@ -6,7 +6,6 @@ import {SignupPage} from "../signup/signup";
 import {TabsPage} from "../tabs/tabs";
 import {Facebook} from "@ionic-native/facebook";
 import {GooglePlus} from "@ionic-native/google-plus";
-import {HighlightsPage} from "../highlights/highlights";
 @IonicPage()
 @Component({
   selector: 'page-login',

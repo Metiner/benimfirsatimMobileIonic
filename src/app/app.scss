@@ -15,7 +15,7 @@
   }
   60%
   {
-    transform: scale( 1 );
+    transform: scale( 1.5 );
   }
   80%
   {
@@ -27,13 +27,16 @@
   }
 }
 
-.fa-heartbeat{
+.animate-hearth{
   animation: heartbeat 1s infinite;
-  color: #E2222C;
+  //color: #E2222C;
 }
-
-
-
+.toolbar-background {
+  background-color: #2FA4E7;
+}
+.toolbar *{
+  color:#eee;
+}
 *{
   font-family: AppFont;
 }

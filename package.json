@@ -47,7 +47,7 @@
     "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",
     "node-sass": "^4.5.2",
-    "onesignal-cordova-plugin": "2.2.2",
+    "onesignal-cordova-plugin": "^2.2.2",
     "rxjs": "5.4.3",
     "sass-loader": "^6.0.3",
     "sw-toolbox": "3.6.0",

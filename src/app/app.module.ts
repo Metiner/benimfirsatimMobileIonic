@@ -29,8 +29,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SettingsPage} from "../pages/settings/settings";
 import {GoogleAnalytics} from "@ionic-native/google-analytics";
 import {GooglePlus} from "@ionic-native/google-plus";
-import {OneSignal} from "@ionic-native/onesignal";
+//import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
+import {ListDealComponent} from "../components/list-deal/list-deal";
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {MyDealsPage} from "../pages/my-deals/my-deals";
     SelectedCategoryPage,
     OnCommentReplyPage,
     SettingsPage,
-    MyDealsPage
+    MyDealsPage,
+    ListDealComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,7 @@ import {MyDealsPage} from "../pages/my-deals/my-deals";
     Facebook,
     GooglePlus,
     GoogleAnalytics,
-    OneSignal,
+    //OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

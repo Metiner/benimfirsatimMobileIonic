@@ -12,17 +12,19 @@ import {LoginPage} from "../login/login";
   selector: 'page-tabs',
   template: `
 
-    <ion-fab right bottom>
+    <ion-fab right middle>
       <button ion-fab
               (click)="onCreateNewDeal()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-fab>
-    <ion-tabs tabsPlacement ="top">
-      <ion-tab [tabsHideOnSubPages]="true" [root]="highlightsPage" tabTitle= "Öne Çıkanlar"></ion-tab>
-      <ion-tab [tabsHideOnSubPages]="true" [root]="risingPage" tabTitle="Yükselenler" ></ion-tab>
-      <ion-tab [tabsHideOnSubPages]="true" [root]="topPage" tabTitle="Yeniler" ></ion-tab>
-      <ion-tab [tabsHideOnSubPages]="true" [root]="categoriesPage" tabTitle="Kategoriler"></ion-tab>
+    <ion-tabs tabsPlacement ="bottom">
+      <ion-tab [tabsHideOnSubPages]="true" [root]="highlightsPage" tabIcon="flash" tabTitle= "Öne Çıkanlar">
+        <ion-icon name="flash"></ion-icon>
+      </ion-tab>
+      <ion-tab [tabsHideOnSubPages]="true" [root]="risingPage" tabIcon="arrow-dropup-circle" tabTitle="Yükselenler" ></ion-tab>
+      <ion-tab [tabsHideOnSubPages]="true" [root]="topPage" tabIcon="add" tabTitle="Yeniler" ></ion-tab>
+      <!--<ion-tab [tabsHideOnSubPages]="true" [root]="categoriesPage" tabTitle="Kategoriler"></ion-tab>-->
 
     </ion-tabs>
   `,
