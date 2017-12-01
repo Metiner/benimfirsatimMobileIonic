@@ -1,0 +1,45 @@
+<ion-row>
+<ion-col>
+  <h5>{{opportunity.title.substring(0,70)+'...'}}</h5>
+</ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <img style="width:100px;height:100px;" src="https://benimfirsatim.com/{{opportunity.image_url}}">
+  </ion-col>
+  <ion-col>
+    {{opportunity.details.substring(0,100)+'...'}}
+  </ion-col>
+</ion-row>
+
+
+
+<ion-row text-center>
+  <ion-col>
+    <ion-chip>
+      <ion-icon name="pricetag"></ion-icon>
+      <ion-label>{{opportunity.price}} ₺</ion-label>
+    </ion-chip>
+  </ion-col>
+  <ion-col>
+    <ion-chip >
+      <ion-icon name="heart" color="danger" class="animate-hearth"></ion-icon>
+      <ion-label >{{opportunity.votes_sum}}</ion-label>
+    </ion-chip>
+  </ion-col>
+  <ion-col>
+    <ion-chip color="calm">
+      <ion-icon name="text"></ion-icon>
+      <ion-label>{{opportunity.comments_count}} Yorum</ion-label>
+    </ion-chip>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <button
+      [navPush] = "opportunityPage" [navParams] = "opportunity"
+      ion-button
+      block>Fırsat Detayları</button>
+  </ion-col>
+</ion-row>
+<hr/>
