@@ -9,7 +9,7 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Fırsat</ion-title>
+    <ion-title>{{opportunity.title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -26,23 +26,27 @@
       <ion-col>
         <button #upVote
                 ion-button
-                clear
+                block
+                strong
                 (click)="upVoteDeal(opportunity.id,upVote)"
                 [@onItemBump] = "upVote.stateChanger ? 'onBump' : 'default'"
-                >
-          <ion-icon name="arrow-up"></ion-icon>
+                color="secondary">
+          <ion-icon style="color:white;font-size:35px;" name="arrow-dropup-circle"></ion-icon>
         </button>
-
+      </ion-col>
+      <ion-col>
         <i class="fa fa-heartbeat fa-4x"></i>
         <span style="font-size: xx-large">{{opportunity.votes_sum}}
         </span>
+      </ion-col>
+      <ion-col>
         <button #downVote
                 ion-button
-                clear
+                block
+                color="danger"
                 (click)="downVoteDeal(opportunity.id,downVote)"
-                [@onItemBump] = "downVote.stateChanger ? 'onBump' : 'default'"
-                style="padding-left: 8px">
-          <ion-icon name="arrow-down"></ion-icon>
+                [@onItemBump] = "downVote.stateChanger ? 'onBump' : 'default'">
+          <ion-icon style="color:white;font-size:35px;" name="arrow-dropdown-circle"></ion-icon>
         </button>
       </ion-col>
     </ion-row>
