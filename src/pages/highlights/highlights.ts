@@ -20,7 +20,6 @@ import {OpportunityPage} from "../opportunity/opportunity";
 export class HighlightsPage {
 
   opportunities: Opportunity[] = [];
-  opportunityPage = OpportunityPage;
   static pagination = 1;
 
   constructor(private benimfirsatimLib:BenimfirsatimLib) {

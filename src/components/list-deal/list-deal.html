@@ -37,8 +37,8 @@
 <ion-row>
   <ion-col>
     <button
-      [navPush] = "opportunityPage" [navParams] = "opportunity"
       ion-button
+      (click)="onOpportunityPage(opportunity)"
       block>Fırsat Detayları</button>
   </ion-col>
 </ion-row>
