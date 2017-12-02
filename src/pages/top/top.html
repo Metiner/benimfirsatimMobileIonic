@@ -1,18 +1,17 @@
 
 <ion-header>
-
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button
-              icon-only
-              menuToggle>
+      <button
+        ion-button
+        icon-only
+        menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Yeniler</ion-title>
   </ion-navbar>
+  <img style="width:150px;position:absolute;margin-top:-55px;margin-left:10px;z-index:999;" src="assets/imgs/logo.png">
 </ion-header>
-
 
 <ion-content padding>
   <list-deal *ngFor="let opportunity of opportunities" [opportunity]="opportunity">
