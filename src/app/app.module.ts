@@ -32,6 +32,7 @@ import {GooglePlus} from "@ionic-native/google-plus";
 //import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
 import {ListDealComponent} from "../components/list-deal/list-deal";
+import {CommentComponent} from "../components/comment/comment";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {ListDealComponent} from "../components/list-deal/list-deal";
     OnCommentReplyPage,
     SettingsPage,
     MyDealsPage,
-    ListDealComponent
+    ListDealComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
