@@ -50,9 +50,9 @@ export class BenimfirsatimLib{
     return this.http.get(this.api_address + '/users/login_check',opt);
   }
 
-  public signupOrLogin(email,name,avatar_url,uid,provider_name){
+  public signupOrLogin(email,name,avatar_url,uid,authResponse,provider_name){
     let opt = this.setHeader();
-    return this.http.post(this.api_address+'/users/auto_oauth',{"email":email,"name":name,"avatar_url":avatar_url,"uid":uid,"provider":provider_name},opt);
+    return this.http.post(this.api_address+'/users/auto_oauth',{"email":email,"name":name,"avatar_url":avatar_url,"uid":uid,"provider":provider_name,login_data:authResponse},opt);
   }
 
   public signIn(email,password){

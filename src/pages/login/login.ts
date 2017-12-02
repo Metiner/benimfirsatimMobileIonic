@@ -65,15 +65,18 @@ export class LoginPage {
     this.fb.login(['public_profile', 'user_friends', 'email'])
       .then(res =>{
 
+        console.log(res);
         var fbValues = "&fields=id,name,location,website,picture,email";
         var fbPermission = ["public_profile"];
+        var authResponse= res.authResponse;
 
         this.fb.api("me?"+ fbValues, fbPermission).then(response=>{
+          console.log(response);
           let email = response.email;
           let name = response.name;
           let id = response.id;
           let picture = response.picture.data.url;
-          this.benimFirsatimLib.signupOrLogin(email,name,picture,id,"facebook").subscribe(response=>{
+          this.benimFirsatimLib.signupOrLogin(email,name,picture,id,authResponse,"facebook").subscribe(response=>{
 
             // It means, email is already being used by another user.
             if(!response.json().success){
@@ -105,7 +108,8 @@ export class LoginPage {
       let id = response.userId;
       let picture = response.imageUrl;
 
-      this.benimFirsatimLib.signupOrLogin(email,name,picture,id,"google").subscribe(response=>{
+
+      this.benimFirsatimLib.signupOrLogin(email,name,picture,id,response,"google").subscribe(response=>{
 
 
 

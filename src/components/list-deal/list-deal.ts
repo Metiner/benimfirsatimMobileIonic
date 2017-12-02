@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Opportunity} from "../../models/opportunity";
+import {OpportunityPage} from "../../pages/opportunity/opportunity";
+import {NavController} from "ionic-angular";
 
 /**
  * Generated class for the ListDealComponent component.
@@ -15,8 +17,12 @@ export class ListDealComponent {
 
   @Input() opportunity : Opportunity;
 
-  constructor() {
+  constructor(private navCont:NavController) {
 
+  }
+
+  onOpportunityPage(opportunity: Opportunity){
+    this.navCont.push(OpportunityPage,this.opportunity);
   }
 
 }
