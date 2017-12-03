@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
@@ -14,12 +13,14 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-grid>
+  <ion-row>
+    <ion-col style="text-align: center">
+      <img src="https://benimfirsatim.com/{{opportunity.image_url}}">
+    </ion-col>
+  </ion-row>
     <ion-row>
       <ion-col>
-        <div style="border-bottom: 0.55px solid #c8c7cc">
           <h6>{{opportunity.title}}</h6>
-        </div>
       </ion-col>
     </ion-row>
     <ion-row style="text-align: center">
@@ -51,22 +52,15 @@
         </button>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col style="text-align: center">
-        <img src="https://benimfirsatim.com/{{opportunity.image_url}}">
-      </ion-col>
-    </ion-row>
     <ion-row (click)="scrollToNewlyAddedComment()">
       {{opportunity.details}}
     </ion-row>
-  </ion-grid>
   <ion-list>
     <ion-list-header>
       <ion-header text-center>
         <h1>Yorumlar</h1></ion-header>
     </ion-list-header>
     <comment *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" [comment]="comment" ngClass="highlighted">
-
     </comment>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">

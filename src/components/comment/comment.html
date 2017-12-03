@@ -1,58 +1,48 @@
-  <ion-row>
-    <ion-col col-auto>
-      <ion-avatar>
-        <img src="{{comment.user.avatar_url}}">
-      </ion-avatar>
-    </ion-col>
-    <ion-col col-auto>
-      <p class="nickname">{{comment.user.name}}</p>
-    </ion-col>
-    <ion-col col-auto>
-      <p class="votes"> - {{comment.comment_votes_count}} Puan</p>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <div  text-wrap *ngIf="comment.showContent" [@onCommentExpand]="comment.showContent ? 'toExpand' : 'asd'" >
-      <p>{{comment.text}}</p>
-    </div>
-    <div (click)="comment.showContent = !comment.showContent" *ngIf="!comment.showContent">
-      <p>{{comment.text}}</p>
-    </div>
-  </ion-row>
-  <ion-row>
-    <ion-col class="thumbs" col-auto>
-      <button #thumbsUp
-              ion-button
-              small
-              color="secondary"
-              (click) = "onItemBump(i,thumbsUp)">
-        <ion-icon style="color:white;font-size:20px;" name="thumbs-up"></ion-icon>
-      </button>
-    </ion-col>
-    <ion-col class="thumbs" col-auto>
-      <button #thumbsDown
-              ion-button
-              small
-              color="danger"
-              (click) = "onItemBump(i,thumbsDown)">
-        <ion-icon style="color:white;font-size:20px;" name="thumbs-down"></ion-icon>
-      </button>
-    </ion-col>
-    <ion-col class="thumbs"col-auto>
-      <button ion-button
-              small
-              color="primary"
-              style="color: #222222"
-              [navPush]="onCommentReplyPage"
-              [navParams]="{comment:comment,opportunity:opportunity}">
-        <ion-icon style="color:white;font-size:20px;" name="undo"></ion-icon>
-      </button>
-    </ion-col>
-  </ion-row>
-
-<div  style="padding-left: 15%;
+<ion-row style="padding-top: 5%;">
+  <ion-col col-2>
+    <ion-avatar>
+      <img src="{{comment.user.avatar_url}}">
+    </ion-avatar>
+  </ion-col>
+  <ion-col col-10 style="border:1px solid #eee;border-radius:10px;">
+    <strong class="nickname">{{comment.user.name}}</strong>
+    <em class="votes"> {{comment.comment_votes_count}} Puan</em>
+    <small>{{comment.created_at}}</small>
+    <ion-row>
+      <span *ngIf="comment.showContent"
+            [@onCommentExpand]="comment.showContent ? 'toExpand' : 'asd'">{{comment.text}}</span>
+      <span (click)="comment.showContent = !comment.showContent" *ngIf="!comment.showContent">{{comment.text}}</span>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <button #thumbsUp
+                ion-button
+                small
+                color="light"
+                block
+                (click)="onItemBump(i,thumbsUp)">
+          <ion-icon name="thumbs-up" style="margin:5px;"></ion-icon>
+          <span> Begen</span>
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button
+                small
+                color="light"
+                block
+                [navPush]="onCommentReplyPage"
+                [navParams]="{comment:comment,opportunity:opportunity}">
+          <ion-icon name="undo" style="margin:5px;"></ion-icon>
+          <span> Cevapla</span>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+</ion-row>
+<div style="padding-left: 15%;
               padding-top: 5%"
-      *ngFor="let subComment of comment.comments;let i=index">
-  <comment *ngFor="let subComment of comment.comments;let i=index" id="{{comment.newlyAdded}}" [comment]="subComment" ngClass="highlighted">
+     *ngFor="let subComment of comment.comments;let i=index">
+  <comment *ngFor="let subComment of comment.comments;let i=index" id="{{comment.newlyAdded}}" [comment]="subComment"
+           ngClass="highlighted">
   </comment>
 </div>
