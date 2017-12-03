@@ -236,5 +236,7 @@ export class BenimfirsatimLib{
     let opt = this.setHeader();
     return this.http.get(this.api_address+'/user/'+BenimfirsatimLib.user.id+'/deals.json?page='+pagination+'&per_page=3',opt);
   }
+
+
 }
 

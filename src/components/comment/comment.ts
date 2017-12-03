@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {onCommentExpand} from "../../app/animations";
+import {onCommentExpand, onItemBump} from "../../app/animations";
+import {OnCommentReplyPage} from "../../pages/on-comment-reply/on-comment-reply";
+import {Opportunity} from "../../models/opportunity";
 
 /**
  * Generated class for the CommentComponent component.
@@ -11,14 +13,23 @@ import {onCommentExpand} from "../../app/animations";
   selector: 'comment',
   templateUrl: 'comment.html',
   animations: [
-    onCommentExpand
+    onCommentExpand,
+    onItemBump
   ]
 })
 export class CommentComponent {
 
   @Input() comment : Comment;
+  @Input() opportunity: Opportunity;
 
+  onCommentReplyPage= OnCommentReplyPage;
   constructor() {
   }
 
+  onItemBump(i:any,item:any){
+    item.i = i;
+    setTimeout(()=>{
+      item.i=-1
+    },200)
+  }
 }

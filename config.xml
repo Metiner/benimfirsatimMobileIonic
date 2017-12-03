@@ -98,4 +98,5 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.57374298212-r1h4ovakq9qrimg8k53p5kqh24lnounm" />
     </plugin>
     <plugin name="onesignal-cordova-plugin" spec="^2.2.2" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.3.0" />
 </widget>

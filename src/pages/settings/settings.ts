@@ -22,6 +22,15 @@ export class SettingsPage {
     this.user = BenimfirsatimLib.user;
   }
 
+
+  ionViewWillEnter(){
+      this.benimFirsatimLib.checkAuthFromStorage().then( response =>{
+      this.user = response.user;
+    }).catch(error=>{
+      console.log(error);
+      })
+  }
+
   onChangeAvatar(){
       this.benimFirsatimLib.presentActionSheet("Profil Fotoğrafını Değiştir",[
         {

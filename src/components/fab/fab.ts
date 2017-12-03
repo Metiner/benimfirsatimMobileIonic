@@ -6,7 +6,7 @@ import {LoginPage} from "../../pages/login/login";
 
 @Component({
   selector:'fab',
-  template:`<ion-fab  right top style="margin-top:30px">
+  template:`<ion-fab  right top style="top:80px;position: fixed">
     <button ion-fab style="background-color: #0572B2"
             (click)="onCreateNewDeal()">
       <ion-icon name="add"></ion-icon>

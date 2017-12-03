@@ -21,7 +21,6 @@ export class OpportunityPage {
 
   opportunity: Opportunity;
   comments: Comment[] = [];
-  onCommentReplyPage= OnCommentReplyPage;
   loginPage = LoginPage;
   toHighlight = false;
   comment = "ne düşünüyorsun";
@@ -141,12 +140,7 @@ export class OpportunityPage {
 
   }
 
-  onItemBump(i:any,item:any){
-    item.i = i;
-    setTimeout(()=>{
-      item.i=-1
-    },200)
-  }
+
 
   scrollToNewlyAddedComment(){
 

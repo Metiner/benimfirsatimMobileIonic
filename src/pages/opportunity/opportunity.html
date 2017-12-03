@@ -64,7 +64,7 @@
     </ion-col>
   </ion-row>
   <ion-list>
-    <comment *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" [comment]="comment"
+    <comment *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" [comment]="comment" [opportunity]="opportunity"
              ngClass="highlighted">
     </comment>
   </ion-list>
@@ -77,23 +77,26 @@
 </ion-content>
 
 <ion-footer>
-  <ion-grid>
-    <ion-row>
-      <ion-col col-2 style="text-align: center" align-self-center>
-        <button>
-          <ion-icon style="font-size: xx-large;font-weight: 900;color:#2FA4E7" name="add"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-8>
-        <ion-item no-lines>
-          <ion-input style="padding:0;font-size:15px;background-color: #f0ecec;border-radius: 64px" type="text" placeholder="Düşüncelerin neler ?"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col col-2 text-center align-self-center>
-        <button (click)="onCommentSubmit()">
-          <ion-icon style="font-size: xx-large;font-weight: 900;color:#2FA4E7" name="send"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <form #f="ngForm" (submit)="onCommentSubmit(f)">
+    <ion-grid>
+      <ion-row>
+        <!--<ion-col col-2 style="text-align: center" align-self-center>
+          <button>
+            <ion-icon style="font-size: xx-large;font-weight: 900;color:#2FA4E7" name="add"></ion-icon>
+          </button>
+        </ion-col>-->
+        <ion-col col-8>
+          <ion-item no-lines>
+            <ion-input required [ngModel] name="comment" style="padding:0 0 0 10px;font-size:15px;background-color: #f0ecec;border-radius: 64px" type="text" placeholder="Düşüncelerin neler ?"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-2 text-center align-self-center>
+          <button type="submit"
+            [disabled]="!f.valid">
+            <ion-icon style="font-size: xx-large;font-weight: 900;color:#2FA4E7" name="send"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-footer>

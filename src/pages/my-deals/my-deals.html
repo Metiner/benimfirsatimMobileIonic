@@ -21,48 +21,53 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor="let opportunity of opportunities">
-    <ion-item>
-      <div style="text-align: center;margin-bottom: 10px">
-        <i class="fa fa-heartbeat fa-4x"></i>
-        <span style="font-size: xx-large">{{opportunity.votes_sum}}</span>
-      </div>
-      <h2>{{opportunity.title}}</h2>
-      <p>{{opportunity.link}}</p>
-    </ion-item>
-    <img padding="" src="https://benimfirsatim.com/{{opportunity.image_url}}">
-    <ion-card-content>
-      <p>{{opportunity.details}}</p>
-    </ion-card-content>
-    <ion-row text-center>
-      <ion-col>
-        <button ion-button
-                icon-left
-                clear
-                small
-                [navPush] = "opportunityPage" [navParams] = "opportunity">
-          <ion-icon name="pricetag"></ion-icon>
-          <div>{{opportunity.price}} ₺ </div>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button
-                icon-left
-                clear
-                small
-                [navPush] = "opportunityPage" [navParams] = "opportunity">
-          <ion-icon name="text"></ion-icon>
-          <div>{{opportunity.comments_count}} Yorum</div>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button
-          [navPush] = "opportunityPage" [navParams] = "opportunity"
-          ion-button
-          round
-          small>Fırsat Detayları</button>
-      </ion-col>
-    </ion-row>
+    <ion-card style="padding-top: 20px;border-radius: 10px"  *ngFor="let opportunity of opportunities">
+      <ion-row >
+        <ion-col text-center>
+          <span style="font-size: large;font-weight: 600">{{opportunity.title.substring(0,70)+'...'}}</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <img style="width:100%;height:100%;" src="https://benimfirsatim.com/{{opportunity.image_url}}">
+        </ion-col>
+        <ion-col style="padding: 10px">
+          {{opportunity.details.substring(0,100)+'...'}}
+        </ion-col>
+      </ion-row>
+
+
+
+      <ion-row text-center>
+        <ion-col>
+          <ion-chip>
+            <ion-icon name="pricetag"></ion-icon>
+            <ion-label>{{opportunity.price}} ₺</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col>
+          <ion-chip >
+            <ion-icon name="heart" color="danger" class="animate-hearth"></ion-icon>
+            <ion-label >{{opportunity.votes_sum}}</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col>
+          <ion-chip color="calm">
+            <ion-icon name="text"></ion-icon>
+            <ion-label>{{opportunity.comments_count}} Yorum</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button
+            ion-button
+            round
+            color="button"
+            (click)="onOpportunityPage(opportunity)"
+            block>Fırsat Detayları</button>
+        </ion-col>
+      </ion-row>
   </ion-card>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
     <ion-infinite-scroll-content

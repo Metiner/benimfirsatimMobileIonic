@@ -29,7 +29,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SettingsPage} from "../pages/settings/settings";
 import {GoogleAnalytics} from "@ionic-native/google-analytics";
 import {GooglePlus} from "@ionic-native/google-plus";
-//import {OneSignal} from "@ionic-native/onesignal";
+import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
 import {ListDealComponent} from "../components/list-deal/list-deal";
 import {CommentComponent} from "../components/comment/comment";
@@ -94,7 +94,7 @@ import {FabCompenent} from "../components/fab/fab";
     Facebook,
     GooglePlus,
     GoogleAnalytics,
-    //OneSignal,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

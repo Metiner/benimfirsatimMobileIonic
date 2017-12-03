@@ -9,7 +9,7 @@ import {SettingsPage} from "../pages/settings/settings";
 import {GoogleAnalytics} from "@ionic-native/google-analytics";
 import {GooglePlus} from "@ionic-native/google-plus";
 import {Facebook} from "@ionic-native/facebook";
-//import {OneSignal} from "@ionic-native/onesignal";
+import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
 @Component({
   templateUrl: 'app.html'
@@ -27,7 +27,7 @@ export class MyApp {
               private benimFirsatimLib:BenimfirsatimLib,
               private eventCtrl:Events,
               private gA:GoogleAnalytics,
-              //private oneSignal:OneSignal,
+              private oneSignal:OneSignal,
               private googlePlusLogin:GooglePlus,
               private facebookLogin:Facebook) {
 
@@ -49,27 +49,29 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.hide();
-      splashScreen.hide();
 
     this.nav.setRoot(TabsPage);
+    this.benimFirsatimLib.checkAuthFromStorage().then(response=>{
+      BenimfirsatimLib.user = response.user;
+      BenimfirsatimLib.token = response.token;
+    })
 
 
-      // // onesignal code start:
-      // this.oneSignal.startInit('e3b6a1f6-1826-4015-a0c5-99665f5a9589', '57374298212');
-      //
-      // this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
-      //
-      // this.oneSignal.handleNotificationReceived().subscribe(() => {
-      //   // do something when notification is received
-      // });
-      //
-      // this.oneSignal.handleNotificationOpened().subscribe(() => {
-      //   // do something when a notification is opened
-      // });
-      //
-      // this.oneSignal.endInit();
+       // onesignal code start:
+       this.oneSignal.startInit('e3b6a1f6-1826-4015-a0c5-99665f5a9589', '57374298212');
 
-      // for starting google analytics
+       this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+
+       this.oneSignal.handleNotificationReceived().subscribe(() => {
+         // do something when notification is received
+       });
+
+       this.oneSignal.handleNotificationOpened().subscribe(() => {
+         // do something when a notification is opened
+       });
+
+       this.oneSignal.endInit()
+       //for starting google analytics
 
       this.gA.startTrackerWithId('UA-44910726-2')
         .then(() => {
@@ -126,6 +128,7 @@ export class MyApp {
 
     onMyDeals(){
       this.nav.push(this.myDealsPage);
+      this.menuCtrl.close();
     }
 
 }

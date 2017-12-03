@@ -17,90 +17,67 @@
   <ion-item text-wrap>
     <p><b>{{comment.user.name}}</b> tarafından yapılan yoruma cevap vermektesiniz.</p>
     <ion-grid>
-      <ion-row>
-        <ion-col col-auto>
+      <ion-row style="padding-top: 5%;">
+        <ion-col col-2>
           <ion-avatar>
-            <img src="{{comment.user.avatar_url}}">
+            <img style="border-radius: 10px" src="{{comment.user.avatar_url}}">
           </ion-avatar>
         </ion-col>
-        <ion-col col-auto>
-          <p class="nickname">{{comment.user.name}}</p>
-        </ion-col>
-        <ion-col col-auto>
-          <p class="votes"> - {{comment.comment_votes_count}} Puan</p>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <div (click) = "toExpandItem(comment)"
-             text-left
-             *ngIf="!comment.showContent">
-          <p>{{comment.text}}</p>
-        </div>
-        <div (click) = "toExpandItem(comment)"
-             *ngIf="comment.showContent"
-             text-wrap>
-          <p>{{comment.text}}</p>
-        </div>
-      </ion-row>
-      <ion-row>
-        <ion-col class="thumbs" col-auto>
-          <button ion-button
-                  clear
-                  small
-                  (click)="upVoteComment()">
-            <ion-icon name="thumbs-up"></ion-icon>
-          </button>
-        </ion-col>
-        <ion-col class="thumbs" col-auto>
-          <button ion-button
-                  clear
-                  small>
-            <ion-icon name="thumbs-down"></ion-icon>
-          </button>
+        <ion-col col-10 style="border:1px solid #eee;border-radius:10px;">
+          <strong class="nickname">{{comment.user.name}}</strong>
+          <em class="votes"> {{comment.comment_votes_count}} Puan</em>
+          <ion-row>
+            <ion-col>
+      <span *ngIf="comment.showContent"
+            [@onCommentExpand]="comment.showContent ? 'toExpand' : 'asd'">{{comment.text}}</span>
+              <span (click)="comment.showContent = !comment.showContent" *ngIf="!comment.showContent">{{comment.text}}</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <button #thumbsUp
+                      ion-button
+                      small
+                      color="light"
+                      block
+                      (click)="onCommentLike()">
+                <ion-icon name="thumbs-up" style="margin:5px;"></ion-icon>
+                <span> Begen</span>
+              </button>
+            </ion-col>
+          </ion-row>
         </ion-col>
       </ion-row>
       <div style="padding-left: 15%;padding-top: 5%"
            *ngFor="let subComment of comment.comments" id="{{subComment.newlyAdded}}" ngClass="highlighted">
-        <ion-row>
-          <ion-col col-auto>
+        <ion-row style="padding-top: 5%;">
+          <ion-col col-2>
             <ion-avatar>
-              <img src="https://benimfirsatim.com/{{subComment.user.avatar_url}}">
+              <img style="border-radius: 10px" src="{{subComment.user.avatar_url}}">
             </ion-avatar>
           </ion-col>
-          <ion-col col-auto>
-            <p class="nickname">{{subComment.user.name}}</p>
-          </ion-col>
-          <ion-col col-auto>
-            <p class="votes"> - {{subComment.comment_votes_count}} Puan</p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <div (click) = "toExpandItem(subComment)"
-               text-left
-               *ngIf="!subComment.showContent">
-            <p>{{subComment.text}}</p>
-          </div>
-          <div (click) = "toExpandItem(subComment)"
-               *ngIf="subComment.showContent"
-               text-wrap>
-            <p>{{subComment.text}}</p>
-          </div>
-        </ion-row>
-        <ion-row>
-          <ion-col  col-auto>
-            <button ion-button
-                    clear
-                    small
-                    (click)="upVoteComment()">
-              <ion-icon name="thumbs-up"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col  col-auto>
-            <button ion-button
-                    clear
-                    small>
-              <ion-icon name="thumbs-down"></ion-icon>
-            </button>
+          <ion-col col-10 style="border:1px solid #eee;border-radius:10px;">
+            <strong class="nickname">{{subComment.user.name}}</strong>
+            <em class="votes"> {{subComment.comment_votes_count}} Puan</em>
+            <ion-row>
+              <ion-col>
+      <span *ngIf="subComment.showContent"
+            [@onCommentExpand]="subComment.showContent ? 'toExpand' : 'asd'">{{subComment.text}}</span>
+                <span (click)="subComment.showContent = !subComment.showContent" *ngIf="!subComment.showContent">{{subComment.text}}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-6>
+                <button #thumbsUp
+                        ion-button
+                        small
+                        color="light"
+                        block>
+                  <ion-icon name="thumbs-up" style="margin:5px;"></ion-icon>
+                  <span> Begen</span>
+                </button>
+              </ion-col>
+            </ion-row>
           </ion-col>
         </ion-row>
       </div>

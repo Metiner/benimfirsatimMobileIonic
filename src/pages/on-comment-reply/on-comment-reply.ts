@@ -55,4 +55,7 @@ export class OnCommentReplyPage {
 
 
   }
+  onCommentLike(){
+    this.benimFirsatimLib.commentVote(this.comment.id);
+  }
 }
