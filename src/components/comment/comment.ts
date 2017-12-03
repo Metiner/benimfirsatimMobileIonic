@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {onCommentExpand} from "../../app/animations";
 
 /**
  * Generated class for the CommentComponent component.
@@ -8,7 +9,10 @@ import {Component, Input} from '@angular/core';
  */
 @Component({
   selector: 'comment',
-  templateUrl: 'comment.html'
+  templateUrl: 'comment.html',
+  animations: [
+    onCommentExpand
+  ]
 })
 export class CommentComponent {
 

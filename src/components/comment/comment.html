@@ -1,16 +1,18 @@
 <ion-row style="padding-top: 5%;">
   <ion-col col-2>
     <ion-avatar>
-      <img src="{{comment.user.avatar_url}}">
+      <img style="border-radius: 10px" src="{{comment.user.avatar_url}}">
     </ion-avatar>
   </ion-col>
   <ion-col col-10 style="border:1px solid #eee;border-radius:10px;">
     <strong class="nickname">{{comment.user.name}}</strong>
     <em class="votes"> {{comment.comment_votes_count}} Puan</em>
     <ion-row>
+      <ion-col>
       <span *ngIf="comment.showContent"
             [@onCommentExpand]="comment.showContent ? 'toExpand' : 'asd'">{{comment.text}}</span>
       <span (click)="comment.showContent = !comment.showContent" *ngIf="!comment.showContent">{{comment.text}}</span>
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-6>

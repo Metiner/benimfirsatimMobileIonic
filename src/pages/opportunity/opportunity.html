@@ -8,54 +8,62 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>{{opportunity.title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-row text-center>
+    <ion-col style="font-weight:900;font-size: large" align-self-center>
+      <span>{{opportunity.title}}</span>
+    </ion-col>
+  </ion-row>
+  <ion-card style="padding-top: 10px;border-radius: 10px">
+    <ion-row col-10 offset-1 style="text-align: center">
+      <ion-col>
+        <button  #upVote
+                ion-button
+                clear
+
+                (click)="upVoteDeal(opportunity.id,upVote)"
+                [@onItemBump]="upVote.stateChanger ? 'onBump' : 'default'"
+                >
+          <ion-icon class="vote" name="arrow-up"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <ion-chip>
+          <ion-icon name="heart" color="danger" class="animate-hearth"></ion-icon>
+          <ion-label>{{opportunity.votes_sum}}</ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col>
+        <button #downVote
+                ion-button
+
+                clear
+                (click)="downVoteDeal(opportunity.id,downVote)"
+                [@onItemBump]="downVote.stateChanger ? 'onBump' : 'default'">
+          <ion-icon class="vote" name="arrow-down"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-8 offset-2 style="text-align: center">
+        <img src="https://benimfirsatim.com/{{opportunity.image_url}}">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col padding>
+        {{opportunity.details}}
+      </ion-col>
+    </ion-row>
+  </ion-card>
   <ion-row>
-    <ion-col style="text-align: center">
-      <img src="https://benimfirsatim.com/{{opportunity.image_url}}">
+    <ion-col text-center>
+      <span style="font-size: medium;font-weight: 400">YORUMLAR</span>
     </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <h6>{{opportunity.title}}</h6>
-    </ion-col>
-  </ion-row>
-  <ion-row style="text-align: center">
-    <ion-col>
-      <button #upVote
-              ion-button
-              strong
-              small
-              (click)="upVoteDeal(opportunity.id,upVote)"
-              [@onItemBump]="upVote.stateChanger ? 'onBump' : 'default'"
-              color="secondary">
-        <ion-icon style="color:white;" name="arrow-dropup-circle"></ion-icon>
-      </button>
-      <ion-chip>
-        <ion-icon name="heart" color="danger" class="animate-hearth"></ion-icon>
-        <ion-label>{{opportunity.votes_sum}}</ion-label>
-      </ion-chip>
-      <button #downVote
-              ion-button
-              small
-              color="danger"
-              (click)="downVoteDeal(opportunity.id,downVote)"
-              [@onItemBump]="downVote.stateChanger ? 'onBump' : 'default'">
-        <ion-icon style="color:white;" name="arrow-dropdown-circle"></ion-icon>
-      </button>
-    </ion-col>
-  </ion-row>
-  <ion-row (click)="scrollToNewlyAddedComment()">
-    {{opportunity.details}}
   </ion-row>
   <ion-list>
-    <ion-list-header>
-      <ion-header text-center>
-        <h1>Yorumlar</h1></ion-header>
-    </ion-list-header>
     <comment *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" [comment]="comment"
              ngClass="highlighted">
     </comment>
@@ -69,28 +77,23 @@
 </ion-content>
 
 <ion-footer>
-  <form #f="ngForm" (ngSubmit)="onCommentSubmit(f)">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-input style="padding-top: 5%;padding-left: 10%"
-                     [ngModel]
-                     placeholder="Ne düşünüyorsun?"
-                     name="comment"
-                     required></ion-input>
-        </ion-col>
-        <ion-col>
-          <button style="padding-left: 5%"
-                  ion-button
-                  [disabled]="!f.valid"
-                  type="submit"
-                  clear
-                  (click)="toHighlight = true">
-            <ion-icon style="font-size: 2.6em"
-                      name="send"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-2 style="text-align: center" align-self-center>
+        <button>
+          <ion-icon style="font-size: xx-large;font-weight: 900;color:#2FA4E7" name="add"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-8>
+        <ion-item no-lines>
+          <ion-input style="padding:0;font-size:15px;background-color: #f0ecec;border-radius: 64px" type="text" placeholder="Düşüncelerin neler ?"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2 text-center align-self-center>
+        <button (click)="onCommentSubmit()">
+          <ion-icon style="font-size: xx-large;font-weight: 900;color:#2FA4E7" name="send"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-footer>

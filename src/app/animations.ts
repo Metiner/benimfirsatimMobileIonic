@@ -8,7 +8,7 @@ export const onItemBump = trigger('onItemBump',[
     transform:'scale(0.5)'
   })),
   transition('default <=> onBump',[
-    animate(300)])
+    animate(50)])
 ]);
 
 export const onCommentExpand = trigger("onCommentExpand",[

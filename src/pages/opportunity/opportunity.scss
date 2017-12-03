@@ -1,13 +1,23 @@
 page-opportunity {
-  //
-  //.col{
-  //   background: whitesmoke;
-  //   border:  solid black;
-  // }
-  //div{
-  //  background: whitesmoke;
-  //  border:  solid blue;
-  //}
+
+  /*.col{
+     border:  solid black;
+   }
+  div{
+    border:  solid blue;
+  }*/
+
+  ion-content{
+    margin-top: 0px;
+  }
+  ion-icon.vote{
+    font-size: 30px;
+    color: #666666;
+  }
+  ion-list{
+    padding: 0px !important;
+    margin-top: 0px !important;
+  }
 @keyframes heartbeat
 {
   0%
@@ -16,7 +26,7 @@ page-opportunity {
   }
   20%
   {
-    transform: scale( 1 );
+    transform: scale( 1.15 );
   }
   40%
   {
@@ -24,7 +34,7 @@ page-opportunity {
   }
   60%
   {
-    transform: scale( 1 );
+    transform: scale( 1.15 );
   }
   80%
   {
@@ -44,7 +54,7 @@ page-opportunity {
 
   #newlyAdded.highlighted {
     background-color: lightgoldenrodyellow;
-    animation: toHighlight 1s;
+    animation: toHighlight 10ms;
   }
   @keyframes toHighlight {
     0%
@@ -67,6 +77,18 @@ page-opportunity {
   }
   .thumbs{
     padding: 7px 0px 0px 0px !important;
+  }
+  .text-input::-moz-placeholder {
+    color: #5c5c5c;
+  }
+
+  .text-input:-ms-input-placeholder {
+    color: #777777;
+  }
+
+  .text-input::-webkit-input-placeholder {
+    text-indent: 0;
+    color: #747474;
   }
 }
 
