@@ -18,49 +18,46 @@
       <img src="https://benimfirsatim.com/{{opportunity.image_url}}">
     </ion-col>
   </ion-row>
-    <ion-row>
-      <ion-col>
-          <h6>{{opportunity.title}}</h6>
-      </ion-col>
-    </ion-row>
-    <ion-row style="text-align: center">
-      <ion-col>
-        <button #upVote
-                ion-button
-                block
-                strong
-                (click)="upVoteDeal(opportunity.id,upVote)"
-                [@onItemBump] = "upVote.stateChanger ? 'onBump' : 'default'"
-                color="secondary">
-          <ion-icon style="color:white;font-size:35px;" name="arrow-dropup-circle"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col>
-        <ion-row>
-          <i class="fa fa-heartbeat fa-4x"></i>
-          <span style="font-size: xx-large">{{opportunity.votes_sum}}</span>
-        </ion-row>
-      </ion-col>
-      <ion-col>
-        <button #downVote
-                ion-button
-                block
-                color="danger"
-                (click)="downVoteDeal(opportunity.id,downVote)"
-                [@onItemBump] = "downVote.stateChanger ? 'onBump' : 'default'">
-          <ion-icon style="color:white;font-size:35px;" name="arrow-dropdown-circle"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-    <ion-row (click)="scrollToNewlyAddedComment()">
-      {{opportunity.details}}
-    </ion-row>
+  <ion-row>
+    <ion-col>
+      <h6>{{opportunity.title}}</h6>
+    </ion-col>
+  </ion-row>
+  <ion-row style="text-align: center">
+    <ion-col>
+      <button #upVote
+              ion-button
+              strong
+              small
+              (click)="upVoteDeal(opportunity.id,upVote)"
+              [@onItemBump]="upVote.stateChanger ? 'onBump' : 'default'"
+              color="secondary">
+        <ion-icon style="color:white;" name="arrow-dropup-circle"></ion-icon>
+      </button>
+      <ion-chip>
+        <ion-icon name="heart" color="danger" class="animate-hearth"></ion-icon>
+        <ion-label>{{opportunity.votes_sum}}</ion-label>
+      </ion-chip>
+      <button #downVote
+              ion-button
+              small
+              color="danger"
+              (click)="downVoteDeal(opportunity.id,downVote)"
+              [@onItemBump]="downVote.stateChanger ? 'onBump' : 'default'">
+        <ion-icon style="color:white;" name="arrow-dropdown-circle"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row (click)="scrollToNewlyAddedComment()">
+    {{opportunity.details}}
+  </ion-row>
   <ion-list>
     <ion-list-header>
       <ion-header text-center>
         <h1>Yorumlar</h1></ion-header>
     </ion-list-header>
-    <comment *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" [comment]="comment" ngClass="highlighted">
+    <comment *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" [comment]="comment"
+             ngClass="highlighted">
     </comment>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
