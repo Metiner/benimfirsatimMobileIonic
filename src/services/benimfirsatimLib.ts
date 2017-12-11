@@ -166,8 +166,7 @@ export class BenimfirsatimLib{
 
   //It checks if any user is stored on devices local storage.
   public checkAuthFromStorage() {
-
-    return this.storageCtrl.get("user")
+      return this.storageCtrl.get("user")
   }
 
   //It removes all of users from device local storage.

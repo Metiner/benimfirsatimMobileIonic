@@ -1,4 +1,4 @@
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 
 export const onItemBump = trigger('onItemBump',[
   state('default',style({

@@ -149,4 +149,8 @@ export class OpportunityPage {
 
 
   }
+
+  onOutsideDealLink(opportunity){
+    window.open(opportunity.link);
+  }
 }

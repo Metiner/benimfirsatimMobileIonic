@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {InfiniteScroll, IonicPage} from 'ionic-angular';
+import {InfiniteScroll, IonicPage, NavController} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
@@ -19,10 +19,10 @@ import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 export class MyDealsPage {
 
   opportunities: Opportunity[] = [];
-  opportunityPage = OpportunityPage;
   static pagination = 1;
 
-  constructor(private benimfirsatimLib:BenimfirsatimLib) {
+  constructor(private benimfirsatimLib:BenimfirsatimLib,
+              private navCtrl:NavController) {
     MyDealsPage.pagination = 1;
     this.benimfirsatimLib.getDealFromUser(MyDealsPage.pagination).subscribe((data)=>{
 
@@ -37,6 +37,10 @@ export class MyDealsPage {
         this.opportunities.push(u);
       });
     })
+  }
+
+  onOpportunityPage(opportunity: Opportunity){
+    this.navCtrl.push(OpportunityPage,opportunity);
   }
 
   //Async calls new comments from database.

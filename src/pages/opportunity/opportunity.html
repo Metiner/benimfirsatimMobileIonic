@@ -8,6 +8,7 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
+    <ion-title>Fırsat</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -25,8 +26,7 @@
                 clear
 
                 (click)="upVoteDeal(opportunity.id,upVote)"
-                [@onItemBump]="upVote.stateChanger ? 'onBump' : 'default'"
-                >
+                [@onItemBump]="upVote.stateChanger ? 'onBump' : 'default'">
           <ion-icon class="vote" name="arrow-up"></ion-icon>
         </button>
       </ion-col>
@@ -55,6 +55,14 @@
     <ion-row>
       <ion-col padding>
         {{opportunity.details}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button
+                round
+                color="button"
+                (click)="onOutsideDealLink(opportunity)">Fırsata Git !</button>
       </ion-col>
     </ion-row>
   </ion-card>

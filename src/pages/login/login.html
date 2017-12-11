@@ -4,28 +4,28 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content #content padding>
   <ion-grid>
-    <ion-row style="margin-bottom: 20px">
-      <ion-col offset-sm-3 col-sm-6>
-        <img src="assets/imgs/benimFirsatimLogo.png">
+  <ion-row #itemone [ngClass]="{'toLogoUp':itemone.toLogoUp}"    style="margin-bottom: 20px">
+      <ion-col col-8 offset-2>
+        <img  src="assets/imgs/benimFirsatimLogo.png">
       </ion-col>
     </ion-row>
-    <form #f="ngForm" (submit)="onLogIn(f)">
-      <ion-item no-lines class="inputBox">
+    <form #f="ngForm" (submit)="onLogIn(f,itemone,itemtwo,itemthree,itemfour,itemfive,itemsix)">
+      <ion-item #itemtwo [ngClass]="{'toLogoUp':itemone.toLogoUp}"  no-lines class="inputBox">
         <ion-input [ngModel] name="email" type="text" placeholder="Kullanıcı Adı veya E-posta"></ion-input>
       </ion-item>
-      <ion-item no-lines class="inputBox">
+      <ion-item #itemthree [ngClass]="{'toLogoUp':itemthree.toLogoUp}"  no-lines class="inputBox">
         <ion-input [ngModel] name="password" type="password" placeholder="Parola"></ion-input>
       </ion-item>
       <ion-row nowrap>
-        <ion-col col-auto>
+        <ion-col #itemfour  [ngClass]="{'toLogoUp':itemfour.toLogoUp}" col-auto>
           <ion-item no-lines class="rememberMe">
             <ion-label>Beni Hatırla</ion-label>
             <ion-checkbox no-padding style="margin-right: 8px" [ngModel] name="rememberMe"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col col-auto>
+        <ion-col #itemfive  [ngClass]="{'toLogoUp':itemfive.toLogoUp}" col-auto>
           <button ion-button
                   clear
                   (click)="onForgotPassword()"
@@ -35,7 +35,7 @@
           >Parolamı unuttum</button>
         </ion-col>
       </ion-row>
-      <button ion-button
+      <button #itemsix  [ngClass]="{'toLogoUp':itemsix.toLogoUp}" ion-button
               type="submit"
               outline
               color="light"
@@ -54,7 +54,7 @@
       <button ion-button
               block
               round
-              small
+
               type="button"
               (click)="onFacebookLogin()"
               style="background-color: #3b5998"
@@ -62,7 +62,7 @@
     </ion-row>
     <ion-row>
       <button ion-button
-              small
+
               block
               (click)="onGooglePlusLogin()"
               round
@@ -72,7 +72,7 @@
     </ion-row>
     <ion-row>
       <button ion-button
-              small
+
               block
               type="button"
               round
@@ -82,7 +82,7 @@
     </ion-row>
     <ion-row>
       <button ion-button
-              small
+
               block
               round
               clear

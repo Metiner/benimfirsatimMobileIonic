@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {IonicPage, LoadingController, NavController, Events} from "ionic-angular";
 import {NgForm} from "@angular/forms";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
@@ -9,10 +9,13 @@ import {GooglePlus} from "@ionic-native/google-plus";
 @IonicPage()
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html',
+  templateUrl: 'login.html'
 })
 export class LoginPage {
 
+
+  @ViewChildren('content') rows: QueryList<any>;
+  onLoginLogo = false;
 
 
   constructor(private benimFirsatimLib: BenimfirsatimLib,
@@ -20,17 +23,31 @@ export class LoginPage {
               private loadingCtrl:LoadingController,
               private eventCtrl:Events,
               private fb:Facebook,
-              private googlePlus:GooglePlus){}
+              private googlePlus:GooglePlus){
+    console.log(this.rows);
+  }
 
-  onLogIn(form:NgForm){
+  onLogIn(form:NgForm,itemone,itemtwo,itemthree,itemfour,itemfive,itemsix){
 
-    console.log(form)
+    const arr:any[] = [itemone,itemtwo,itemthree,itemfour,itemfive,itemsix];
+
+    for(let i = 0;i<arr.length;i++){
+      setTimeout(()=>{
+        arr[i].toLogoUp = true;
+      },i*100);
+    }
+
     this.benimFirsatimLib.signIn(form.value.email, form.value.password).subscribe(data=>{
 
-      console.log(data.json());
+      this.onLoginLogo = true;
       if(data.json() != null && data.json().success == true ){
 
-        this.setStorageAndUserInfoAfterSuccessLogin(data.json());
+        setTimeout( ()=>{
+
+          this.setStorageAndUserInfoAfterSuccessLogin(data.json());
+
+          }
+        ,1000);
 
       }
     },error => {
@@ -84,7 +101,13 @@ export class LoginPage {
 
             }
             if(response.json() != null && response.json().success == true ) {
-              this.setStorageAndUserInfoAfterSuccessLogin(response.json());
+
+              setTimeout( ()=>{
+
+                  this.setStorageAndUserInfoAfterSuccessLogin(response.json());
+                }
+                ,700);
+
               BenimfirsatimLib.isLoggedInWithFacebook = true;
               this.navCtrl.push(TabsPage);
 
@@ -119,7 +142,12 @@ export class LoginPage {
 
         }
         if(response.json() != null && response.json().success == true ) {
-          this.setStorageAndUserInfoAfterSuccessLogin(response.json());
+          setTimeout( ()=>{
+
+              this.setStorageAndUserInfoAfterSuccessLogin(response.json());
+            }
+            ,700);
+
           BenimfirsatimLib.isLoggedInWihGoogle = true;
           this.navCtrl.push(TabsPage);
         }

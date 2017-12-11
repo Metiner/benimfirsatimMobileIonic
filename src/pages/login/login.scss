@@ -1,14 +1,13 @@
 page-login {
 
-
-  .scroll-content{
+  .scroll-content {
     background-image: url('../assets/imgs/background.png');
-    background-repeat:no-repeat;
-    background-size:cover;
-    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
 
   }
-  .inputBox{
+  .inputBox {
     background-color: rgba(255, 255, 255, 0.3
     );
 
@@ -18,7 +17,7 @@ page-login {
 
   }
 
-  .rememberMe{
+  .rememberMe {
     background-color: transparent;
     color: #ffffff;
     font-size: small;
@@ -26,20 +25,37 @@ page-login {
   }
 
   img {
-    -webkit-filter: drop-shadow(5px 5px 5px #222 );
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
     filter: drop-shadow(5px 5px 5px #222);
   }
 
-/*
-  .col{
-     background: whitesmoke;
-     border:  solid black;
+  /*
+    .col{
+       background: whitesmoke;
+       border:  solid black;
+    }
+    div{
+      background: whitesmoke;
+      border:  solid blue;
+    }*/
+  ion-col div {
+    text-align: start !important;
   }
-  div{
-    background: whitesmoke;
-    border:  solid blue;
-  }*/
- ion-col div{
-   text-align: start !important;
- }
+  .toLogoUp {
+    animation: toLogoUp 1s forwards;
+  }
+
+  @keyframes toLogoUp {
+
+    20% {
+      transform: translateY(10px);
+
+    }
+    100% {
+      transform: translateY(-200px);
+      opacity: 0;
+      }
+
+  }
 }
+
