@@ -14,7 +14,17 @@
 </ion-header>
 
 <ion-content padding>
-  <fab></fab>
+
+  <ion-grid ion-fixed style="top:20px">
+    <ion-row>
+      <ion-col offset-10>
+
+        <fab></fab>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <list-deal *ngFor="let opportunity of opportunities" [opportunity]="opportunity">
 
   </list-deal>

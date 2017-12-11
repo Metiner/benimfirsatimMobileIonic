@@ -6,12 +6,12 @@ import {LoginPage} from "../../pages/login/login";
 
 @Component({
   selector:'fab',
-  template:`<ion-fab  right top style="top:80px;position: fixed">
+  template:`
     <button ion-fab style="background-color: #0572B2"
             (click)="onCreateNewDeal()">
       <ion-icon name="add"></ion-icon>
     </button>
-  </ion-fab>`
+  `
 })
 export class FabCompenent{
 

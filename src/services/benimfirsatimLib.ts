@@ -11,6 +11,7 @@ import {NgForm} from "@angular/forms";
 @Injectable()
 export class BenimfirsatimLib{
   api_address = "https://benimfirsatim.com";
+  //api_address = "http://192.168.0.40:3000";
 
   //api_address = "https://benimfirsatim.cleverapps.io/";
   static token:string ="";

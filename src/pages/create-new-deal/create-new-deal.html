@@ -133,7 +133,7 @@
         <ion-row>
           <ion-col>
             <ion-card #picture *ngFor="let image of images" (click)="onPictureSelect(picture)" [@onPictureSelectAnimation]="picture.isSelected ? 'toSelected' : 'default'">
-              <img src="{{image}}">
+              <img style="width: auto;height: inherit" src="{{image}}">
             </ion-card>
           </ion-col>
         </ion-row>
