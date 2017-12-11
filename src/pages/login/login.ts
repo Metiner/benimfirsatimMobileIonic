@@ -18,36 +18,51 @@ export class LoginPage {
   onLoginLogo = false;
 
 
+  itemone=false;
+  itemtwo=false;
+  itemthree=false;
+  itemfour=false;
+  itemfive=false;
+  itemsix=false;
+  itemseven=false;
+  itemeight=false;
+  itemnine=false;
+  itemten=false;
+  itemeleven=false;
+
   constructor(private benimFirsatimLib: BenimfirsatimLib,
               private navCtrl: NavController,
               private loadingCtrl:LoadingController,
               private eventCtrl:Events,
               private fb:Facebook,
               private googlePlus:GooglePlus){
-    console.log(this.rows);
+
+    //this.setItemsBooleanOpposite();
   }
 
-  onLogIn(form:NgForm,itemone,itemtwo,itemthree,itemfour,itemfive,itemsix){
+  onLogIn(form:NgForm,itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten){
 
-    const arr:any[] = [itemone,itemtwo,itemthree,itemfour,itemfive,itemsix];
 
-    for(let i = 0;i<arr.length;i++){
-      setTimeout(()=>{
-        arr[i].toLogoUp = true;
-      },i*100);
-    }
 
     this.benimFirsatimLib.signIn(form.value.email, form.value.password).subscribe(data=>{
 
       this.onLoginLogo = true;
       if(data.json() != null && data.json().success == true ){
 
+        const arr:any[] = [itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten];
+
+        for(let i = 0;i<arr.length;i++){
+          setTimeout(()=>{
+            arr[i].toLogoUp = true;
+          },i*100);
+        }
+
         setTimeout( ()=>{
 
           this.setStorageAndUserInfoAfterSuccessLogin(data.json());
 
           }
-        ,1000);
+        ,1100);
 
       }
     },error => {
@@ -57,8 +72,23 @@ export class LoginPage {
   };
 
 
-  onSignUpButton(){
-    this.navCtrl.push(SignupPage);
+  onSignUpButton(itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten){
+
+    const arr:any[] = [itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten];
+
+    for(let i = 0;i<arr.length;i++){
+      setTimeout(()=>{
+        arr[i].toLogoUp = true;
+      },i*100);
+    }
+
+
+
+    setTimeout( ()=>{
+
+        this.navCtrl.push(SignupPage);
+      }
+      ,1100);
   }
 
   //sets the user info to benimfirsatimlib's static user variable and stores token in local storage
@@ -77,7 +107,11 @@ export class LoginPage {
   }
 
 
-  onFacebookLogin(){
+  onFacebookLogin(itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten){
+
+
+
+
 
     this.fb.login(['public_profile', 'user_friends', 'email'])
       .then(res =>{
@@ -102,11 +136,23 @@ export class LoginPage {
             }
             if(response.json() != null && response.json().success == true ) {
 
+
+
+              const arr:any[] = [itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten];
+
+              for(let i = 0;i<arr.length;i++){
+                setTimeout(()=>{
+                  arr[i].toLogoUp = true;
+                },i*100);
+              }
+
+
+
               setTimeout( ()=>{
 
                   this.setStorageAndUserInfoAfterSuccessLogin(response.json());
                 }
-                ,700);
+                ,1000);
 
               BenimfirsatimLib.isLoggedInWithFacebook = true;
               this.navCtrl.push(TabsPage);
@@ -123,7 +169,7 @@ export class LoginPage {
       .catch(e => console.log('Error logging into Facebook', e));
   }
 
-  onGooglePlusLogin(){
+  onGooglePlusLogin(itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten){
 
     this.googlePlus.login({}).then(response=>{
       let email = response.email;
@@ -142,11 +188,21 @@ export class LoginPage {
 
         }
         if(response.json() != null && response.json().success == true ) {
+
+
+          const arr:any[] = [itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten];
+
+          for(let i = 0;i<arr.length;i++){
+            setTimeout(()=>{
+              arr[i].toLogoUp = true;
+            },i*100);
+          }
+
           setTimeout( ()=>{
 
               this.setStorageAndUserInfoAfterSuccessLogin(response.json());
             }
-            ,700);
+            ,1000);
 
           BenimfirsatimLib.isLoggedInWihGoogle = true;
           this.navCtrl.push(TabsPage);
@@ -161,9 +217,38 @@ export class LoginPage {
 
   }
 
-  toTabsPage(){
-    this.googlePlus.logout();
-    this.navCtrl.push(TabsPage);
+  toTabsPage(itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten){
+
+
+      this.setItemsBooleanOpposite();
+
+
+    setTimeout( ()=>{
+
+        this.googlePlus.logout();
+        this.navCtrl.push(TabsPage);
+      }
+      ,1000);
+
+  }
+
+  setItemsBooleanOpposite(){
+
+    const arr:any[] = [this.itemone,this.itemtwo,this.itemthree,this.itemfour,this.itemfive,this.itemsix,this.itemseven,this.itemeight,this.itemnine,this.itemten,this.itemeleven];
+
+    for(let i = 0;i<arr.length;i++){
+      setTimeout(()=>{
+        if(arr[i] == false){
+          arr[i] = true;
+        }
+        else{
+          arr[i]= false;
+        }
+
+      },i*100);
+    }
+
+
   }
 
 }

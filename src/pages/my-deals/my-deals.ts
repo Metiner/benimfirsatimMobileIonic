@@ -21,8 +21,12 @@ export class MyDealsPage {
   opportunities: Opportunity[] = [];
   static pagination = 1;
 
+  logoComesFromLeft = false;
+
   constructor(private benimfirsatimLib:BenimfirsatimLib,
               private navCtrl:NavController) {
+
+
     MyDealsPage.pagination = 1;
     this.benimfirsatimLib.getDealFromUser(MyDealsPage.pagination).subscribe((data)=>{
 
@@ -36,6 +40,8 @@ export class MyDealsPage {
         Object.assign(u,element);
         this.opportunities.push(u);
       });
+
+      this.logoComesFromLeft = true;
     })
   }
 

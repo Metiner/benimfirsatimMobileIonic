@@ -3,6 +3,7 @@ import {InfiniteScroll, IonicPage} from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
+import {ListDealComponent} from "../../components/list-deal/list-deal";
 
 
 /**

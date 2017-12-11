@@ -6,26 +6,26 @@
 
 <ion-content #content padding>
   <ion-grid>
-  <ion-row #itemone [ngClass]="{'toLogoUp':itemone.toLogoUp}"    style="margin-bottom: 20px">
+  <ion-row [ngClass]="itemone ? 'toLogoUp' : 'toLogoDown'"    style="margin-bottom: 20px">
       <ion-col col-8 offset-2>
         <img  src="assets/imgs/benimFirsatimLogo.png">
       </ion-col>
     </ion-row>
-    <form #f="ngForm" (submit)="onLogIn(f,itemone,itemtwo,itemthree,itemfour,itemfive,itemsix)">
-      <ion-item #itemtwo [ngClass]="{'toLogoUp':itemone.toLogoUp}"  no-lines class="inputBox">
+    <form #f="ngForm" (submit)="onLogIn(f)">
+      <ion-item [ngClass]="itemtwo ? 'toLogoUp' : 'toLogoDown'"  no-lines class="inputBox">
         <ion-input [ngModel] name="email" type="text" placeholder="Kullanıcı Adı veya E-posta"></ion-input>
       </ion-item>
-      <ion-item #itemthree [ngClass]="{'toLogoUp':itemthree.toLogoUp}"  no-lines class="inputBox">
+      <ion-item [ngClass]="itemthree ? 'toLogoUp' : 'toLogoDown'"  no-lines class="inputBox">
         <ion-input [ngModel] name="password" type="password" placeholder="Parola"></ion-input>
       </ion-item>
       <ion-row nowrap>
-        <ion-col #itemfour  [ngClass]="{'toLogoUp':itemfour.toLogoUp}" col-auto>
+        <ion-col [ngClass]="itemfour ? 'toLogoUp' : 'toLogoDown'" col-auto>
           <ion-item no-lines class="rememberMe">
             <ion-label>Beni Hatırla</ion-label>
             <ion-checkbox no-padding style="margin-right: 8px" [ngModel] name="rememberMe"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col #itemfive  [ngClass]="{'toLogoUp':itemfive.toLogoUp}" col-auto>
+        <ion-col [ngClass]="itemfive ? 'toLogoUp' : 'toLogoDown'" col-auto>
           <button ion-button
                   clear
                   (click)="onForgotPassword()"
@@ -35,7 +35,7 @@
           >Parolamı unuttum</button>
         </ion-col>
       </ion-row>
-      <button #itemsix  [ngClass]="{'toLogoUp':itemsix.toLogoUp}" ion-button
+      <button [ngClass]="itemsix ? 'toLogoUp' : 'toLogoDown'" ion-button
               type="submit"
               outline
               color="light"
@@ -45,12 +45,12 @@
               round
       >Giriş Yap</button>
     </form>
-    <ion-row>
+    <ion-row [ngClass]="itemseven ? 'toLogoUp' : 'toLogoDown'">
       <ion-col text-center>
         <ion-label style="font-style: italic;color: whitesmoke;">yada..</ion-label>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row  [ngClass]="itemeight ? 'toLogoUp' : 'toLogoDown'">
       <button ion-button
               block
               round
@@ -60,7 +60,7 @@
               style="background-color: #3b5998"
       >Facebook</button>
     </ion-row>
-    <ion-row>
+    <ion-row  [ngClass]="itemnine ? 'toLogoUp' : 'toLogoDown'">
       <button ion-button
 
               block
@@ -70,7 +70,7 @@
               style="background-color: #d34836"
       >Google Plus</button>
     </ion-row>
-    <ion-row>
+    <ion-row  [ngClass]="itemten ? 'toLogoUp' : 'toLogoDown'">
       <button ion-button
 
               block
@@ -80,7 +80,7 @@
               style="background-color: whitesmoke;color: darkred"
       >Hesap Oluştur</button>
     </ion-row>
-    <ion-row>
+    <ion-row  [ngClass]="itemeleven ? 'toLogoUp' : 'toLogoDown'">
       <button ion-button
 
               block

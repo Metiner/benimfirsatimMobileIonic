@@ -13,12 +13,12 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-row text-center>
+  <ion-row #itemone [ngClass]="{'toLogoUp':itemone.toLogoUp}" text-center>
     <ion-col style="font-weight:900;font-size: large" align-self-center>
       <span>{{opportunity.title}}</span>
     </ion-col>
   </ion-row>
-  <ion-card style="padding-top: 10px;border-radius: 10px">
+  <ion-card  #itemone [ngClass]="{'toLogoUp':itemone.toLogoUp}" style="padding-top: 10px;border-radius: 10px">
     <ion-row col-10 offset-1 style="text-align: center">
       <ion-col>
         <button  #upVote
@@ -62,16 +62,16 @@
         <button ion-button
                 round
                 color="button"
-                (click)="onOutsideDealLink(opportunity)">Fırsata Git !</button>
+                (click)="onOutsideDealLink(opportunity,itemone,itemtwo,itemthree)">Fırsata Git !</button>
       </ion-col>
     </ion-row>
   </ion-card>
-  <ion-row>
+  <ion-row #itemtwo [ngClass]="{'toLogoUp':itemtwo.toLogoUp}">
     <ion-col text-center>
       <span style="font-size: medium;font-weight: 400">YORUMLAR</span>
     </ion-col>
   </ion-row>
-  <ion-list>
+  <ion-list #itemthree [ngClass]="{'toLogoUp':itemthree.toLogoUp}">
     <comment *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" [comment]="comment" [opportunity]="opportunity"
              ngClass="highlighted">
     </comment>

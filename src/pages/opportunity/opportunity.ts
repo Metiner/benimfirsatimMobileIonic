@@ -150,7 +150,19 @@ export class OpportunityPage {
 
   }
 
-  onOutsideDealLink(opportunity){
+  onOutsideDealLink(opportunity,itemone,itemtwo,itemthree){
+
+    const arr:any[] = [itemone,itemtwo,itemthree];
+
+    for(let i = 0;i<arr.length;i++){
+      setTimeout(()=>{
+        arr[i].toLogoUp = true;
+      },i*200);
+    }
+
+    setTimeout(()=>{
+
     window.open(opportunity.link);
+    },700)
   }
 }

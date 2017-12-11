@@ -16,10 +16,14 @@ import {NavController} from "ionic-angular";
 export class ListDealComponent {
 
   @Input() opportunity : Opportunity;
+  logoComesFromLeft: boolean = false;
 
   constructor(private navCont:NavController) {
 
+    this.logoComesFromLeft = true;
   }
+
+
 
   onOpportunityPage(opportunity: Opportunity){
     this.navCont.push(OpportunityPage,this.opportunity);

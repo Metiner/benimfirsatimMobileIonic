@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { IonicPage,NavParams } from 'ionic-angular';
 import {User} from "../../models/user";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
@@ -17,11 +17,14 @@ import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 })
 export class SettingsPage {
 
+
   user:User;
   constructor(private benimFirsatimLib:BenimfirsatimLib, public navParams: NavParams) {
     this.user = BenimfirsatimLib.user;
   }
 
+  itemone;
+  itemtwo;
 
   ionViewWillEnter(){
       this.benimFirsatimLib.checkAuthFromStorage().then( response =>{
@@ -29,6 +32,10 @@ export class SettingsPage {
     }).catch(error=>{
       console.log(error);
       })
+
+    this.itemone = 'toLogoUp';
+    this.itemtwo = 'toLogoUp';
+
   }
 
   onChangeAvatar(){

@@ -21,7 +21,7 @@
 
 
 <ion-content padding>
-    <ion-card style="padding-top: 20px;border-radius: 10px"  *ngFor="let opportunity of opportunities">
+    <ion-card [ngClass]="{'logoComesFromLeft':logoComesFromLeft}" style="padding-top: 20px;border-radius: 10px"  *ngFor="let opportunity of opportunities">
       <ion-row >
         <ion-col text-center>
           <span style="font-size: large;font-weight: 600">{{opportunity.title.substring(0,70)+'...'}}</span>

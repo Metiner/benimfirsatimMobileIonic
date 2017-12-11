@@ -20,13 +20,13 @@
 
 
 <ion-content padding>
-    <ion-item (click) = "onChangeAvatar()">
+    <ion-item  [ngClass]="itemone" (click) = "onChangeAvatar()">
       <ion-avatar item-start>
         <img src="{{user.avatar_url}}">
       </ion-avatar>
       <h2>Profil fotoğrafını değiştir</h2>
     </ion-item>
-    <ion-item>
+    <ion-item [ngClass]="itemtwo">
       <ion-icon name="contact" item-start></ion-icon>
       <ion-input [ngModel]="user.name" ></ion-input>
     </ion-item>

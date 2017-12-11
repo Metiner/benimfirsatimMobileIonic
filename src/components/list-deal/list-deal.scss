@@ -5,4 +5,21 @@ list-deal {
   .row{
     border: 1px solid black;
   }*/
-}
+
+
+  .logoComesFromLeft{
+    animation: logoAnimation 1.5s forwards;
+  }
+
+  @keyframes logoAnimation {
+
+    0% {
+      transform: translateX(-350px)
+    }
+
+    100%{
+      transform: translateX(0px)
+    }
+  }
+  }
+

@@ -1,3 +1,17 @@
 page-my-deals {
+  .logoComesFromLeft{
+    animation: myDeals 1.5s forwards;
+  }
 
+  @keyframes myDeals {
+
+    0% {
+      transform: translateX(-350px)
+    }
+
+    100%{
+      transform: translateX(0px)
+    }
+  }
 }
+
