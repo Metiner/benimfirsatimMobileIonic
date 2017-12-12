@@ -13,12 +13,12 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-row #itemone [ngClass]="{'toLogoUp':itemone.toLogoUp}" text-center>
+  <ion-row [ngClass]="itemone ? 'toLogoUp' : 'toLogoDown'"  text-center>
     <ion-col style="font-weight:900;font-size: large" align-self-center>
       <span>{{opportunity.title}}</span>
     </ion-col>
   </ion-row>
-  <ion-card  #itemone [ngClass]="{'toLogoUp':itemone.toLogoUp}" style="padding-top: 10px;border-radius: 10px">
+  <ion-card  [ngClass]="itemtwo ? 'toLogoUp' : 'toLogoDown'"  style="padding-top: 10px;border-radius: 10px">
     <ion-row col-10 offset-1 style="text-align: center">
       <ion-col>
         <button  #upVote
@@ -66,12 +66,12 @@
       </ion-col>
     </ion-row>
   </ion-card>
-  <ion-row #itemtwo [ngClass]="{'toLogoUp':itemtwo.toLogoUp}">
+  <ion-row [ngClass]="itemthree ? 'toLogoUp' : 'toLogoDown'" >
     <ion-col text-center>
       <span style="font-size: medium;font-weight: 400">YORUMLAR</span>
     </ion-col>
   </ion-row>
-  <ion-list #itemthree [ngClass]="{'toLogoUp':itemthree.toLogoUp}">
+  <ion-list [ngClass]="itemfour ? 'toLogoUp' : 'toLogoDown'" >
     <comment *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" [comment]="comment" [opportunity]="opportunity"
              ngClass="highlighted">
     </comment>

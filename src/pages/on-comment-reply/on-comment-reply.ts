@@ -22,10 +22,13 @@ export class OnCommentReplyPage {
   comment: Comment;
   opportunity: Opportunity;
 
+  itemone=true;
+  itemtwo=true;
+
   constructor(public navParams: NavParams, private benimFirsatimLib: BenimfirsatimLib) {
     this.comment = this.navParams.get('comment');
     this.opportunity = this.navParams.get('opportunity');
-
+    this.setItemsBooleanOpposite();
   }
 
   onCommentSubmit(form: NgForm) {
@@ -57,5 +60,15 @@ export class OnCommentReplyPage {
   }
   onCommentLike(){
     this.benimFirsatimLib.commentVote(this.comment.id);
+  }
+
+  setItemsBooleanOpposite() {
+
+    setTimeout(() => {
+      this.itemone = !this.itemone;
+    }, 0)
+    setTimeout(() => {
+      this.itemtwo = !this.itemtwo;
+    }, 100)
   }
 }

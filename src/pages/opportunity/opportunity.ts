@@ -27,6 +27,10 @@ export class OpportunityPage {
   static pageCount = 1;
   @ViewChild(Content) content:Content;
 
+  itemone=true;
+  itemtwo=true;
+  itemthree=true;
+  itemfour=true;
 
   constructor(public navParams: NavParams,
               private benimFirsatimLib:BenimfirsatimLib,
@@ -41,6 +45,8 @@ export class OpportunityPage {
         this.comments.push(u);
       })
     });
+
+    this.setItemsBooleanOpposite()
   }
 
   upVoteDeal(dealId:number,upVote:any){
@@ -152,17 +158,27 @@ export class OpportunityPage {
 
   onOutsideDealLink(opportunity,itemone,itemtwo,itemthree){
 
-    const arr:any[] = [itemone,itemtwo,itemthree];
-
-    for(let i = 0;i<arr.length;i++){
-      setTimeout(()=>{
-        arr[i].toLogoUp = true;
-      },i*200);
-    }
+    this.setItemsBooleanOpposite();
 
     setTimeout(()=>{
 
     window.open(opportunity.link);
     },700)
   }
+  setItemsBooleanOpposite() {
+
+    setTimeout(() => {
+      this.itemone = !this.itemone;
+    }, 0)
+    setTimeout(() => {
+      this.itemtwo = !this.itemtwo;
+    }, 100)
+    setTimeout(() => {
+      this.itemthree = !this.itemthree;
+    }, 200)
+    setTimeout(() => {
+      this.itemfour = !this.itemfour;
+    }, 300)
+  }
+
 }

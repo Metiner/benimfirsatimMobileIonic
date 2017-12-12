@@ -45,6 +45,10 @@ page-login {
     animation: toLogoUp .8s forwards;
   }
 
+  .toLogoDown{
+    animation: toLogoDown .8s forwards;
+  }
+
   @keyframes toLogoUp {
 
     20% {
@@ -55,6 +59,20 @@ page-login {
       transform: translateY(-200px);
       opacity: 0;
       }
+
+  }
+
+  @keyframes toLogoDown {
+
+    20% {
+      opacity: 0;
+      transform: translateY(-200px);
+
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
 
   }
 }

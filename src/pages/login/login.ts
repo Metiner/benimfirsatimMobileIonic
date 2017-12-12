@@ -18,17 +18,17 @@ export class LoginPage {
   onLoginLogo = false;
 
 
-  itemone=false;
-  itemtwo=false;
-  itemthree=false;
-  itemfour=false;
-  itemfive=false;
-  itemsix=false;
-  itemseven=false;
-  itemeight=false;
-  itemnine=false;
-  itemten=false;
-  itemeleven=false;
+  itemone=true;
+  itemtwo=true;
+  itemthree=true;
+  itemfour=true;
+  itemfive=true;
+  itemsix=true;
+  itemseven=true;
+  itemeight=true;
+  itemnine=true;
+  itemten=true;
+  itemeleven=true;
 
   constructor(private benimFirsatimLib: BenimfirsatimLib,
               private navCtrl: NavController,
@@ -37,7 +37,7 @@ export class LoginPage {
               private fb:Facebook,
               private googlePlus:GooglePlus){
 
-    //this.setItemsBooleanOpposite();
+    this.setItemsBooleanOpposite();
   }
 
   onLogIn(form:NgForm,itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten){
@@ -49,13 +49,9 @@ export class LoginPage {
       this.onLoginLogo = true;
       if(data.json() != null && data.json().success == true ){
 
-        const arr:any[] = [itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten];
 
-        for(let i = 0;i<arr.length;i++){
-          setTimeout(()=>{
-            arr[i].toLogoUp = true;
-          },i*100);
-        }
+        this.setItemsBooleanOpposite();
+
 
         setTimeout( ()=>{
 
@@ -74,15 +70,9 @@ export class LoginPage {
 
   onSignUpButton(itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten){
 
-    const arr:any[] = [itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten];
-
-    for(let i = 0;i<arr.length;i++){
-      setTimeout(()=>{
-        arr[i].toLogoUp = true;
-      },i*100);
-    }
 
 
+    this.setItemsBooleanOpposite();
 
     setTimeout( ()=>{
 
@@ -138,13 +128,8 @@ export class LoginPage {
 
 
 
-              const arr:any[] = [itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten];
 
-              for(let i = 0;i<arr.length;i++){
-                setTimeout(()=>{
-                  arr[i].toLogoUp = true;
-                },i*100);
-              }
+              this.setItemsBooleanOpposite();
 
 
 
@@ -190,13 +175,8 @@ export class LoginPage {
         if(response.json() != null && response.json().success == true ) {
 
 
-          const arr:any[] = [itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten];
 
-          for(let i = 0;i<arr.length;i++){
-            setTimeout(()=>{
-              arr[i].toLogoUp = true;
-            },i*100);
-          }
+          this.setItemsBooleanOpposite();
 
           setTimeout( ()=>{
 
@@ -217,11 +197,9 @@ export class LoginPage {
 
   }
 
-  toTabsPage(itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten){
+  toTabsPage(){
 
-
-      this.setItemsBooleanOpposite();
-
+    this.setItemsBooleanOpposite();
 
     setTimeout( ()=>{
 
@@ -229,26 +207,41 @@ export class LoginPage {
         this.navCtrl.push(TabsPage);
       }
       ,1000);
-
   }
-
   setItemsBooleanOpposite(){
 
-    const arr:any[] = [this.itemone,this.itemtwo,this.itemthree,this.itemfour,this.itemfive,this.itemsix,this.itemseven,this.itemeight,this.itemnine,this.itemten,this.itemeleven];
-
-    for(let i = 0;i<arr.length;i++){
       setTimeout(()=>{
-        if(arr[i] == false){
-          arr[i] = true;
-        }
-        else{
-          arr[i]= false;
-        }
-
-      },i*100);
-    }
-
-
+        this.itemone=! this.itemone;
+      },0)
+      setTimeout(()=>{
+        this.itemtwo=! this.itemtwo;
+      },100)
+      setTimeout(()=>{
+        this.itemthree=! this.itemthree;
+      },200)
+      setTimeout(()=>{
+        this.itemfour=! this.itemfour;
+      },300)
+      setTimeout(()=>{
+        this.itemfive=! this.itemfive;
+      },400)
+      setTimeout(()=>{
+        this.itemsix=! this.itemsix;
+      },500)
+      setTimeout(()=>{
+        this.itemseven=! this.itemseven;
+      },600)
+      setTimeout(()=>{
+        this.itemeight=! this.itemeight;
+      },700)
+      setTimeout(()=>{
+        this.itemnine=! this.itemnine;
+      },800)
+      setTimeout(()=>{
+        this.itemten=! this.itemten;
+      },900)
+      setTimeout(()=>{
+        this.itemeleven=! this.itemeleven;
+      },1000)
   }
-
 }

@@ -14,10 +14,10 @@
 
 
 <ion-content padding>
-  <ion-item text-wrap>
+  <ion-item [ngClass]="itemone ? 'toLogoUp' : 'toLogoDown'" text-wrap>
     <p><b>{{comment.user.name}}</b> tarafından yapılan yoruma cevap vermektesiniz.</p>
-    <ion-grid>
-      <ion-row style="padding-top: 5%;">
+    <ion-grid [ngClass]="itemtwo ? 'toLogoUp' : 'toLogoDown'" >
+      <ion-row  style="padding-top: 5%;">
         <ion-col col-2>
           <ion-avatar>
             <img style="border-radius: 10px" src="{{comment.user.avatar_url}}">
