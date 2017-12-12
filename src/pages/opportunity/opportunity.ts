@@ -162,7 +162,7 @@ export class OpportunityPage {
 
     setTimeout(()=>{
 
-    window.open(opportunity.link);
+    window.open(opportunity.link,'_system');
     },700)
   }
   setItemsBooleanOpposite() {
