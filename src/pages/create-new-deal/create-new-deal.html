@@ -1,6 +1,8 @@
 <ion-header>
 
   <ion-navbar>
+
+
     <ion-title>Yeni Fırsat Ekle</ion-title>
   </ion-navbar>
 
@@ -10,10 +12,9 @@
 <ion-content padding>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-item>
-      <ion-label>Url *</ion-label>
+      <ion-label>Link </ion-label>
       <ion-input [ngModel]
                  type="url"
-                 required
                  name="deal_url"
                  (ionChange)="onUrlChange($event)"
                  placeholder="www.alisverissitem.com/urun.aspx?kod=1123"></ion-input>
@@ -68,68 +69,29 @@
                     displayFormat="DD MM, YYYY"
                     name="deal_date"></ion-datetime>
     </ion-item>
-    <!--<ion-grid>-->
-      <!--<ion-row>-->
-        <!--<ion-col>-->
-          <!--<button-->
-            <!--ion-button-->
-            <!--outline-->
-            <!--block-->
-            <!--type="button"-->
-            <!--icon-left-->
-            <!--(click)="onLocate()">-->
-            <!--<ion-icon name="locate"></ion-icon>-->
-            <!--Konumumu ekle-->
-          <!--</button>-->
-        <!--</ion-col>-->
-        <!--<ion-col>-->
-          <!--<button ion-button-->
-                  <!--outline-->
-                  <!--block-->
-                  <!--icon-left-->
-                  <!--(click)="onOpenMap()"-->
-                  <!--type="button"-->
-                  <!--&gt;-->
-            <!--<ion-icon name="map"></ion-icon>-->
-            <!--Haritada seç-->
-          <!--</button>-->
-        <!--</ion-col>-->
-      <!--</ion-row>-->
-      <!--<ion-row  *ngIf="isLocationSet">-->
-        <!--<ion-col>-->
-          <!--<sebm-google-map-->
-            <!--[longitude]="location.lng"-->
-            <!--[latitude]="location.ltt"-->
-            <!--[zoom]="16">-->
-            <!--<sebm-google-map-marker-->
-              <!--[longitude]="location.lng"-->
-              <!--[latitude]="location.ltt"></sebm-google-map-marker>-->
-          <!--</sebm-google-map>-->
-        <!--</ion-col>-->
-      <!--</ion-row>-->
-      <!--<ion-row>-->
-        <!--<ion-col text-center>-->
-          <!--<h5>Fotoğraf yükle</h5>-->
-        <!--</ion-col>-->
-      <!--</ion-row>-->
-      <!--<ion-row>-->
-        <!--<ion-col>-->
-          <!--<button block-->
-                  <!--ion-button-->
-                  <!--(click)="onTakePhoto()"-->
-                  <!--outline-->
-                  <!--icon-left-->
-                  <!--type="button"-->
-          <!--&gt;<ion-icon name="camera"></ion-icon>-->
-          <!--Kamerayı Aç-->
-          <!--</button>-->
-        <!--</ion-col>-->
-      <!--</ion-row>-->
-    <ion-item>
+      <ion-row>
+        <ion-col>
+          <button block
+                  ion-button
+                  (click)="onTakePhoto()"
+                  outline
+                  icon-left
+                  type="button">
+            <ion-icon name="camera"></ion-icon>
+          Kamerayı Aç
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+            <img [src]="base64Image" *ngIf="base64Image" />
+        </ion-col>
+      </ion-row>
+    <ion-item *ngIf="!photoTaken">
       <ion-label style="white-space: normal;color: #aaaaaa">Lütfen fırsatta görünmesini istediğiniz görseli seçin.</ion-label>
     </ion-item>
     <ion-grid>
-      <ion-scroll scrollX="true" direction="x">
+      <ion-scroll *ngIf="!photoTaken" scrollX="true" direction="x">
         <ion-row>
           <ion-col>
             <ion-card #picture *ngFor="let image of images" (click)="onPictureSelect(picture)" [@onPictureSelectAnimation]="picture.isSelected ? 'toSelected' : 'default'">

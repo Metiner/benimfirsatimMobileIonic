@@ -4,9 +4,9 @@ import {Opportunity} from "../../models/opportunity";
 import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {NgForm} from "@angular/forms";
-import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
 import {onCommentExpand, onItemBump} from "../../app/animations";
 import {LoginPage} from "../login/login";
+import {BrowserTab} from "@ionic-native/browser-tab";
 
 @IonicPage()
 @Component({
@@ -22,7 +22,6 @@ export class OpportunityPage {
   opportunity: Opportunity;
   comments: Comment[] = [];
   loginPage = LoginPage;
-  toHighlight = false;
   comment = "ne düşünüyorsun";
   static pageCount = 1;
   @ViewChild(Content) content:Content;
@@ -34,9 +33,11 @@ export class OpportunityPage {
 
   constructor(public navParams: NavParams,
               private benimFirsatimLib:BenimfirsatimLib,
-              private navCtrl:NavController) {
+              private navCtrl:NavController,
+              private browserTab:BrowserTab) {
     OpportunityPage.pageCount = 1;
     this.opportunity = navParams.data;
+    console.log(this.opportunity);
     benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
       OpportunityPage.pageCount++;
       data.json().forEach(element=>{
@@ -160,11 +161,29 @@ export class OpportunityPage {
 
     this.setItemsBooleanOpposite();
 
+
+
+
     setTimeout(()=>{
 
-    window.open(opportunity.link,'_system');
+      this.browserTab.isAvailable()
+        .then((isAvailable: boolean) => {
+
+          if (isAvailable) {
+
+            this.browserTab.openUrl(opportunity.link);
+
+          } else {
+
+            // open URL with InAppBrowser instead or SafariViewController
+
+          }
+
+        });
+
     },700)
   }
+
   setItemsBooleanOpposite() {
 
     setTimeout(() => {
@@ -181,4 +200,8 @@ export class OpportunityPage {
     }, 300)
   }
 
+
+  goToRoot(){
+    this.navCtrl.popToRoot();
+  }
 }

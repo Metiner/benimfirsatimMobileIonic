@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from "@angular/platform-browser";
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -34,6 +34,9 @@ import {MyDealsPage} from "../pages/my-deals/my-deals";
 import {ListDealComponent} from "../components/list-deal/list-deal";
 import {CommentComponent} from "../components/comment/comment";
 import {FabCompenent} from "../components/fab/fab";
+import {BrowserTab} from "@ionic-native/browser-tab";
+import {Camera} from "@ionic-native/camera";
+import {File} from "@ionic-native/file";
 
 @NgModule({
   declarations: [
@@ -95,6 +98,9 @@ import {FabCompenent} from "../components/fab/fab";
     GooglePlus,
     GoogleAnalytics,
     OneSignal,
+    BrowserTab,
+    Camera,
+    File,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
