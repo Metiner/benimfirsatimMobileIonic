@@ -32,10 +32,10 @@ export class BenimfirsatimLib{
   public getPage(page_code,pagination){
       let opt = this.setHeader();
       let possible_page_codes = ['hot','rising','newcomers'];
-      if(possible_page_codes.indexOf(page_code)=== -1){
+      /*if(possible_page_codes.indexOf(page_code)=== -1){
         return;
 
-      }
+      }*/
       return this.http.get(this.api_address + '/'+page_code+'.json?page='+pagination+'&per_page=3',opt);
   }
 
@@ -81,22 +81,39 @@ export class BenimfirsatimLib{
     return this.http.post(this.api_address + '/deals/' + deal_id +'/comments.json',{parent_comment_id:parent_comment_id,comment:comment},opt);
   }
 
-  public createDeal(form:NgForm,selectedImageUrl){
+  public createDeal(form:NgForm,selectedImageUrl,imageBase64){
     let opt = this.setHeader();
     let categories = '';
     form.value.selectedCategory.forEach(element =>{
       categories +=element +',';
     })
     categories.substr(categories.length,1);
-    let body = {starts_at:form.value.deal_date,
-      price:form.value.deal_price,
-      categories:categories,
-      image:null,link:form.value.deal_url,
-      image_url:selectedImageUrl,
-      title:form.value.deal_title,
-      details:form.value.deal_details,
-      coupon_code:form.value.deal_coupon_code,
-      city:form.value.selectedCity};
+    let body;
+    if(selectedImageUrl == 'photoTaken'){
+      body = {starts_at:form.value.deal_date,
+        price:form.value.deal_price,
+        categories:categories,
+        image_64:imageBase64,
+        link:form.value.deal_url,
+        image_url:null,
+        title:form.value.deal_title,
+        details:form.value.deal_details,
+        coupon_code:form.value.deal_coupon_code,
+        city:form.value.selectedCity};
+    }
+    else{
+      body = {starts_at:form.value.deal_date,
+        price:form.value.deal_price,
+        categories:categories,
+        image_64:null,
+        link:form.value.deal_url,
+        image_url:selectedImageUrl,
+        title:form.value.deal_title,
+        details:form.value.deal_details,
+        coupon_code:form.value.deal_coupon_code,
+        city:form.value.selectedCity};
+    }
+
     return this.http.post(this.api_address + '/deals/create.json',body,opt);
   }
 

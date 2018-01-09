@@ -8,6 +8,8 @@ import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {onPictureSelectAnimation} from "../../app/animations";
 import {OpportunityPage} from "../opportunity/opportunity";
 import {Opportunity} from "../../models/opportunity";
+import {Camera,CameraOptions} from "@ionic-native/camera";
+import {File} from "@ionic-native/file";
 
 @IonicPage()
 @Component({
@@ -31,11 +33,17 @@ export class CreateNewDealPage {
   isLinkEmpty: boolean = true;
   selectedImageUrl:string ='';
   selectedImages:any[] = [];
+  base64Image: string;
+  base64ImageToUpload: string;
+  photoTaken = false;
+
 
   constructor(private modalCtrl:ModalController,
               private benimFirsatimLib:BenimfirsatimLib,
               private loadingCtrl:LoadingController,
-              private navCtrl:NavController){
+              private navCtrl:NavController,
+              private camera:Camera,
+              private file:File){
     benimFirsatimLib.getCategories().subscribe(data=>{
       data.json().forEach(element=>{
         let u: Category = new Category();
@@ -60,7 +68,7 @@ export class CreateNewDealPage {
       this.benimFirsatimLib.showToast("Lütfen bir görsel seçiniz",3000,"bottom");
     }
     else{
-      this.benimFirsatimLib.createDeal(form,this.selectedImageUrl).subscribe(response=>{
+      this.benimFirsatimLib.createDeal(form,this.selectedImageUrl,this.base64ImageToUpload).subscribe(response=>{
         console.log(response);
         console.log(response.json());
         if(response.ok){
@@ -144,4 +152,26 @@ export class CreateNewDealPage {
     this.selectedImageUrl = picture.children[0].currentSrc;
 
   }
+
+  onTakePhoto(){
+
+    this.camera.getPicture({
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 1000,
+      targetHeight: 1000
+    }).then((imageData) => {
+      this.photoTaken = true;
+      this.selectedImageUrl = 'photoTaken';
+      // imageData is a base64 encoded string
+      this.base64Image = "data:image/jpeg;base64," + imageData;
+      let base64 = this.base64Image.split(',');
+      this.base64ImageToUpload=base64[1].trim();
+
+    }, (err) => {
+      console.log(err);
+      this.selectedImageUrl = '';
+      this.photoTaken = false;
+    });
+  }
+
 }

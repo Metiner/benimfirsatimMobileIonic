@@ -19,7 +19,6 @@ import {OpportunityPage} from "../opportunity/opportunity";
 export class RisingPage {
 
   opportunities: Opportunity[] = [];
-  opportunityPage = OpportunityPage;
   static pagination = 1;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private benimfirsatimLib:BenimfirsatimLib) {

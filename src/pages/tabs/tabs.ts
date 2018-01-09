@@ -4,6 +4,7 @@ import {RisingPage} from "../rising/rising";
 import {TopPage} from "../top/top";
 import {NavController} from "ionic-angular";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {CategoriesPage} from "../categories/categories";
 @Component({
   selector: 'page-tabs',
   template: `
@@ -15,6 +16,7 @@ import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
       </ion-tab>
       <ion-tab [tabsHideOnSubPages]="true" [root]="risingPage" tabIcon="arrow-dropup-circle" tabTitle="Yükselenler" ></ion-tab>
       <ion-tab [tabsHideOnSubPages]="true" [root]="topPage" tabIcon="add" tabTitle="Yeniler" ></ion-tab>
+      <ion-tab [tabsHideOnSubPages]="true" [root]="categoriesPage" tabIcon="add" tabTitle="Kategoriler" ></ion-tab>
 
     </ion-tabs>
   `,
@@ -27,6 +29,7 @@ export class TabsPage {
   highlightsPage = HighlightsPage;
   risingPage = RisingPage;
   topPage = TopPage;
+  categoriesPage = CategoriesPage;
 
 
 }

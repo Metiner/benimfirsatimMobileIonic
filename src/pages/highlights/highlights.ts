@@ -24,7 +24,7 @@ export class HighlightsPage {
   static pagination = 1;
 
   constructor(private benimfirsatimLib:BenimfirsatimLib) {
-    this.benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe((data)=>{
+    benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe((data)=>{
 
       HighlightsPage.pagination++;
       console.log(data.json());
@@ -35,6 +35,8 @@ export class HighlightsPage {
         Object.assign(u,element);
         this.opportunities.push(u);
     });
+    },error=>{
+      console.log(error);
     })
   }
 
