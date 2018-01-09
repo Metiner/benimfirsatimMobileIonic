@@ -207,7 +207,6 @@ export class BenimfirsatimLib{
 
     return opt;
   }
-
   // sets user object to user static variable which locates in this class after login.
   public setUserInfoAfterLogin(user:any){
     let u:User=new User();

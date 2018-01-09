@@ -40,11 +40,9 @@ export class LoginPage {
     this.setItemsBooleanOpposite();
   }
 
-  onLogIn(form:NgForm,itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten){
+  onLogIn(form:NgForm){
 
-
-
-    this.benimFirsatimLib.signIn(form.value.email, form.value.password).subscribe(data=>{
+     this.benimFirsatimLib.signIn(form.value.email, form.value.password).subscribe(data=>{
 
       this.onLoginLogo = true;
       if(data.json() != null && data.json().success == true ){
@@ -65,12 +63,10 @@ export class LoginPage {
 
       this.benimFirsatimLib.showAlert(" ","Yanlış e-mail veya parola girdiniz.",["Tamam"]);
     })
-  };
+  }
 
 
-  onSignUpButton(itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten){
-
-
+  onSignUpButton(){
 
     this.setItemsBooleanOpposite();
 
@@ -97,10 +93,7 @@ export class LoginPage {
   }
 
 
-  onFacebookLogin(itemone,itemtwo,itemthree,itemfour,itemfive,itemsix,itemseven,itemeight,itemnine,itemten){
-
-
-
+  onFacebookLogin(){
 
 
     this.fb.login(['public_profile', 'user_friends', 'email'])
