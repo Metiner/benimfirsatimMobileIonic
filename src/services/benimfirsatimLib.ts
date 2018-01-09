@@ -84,18 +84,14 @@ export class BenimfirsatimLib{
   public createDeal(form:NgForm,selectedImageUrl,imageBase64){
     let opt = this.setHeader();
     let categories = '';
-    form.value.selectedCategory.forEach(element =>{
-      categories +=element +',';
-    })
-    categories.substr(categories.length,1);
     let body;
+console.log(form.value);
     if(selectedImageUrl == 'photoTaken'){
       body = {starts_at:form.value.deal_date,
         price:form.value.deal_price,
-        categories:categories,
+        categories: form.value.selectedCategory[0],
         image_64:imageBase64,
         link:form.value.deal_url,
-        image_url:null,
         title:form.value.deal_title,
         details:form.value.deal_details,
         coupon_code:form.value.deal_coupon_code,
@@ -104,8 +100,7 @@ export class BenimfirsatimLib{
     else{
       body = {starts_at:form.value.deal_date,
         price:form.value.deal_price,
-        categories:categories,
-        image_64:null,
+        categories: form.value.selectedCategory[0],
         link:form.value.deal_url,
         image_url:selectedImageUrl,
         title:form.value.deal_title,

@@ -107,16 +107,20 @@ export class CreateNewDealPage {
   // it replaces title,images,description of deals with given link.
   onUrlChange(event){
     if(this.isLinkEmpty){
+
       const loading = this.loadingCtrl.create({
         content : "Yükleniyor..."
       });
+
+      loading.present();
       this.benimFirsatimLib.getPullMeta(event.value).subscribe(response=>{
         if(!response.json().hasOwnProperty("errors")){
-          loading.present();
           this.images =[];
           this.images.push(response.json().best_image);
           for(var i=0;i<response.json().other_images.length;i++){
-            this.images.push(response.json().other_images[i][0]);
+            if(this.images.length < 5){
+              this.images.push(response.json().other_images[i][0]);
+            }
           }
           this.deal_title = response.json().title;
           this.deal_details = response.json().description;
