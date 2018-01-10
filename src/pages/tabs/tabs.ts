@@ -16,7 +16,7 @@ import {CategoriesPage} from "../categories/categories";
       </ion-tab>
       <ion-tab [tabsHideOnSubPages]="true" [root]="risingPage" tabIcon="arrow-dropup-circle" tabTitle="Yükselenler" ></ion-tab>
       <ion-tab [tabsHideOnSubPages]="true" [root]="topPage" tabIcon="add" tabTitle="Yeniler" ></ion-tab>
-      <ion-tab [tabsHideOnSubPages]="true" [root]="categoriesPage" tabIcon="add" tabTitle="Kategoriler" ></ion-tab>
+      <ion-tab [tabsHideOnSubPages]="true" [root]="categoriesPage" tabIcon="albums" tabTitle="Kategoriler" ></ion-tab>
 
     </ion-tabs>
   `,

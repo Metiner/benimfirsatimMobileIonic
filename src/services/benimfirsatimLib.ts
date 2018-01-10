@@ -125,10 +125,9 @@ console.log(form.value);
     let opt = this.setHeader();
     return this.http.get(this.api_address + '/data/cities',opt);
   }
-
   public getCategories(){
     let opt = this.setHeader();
-    return this.http.get(this.api_address + '/categories',opt);
+    return this.http.get(this.api_address + '/deals/categories',opt);
   }
 
   //Gets information from given deal link.
