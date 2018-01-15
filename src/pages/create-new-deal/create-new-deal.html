@@ -1,8 +1,8 @@
 <ion-header>
 
-  <ion-navbar text-center>
+  <ion-navbar text-center hideBackButton="true">
 
-
+    <img (click)="goBack()" style="max-width: 30px;position: fixed;left: 16px" src="assets/imgs/back_button@3x.png">
     <img style="max-width: 60%" src="assets/imgs/yeni_firsat_ekle_text_18pt_markheavy@3x.png">
   </ion-navbar>
 
@@ -70,25 +70,22 @@
                     name="deal_date"></ion-datetime>
     </ion-item>
       <ion-row>
-        <ion-col>
-          <button block
-                  ion-button
+        <ion-col text-center>
+          <button ion-button
                   (click)="onTakePhoto()"
-                  outline
-                  icon-left
+                  clear
                   type="button">
-            <ion-icon name="camera"></ion-icon>
-          Kamerayı Aç
+            <img src="assets/imgs/kamerayi_ac_button@3x.png">
           </button>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-            <img [src]="base64Image" *ngIf="base64Image" />
+            <img style="margin-left: 20px" [src]="base64Image" *ngIf="base64Image" />
         </ion-col>
       </ion-row>
     <ion-item *ngIf="!photoTaken">
-      <ion-label style="white-space: normal;color: #aaaaaa">Lütfen fırsatta görünmesini istediğiniz görseli seçin.</ion-label>
+      <ion-label class="staticText">LÜTFEN FIRSAT GÖRSELİ SEÇİN.</ion-label>
     </ion-item>
     <ion-grid>
       <ion-scroll *ngIf="!photoTaken" scrollX="true" direction="x">
@@ -104,9 +101,10 @@
         <ion-col>
           <button ion-button
                   type="submit"
-                  block
-                  color="secondary"
-                  [disabled]="!f.valid">Fırsatı Yarat</button>
+                  clear
+                  [disabled]="!f.valid">
+            <img src="assets/imgs/firsati_yarat_button@3x.png">
+          </button>
         </ion-col>
       </ion-row>
     </ion-grid>

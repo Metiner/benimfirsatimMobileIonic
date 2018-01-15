@@ -17,7 +17,7 @@ import {CreateNewDealPage} from "../pages/create-new-deal/create-new-deal";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = MyDealsPage;
+  rootPage:any = SettingsPage;
   public isAuthenticated = false;
   settingsPage = SettingsPage;
   myDealsPage = MyDealsPage;
@@ -52,7 +52,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.hide();
 
-    this.nav.setRoot(CreateNewDealPage);
+    this.nav.setRoot(SettingsPage);
     this.benimFirsatimLib.checkAuthFromStorage().then(response=>{
       if(response != null) {
         BenimfirsatimLib.user = response.user;

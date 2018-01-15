@@ -144,7 +144,7 @@ export class CreateNewDealPage {
   // it fills the array with default images.
   fillImagesArrayWithDefaultImages(){
       for(let i=0;i<4;i++){
-        this.images.push('https://benimfirsatim.com/product_placeholder.png');
+        this.images.push('assets/imgs/firsat_gorseli_unselected@3x.png');
     }
   }
 
@@ -179,6 +179,9 @@ export class CreateNewDealPage {
       this.selectedImageUrl = '';
       this.photoTaken = false;
     });
+  }
+  goBack(){
+    this.navCtrl.pop();
   }
 
 }
