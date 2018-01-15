@@ -12,11 +12,12 @@ import {Facebook} from "@ionic-native/facebook";
 import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
 import {OpportunityPage} from "../pages/opportunity/opportunity";
+import {CreateNewDealPage} from "../pages/create-new-deal/create-new-deal";
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = OpportunityPage;
+  rootPage:any = MyDealsPage;
   public isAuthenticated = false;
   settingsPage = SettingsPage;
   myDealsPage = MyDealsPage;
@@ -51,7 +52,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.hide();
 
-    this.nav.setRoot(TabsPage);
+    this.nav.setRoot(CreateNewDealPage);
     this.benimFirsatimLib.checkAuthFromStorage().then(response=>{
       if(response != null) {
         BenimfirsatimLib.user = response.user;

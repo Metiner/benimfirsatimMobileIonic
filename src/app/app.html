@@ -5,44 +5,48 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-      <ion-item *ngIf="!isAuthenticated">
+      <ion-item *ngIf="!isAuthenticated" no-lines>
         <button ion-button
                 clear
                 (click)="onSignin()"
-                icon-left>
-          <ion-icon name="log-in"></ion-icon>Giriş Yap
-        </button>
-      </ion-item>
-      <ion-item *ngIf="isAuthenticated">
-        <button ion-button
-                clear
-                (click) = "onMyDeals()"
-                icon-left>
-          <ion-icon name="pulse"></ion-icon>Fırsatlarım
-        </button>
-      </ion-item>
-      <ion-item *ngIf="isAuthenticated">
-        <button ion-button
-                clear
-                (click) = "onNotifications()"
-                icon-left>
-          <ion-icon name="notifications"></ion-icon>Bildirimler
+                >
+          <img style="max-width: 30%;margin-left: -28px" src="assets/imgs/logout_icon@3x.png">
+          <span style="color: #F7E60F !important;font-family: MarkPro-Medium;font-size: 14px;margin-left: 25px">GİRİŞ YAP</span>
         </button>
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
         <button ion-button
                 clear
                 (click) = "onSettings()"
-                icon-left>
-          <ion-icon name="settings"></ion-icon>Ayarlar
+                >
+          <img style="max-width: 30%;margin-left: -30px" src="assets/imgs/profilim_icon@3x.png">
+          <span style="color: #F7E60F !important;font-family: MarkPro-Medium;font-size: 14px;margin-left: 14px">PROFİLİM</span>
+        </button>
+      </ion-item>
+      <ion-item *ngIf="isAuthenticated">
+        <button ion-button
+                clear
+                (click) = "onMyDeals()"
+                >
+          <img style="max-width: 30%;margin-left: -30px" src="assets/imgs/firsatlarim_icon@3x.png">
+          <span style="color: #F7E60F !important;font-family: MarkPro-Medium;font-size: 14px;margin-left: 10px">FIRSATLARIM</span>
+        </button>
+      </ion-item>
+      <ion-item *ngIf="isAuthenticated">
+        <button ion-button
+                clear
+                (click) = "onNotifications()">
+          <img style="max-width: 30%;margin-left: -30px" src="assets/imgs/puan_tablosu_icon@3x.png">
+          <span style="color: #F7E60F !important;font-family: MarkPro-Medium;font-size: 14px;margin-left: 9px">PUAN TABLOSU</span>
         </button>
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
         <button ion-button
                 clear
                 (click)="onLogout()"
-                icon-left>
-          <ion-icon name="log-out"></ion-icon>Çıkış
+                >
+          <img style="max-width: 30%;margin-left: -28px" src="assets/imgs/logout_icon@3x.png">
+          <span style="color: #F7E60F !important;font-family: MarkPro-Medium;font-size: 14px;margin-left: 25px">ÇIKIŞ YAP</span>
         </button>
       </ion-item>
   </ion-content>

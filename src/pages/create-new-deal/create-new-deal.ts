@@ -125,6 +125,9 @@ export class CreateNewDealPage {
           this.deal_title = response.json().title;
           this.deal_details = response.json().description;
           loading.dismiss();
+        }else{
+          this.benimFirsatimLib.showToast("Bilgi bulunamadı.",3000,"bottom");
+          loading.dismiss();
         }
       },error2 => {
         console.log(error2.toLocaleString());

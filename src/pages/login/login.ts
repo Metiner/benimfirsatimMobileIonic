@@ -205,36 +205,5 @@ export class LoginPage {
 
       setTimeout(()=>{
         this.itemone=! this.itemone;
-      },0)
-      setTimeout(()=>{
-        this.itemtwo=! this.itemtwo;
-      },100)
-      setTimeout(()=>{
-        this.itemthree=! this.itemthree;
-      },200)
-      setTimeout(()=>{
-        this.itemfour=! this.itemfour;
-      },300)
-      setTimeout(()=>{
-        this.itemfive=! this.itemfive;
-      },400)
-      setTimeout(()=>{
-        this.itemsix=! this.itemsix;
-      },500)
-      setTimeout(()=>{
-        this.itemseven=! this.itemseven;
-      },600)
-      setTimeout(()=>{
-        this.itemeight=! this.itemeight;
-      },700)
-      setTimeout(()=>{
-        this.itemnine=! this.itemnine;
-      },800)
-      setTimeout(()=>{
-        this.itemten=! this.itemten;
-      },900)
-      setTimeout(()=>{
-        this.itemeleven=! this.itemeleven;
-      },1000)
-  }
+      },0)}
 }

@@ -106,9 +106,33 @@ p {
 
 
 @font-face {
-  font-family: AppFont;
-  src: url("../assets/fonts/OpenSans-Regular.ttf");
+  font-family: MarkPro-Black;
+  src: url("../assets/fonts/MarkPro-Black.otf");
 }
+@font-face {
+  font-family: MarkPro-Bold;
+  src: url("../assets/fonts/MarkPro-Bold.otf");
+}
+
+@font-face {
+  font-family: MarkPro-Italic;
+  src: url("../assets/fonts/MarkPro-Italic.otf");
+}
+@font-face {
+  font-family: MarkPro-Heavy;
+  src: url("../assets/fonts/MarkPro-Heavy.otf");
+}
+
+@font-face {
+  font-family: MarkPro-Medium;
+  src: url("../assets/fonts/MarkPro-Medium.otf");
+}
+
+@font-face {
+  font-family: MarkPro-Book;
+  src: url("../assets/fonts/MarkPro-Book.otf");
+}
+
 
 
 

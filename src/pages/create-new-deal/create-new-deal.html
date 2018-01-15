@@ -1,9 +1,9 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar text-center>
 
 
-    <ion-title>Yeni Fırsat Ekle</ion-title>
+    <img style="max-width: 60%" src="assets/imgs/yeni_firsat_ekle_text_18pt_markheavy@3x.png">
   </ion-navbar>
 
 </ion-header>
@@ -12,7 +12,7 @@
 <ion-content padding>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-item>
-      <ion-label>Link </ion-label>
+      <ion-label class="staticText">LINK </ion-label>
       <ion-input [ngModel]
                  type="url"
                  name="deal_url"
@@ -20,13 +20,13 @@
                  placeholder="www.alisverissitem.com/urun.aspx?kod=1123"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Fiyat</ion-label>
+      <ion-label class="staticText">FİYAT</ion-label>
       <ion-input [ngModel]
                  type="number"
                  name="deal_price"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Kategori *</ion-label>
+      <ion-label class="staticText">KATEGORİ *</ion-label>
       <ion-select required
                   [ngModel]
                   name="selectedCategory"
@@ -35,7 +35,7 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Şehir *</ion-label>
+      <ion-label class="staticText">ŞEHİR *</ion-label>
       <ion-select required
                   [ngModel]
                   name="selectedCity">
@@ -43,27 +43,27 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Kupon Codu</ion-label>
+      <ion-label class="staticText">KUPON KODU</ion-label>
       <ion-input [ngModel] type="text"
                  name="deal_coupon_code"
       ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Başlık *</ion-label>
+      <ion-label class="staticText">BAŞLIK *</ion-label>
       <ion-input [ngModel] = 'deal_title'
                  type="text"
                  required
                  name="deal_title" ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Detaylar *</ion-label>
+      <ion-label class="staticText">DETAYLAR *</ion-label>
       <ion-textarea [ngModel] ='deal_details'
                     required
                     name="deal_details" ></ion-textarea>
     </ion-item>
 
     <ion-item>
-      <ion-label>Tarih *</ion-label>
+      <ion-label class="staticText">TARİH *</ion-label>
       <ion-datetime [ngModel]
                     required
                     displayFormat="DD MM, YYYY"

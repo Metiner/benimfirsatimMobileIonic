@@ -7,10 +7,12 @@ import {LoginPage} from "../../pages/login/login";
 @Component({
   selector:'fab',
   template:`
-    <button ion-fab style="background-color: #0572B2"
-            (click)="onCreateNewDeal()">
-      <ion-icon name="add"></ion-icon>
-    </button>
+    <ion-fab bottom center>
+      <button ion-fab
+              (click)="onCreateNewDeal()">
+       
+      </button>
+    </ion-fab>
   `
 })
 export class FabCompenent{
@@ -22,24 +24,5 @@ export class FabCompenent{
               private navCtrl:NavController){
 
   }
-  onCreateNewDeal() {
-    this.benimFirsatimLib.checkAuthFromStorage().then(response => {
-      if(response != null){
-        this.navCtrl.push(this.createNewDealPage);
-      }
-      else{
-        this.benimFirsatimLib.showAlert("Uyarı", "Fırsat yaratmak için giriş yapmalısınız.", [
-          {
-            text: 'Giriş Yap', handler: () => {
-            this.navCtrl.push(this.loginPage);
-          }
-          },
-          {
-            text: 'Vazgeç'
-          }])
-      }
-    }).catch(error => {
-      this.benimFirsatimLib.showToast(error.toLocaleString(),3000,'bottom')
-    })
-  }
+
 }

@@ -1,27 +1,21 @@
 <ion-header>
-
-
   <ion-navbar>
-    <ion-buttons start>
-      <button
-        ion-button
-        icon-only
-        clear
-        menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>Yarattığım Fırsatlar
-    </ion-title>
-
+    <button
+      ion-button
+      icon-only
+      menuToggle>
+      <img src="assets/imgs/Menu_button@3x.png">
+    </button>
+    <img src="assets/imgs/Slogan_top@2x.png" style="margin-left: 60px;max-width: 40%;position: fixed;left:1px">
   </ion-navbar>
-
-
+  <img style="width:150px;position:fixed;right: 0px;margin-top:-55px;margin-right:10px;z-index:999;" src="assets/imgs/logo.png">
 </ion-header>
 
 
 <ion-content padding>
-    <ion-card [ngClass]="{'logoComesFromLeft':logoComesFromLeft}" style="padding-top: 20px;border-radius: 10px"  *ngFor="let opportunity of opportunities">
+  <list-deal *ngFor="let opportunity of opportunities" [opportunity]="opportunity"></list-deal>
+
+<!--    <ion-card [ngClass]="{'logoComesFromLeft':logoComesFromLeft}" style="padding-top: 20px"  *ngFor="let opportunity of opportunities">
       <ion-row >
         <ion-col text-center>
           <span style="font-size: large;font-weight: 600">{{opportunity.title.substring(0,70)+'...'}}</span>
@@ -68,7 +62,7 @@
             block>Fırsat Detayları</button>
         </ion-col>
       </ion-row>
-  </ion-card>
+  </ion-card>-->
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"

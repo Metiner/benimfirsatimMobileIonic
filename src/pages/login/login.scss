@@ -7,21 +7,38 @@ page-login {
     width: 100%;
 
   }
-  .inputBox {
-    background-color: rgba(255, 255, 255, 0.3
-    );
+  .emailPassword{
+    background-color: transparent;
+    font-family: MarkPro-Bold;
+    font-size: 20px;
+    color:#F7E60F !important;
 
-    border-radius: 64px;
-    margin-top: 5px;
-    color: white;
+    ion-label{
+      font-size: 20px;
+      color: #F7E60F !important;
+    }
+  }
+
+
+  .rememberMe_forgetPassword {
+    background-color: transparent;
+    font-family: MarkPro-Italic;
+    font-size: 15px;
+    color:#F7E60F;
 
   }
 
-  .rememberMe {
+  .createAccount_ContinueAsGuest {
     background-color: transparent;
-    color: #ffffff;
-    font-size: small;
+    font-family: MarkPro-Heavy;
+    font-size: 20px;
+    color: #F7E60F;
 
+    ion-label{
+      font-family: MarkPro-Italic;
+      font-size: 20px;
+      color: #F7E60F;
+    }
   }
 
   img {

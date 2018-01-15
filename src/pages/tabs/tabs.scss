@@ -1,0 +1,26 @@
+page-tabs{
+  .tabbar {
+    background-image: url('../assets/imgs/bottom_bar@2x.png') !important;
+    font-family: MarkPro-Heavy !important;
+    font-size: 20px !important;
+
+  }
+  .tab-button{
+    color: #F7E60F !important;
+  }
+  .tab-button-icon{
+    color: #F7E60F !important;
+  }
+
+
+
+  .tab-button[id$="1"]{
+    margin-right: 40px;
+  }
+
+
+
+  .tab-button[id$="2"]{
+    margin-left: 40px;
+  }
+}

@@ -32,13 +32,11 @@
   //color: #E2222C;
 }
 .toolbar-background {
-  background-color: #2FA4E7;
+
+  background-image: url('../assets/imgs/bottom_bar@2x.png') !important;
 }
 .toolbar *{
   color:#eee;
-}
-*{
-  font-family: AppFont;
 }
 
 ion-list{
@@ -46,6 +44,26 @@ ion-list{
 }
 .button{
   text-transform: none !important;
+}
+.menu-inner > ion-content {
+
+  .item{
+    background: transparent;
+
+  }
+  background-image: url('../assets/imgs/menu_bar_opened_bg@3x.png') !important;
+
+}
+
+.item-md .item-button{
+  height: 60px;
+}
+.item-ios .item-button{
+  height: 60px;
+}
+
+.item-md.item-block .item-inner{
+  border-bottom: 1px solid #F7E60F;
 }
 
 // App Global Sass

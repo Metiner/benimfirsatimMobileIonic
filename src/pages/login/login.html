@@ -6,89 +6,94 @@
 
 <ion-content #content padding>
   <ion-grid>
-  <ion-row [ngClass]="itemone ? 'toLogoUp' : 'toLogoDown'"    style="margin-bottom: 20px">
+  <ion-row [ngClass]="itemone ? 'toLogoUp' : 'toLogoDown'">
       <ion-col col-8 offset-2>
-        <img  src="assets/imgs/benimFirsatimLogo.png">
+        <img  src="assets/imgs/logo2x.png">
       </ion-col>
     </ion-row>
-    <form #f="ngForm" (submit)="onLogIn(f)">
-      <ion-item [ngClass]="itemtwo ? 'toLogoUp' : 'toLogoDown'"  no-lines class="inputBox">
-        <ion-input [ngModel] name="email" type="text" placeholder="Kullanıcı Adı veya E-posta"></ion-input>
+    <form #f="ngForm" (submit)="onLogIn(f)" text-center>
+      <ion-item class="emailPassword">
+        <ion-label floating>Kullanıcı Adı veya E-posta</ion-label>
+        <ion-input [ngModel] name="email" type="text"></ion-input>
       </ion-item>
-      <ion-item [ngClass]="itemthree ? 'toLogoUp' : 'toLogoDown'"  no-lines class="inputBox">
-        <ion-input [ngModel] name="password" type="password" placeholder="Parola"></ion-input>
+      <!--<ion-item [ngClass]="itemtwo ? 'toLogoUp' : 'toLogoDown'"  no-lines class="inputBox">
+        <ion-input [ngModel] name="email" type="text" placeholder="Kullanıcı Adı veya E-posta"></ion-input>
+      </ion-item>-->
+      <ion-item class="emailPassword">
+        <ion-label floating>Parola</ion-label>
+        <ion-input [ngModel] name="password" type="password"></ion-input>
       </ion-item>
       <ion-row nowrap>
-        <ion-col [ngClass]="itemfour ? 'toLogoUp' : 'toLogoDown'" col-auto>
-          <ion-item no-lines class="rememberMe">
+        <ion-col col-auto>
+          <ion-item no-lines class="rememberMe_forgetPassword">
             <ion-label>Beni Hatırla</ion-label>
             <ion-checkbox no-padding style="margin-right: 8px" [ngModel] name="rememberMe"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col [ngClass]="itemfive ? 'toLogoUp' : 'toLogoDown'" col-auto>
+        <ion-col col-auto>
           <button ion-button
                   clear
                   (click)="onForgotPassword()"
                   type="button"
-                  style="font-size: small;
-                  color: white"
+                  class="rememberMe_forgetPassword"
           >Parolamı unuttum</button>
         </ion-col>
       </ion-row>
-      <button [ngClass]="itemsix ? 'toLogoUp' : 'toLogoDown'" ion-button
+      <button ion-button
+              style="width: 110px;height: 110px"
               type="submit"
-              outline
-              color="light"
-              style="font-size: large;border: 2px white solid"
+              clear
               [disabled]="!f.valid"
-              block
-              round
-      >Giriş Yap</button>
+      >
+        <img style="padding: 2px" src="assets/imgs/loginButton2x.png"></button>
     </form>
-    <ion-row [ngClass]="itemseven ? 'toLogoUp' : 'toLogoDown'">
-      <ion-col text-center>
-        <ion-label style="font-style: italic;color: whitesmoke;">yada..</ion-label>
+    <ion-row>
+      <ion-col text-center no-padding>
+        <button ion-button
+                clear
+                type="button"
+                style="width: 80px;height: 80px;margin-top: -17px"
+                (click)="onFacebookLogin()"
+
+        ><img style="padding: 7px" src="assets/imgs/FB-Icon@2x.png"></button>
+      </ion-col>
+      <ion-col text-center no-padding>
+        <button ion-button
+                (click)="onGooglePlusLogin()"
+                type="button"
+                style="width: 80px;height: 80px;margin-top: -17px"
+                clear
+                text-center
+        ><img style="padding: 7px" src="assets/imgs/G+Icon@2x.png"></button>
+      </ion-col>
+
+
+
+    </ion-row>
+    <ion-row>
+
+      <ion-col text-center style="margin-top: -15px">
+        <button ion-button
+                clear
+                type="button"
+                (click)="onSignUpButton()"
+                class="createAccount_ContinueAsGuest"
+        >HESAP OLUŞTUR</button>
       </ion-col>
     </ion-row>
-    <ion-row  [ngClass]="itemeight ? 'toLogoUp' : 'toLogoDown'">
-      <button ion-button
-              block
-              round
-
-              type="button"
-              (click)="onFacebookLogin()"
-              style="background-color: #3b5998"
-      >Facebook</button>
+    <ion-row no-padding no-margin>
+      <ion-col class="createAccount_ContinueAsGuest" text-center style="margin-top: -35px">
+        <ion-label >veya</ion-label>
+      </ion-col>
     </ion-row>
-    <ion-row  [ngClass]="itemnine ? 'toLogoUp' : 'toLogoDown'">
-      <button ion-button
-
-              block
-              (click)="onGooglePlusLogin()"
-              round
-              type="button"
-              style="background-color: #d34836"
-      >Google Plus</button>
-    </ion-row>
-    <ion-row  [ngClass]="itemten ? 'toLogoUp' : 'toLogoDown'">
-      <button ion-button
-
-              block
-              type="button"
-              round
-              (click)="onSignUpButton()"
-              style="background-color: whitesmoke;color: darkred"
-      >Hesap Oluştur</button>
-    </ion-row>
-    <ion-row  [ngClass]="itemeleven ? 'toLogoUp' : 'toLogoDown'">
-      <button ion-button
-
-              block
-              round
-              clear
-              (click)="toTabsPage()"
-              style="background-color: whitesmoke"
-      >Misafir Olarak Devam Et</button>
+    <ion-row>
+      <ion-col text-center style="margin-top: -25px">
+        <button ion-button
+                clear
+                (click)="toTabsPage()"
+                class="createAccount_ContinueAsGuest"
+        >MİSAFİR OLARAK DEVAM ET</button>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

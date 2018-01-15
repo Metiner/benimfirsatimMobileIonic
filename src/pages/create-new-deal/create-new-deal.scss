@@ -7,6 +7,12 @@ page-create-new-deal {
     white-space: nowrap;
   }
 
+  .scroll-content{
+    background-image: url('../assets/imgs/bg_pattern@3x.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+  }
   ion-card {
     margin-top: 30px;
     width: 150px !important;
@@ -18,8 +24,30 @@ page-create-new-deal {
     min-height: 170px;
     height: 190px;
 
+
     .scroll-content {
       padding: 0px !important;
     }
+  }
+  ion-item{
+    background-color: transparent !important;
+  }
+
+
+  .staticText{
+    font-family: MarkPro-Book;
+    font-size: 16px;
+    color:#234491 !important;
+  }
+
+  ion-label{
+    overflow: initial;
+  }
+
+
+  .text-input{
+    font-family: MarkPro-Heavy;
+    font-size: 20px;
+    color:#234491 !important;
   }
 }
