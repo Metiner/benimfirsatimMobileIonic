@@ -56,4 +56,30 @@ page-settings {
     margin-left: -90px;
     transform: scale(1.4);
   }
+
+  #notNumber{
+    font-family: MarkPro-Heavy;
+    font-size: 16px;
+    color: #234491;
+    position: fixed;
+    margin-top: 132px;
+    z-index: 10;
+    margin-left: -22px;
+
+  }
+
+
+  .scroll-content {
+    background-image: url('../assets/imgs/bg_patternn@3x.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+
+  }
+
+  .profileStatic{
+    font-family: MarkPro-Book;
+    font-size: 16px;
+    color:#234491 !important;
+  }
 }

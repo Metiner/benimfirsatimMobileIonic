@@ -30,9 +30,46 @@
           </ion-col>
           <ion-col col-2>
             <img id="notifications" src="assets/imgs/activities_icon_empty@3x.png">
+            <span id="notNumber">999</span>
           </ion-col>
         </ion-row>
-
+        <ion-row>
+          <ion-col>
+            <span style="font-family: MarkPro-Heavy;font-size: 23px;color:#234491">{{user.email}}</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label style="margin-left: -22px" class="profileStatic" fixed>PAROLA</ion-label>
+              <ion-input style="margin-left: 25px"[ngModel] name="password" type="password"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label style="margin-left: -23px;" class="profileStatic" fixed>TEKRAR</ion-label>
+              <ion-input style="margin-left: 14px"[ngModel] name="passwordTwo" type="password"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label style="margin-left: -12px;" class="profileStatic" fixed>TAKMA AD</ion-label>
+              <ion-input style="margin-left: 15px" [ngModel] name="nickname" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8 push-2>
+            <img src="assets/imgs/guncelle_button@3x.png">
+          </ion-col>
+          <ion-col col-2 push-2>
+            <img src="assets/imgs/hesabi_sil_icon@3x.png">
+          </ion-col>
+        </ion-row>
       </ion-grid>
     </div>
 
