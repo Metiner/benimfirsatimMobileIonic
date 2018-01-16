@@ -18,7 +18,7 @@ import {PointsPage} from "../pages/points/points";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = PointsPage;
+  rootPage:any = TabsPage;
   public isAuthenticated = false;
   settingsPage = SettingsPage;
   myDealsPage = MyDealsPage;
@@ -53,7 +53,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.hide();
 
-    this.nav.setRoot(PointsPage);
+    this.nav.setRoot(TabsPage);
     this.benimFirsatimLib.checkAuthFromStorage().then(response=>{
       if(response != null) {
         BenimfirsatimLib.user = response.user;
@@ -123,12 +123,13 @@ export class MyApp {
     }
 
     onNotifications(){
-      this.benimFirsatimLib.getUserLog().subscribe( response =>{
+      this.nav.push(PointsPage);
+      /*this.benimFirsatimLib.getUserLog().subscribe( response =>{
         console.log(response.json());
       },
         error =>{
         console.log(error.toLocaleString());
-        })
+        })*/
     }
 
     onMyDeals(){

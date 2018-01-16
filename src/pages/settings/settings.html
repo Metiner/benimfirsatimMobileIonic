@@ -10,7 +10,10 @@
     <div id="firstDiv" text-center>
       <ion-grid>
         <ion-row>
-          <ion-col>
+          <ion-col col-2>
+            <img (click)="goBack()" style="max-width: 30px;position: fixed;left: 16px" src="assets/imgs/back_button@3x.png">
+          </ion-col>
+          <ion-col col-10>
             <img id="profilim" src="assets/imgs/profilim_text_18pt_mark_heavy@3x.png">
           </ion-col>
         </ion-row>
@@ -64,7 +67,7 @@
         </ion-row>
         <ion-row>
           <ion-col col-8 push-2>
-            <img src="assets/imgs/guncelle_button@3x.png">
+            <img style="transform: scale(.8)" src="assets/imgs/guncelle_button@3x.png">
           </ion-col>
           <ion-col col-2 push-2>
             <img src="assets/imgs/hesabi_sil_icon@3x.png">

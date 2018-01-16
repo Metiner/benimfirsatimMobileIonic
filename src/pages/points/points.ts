@@ -22,4 +22,8 @@ export class PointsPage {
     console.log('ionViewDidLoad PointsPage');
   }
 
+
+  goBack(){
+    this.navCtrl.pop();
+  }
 }
