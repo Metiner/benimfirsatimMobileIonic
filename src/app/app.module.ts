@@ -37,6 +37,7 @@ import {FabCompenent} from "../components/fab/fab";
 import {BrowserTab} from "@ionic-native/browser-tab";
 import {Camera} from "@ionic-native/camera";
 import {File} from "@ionic-native/file";
+import {PointsPage} from "../pages/points/points";
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {File} from "@ionic-native/file";
     MyDealsPage,
     ListDealComponent,
     CommentComponent,
-    FabCompenent
+    FabCompenent,
+    PointsPage
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,8 @@ import {File} from "@ionic-native/file";
     SelectedCategoryPage,
     OnCommentReplyPage,
     SettingsPage,
-    MyDealsPage
+    MyDealsPage,
+    PointsPage
   ],
   providers: [
     StatusBar,
