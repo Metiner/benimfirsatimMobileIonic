@@ -1,15 +1,11 @@
 <ion-header>
-  <ion-navbar hideBackButton="true">
-    <ion-buttons end>
-      <button ion-button
-              icon-only
-              clear
-              (click)="goToRoot()">
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>Fırsat</ion-title>
+
+  <ion-navbar text-center hideBackButton="true">
+
+    <img (click)="goBack()" style="max-width: 30px;position: fixed;left: 16px" src="assets/imgs/back_button@3x.png">
+    <img style="max-width: 60%" src="assets/imgs/firsat_header@3x.png">
   </ion-navbar>
+
 </ion-header>
 
 <ion-content padding>
