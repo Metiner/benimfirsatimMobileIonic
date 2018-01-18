@@ -17,7 +17,6 @@ export class ListDealComponent {
 
   @Input() opportunity : Opportunity;
   logoComesFromLeft: boolean = false;
-
   constructor(private navCont:NavController) {
 
     this.logoComesFromLeft = true;
@@ -27,6 +26,13 @@ export class ListDealComponent {
 
   onOpportunityPage(opportunity: Opportunity){
     this.navCont.push(OpportunityPage,this.opportunity);
+  }
+
+  isPriceToolong(){
+    return this.opportunity.price ? (this.opportunity.price.length > 5 ? '20px' : this.opportunity.price.length > 6 ? '19px' : '25px') : '25px';
+  }
+  whatIsPrice(){
+    return this.opportunity.price ? (this.opportunity.price + '₺') : '';
   }
 
 }
