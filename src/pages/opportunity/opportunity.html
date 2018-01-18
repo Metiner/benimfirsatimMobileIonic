@@ -2,8 +2,19 @@
 
   <ion-navbar text-center hideBackButton="true">
 
-    <img (click)="goBack()" style="max-width: 30px;position: fixed;left: 16px" src="assets/imgs/back_button@3x.png">
-    <img style="max-width: 60%" src="assets/imgs/firsat_header@3x.png">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <img (click)="goBack()" src="assets/imgs/back_button@3x.png">
+        </ion-col>
+        <ion-col col-6>
+          <img src="assets/imgs/firsat_header@3x.png">
+        </ion-col>
+        <ion-col col-3>
+          <img src="assets/imgs/firsat_header@3x.png">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-navbar>
 
 </ion-header>
