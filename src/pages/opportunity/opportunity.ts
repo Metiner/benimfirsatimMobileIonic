@@ -7,6 +7,7 @@ import {NgForm} from "@angular/forms";
 import {onCommentExpand, onItemBump} from "../../app/animations";
 import {LoginPage} from "../login/login";
 import {BrowserTab} from "@ionic-native/browser-tab";
+import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
 
 @IonicPage()
 @Component({
@@ -50,14 +51,16 @@ export class OpportunityPage {
     this.setItemsBooleanOpposite()
   }
 
-  upVoteDeal(dealId:number,upVote:any){
+  upVoteDeal(dealId:number){
 
-    upVote.stateChanger = !upVote.stateChanger;
+    // upVoteDeal(dealId:number,upVote:any){
 
-    setTimeout(()=>{
-      upVote.stateChanger = !upVote.stateChanger;
+    // upVote.stateChanger = !upVote.stateChanger;
 
-    },500)
+    // setTimeout(()=>{
+      // upVote.stateChanger = !upVote.stateChanger;
+
+    // },500)
     this.benimFirsatimLib.upvoteDeal(dealId).subscribe(data=>{
       this.opportunity.votes_sum = data.json().deal_score;
     });
@@ -97,6 +100,12 @@ export class OpportunityPage {
         infiniteScroll.complete();
       });
 
+  }
+  isPriceToolong(){
+    return this.opportunity.price ? (this.opportunity.price.length > 5 ? '20px' : this.opportunity.price.length > 6 ? '19px' : '25px') : '25px';
+  }
+  whatIsPrice(){
+    return this.opportunity.price ? (this.opportunity.price + '₺') : '';
   }
 
 
@@ -203,5 +212,13 @@ export class OpportunityPage {
 
   goToRoot(){
     this.navCtrl.popToRoot();
+  }
+
+  goBack(){
+    this.navCtrl.popToRoot();
+  }
+
+  onCommentReply(commentInfo){
+    this.navCtrl.pop(OnCommentReplyPage,commentInfo);
   }
 }

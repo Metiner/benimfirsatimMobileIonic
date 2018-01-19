@@ -1,11 +1,18 @@
 page-opportunity {
+  //
+  //.col{
+  //   border:  solid black;
+  // }
+  //div{
+  //  border:  solid blue;
+  //}
 
-  /*.col{
-     border:  solid black;
-   }
-  div{
-    border:  solid blue;
-  }*/
+  .scroll-content{
+    background-image: url('../assets/imgs/bg_pattern@3x.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+  }
 
   ion-content{
     margin-top: 0px;

@@ -1,17 +1,17 @@
 <ion-header>
 
-  <ion-navbar text-center hideBackButton="true">
+  <ion-navbar text-center hideBackButton="true" style="padding: 0px !important">
 
-    <ion-grid>
+    <ion-grid style="padding: 0px !important">
       <ion-row>
-        <ion-col col-3>
+        <ion-col col-15>
           <img (click)="goBack()" src="assets/imgs/back_button@3x.png">
         </ion-col>
-        <ion-col col-6>
+        <ion-col col-30 push-30 style="display: flex;align-items: center">
           <img src="assets/imgs/firsat_header@3x.png">
         </ion-col>
-        <ion-col col-3>
-          <img src="assets/imgs/firsat_header@3x.png">
+        <ion-col col-15 push-60>
+          <img src="assets/imgs/paylas_button@3x.png">
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -19,65 +19,84 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-row [ngClass]="itemone ? 'toLogoUp' : 'toLogoDown'"  text-center>
-    <ion-col style="font-weight:900;font-size: large" align-self-center>
+    <ion-col style="font-family: MarkPro-Heavy;font-size: 20px;color:#234491;margin-top: 20px" align-self-center>
       <span>{{opportunity.title}}</span>
     </ion-col>
   </ion-row>
-  <ion-card  [ngClass]="itemtwo ? 'toLogoUp' : 'toLogoDown'"  style="padding-top: 10px;border-radius: 10px">
-    <ion-row col-10 offset-1 style="text-align: center">
-      <ion-col>
-        <button  #upVote
-                ion-button
-                clear
-
-                (click)="upVoteDeal(opportunity.id,upVote)"
-                [@onItemBump]="upVote.stateChanger ? 'onBump' : 'default'">
-          <ion-icon class="vote" name="arrow-up"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col>
-        <ion-chip>
-          <ion-icon name="heart" color="danger" class="animate-hearth"></ion-icon>
-          <ion-label>{{opportunity.votes_sum}}</ion-label>
-        </ion-chip>
-      </ion-col>
-      <ion-col>
-        <button #downVote
-                ion-button
-
-                clear
-                (click)="downVoteDeal(opportunity.id,downVote)"
-                [@onItemBump]="downVote.stateChanger ? 'onBump' : 'default'">
-          <ion-icon class="vote" name="arrow-down"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-8 offset-2 style="text-align: center">
-        <img src="https://benimfirsatim.com/{{opportunity.image_url}}">
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col padding>
-        {{opportunity.details}}
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <button ion-button
-                round
-                color="button"
-                (click)="onOutsideDealLink(opportunity,itemone,itemtwo,itemthree)">Fırsata Git !</button>
-      </ion-col>
-    </ion-row>
-  </ion-card>
-  <ion-row [ngClass]="itemthree ? 'toLogoUp' : 'toLogoDown'" >
-    <ion-col text-center>
-      <span style="font-size: medium;font-weight: 400">YORUMLAR</span>
+  <ion-row>
+    <ion-col col-80 offset-20 style="text-align: center">
+      <img src="https://benimfirsatim.com/{{opportunity.image_url}}">
     </ion-col>
   </ion-row>
+  <ion-row>
+    <ion-col col-20 push-10 style="display: flex;align-items: center">
+      <img src="assets/imgs/price_tag@3x.png">
+    </ion-col>
+    <ion-col col-40 push-10 style="display: flex;align-items: center">
+      <ion-label  [ngStyle]="{'font-size':isPriceToolong()}" style="font-family: MarkPro-Black;font-size: 25px;color:#234491">{{whatIsPrice()}}</ion-label>
+    </ion-col>
+    <ion-col style="padding: 0px !important;display: flex;align-items: center;justify-content: center" col-60>
+      <div style="background-color: #F7E60F;border-radius: 20px 20px 20px 20px">
+        <ion-grid style="padding: 0px !important;">
+          <ion-row style="padding: 0px !important;">
+            <ion-col style="padding: 0px !important;display: flex;align-items: center" col-40>
+              <img style="border-radius: 50%" src="{{opportunity.user.avatar_url}}">
+            </ion-col>
+            <ion-col style="padding: 0px !important;display: flex;align-items: center" col-80>
+              <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491">{{opportunity.user.name}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <img style="transform: scale(0.9)" src="assets/imgs/seperator_line@3x.png">
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col style="margin-left: 18px">
+      <span style="font-family: MarkPro-Medium;font-size: 15px;color:#234491">{{opportunity.details}}</span>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <img style="transform: scale(0.9)" src="assets/imgs/seperator_line@3x.png">
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-25 push-5>
+      <img                (click)="upVoteDeal(opportunity.id)"
+                          src="assets/imgs/like_button@3x.png">
+      <ion-label style="font-family: MarkPro-Heavy;font-size: 16px;position:absolute;top: 12%;left:61%;color:#234491">{{opportunity.votes_sum}}</ion-label>
+    </ion-col>
+    <ion-col col-60 push-5>
+      <img   (click)="onOutsideDealLink(opportunity,itemone,itemtwo,itemthree)" src="assets/imgs/firsata_git_button@3x.png">
+    </ion-col>
+    <ion-col col-25 push-5>
+      <img src="assets/imgs/comment_button@3x.png">
+      <ion-label style="font-family: MarkPro-Heavy;font-size: 16px;position:absolute;top: 12%;left:61%;color:#234491">{{opportunity.comments_count}}</ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <img style="transform: scale(0.9)" src="assets/imgs/yorumlar_header@3x.png">
+    </ion-col>
+  </ion-row>
+  <!--<ion-row>-->
+    <!--<ion-col>-->
+      <!--<button  #upVote-->
+               <!--ion-button-->
+               <!--clear-->
+               <!--(click)="upVoteDeal(opportunity.id,upVote)"-->
+               <!--[@onItemBump]="upVote.stateChanger ? 'onBump' : 'default'">-->
+        <!--<ion-icon class="vote" name="arrow-up"></ion-icon>-->
+      <!--</button>-->
+    <!--</ion-col>-->
+  <!--</ion-row>-->
   <ion-list [ngClass]="itemfour ? 'toLogoUp' : 'toLogoDown'" >
     <comment *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" [comment]="comment" [opportunity]="opportunity"
              ngClass="highlighted">
@@ -100,15 +119,15 @@
             <ion-icon style="font-size: xx-large;font-weight: 900;color:#2FA4E7" name="add"></ion-icon>
           </button>
         </ion-col>-->
-        <ion-col col-8>
+        <ion-col col-80>
           <ion-item no-lines>
             <ion-input required [ngModel] name="comment" style="padding:0 0 0 10px;font-size:15px;background-color: #f0ecec;border-radius: 64px" type="text" placeholder="Düşüncelerin neler ?"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col col-2 text-center align-self-center>
+        <ion-col col-20 text-center align-self-center>
           <button type="submit"
             [disabled]="!f.valid">
-            <ion-icon style="font-size: xx-large;font-weight: 900;color:#2FA4E7" name="send"></ion-icon>
+            <img src="assets/imgs/dusuncelerin_neler_icon@3x.png">
           </button>
         </ion-col>
       </ion-row>
