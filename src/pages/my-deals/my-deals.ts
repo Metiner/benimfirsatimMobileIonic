@@ -73,4 +73,8 @@ export class MyDealsPage {
 
   }
 
+
+  goBack(){
+    this.navCtrl.pop();
+  }
 }

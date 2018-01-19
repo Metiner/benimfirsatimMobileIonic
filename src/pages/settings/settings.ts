@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import { IonicPage,NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {User} from "../../models/user";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 
@@ -19,7 +19,7 @@ export class SettingsPage {
 
 
   user:User;
-  constructor(private benimFirsatimLib:BenimfirsatimLib, public navParams: NavParams) {
+  constructor(private benimFirsatimLib:BenimfirsatimLib, public navParams: NavParams,public navCtrl:NavController) {
     this.user = BenimfirsatimLib.user;
   }
 
@@ -59,5 +59,8 @@ export class SettingsPage {
 
   }
 
+  goBack(){
+   this.navCtrl.pop();
+  }
 
 }
