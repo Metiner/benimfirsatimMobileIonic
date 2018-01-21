@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Content, IonicPage, NavParams} from 'ionic-angular';
+import {Content, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Opportunity} from "../../models/opportunity";
@@ -25,7 +25,7 @@ export class OnCommentReplyPage {
   itemone=true;
   itemtwo=true;
 
-  constructor(public navParams: NavParams, private benimFirsatimLib: BenimfirsatimLib) {
+  constructor(public navParams: NavParams, private benimFirsatimLib: BenimfirsatimLib,private navCtrl:NavController) {
     this.comment = this.navParams.get('comment');
     this.opportunity = this.navParams.get('opportunity');
     this.setItemsBooleanOpposite();
@@ -70,5 +70,9 @@ export class OnCommentReplyPage {
     setTimeout(() => {
       this.itemtwo = !this.itemtwo;
     }, 100)
+  }
+
+  goBack(){
+    this.navCtrl.pop();
   }
 }

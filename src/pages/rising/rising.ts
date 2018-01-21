@@ -33,6 +33,12 @@ export class RisingPage {
     })
   }
 
+  ionViewDidLoad(){
+    RisingPage.pagination = 1;
+  }
+
+
+
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 

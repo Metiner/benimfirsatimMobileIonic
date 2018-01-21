@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {onCommentExpand, onItemBump} from "../../app/animations";
 import {OnCommentReplyPage} from "../../pages/on-comment-reply/on-comment-reply";
 import {Opportunity} from "../../models/opportunity";
+import {NavController} from "ionic-angular";
 
 /**
  * Generated class for the CommentComponent component.
@@ -23,7 +24,7 @@ export class CommentComponent {
   @Input() opportunity: Opportunity;
 
   onCommentReplyPage= OnCommentReplyPage;
-  constructor() {
+  constructor(private navCtrl:NavController) {
   }
 
   onItemBump(i:any,item:any){
@@ -31,5 +32,9 @@ export class CommentComponent {
     setTimeout(()=>{
       item.i=-1
     },200)
+  }
+
+  onCommentReply(commentInfo){
+    this.navCtrl.push(this.onCommentReplyPage,commentInfo);
   }
 }

@@ -1,15 +1,17 @@
 
 <ion-header>
-  <ion-navbar>
-    <button
-      ion-button
-      icon-only
-      menuToggle>
-      <img src="assets/imgs/Menu_button@3x.png">
-    </button>
-    <img src="assets/imgs/Slogan_top@2x.png" style="margin-left: 60px;max-width: 40%;position: fixed;left:1px">
-  </ion-navbar>
-  <img style="width:150px;position:fixed;right: 0px;margin-top:-55px;margin-right:10px;z-index:999;" src="assets/imgs/logo.png">
+  <ion-toolbar>
+    <ion-navbar>
+      <button
+        ion-button
+        icon-only
+        menuToggle>
+        <img src="assets/imgs/Menu_button@3x.png">
+      </button>
+      <img src="assets/imgs/Slogan_top@2x.png" style="margin-left: 60px;max-width: 40%;position: fixed;left:1px">
+    </ion-navbar>
+    <img style="width:150px;position:fixed;right: 0px;margin-top:-55px;margin-right:10px;z-index:999;" src="assets/imgs/logo.png">
+  </ion-toolbar>
 </ion-header>
 
 
@@ -17,6 +19,6 @@
   <ion-item *ngFor="let category of categories"
             [navPush]="selectedCategoryPage"
             [navParams]="category">
-    <h5 text-capitalize>{{category.name}}</h5>
+    <span style="font-family: MarkPro-Heavy;font-size: 15px;color: #234491;"text-capitalize>{{category.name}}</span>
   </ion-item>
 </ion-content>

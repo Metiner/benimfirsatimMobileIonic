@@ -215,10 +215,8 @@ export class OpportunityPage {
   }
 
   goBack(){
-    this.navCtrl.popToRoot();
+    this.navCtrl.pop();
   }
 
-  onCommentReply(commentInfo){
-    this.navCtrl.pop(OnCommentReplyPage,commentInfo);
-  }
+
 }

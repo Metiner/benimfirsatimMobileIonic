@@ -5,105 +5,94 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Yorum cevapla</ion-title>
-  </ion-navbar>
-
+  <ion-toolbar>
+    <ion-navbar text-center hideBackButton="true">
+      <img (click)="goBack()" style="max-width: 30px;position: fixed;left: 16px" src="assets/imgs/back_button@3x.png">
+      <span style="color: #F7E60F;font-family: MarkPro-Heavy;font-size: 15px">Yorum Cevapla</span>
+    </ion-navbar>
+  </ion-toolbar>
 </ion-header>
+
 
 
 <ion-content padding>
   <ion-item [ngClass]="itemone ? 'toLogoUp' : 'toLogoDown'" text-wrap>
     <p><b>{{comment.user.name}}</b> tarafından yapılan yoruma cevap vermektesiniz.</p>
     <ion-grid [ngClass]="itemtwo ? 'toLogoUp' : 'toLogoDown'" >
-      <ion-row  style="padding-top: 5%;">
-        <ion-col col-20>
-          <ion-avatar>
-            <img style="border-radius: 10px" src="{{comment.user.avatar_url}}">
-          </ion-avatar>
-        </ion-col>
-        <ion-col col-100 style="border:1px solid #eee;border-radius:10px;">
-          <strong class="nickname">{{comment.user.name}}</strong>
-          <em class="votes"> {{comment.comment_votes_count}} Puan</em>
-          <ion-row>
-            <ion-col>
-      <span *ngIf="comment.showContent"
-            [@onCommentExpand]="comment.showContent ? 'toExpand' : 'asd'">{{comment.text}}</span>
-              <span (click)="comment.showContent = !comment.showContent" *ngIf="!comment.showContent">{{comment.text}}</span>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-60>
-              <button #thumbsUp
-                      ion-button
-                      small
-                      color="light"
-                      block
-                      (click)="onCommentLike()">
-                <ion-icon name="thumbs-up" style="margin:5px;"></ion-icon>
-                <span> Begen</span>
-              </button>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-      </ion-row>
-      <div style="padding-left: 15%;padding-top: 5%"
-           *ngFor="let subComment of comment.comments" id="{{subComment.newlyAdded}}" ngClass="highlighted">
-        <ion-row style="padding-top: 5%;">
+      <div style="margin-top: 16px;background-color:#E5E5E5;border-radius: 20px 20px 20px 20px;transform: scale(0.9)">
+        <ion-row style="background-color: #F7E60F;border-radius: 20px 20px 20px 20px">
           <ion-col col-20>
             <ion-avatar>
-              <img style="border-radius: 10px" src="{{subComment.user.avatar_url}}">
+              <img style="border-radius: 20px;height: 40px;
+    width: 40px;" src="{{comment.user.avatar_url}}">
             </ion-avatar>
           </ion-col>
-          <ion-col col-100 style="border:1px solid #eee;border-radius:10px;">
-            <strong class="nickname">{{subComment.user.name}}</strong>
-            <em class="votes"> {{subComment.comment_votes_count}} Puan</em>
-            <ion-row>
-              <ion-col>
-      <span *ngIf="subComment.showContent"
-            [@onCommentExpand]="subComment.showContent ? 'toExpand' : 'asd'">{{subComment.text}}</span>
-                <span (click)="subComment.showContent = !subComment.showContent" *ngIf="!subComment.showContent">{{subComment.text}}</span>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col col-60>
-                <button #thumbsUp
-                        ion-button
-                        small
-                        color="light"
-                        block>
-                  <ion-icon name="thumbs-up" style="margin:5px;"></ion-icon>
-                  <span> Begen</span>
-                </button>
-              </ion-col>
-            </ion-row>
+          <ion-col style="padding: 0px !important;display: flex;align-items: center" col-80>
+            <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491">{{comment.user.name}}</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="margin: 5px">
+        <span *ngIf="comment.showContent"
+              [@onCommentExpand]="comment.showContent ? 'toExpand' : 'asd'">{{comment.text}}</span>
+            <span  style="font-family: MarkPro-Book;font-size: 15px;color:#234491" (click)="comment.showContent = !comment.showContent" *ngIf="!comment.showContent">{{comment.text}}</span>
           </ion-col>
         </ion-row>
       </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-100 push-23>
+            <div no-padding style="background-color:#E5E5E5;border-radius: 20px 20px 20px 20px;transform: scale(0.9)"
+                 *ngFor="let subComment of comment.comments" id="{{subComment.newlyAdded}}" ngClass="highlighted">
+              <ion-row  style="background-color: #F7E60F;border-radius: 20px 20px 20px 20px">
+                <ion-col col-30>
+                  <ion-avatar>
+                    <img style="border-radius: 20px;height: 40px;
+    width: 40px;" src="{{subComment.user.avatar_url}}">
+                  </ion-avatar>
+                </ion-col>
+                <ion-col style="padding: 0px !important;display: flex;align-items: center" col-80>
+                  <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491">{{subComment.user.name}}</span>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col style="margin: 5px">
+              <span *ngIf="comment.showContent"
+                    [@onCommentExpand]="comment.showContent ? 'toExpand' : 'asd'">{{comment.text}}</span>
+                  <span  style="font-family: MarkPro-Book;font-size: 15px;color:#234491" (click)="comment.showContent = !comment.showContent" *ngIf="!comment.showContent">{{comment.text}}</span>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-30 push-86>
+                  <img #thumbsUp  style="margin-bottom: -21px" (click)="onItemBump(i,thumbsUp)" src="assets/imgs/thumb_up_icon@3x.png">
+                  <span style="position: fixed;top: 88%;left: 86%;font-family: MarkPro-Heavy;font-size: 13px;color: #234491;">{{comment.comment_votes_count}}</span>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-grid>
   </ion-item>
 </ion-content>
 <ion-footer>
-  <form #f="ngForm"
-        (ngSubmit)="onCommentSubmit(f)">
+  <form #f="ngForm" (submit)="onCommentSubmit(f)">
     <ion-grid>
       <ion-row>
-        <ion-col>
-          <ion-input style="padding-top: 5%;padding-left: 10%"
-                     [ngModel] type="text"
-                     placeholder="Yorum yaz..."
-                     name="comment"
-                     required></ion-input>
+        <!--<ion-col col-2 style="text-align: center" align-self-center>
+          <button>
+            <ion-icon style="font-size: xx-large;font-weight: 900;color:#2FA4E7" name="add"></ion-icon>
+          </button>
+        </ion-col>-->
+        <ion-col col-80>
+          <ion-item no-lines>
+            <ion-input required [ngModel] name="comment" style="padding:0 0 0 10px;font-size:15px;background-color: #f0ecec;border-radius: 64px" type="text" placeholder="Düşüncelerin neler ?"></ion-input>
+          </ion-item>
         </ion-col>
-        <ion-col>
-          <button style="padding-left: 5%"
-                  ion-button
-                  [disabled]="!f.valid"
-                  type="submit"
-                  clear>
-            <ion-icon style="font-size: 2.6em"
-                      name="send"></ion-icon>
+        <ion-col col-20 text-center align-self-center>
+          <button type="submit"
+                  [disabled]="!f.valid">
+            <img src="assets/imgs/dusuncelerin_neler_icon@3x.png">
           </button>
         </ion-col>
       </ion-row>

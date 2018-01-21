@@ -30,19 +30,19 @@ export class BenimfirsatimLib{
   //Page code can be,
   //'hot','rising' or 'newcomers'
   public getPage(page_code,pagination){
-      let opt = this.setHeader();
+      //let opt = this.setHeader();
       let possible_page_codes = ['hot','rising','newcomers'];
       /*if(possible_page_codes.indexOf(page_code)=== -1){
         return;
 
       }*/
-      return this.http.get(this.api_address + '/'+page_code+'.json?page='+pagination+'&per_page=3',opt);
+      return this.http.get(this.api_address + '/'+page_code+'.json?page='+pagination+'&per_page=3');
   }
 
 
   public signUp(email,password){
     console.log(email +' '+ password);
-    return this.http.post(this.api_address + '/users.json',{"user":{"email":email,"password":password}});
+    return this.http.post(this.api_address + '/users', {"user":{"email":email,"password":password}});
   }
 
   public checkLogin(){
@@ -64,6 +64,12 @@ export class BenimfirsatimLib{
   public getDeal(deal_id){
     let opt = this.setHeader();
     return this.http.get(this.api_address + '/deals/0/'+deal_id.toString() + '/',opt);
+  }
+
+  public updateUser(nickname,password){
+    let opt = this.setHeader();
+    console.log(opt);
+    return this.http.put(this.api_address + '/users.json',{"name":nickname,"password":password},opt);
   }
 
   public upvoteDeal(deal_id){

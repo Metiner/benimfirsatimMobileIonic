@@ -1,22 +1,21 @@
 <ion-header>
-
-  <ion-navbar text-center hideBackButton="true" style="padding: 0px !important">
-
-    <ion-grid style="padding: 0px !important">
-      <ion-row>
-        <ion-col col-15>
-          <img (click)="goBack()" src="assets/imgs/back_button@3x.png">
-        </ion-col>
-        <ion-col col-30 push-30 style="display: flex;align-items: center">
-          <img src="assets/imgs/firsat_header@3x.png">
-        </ion-col>
-        <ion-col col-15 push-60>
-          <img src="assets/imgs/paylas_button@3x.png">
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-navbar>
-
+  <ion-toolbar>
+    <ion-navbar text-center hideBackButton="true" style="padding: 0px !important">
+      <ion-grid style="padding: 0px !important">
+        <ion-row>
+          <ion-col col-15>
+            <img (click)="goBack()" src="assets/imgs/back_button@3x.png">
+          </ion-col>
+          <ion-col col-30 push-30 style="display: flex;align-items: center">
+            <img src="assets/imgs/firsat_header@3x.png">
+          </ion-col>
+          <ion-col col-15 push-60>
+            <img src="assets/imgs/paylas_button@3x.png">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -37,15 +36,15 @@
     <ion-col col-40 push-10 style="display: flex;align-items: center">
       <ion-label  [ngStyle]="{'font-size':isPriceToolong()}" style="font-family: MarkPro-Black;font-size: 25px;color:#234491">{{whatIsPrice()}}</ion-label>
     </ion-col>
-    <ion-col style="padding: 0px !important;display: flex;align-items: center;justify-content: center" col-60>
-      <div style="background-color: #F7E60F;border-radius: 20px 20px 20px 20px">
+    <ion-col style="padding: 0px !important;display: flex;align-items: center;justify-content: center" col-55>
+      <div style="background-color: #F7E60F;border-radius: 20px 20px 20px 20px;width: 100%">
         <ion-grid style="padding: 0px !important;">
           <ion-row style="padding: 0px !important;">
             <ion-col style="padding: 0px !important;display: flex;align-items: center" col-40>
-              <img style="border-radius: 50%" src="{{opportunity.user.avatar_url}}">
+              <img style="border-radius: 50%;width: 40px;height: 40px;" src="{{opportunity.user.avatar_url}}">
             </ion-col>
             <ion-col style="padding: 0px !important;display: flex;align-items: center" col-80>
-              <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491">{{opportunity.user.name}}</span>
+              <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491;word-break: break-word">{{opportunity.user.name}}</span>
             </ion-col>
           </ion-row>
         </ion-grid>

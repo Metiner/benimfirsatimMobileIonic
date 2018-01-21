@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {InfiniteScroll, IonicPage, NavParams} from 'ionic-angular';
+import {InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
@@ -16,7 +16,7 @@ export class SelectedCategoryPage {
   opportunityPage = OpportunityPage;
   static pagination = 1;
 
-  constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib) {
+  constructor(public navParams: NavParams,private benimFirsatimLib:BenimfirsatimLib,private navCtrl:NavController) {
     this.category = this.navParams.data;
     this.benimFirsatimLib.getCategoryDeals(this.category.id,SelectedCategoryPage.pagination).subscribe((data)=>{
 
@@ -56,6 +56,11 @@ export class SelectedCategoryPage {
   }
   ionViewWillLeave(){
     SelectedCategoryPage.pagination=1;
+  }
+
+
+  goBack(){
+    this.navCtrl.pop();
   }
 
 }
