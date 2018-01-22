@@ -33,6 +33,10 @@ export class TopPage {
     })
   }
 
+  ionViewDidLoad(){
+    TopPage.pagination = 1;
+  }
+
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 

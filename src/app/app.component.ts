@@ -124,6 +124,7 @@ export class MyApp {
 
     onNotifications(){
       this.nav.push(PointsPage);
+      this.menuCtrl.close();
       /*this.benimFirsatimLib.getUserLog().subscribe( response =>{
         console.log(response.json());
       },

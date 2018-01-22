@@ -37,11 +37,7 @@
       <ion-label style="font-family: MarkPro-Heavy;font-size: 16px;position:absolute;top: 12%;left:61%;color:#234491">{{opportunity.comments_count}}</ion-label>
     </ion-col>
     <ion-col col-60>
-      <button
-        ion-button
-        clear
-        (click)="onOpportunityPage(opportunity)"
-        ><img src="assets/imgs/firsat_detaylari_button@3x.png"></button>
+      <img (click)="onOpportunityPage(opportunity)" src="assets/imgs/firsat_detaylari_button@3x.png">
     </ion-col>
   </ion-row>
 </ion-card>

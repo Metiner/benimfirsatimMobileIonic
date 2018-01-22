@@ -40,6 +40,10 @@ export class HighlightsPage {
     })
   }
 
+  ionViewDidLoad(){
+    HighlightsPage.pagination = 1;
+  }
+
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 

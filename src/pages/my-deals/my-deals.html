@@ -1,12 +1,15 @@
 <ion-header>
-  <ion-navbar>
-    <button
-      ion-button
-      icon-only
-      menuToggle>
-      <img src="assets/imgs/Menu_button@3x.png">
-    </button>
-    <img src="assets/imgs/Slogan_top@2x.png" style="margin-left: 60px;max-width: 40%;position: fixed;left:1px">
+  <ion-navbar hideBackButton="true">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-15>
+          <img (click)="goBack()" src="assets/imgs/back_button@3x.png">
+        </ion-col>
+        <ion-col col-55 style="display: flex;align-items: center">
+          <img src="assets/imgs/Slogan_top@2x.png">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-navbar>
   <img style="width:150px;position:fixed;right: 0px;margin-top:-55px;margin-right:10px;z-index:999;" src="assets/imgs/logo.png">
 </ion-header>

@@ -93,11 +93,16 @@
         <variable name="APP_ID" value="113944349294618" />
         <variable name="APP_NAME" value="benimfirsatim.com" />
     </plugin>
-    <plugin name="cordova-sqlite-storage" spec="^2.1.2" />
-    <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
+    <plugin name="cordova-sqlite-storage" spec="^2.2.0" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.2.1">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.57374298212-r1h4ovakq9qrimg8k53p5kqh24lnounm" />
     </plugin>
-    <plugin name="onesignal-cordova-plugin" spec="^2.2.4" />
-    <plugin name="cordova-plugin-statusbar" spec="^2.3.0" />
+    <plugin name="onesignal-cordova-plugin" spec="^2.2.5" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
+    <plugin name="cordova-plugin-camera" spec="^4.0.1">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="Allow the app to use your camera" />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Allow the app to access your photos" />
+    </plugin>
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
 </widget>
