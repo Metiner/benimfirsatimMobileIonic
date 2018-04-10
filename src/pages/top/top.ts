@@ -25,7 +25,7 @@ export class TopPage {
 
   constructor(public navParams: NavParams,private benimfirsatimLib:BenimfirsatimLib) {
     benimfirsatimLib.getPage('newcomers',TopPage.pagination).subscribe((data)=>{
-      data.json().forEach(element => {
+      data.json().entries.forEach(element => {
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
         this.opportunities.push(u);

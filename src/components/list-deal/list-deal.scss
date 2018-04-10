@@ -8,6 +8,9 @@ list-deal {
   }
 */
 
+  .scroll-content{
+    padding: 0px !important;
+  }
 
   .logoComesFromLeft{
     animation: logoAnimation 1.5s forwards;
@@ -34,6 +37,16 @@ list-deal {
     font-family: MarkPro-Heavy;
     font-size: 20px;
     color:#234491;
+  }
+
+  .like-comment-inspan{
+    font-family: MarkPro-Heavy;
+    font-size: 14px;
+    position: absolute;
+    top: 30%;
+    left: 60%;
+    transform: translate(-50%,-50%);
+    color: #234491;
   }
 
 

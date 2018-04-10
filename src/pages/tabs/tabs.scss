@@ -23,4 +23,13 @@ page-tabs{
   .tab-button[id$="2"]{
     margin-left: 40px;
   }
+  .fixed-button{
+    position: fixed;
+    bottom: 1px;
+    z-index: 99;
+    width: 100px;
+    height: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

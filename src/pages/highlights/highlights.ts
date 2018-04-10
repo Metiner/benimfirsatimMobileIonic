@@ -28,7 +28,7 @@ export class HighlightsPage {
 
       HighlightsPage.pagination++;
       console.log(data.json());
-    data.json().forEach(element => {
+    data.json().entries.forEach(element => {
 
 
         let u:Opportunity = new Opportunity();

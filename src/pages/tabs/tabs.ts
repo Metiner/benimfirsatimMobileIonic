@@ -13,10 +13,17 @@ import {LoginPage} from "../login/login";
 
     
     <ion-tabs tabsPlacement ="bottom">
-      <button ion-button 
-              clear
-              (click)="onCreateNewDeal()"
-              style="position: fixed;bottom:1px;z-index: 99;width: 110px;height: 110px;left: 50%;margin-left: -48px"><img src="assets/imgs/yeni_firsat_button@2x.png"></button>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button ion-button
+                    clear
+                    (click)="onCreateNewDeal()"
+                    class="fixed-button"><img src="assets/imgs/yeni_firsat_button@2x.png"></button>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
       <ion-tab  [tabsHideOnSubPages]="true" [root]="highlightsPage" tabIcon="flash" tabTitle= "Öne Çıkanlar">
         <ion-icon name="flash"></ion-icon>

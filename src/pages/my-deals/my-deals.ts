@@ -33,7 +33,7 @@ export class MyDealsPage {
       console.log(data);
       console.log(data.json());
       MyDealsPage.pagination++;
-      data.json().forEach(element => {
+      data.json().entries.forEach(element => {
 
 
         let u:Opportunity = new Opportunity();

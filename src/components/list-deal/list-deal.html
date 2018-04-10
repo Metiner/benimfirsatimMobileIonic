@@ -1,19 +1,19 @@
-<ion-card [ngClass]="{'logoComesFromLeft':logoComesFromLeft}" style="padding-top: 20px">
+<ion-card [ngClass]="{'logoComesFromLeft':logoComesFromLeft}" style="padding-top: 10px">
   <ion-row>
     <ion-col text-center>
       <span class="title">{{opportunity.title.substring(0,70)+'...'}}</span>
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col col-50 style="display: flex;align-items: center">
-      <img  src="https://benimfirsatim.com/{{opportunity.image_url}}">
+    <ion-col col-5 style="display: flex;align-items: center">
+      <img  src="https://app-b7b3c182-2419-47ad-a597-caf24ce3f70c.cleverapps.io{{opportunity.image_url}}">
     </ion-col>
-    <ion-col col-70>
+    <ion-col col-7>
       <ion-row style="display: flex;align-items: center">
-        <ion-col col-40>
+        <ion-col col-4>
           <img src="assets/imgs/price_tag@3x.png">
         </ion-col>
-        <ion-col col-80>
+        <ion-col col-8>
           <ion-label  [ngStyle]="{'font-size':isPriceToolong()}" style="font-family: MarkPro-Black;font-size: 25px;color:#234491">{{whatIsPrice()}}</ion-label>
         </ion-col>
       </ion-row>
@@ -28,15 +28,15 @@
 
 
   <ion-row text-center style="margin-bottom: 18px">
-    <ion-col col-30>
+    <ion-col col-3>
       <img src="assets/imgs/like_button@3x.png">
-      <ion-label style="font-family: MarkPro-Heavy;font-size: 16px;position:absolute;top: 12%;left:61%;color:#234491">{{opportunity.votes_sum}}</ion-label>
+      <ion-label class="like-comment-inspan">{{opportunity.votes_sum}}</ion-label>
     </ion-col>
-    <ion-col col-30>
+    <ion-col col-3>
       <img src="assets/imgs/comment_button@3x.png">
-      <ion-label style="font-family: MarkPro-Heavy;font-size: 16px;position:absolute;top: 12%;left:61%;color:#234491">{{opportunity.comments_count}}</ion-label>
+      <ion-label class="like-comment-inspan">{{opportunity.comments_count}}</ion-label>
     </ion-col>
-    <ion-col col-60>
+    <ion-col col-6>
       <img (click)="onOpportunityPage(opportunity)" src="assets/imgs/firsat_detaylari_button@3x.png">
     </ion-col>
   </ion-row>

@@ -38,7 +38,6 @@ export class OpportunityPage {
               private browserTab:BrowserTab) {
     OpportunityPage.pageCount = 1;
     this.opportunity = navParams.data;
-    console.log(this.opportunity);
     benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
       OpportunityPage.pageCount++;
       data.json().forEach(element=>{

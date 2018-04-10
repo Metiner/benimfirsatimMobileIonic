@@ -5,6 +5,7 @@ page-login {
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
+    padding: 0px !important;
 
   }
   .emailPassword{
@@ -23,7 +24,8 @@ page-login {
   .rememberMe_forgetPassword {
     background-color: transparent;
     font-family: MarkPro-Italic;
-    font-size: 15px;
+    font-size: 12px;
+    padding: 0px;
     color:#F7E60F;
 
   }
@@ -31,7 +33,7 @@ page-login {
   .createAccount_ContinueAsGuest {
     background-color: transparent;
     font-family: MarkPro-Heavy;
-    font-size: 20px;
+    font-size: 15px;
     color: #F7E60F;
 
     ion-label{
@@ -46,18 +48,15 @@ page-login {
     filter: drop-shadow(5px 5px 5px #222);
   }
 
-  /*
-    .col{
-       background: whitesmoke;
-       border:  solid black;
-    }
-    div{
-      background: whitesmoke;
-      border:  solid blue;
-    }*/
-  ion-col div {
-    text-align: start !important;
-  }
+
+  //.col{
+  //  padding: 0px;
+  //  border:  solid black;
+  //}
+  //
+  //ion-col div {
+  //  text-align: start !important;
+  //}
 
 
   .toLogoUp {
@@ -92,7 +91,6 @@ page-login {
       transform: translateY(0px);
       opacity: 1;
     }
-
   }
 }
 

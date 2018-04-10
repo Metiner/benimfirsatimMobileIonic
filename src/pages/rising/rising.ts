@@ -25,7 +25,7 @@ export class RisingPage {
     benimfirsatimLib.getPage('rising',RisingPage.pagination).subscribe((data)=>{
 
       RisingPage.pagination++;
-      data.json().forEach(element => {
+      data.json().entries.forEach(element => {
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
         this.opportunities.push(u);

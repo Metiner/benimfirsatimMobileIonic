@@ -23,7 +23,7 @@ $app-direction: ltr;
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 $text-input-placeholder-color : gray;
 
-$grid-columns:               120 !default;
+$grid-columns:               12 !default;
 
 
 // Named Color Variables
@@ -53,10 +53,15 @@ ion-col div {
   padding: 5px;
   text-align: center;
 }
-
+.scroll-content{
+  padding: 0px !important;
+}
 p {
   padding: 10px 0 0 10px !important;
   margin: 0;
+}
+.nopadding{
+  padding : 0px !important;
 }
 
 
