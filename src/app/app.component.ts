@@ -11,8 +11,6 @@ import {GooglePlus} from "@ionic-native/google-plus";
 import {Facebook} from "@ionic-native/facebook";
 import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
-import {OpportunityPage} from "../pages/opportunity/opportunity";
-import {CreateNewDealPage} from "../pages/create-new-deal/create-new-deal";
 import {PointsPage} from "../pages/points/points";
 @Component({
   templateUrl: 'app.html'

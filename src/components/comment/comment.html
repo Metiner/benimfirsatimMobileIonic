@@ -1,11 +1,11 @@
 <div style="margin-top: 16px;background-color:#E5E5E5;border-radius: 20px 20px 20px 20px;transform: scale(0.9)">
   <ion-row style="background-color: #F7E60F;border-radius: 20px 20px 20px 20px">
-    <ion-col col-20>
+    <ion-col col-2>
       <ion-avatar>
         <img style="border-radius: 20px;height: 40px;width: 40px;" src="{{comment.user.avatar_url}}">
       </ion-avatar>
     </ion-col>
-    <ion-col style="padding: 0px !important;display: flex;align-items: center" col-80>
+    <ion-col style="padding: 0px !important;display: flex;align-items: center" col-8>
       <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491">{{comment.user.name}}</span>
     </ion-col>
   </ion-row>
@@ -17,10 +17,10 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col col-20 push-74>
+    <ion-col col-2 push-7>
       <img style="margin-bottom: -38px" (click) = "onCommentReply({comment:comment,opportunity:opportunity})" src="assets/imgs/reply_icon@3x.png">
     </ion-col>
-    <ion-col col-30 push-71>
+    <ion-col col-3 push-7>
       <img #thumbsUp  style="margin-bottom: -21px" (click)="onItemBump(i,thumbsUp)" src="assets/imgs/thumb_up_icon@3x.png">
       <span style="position: fixed;top: 83%;left: 91%;font-family: MarkPro-Heavy;font-size: 14px;color: #234491;">{{comment.comment_votes_count}}</span>
     </ion-col>
