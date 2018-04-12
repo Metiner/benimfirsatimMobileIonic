@@ -1,6 +1,11 @@
 <ion-menu [content]="nav">
   <ion-header>
     <ion-toolbar>
+      <button *ngIf="lol" style=" outline: none;
+    border: none;
+    background: none;">
+        <img style="width:110px;position:fixed;right: 0px;margin-right:10px;z-index:999;margin-top: -20px" src="assets/imgs/logo.png">
+      </button>
     </ion-toolbar>
   </ion-header>
   <ion-content>
@@ -50,4 +55,5 @@
       </ion-item>
   </ion-content>
 </ion-menu>
+
 <ion-nav [root]="rootPage" #nav></ion-nav>
