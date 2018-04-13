@@ -13,7 +13,7 @@ import {LoginPage} from "../login/login";
 
     
     <ion-tabs tabsPlacement ="bottom">
-      <ion-footer>
+      <ion-footer >
         <ion-buttons>
           <button ion-button
                   clear
@@ -21,12 +21,12 @@ import {LoginPage} from "../login/login";
                   class="fixed-button"><img src="assets/imgs/yeni_firsat_button@2x.png"></button>
         </ion-buttons>         
       </ion-footer>
-      <ion-tab  [tabsHideOnSubPages]="true" [root]="highlightsPage" tabIcon="flash" tabTitle= "Öne Çıkanlar">
+      <ion-tab  [tabsHideOnSubPages]="true" [root]="highlightsPage" tabIcon="flash" tabTitle= "ÖNE ÇIKANLAR">
         <ion-icon name="flash"></ion-icon>
       </ion-tab>
-      <ion-tab style="margin-right: 100px" [tabsHideOnSubPages]="true" [root]="risingPage" tabIcon="arrow-dropup-circle" tabTitle="Yükselenler" ></ion-tab>
-      <ion-tab [tabsHideOnSubPages]="true" [root]="topPage" tabIcon="add" tabTitle="Yeniler" ></ion-tab>
-      <ion-tab [tabsHideOnSubPages]="true" [root]="categoriesPage" tabIcon="albums" tabTitle="Kategoriler" ></ion-tab>
+      <ion-tab   style="font-family: MarkPro-Book !important;font-size: 10px !important;"[tabsHideOnSubPages]="true" [root]="topPage" tabIcon="add" tabTitle="YENİLER" ></ion-tab>
+      <ion-tab style="margin-right: 100px" [tabsHideOnSubPages]="true" [root]="risingPage" tabIcon="arrow-dropup-circle" tabTitle="YÜKSELENLER" ></ion-tab>
+      <ion-tab [tabsHideOnSubPages]="true" [root]="categoriesPage" tabIcon="albums" tabTitle="KATEGORİLER" ></ion-tab>
 
     </ion-tabs>
   `,

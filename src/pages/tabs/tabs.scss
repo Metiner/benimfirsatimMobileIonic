@@ -1,8 +1,8 @@
 page-tabs{
   .tabbar {
     background-image: url('../assets/imgs/bottom_bar@2x.png') !important;
-    font-family: MarkPro-Heavy !important;
-    font-size: 20px !important;
+    font-family: MarkPro-Book !important;
+    font-size: 10px !important;
 
   }
   .tab-button{
@@ -12,20 +12,22 @@ page-tabs{
     color: #F7E60F !important;
   }
 
-
-
-  .tab-button[id$="1"]{
-    margin-right: 27px;
+  .tab-button-text{
+    font-size: 8px !important;
   }
+
+  //.tab-button[id$="1"]{
+  //  margin-right: 30px;
+  //}
 
 
 
   .tab-button[id$="2"]{
-    margin-left: 40px;
+    margin-left: 50px;
   }
   .fixed-button{
     position: fixed;
-    bottom: 1px;
+    bottom: 15px;
     z-index: 99;
     width: 100px;
     height: 70px;

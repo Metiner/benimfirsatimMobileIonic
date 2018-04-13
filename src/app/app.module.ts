@@ -37,6 +37,7 @@ import {BrowserTab} from "@ionic-native/browser-tab";
 import {Camera} from "@ionic-native/camera";
 import {File} from "@ionic-native/file";
 import {PointsPage} from "../pages/points/points";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -64,11 +65,12 @@ import {PointsPage} from "../pages/points/points";
   imports: [
     BrowserModule,
     HttpModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(MyApp,{backButtonText: 'Geri'}),
     IonicStorageModule.forRoot({driverOrder: ['indexeddb', 'websql', 'sqlite']}),
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyB4HjxYVe5iOu4dzGhaDfq1vtCzmiMCg1U'
-    })
+    }),
 
   ],
   bootstrap: [IonicApp],

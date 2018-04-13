@@ -10,10 +10,10 @@
     <div id="firstDiv" text-center>
       <ion-grid>
         <ion-row>
-          <ion-col col-20>
+          <ion-col col-2>
             <img (click)="goBack()" style="max-width: 30px;position: fixed;left: 16px" src="assets/imgs/back_button@3x.png">
           </ion-col>
-          <ion-col col-100 pull-10>
+          <ion-col col-10 pull-1>
             <img id="profilim" src="assets/imgs/profilim_text_18pt_mark_heavy@3x.png">
           </ion-col>
         </ion-row>
@@ -26,14 +26,14 @@
       <ion-grid>
         <form #f="ngForm">
           <ion-row style="padding-top: 30px">
-            <ion-col col-20 push-30 style="display: flex;align-items: flex-end;z-index: 10;">
+            <ion-col col-2 push-3 style="display: flex;align-items: flex-end;z-index: 10;">
               <img (click)="onTakePhoto()" src="assets/imgs/change_photo_icon@3x.png">
             </ion-col>
-            <ion-col col-80>
+            <ion-col col-8>
               <img class="profilePicture"  [src]="base64Image" *ngIf="base64Image">
               <img class="profilePicture" *ngIf="!base64Image" src="{{user.avatar_url}}">
             </ion-col>
-            <ion-col col-20 pull-30 style="display: flex;align-items: flex-end;z-index: 10">
+            <ion-col col-2 pull-3 style="display: flex;align-items: flex-end;z-index: 10">
                   <img src="assets/imgs/activities_icon_empty@3x.png">
 
                   <span id="notNumber">999</span>
@@ -48,7 +48,7 @@
           <ion-row style="margin-top: 12px;">
             <ion-col class="profileStatic">
               <ion-row style="border-bottom: 1px solid #234491;border-radius: 6px;">
-                <ion-col col-40>
+                <ion-col col-4>
                   <ion-label  class="profileStatic" fixed>PAROLA</ion-label>
                 </ion-col>
                 <ion-col>
@@ -60,7 +60,7 @@
           <ion-row style="border-bottom: 1px solid #234491;border-radius: 6px;">
             <ion-col class="profileStatic">
               <ion-row>
-                <ion-col col-40>
+                <ion-col col-4>
                   <ion-label class="profileStatic" fixed>TEKRAR</ion-label>
                 </ion-col>
                 <ion-col>
@@ -72,7 +72,7 @@
           <ion-row style="border-bottom: 1px solid #234491;border-radius: 6px;">
             <ion-col class="profileStatic">
               <ion-row >
-                <ion-col col-40>
+                <ion-col col-4>
                   <ion-label   fixed>TAKMA AD</ion-label>
                 </ion-col>
                 <ion-col>
@@ -82,10 +82,10 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col col-80 push-20>
+            <ion-col col-8 push-2>
               <img (click)="onProfileChangesSave(f)" style="transform: scale(.8)" src="assets/imgs/guncelle_button@3x.png">
             </ion-col>
-            <ion-col col-20 push-20>
+            <ion-col col-2 push-2>
               <img src="assets/imgs/hesabi_sil_icon@3x.png">
             </ion-col>
           </ion-row>
