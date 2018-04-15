@@ -1,17 +1,32 @@
 <ion-header>
-  <ion-navbar hideBackButton="true">
+  <ion-toolbar style="position: initial !important;">
     <ion-grid>
-      <ion-row>
-        <ion-col col-15>
-          <img (click)="goBack()" src="assets/imgs/back_button@3x.png">
+      <ion-row no-padding align-items-center>
+        <ion-col col-2>
+          <button ion-button
+                  menuToggle
+                  style="margin:0px">
+            <img src="assets/svgs/menu_lines.svg">
+          </button>
         </ion-col>
-        <ion-col col-55 style="display: flex;align-items: center">
-          <img src="assets/imgs/Slogan_top@2x.png">
+        <ion-col col-6 style="white-space: nowrap;padding: 0px">
+          <img src="assets/svgs/tam_bagimsiz_firsat_sitesi.svg">
         </ion-col>
+
+        <button style="    outline: none;
+    border: none;
+    background: none;" (click)="toTabsPage()">
+          <img style="
+                          width: 110px;
+                          position: fixed;
+                          right: 6px;
+                          margin-right: -2px;
+                          z-index: 999;
+                          margin-top: -10px;" src="assets/svgs/main_logo.svg">
+        </button>
       </ion-row>
     </ion-grid>
-  </ion-navbar>
-  <img style="width:150px;position:fixed;right: 0px;margin-top:-55px;margin-right:10px;z-index:999;" src="assets/imgs/logo.png">
+  </ion-toolbar>
 </ion-header>
 
 

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {InfiniteScroll, IonicPage, NavParams} from 'ionic-angular';
+import {InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {OpportunityPage} from "../opportunity/opportunity";
+import {TabsPage} from "../tabs/tabs";
 
 /**
  * Generated class for the TopPage page.
@@ -23,7 +24,9 @@ export class TopPage {
   static pagination = 1;
 
 
-  constructor(public navParams: NavParams,private benimfirsatimLib:BenimfirsatimLib) {
+  constructor(public navParams: NavParams,
+              private benimfirsatimLib:BenimfirsatimLib,
+              private navCtrl:NavController) {
     benimfirsatimLib.getPage('newcomers',TopPage.pagination).subscribe((data)=>{
       data.json().entries.forEach(element => {
         let u:Opportunity = new Opportunity();
@@ -60,5 +63,9 @@ export class TopPage {
     });
 
   }
+  toTabsPage(){
+    this.navCtrl.push(TabsPage);
+  }
+
 
 }

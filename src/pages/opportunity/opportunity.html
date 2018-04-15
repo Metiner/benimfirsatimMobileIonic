@@ -3,7 +3,7 @@
     <ion-navbar text-center hideBackButton="true" style="padding: 0px !important">
       <ion-grid style="padding: 0px !important">
         <ion-row align-items-center>
-          <ion-col col-2 >
+          <ion-col col-2>
             <img style="width: 60%" (click)="goBack()" src="assets/imgs/back_button@3x.png">
           </ion-col>
           <ion-col col-3 offset-3 style="display: flex;align-items: center">
@@ -19,7 +19,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-row [ngClass]="itemone ? 'toLogoUp' : 'toLogoDown'"  text-center>
+  <ion-row [ngClass]="itemone ? 'toLogoUp' : 'toLogoDown'" text-center>
     <ion-col style="font-family: MarkPro-Heavy;font-size: 20px;color:#234491;margin-top: 20px" align-self-center>
       <span>{{opportunity.title}}</span>
     </ion-col>
@@ -34,7 +34,9 @@
       <img src="assets/imgs/price_tag@3x.png">
     </ion-col>
     <ion-col col-4 push-1 style="display: flex;align-items: center">
-      <ion-label  [ngStyle]="{'font-size':isPriceToolong()}" style="font-family: MarkPro-Black;font-size: 25px;color:#234491">{{whatIsPrice()}}</ion-label>
+      <ion-label [ngStyle]="{'font-size':isPriceToolong()}"
+                 style="font-family: MarkPro-Black;font-size: 25px;color:#234491">{{whatIsPrice()}}
+      </ion-label>
     </ion-col>
     <ion-col style="padding: 0px !important;display: flex;align-items: center;justify-content: center" col-5>
       <div style="background-color: #F7E60F;border-radius: 20px 20px 20px 20px;width: 100%">
@@ -44,7 +46,7 @@
               <img style="border-radius: 50%;width: 40px;height: 40px;" src="{{opportunity.user.avatar_url}}">
             </ion-col>
             <ion-col style="padding: 0px !important;display: flex;align-items: center" col-8>
-              <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491;word-break: break-word">{{opportunity.user.name}}</span>
+              <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491;word-break: normal">{{opportunity.user.name}}</span>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -66,18 +68,21 @@
       <img style="transform: scale(0.9)" src="assets/imgs/seperator_line@3x.png">
     </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col col-2 push-1>
-      <img                (click)="upVoteDeal(opportunity.id)"
-                          src="assets/imgs/like_button@3x.png">
-      <ion-label style="font-family: MarkPro-Heavy;font-size: 10px;position:absolute;left:61%;top:5%;color:#234491">{{opportunity.votes_sum}}</ion-label>
+  <ion-row align-items-center>
+    <ion-col no-padding col-2 push-1>
+      <div no-padding id="lottieLikeButton" (click)="playAnim(0,'like')"></div>
+      <ion-label style="font-family: MarkPro-Heavy;font-size: 10px;position:absolute;left:61%;top:5%;color:#234491">
+        {{opportunity.votes_sum}}
+      </ion-label>
     </ion-col>
     <ion-col col-6 push-1>
-      <img   (click)="onOutsideDealLink(opportunity,itemone,itemtwo,itemthree)" src="assets/imgs/firsata_git_button@3x.png">
+      <img (click)="onOutsideDealLink(opportunity)" src="assets/imgs/firsata_git_button@3x.png">
     </ion-col>
     <ion-col col-2 push-1>
       <img src="assets/imgs/comment_button@3x.png">
-      <ion-label style="font-family: MarkPro-Heavy;font-size: 10px;position:absolute;left:61%;top:5%;color:#234491">{{opportunity.comments_count}}</ion-label>
+      <ion-label style="font-family: MarkPro-Heavy;font-size: 10px;position:absolute;left:61%;top:5%;color:#234491">
+        {{opportunity.comments_count}}
+      </ion-label>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -85,21 +90,72 @@
       <img style="transform: scale(0.9)" src="assets/imgs/yorumlar_header@3x.png">
     </ion-col>
   </ion-row>
-  <!--<ion-row>-->
-    <!--<ion-col>-->
-      <!--<button  #upVote-->
-               <!--ion-button-->
-               <!--clear-->
-               <!--(click)="upVoteDeal(opportunity.id,upVote)"-->
-               <!--[@onItemBump]="upVote.stateChanger ? 'onBump' : 'default'">-->
-        <!--<ion-icon class="vote" name="arrow-up"></ion-icon>-->
-      <!--</button>-->
-    <!--</ion-col>-->
-  <!--</ion-row>-->
-  <ion-list [ngClass]="itemfour ? 'toLogoUp' : 'toLogoDown'" >
-    <comment *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" [comment]="comment" [opportunity]="opportunity"
-             ngClass="highlighted">
-    </comment>
+  <ion-list [ngClass]="itemfour ? 'toLogoUp' : 'toLogoDown'">
+    <div *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}"
+
+         ngClass="highlighted">
+      <div style="margin-top: 16px;background-color:#E5E5E5;border-radius: 20px 20px 20px 20px;transform: scale(0.9)">
+        <ion-row style="background-color: #F7E60F;border-radius: 20px 20px 20px 20px">
+          <ion-col col-2>
+            <ion-avatar>
+              <img style="border-radius: 20px;height: 40px;width: 40px;" src="{{comment.user.avatar_url}}">
+            </ion-avatar>
+          </ion-col>
+          <ion-col style="padding: 0px !important;display: flex;align-items: center" col-8>
+            <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491">{{comment.user.name}}</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="margin: 5px">
+        <span *ngIf="comment.showContent"
+              [@onCommentExpand]="comment.showContent ? 'toExpand' : 'asd'">{{comment.text}}</span>
+            <span style="font-family: MarkPro-Book;font-size: 15px;color:#234491"
+                  (click)="comment.showContent = !comment.showContent"
+                  *ngIf="!comment.showContent">{{comment.text}}</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-2 push-7>
+              <img style="    position: absolute;
+    top: -220%;" (click)="onCommentReply({comment:comment,opportunity:opportunity})"
+                   src="assets/imgs/reply_icon@3x.png">
+            </ion-col>
+            <ion-col col-3 push-7>
+              <div class="lottieThumbUpButton"  style="    position: absolute;
+    top: -220%;" (click)="playAnim(i,'thumbsUp',comment)"></div>
+              <span style="position: fixed;top: 89%;left: 91%;font-family: MarkPro-Heavy;font-size: 14px;color: #234491;">{{comment.comment_votes_count}}</span>
+            </ion-col>
+
+        </ion-row>
+      </div>
+      <div style="padding-left: 15%;
+              padding-top: 5%"
+           *ngFor="let subComment of comment.comments;let i=index">
+        <div *ngIf="i<10">
+          <div
+            style="margin-top: 16px;background-color:#E5E5E5;border-radius: 20px 20px 20px 20px;transform: scale(0.9)">
+            <ion-row style="background-color: #F7E60F;border-radius: 20px 20px 20px 20px">
+              <ion-col col-2>
+                <ion-avatar>
+                  <img style="border-radius: 20px;height: 40px;width: 40px;" src="{{subComment.user.avatar_url}}">
+                </ion-avatar>
+              </ion-col>
+              <ion-col style="padding: 0px !important;display: flex;align-items: center" col-8>
+                <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491">{{subComment.user.name}}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="margin: 5px">
+                <span *ngIf="subComment.showContent"[@onCommentExpand]="subComment.showContent ? 'toExpand' : 'asd'">{{subComment.text}}</span>
+                <span style="font-family: MarkPro-Book;font-size: 15px;color:#234491"
+                      (click)="subComment.showContent = !subComment.showContent"
+                      *ngIf="!subComment.showContent">{{subComment.text}}</span>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+    </div>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
     <ion-infinite-scroll-content
@@ -120,12 +176,14 @@
         </ion-col>-->
         <ion-col col-8>
           <ion-item no-lines>
-            <ion-input required [ngModel] name="comment" style="padding:0 0 0 10px;font-size:15px;background-color: #f0ecec;border-radius: 64px" type="text" placeholder="Düşüncelerin neler ?"></ion-input>
+            <ion-input required [ngModel] name="comment"
+                       style="padding:0 0 0 10px;font-size:15px;background-color: #f0ecec;border-radius: 64px"
+                       type="text" placeholder="Düşüncelerin neler ?"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col col-2 text-center align-self-center>
           <button type="submit"
-            [disabled]="!f.valid">
+                  [disabled]="!f.valid">
             <img src="assets/imgs/dusuncelerin_neler_icon@3x.png">
           </button>
         </ion-col>

@@ -17,16 +17,17 @@ export class SignupPage {
 
   onSignUp(form: NgForm){
 
+    console.log(form.value);
     //check if passwords are different
-    if(!form.value.password == form.value.passwordTwo){
+    if(form.value.password !== form.value.passwordTwo){
       this.benimFirsatimLib.showToast("Parolalar uyuşmamakta",3000,"bottom");
     }else{
 
       this.benimFirsatimLib.signUp(form.value.email, form.value.password).subscribe(data=>{
 
-        if(data.json != null){
+        if(data != null){
 
-          if(data.json() != null && data.json().state.code == 0){
+          if(data.status == 200 && data.ok){
             this.benimFirsatimLib.showToast("Kullanıcı oluşturuldu",3000,"bottom");
             this.navCtrl.push(LoginPage);
 

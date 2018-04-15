@@ -31,13 +31,13 @@ import {GooglePlus} from "@ionic-native/google-plus";
 import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
 import {ListDealComponent} from "../components/list-deal/list-deal";
-import {CommentComponent} from "../components/comment/comment";
 import {FabCompenent} from "../components/fab/fab";
 import {BrowserTab} from "@ionic-native/browser-tab";
 import {Camera} from "@ionic-native/camera";
 import {File} from "@ionic-native/file";
 import {PointsPage} from "../pages/points/points";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {FacebookModule} from "ngx-facebook";
 
 @NgModule({
   declarations: [
@@ -58,13 +58,13 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     SettingsPage,
     MyDealsPage,
     ListDealComponent,
-    CommentComponent,
     FabCompenent,
     PointsPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    FacebookModule.forRoot(),
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp,{backButtonText: 'Geri'}),
     IonicStorageModule.forRoot({driverOrder: ['indexeddb', 'websql', 'sqlite']}),

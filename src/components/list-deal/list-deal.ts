@@ -3,6 +3,7 @@ import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../../pages/opportunity/opportunity";
 import {NavController} from "ionic-angular";
 
+
 /**
  * Generated class for the ListDealComponent component.
  *

@@ -8,6 +8,9 @@ import {onCommentExpand, onItemBump} from "../../app/animations";
 import {LoginPage} from "../login/login";
 import {BrowserTab} from "@ionic-native/browser-tab";
 import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
+import * as $ from 'jquery'
+
+import * as lottie from 'lottie-web';
 
 @IonicPage()
 @Component({
@@ -23,7 +26,13 @@ export class OpportunityPage {
   opportunity: Opportunity;
   comments: Comment[] = [];
   loginPage = LoginPage;
+  onCommentReplyPage = OnCommentReplyPage;
+
+  thumbUpAnimations=[];
+
+  likeButtonAnimation:any;
   comment = "ne düşünüyorsun";
+
   static pageCount = 1;
   @ViewChild(Content) content:Content;
 
@@ -36,15 +45,19 @@ export class OpportunityPage {
               private benimFirsatimLib:BenimfirsatimLib,
               private navCtrl:NavController,
               private browserTab:BrowserTab) {
+    this.loadAnimations();
     OpportunityPage.pageCount = 1;
     this.opportunity = navParams.data;
     benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
+      console.log(data.json());
       OpportunityPage.pageCount++;
       data.json().forEach(element=>{
         let u:Comment = new Comment();
         Object.assign(u,element);
         this.comments.push(u);
       })
+
+      this.loadThumbsupAnimations();
     });
 
     this.setItemsBooleanOpposite()
@@ -52,26 +65,13 @@ export class OpportunityPage {
 
   upVoteDeal(dealId:number){
 
-    // upVoteDeal(dealId:number,upVote:any){
-
-    // upVote.stateChanger = !upVote.stateChanger;
-
-    // setTimeout(()=>{
-      // upVote.stateChanger = !upVote.stateChanger;
-
-    // },500)
     this.benimFirsatimLib.upvoteDeal(dealId).subscribe(data=>{
       this.opportunity.votes_sum = data.json().deal_score;
     });
   }
 
-  downVoteDeal(dealId:number,downVote:any){
-    downVote.stateChanger = !downVote.stateChanger;
+  downVoteDeal(dealId:number){
 
-    setTimeout(()=>{
-      downVote.stateChanger = !downVote.stateChanger;
-
-    },500)
     this.benimFirsatimLib.downvoteDeal(dealId).subscribe(data=>{
       this.opportunity.votes_sum = data.json().deal_score;
     });
@@ -90,6 +90,7 @@ export class OpportunityPage {
             Object.assign(u, element);
             this.comments.push(u);
           })
+
         }else
         {
           infiniteScroll.enable(false);
@@ -165,12 +166,9 @@ export class OpportunityPage {
 
   }
 
-  onOutsideDealLink(opportunity,itemone,itemtwo,itemthree){
+  onOutsideDealLink(opportunity){
 
     this.setItemsBooleanOpposite();
-
-
-
 
     setTimeout(()=>{
 
@@ -187,7 +185,9 @@ export class OpportunityPage {
 
           }
 
-        });
+        }).catch(error=>{
+        window.open(opportunity.link,'_blank');
+      });
 
     },700)
   }
@@ -208,14 +208,72 @@ export class OpportunityPage {
     }, 300)
   }
 
-
-  goToRoot(){
-    this.navCtrl.popToRoot();
-  }
-
   goBack(){
     this.navCtrl.pop();
   }
 
+  onCommentReply(commentInfo){
+    this.navCtrl.push(this.onCommentReplyPage,commentInfo);
+  }
 
+  playAnim(index,type,comment) {
+    if(type === 'like'){
+      this.likeButtonAnimation.play();
+      if(this.likeButtonAnimation.liked){
+        this.downVoteDeal(this.opportunity.id);
+        this.likeButtonAnimation.setDirection(-1);
+        this.likeButtonAnimation.liked = false;
+
+      }else{
+        this.upVoteDeal(this.opportunity.id);
+        this.likeButtonAnimation.setDirection(1);
+        this.likeButtonAnimation.liked = true;
+      }
+    }else if(type === 'thumbsUp'){
+
+      this.thumbUpAnimations[index].play();
+      this.benimFirsatimLib.commentVote(comment.id).subscribe(response =>{
+        comment.comment_votes_count = response.json().vote_count;
+      })
+      if(this.thumbUpAnimations[index].liked){
+        this.thumbUpAnimations[index].setDirection(-1);
+        this.thumbUpAnimations[index].liked = false;
+      }else{
+        this.thumbUpAnimations[index].setDirection(1);
+        this.thumbUpAnimations[index].liked = true;
+      }
+    }
+
+  }
+
+  loadAnimations(){
+    $(document).ready(()=>{
+
+      this.likeButtonAnimation = lottie.loadAnimation({
+        container: document.getElementById("lottieLikeButton"), // the dom element that will contain the animation
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+        path: 'assets/animations/like_button.json' // the path to the animation json
+      });
+    })
+  }
+  loadThumbsupAnimations(){
+    $(document).ready(()=>{
+      let animations = document.getElementsByClassName("lottieThumbUpButton");
+      if(animations.length > 0){
+        for(var i=0;i<animations.length;i++){
+          this.thumbUpAnimations.push(
+            lottie.loadAnimation({
+              container:animations[i],
+              renderer:'svg',
+              autoplay: false,
+              loop:false,
+              path:'assets/animations/thumb_up.json'
+            })
+          )
+        }
+      }
+    })
+  }
 }

@@ -1,18 +1,96 @@
 page-signup {
-  .scroll-content{
 
-    background-image: url('../assets/imgs/background2.png');
-    background-repeat:no-repeat;
-    background-size:cover;
-    width:100%;
+  .scroll-content {
+    background-image: url('../assets/imgs/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    padding: 0px !important;
+
   }
-  .inputBox{
-    background-color: rgba(255, 255, 255, 0.3
-    );
+  .emailPassword{
+    background-color: transparent;
+    font-family: MarkPro-Bold;
+    font-size: 20px;
+    color:#F7E60F !important;
 
-    border-radius: 64px;
-    margin-top: 5px;
-    color: white;
+    ion-label{
+      font-size: 20px;
+      color: #F7E60F !important;
+    }
+  }
 
+
+  .rememberMe_forgetPassword {
+    background-color: transparent;
+    font-family: MarkPro-Italic;
+    font-size: 12px;
+    padding: 0px;
+    color:#F7E60F;
+
+  }
+
+  .createAccount_ContinueAsGuest {
+    background-color: transparent;
+    font-family: MarkPro-Heavy;
+    font-size: 15px;
+    color: #F7E60F;
+
+    ion-label{
+      font-family: MarkPro-Italic;
+      font-size: 20px;
+      color: #F7E60F;
+    }
+  }
+
+  img {
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+  }
+
+
+  //.col{
+  //  padding: 0px;
+  //  border:  solid black;
+  //}
+  //
+  //ion-col div {
+  //  text-align: start !important;
+  //}
+
+
+  .toLogoUp {
+    animation: toLogoUp .8s forwards;
+  }
+
+  .toLogoDown{
+    animation: toLogoDown .8s forwards;
+  }
+
+  @keyframes toLogoUp {
+
+    20% {
+      transform: translateY(10px);
+
+    }
+    100% {
+      transform: translateY(-200px);
+      opacity: 0;
+    }
+
+  }
+
+  @keyframes toLogoDown {
+
+    20% {
+      opacity: 0;
+      transform: translateY(-200px);
+
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
   }
 }
+

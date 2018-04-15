@@ -10,48 +10,69 @@
   </ion-header>
   <ion-content>
       <ion-item *ngIf="!isAuthenticated" no-lines>
-        <button ion-button
-                clear
-                (click)="onSignin()"
-                >
-          <img style="max-width: 20%;margin-left: -28px" src="assets/imgs/logout_icon@3x.png">
-          <span class="menu-text">GİRİŞ YAP</span>
-        </button>
+        <ion-row align-items-center (click)="onSignin()">
+          <ion-col col-3>
+            <button ion-button
+                    clear>
+              <img src="assets/imgs/logout_icon@3x.png">
+            </button>
+          </ion-col>
+          <ion-col>
+            <span class="menu-text">GİRİŞ YAP</span>
+          </ion-col>
+        </ion-row>
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
-        <button ion-button
-                clear
-                (click) = "onSettings()"
-                >
-          <img style="max-width: 20%;margin-left: -30px" src="assets/imgs/profilim_icon@3x.png">
-          <span class="menu-text">PROFİLİM</span>
-        </button>
+        <ion-row align-items-center (click) = "onSettings()">
+          <ion-col col-3>
+            <button ion-button
+                    clear>
+              <img src="assets/imgs/profilim_icon@3x.png">
+            </button>
+          </ion-col>
+          <ion-col>
+            <span class="menu-text">PROFİLİM</span>
+          </ion-col>
+        </ion-row>
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
-        <button ion-button
-                clear
-                (click) = "onMyDeals()"
-                >
-          <img style="max-width: 20%;margin-left: -30px" src="assets/imgs/firsatlarim_icon@3x.png">
-          <span class="menu-text">FIRSATLARIM</span>
-        </button>
+        <ion-row align-items-center (click) = "onMyDeals()">
+          <ion-col col-3>
+            <button ion-button
+                    clear>
+              <img src="assets/imgs/firsatlarim_icon@3x.png">
+            </button>
+          </ion-col>
+          <ion-col>
+            <span class="menu-text">FIRSATLARIM</span>
+          </ion-col>
+        </ion-row>
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
-        <button ion-button
-                clear
-                (click) = "onNotifications()">
-          <img style="max-width: 20%;margin-left: -30px" src="assets/imgs/puan_tablosu_icon@3x.png">
-          <span class="menu-text">PUAN TABLOSU</span>
-        </button>
+        <ion-row align-items-center (click) = "onNotifications()">
+          <ion-col col-3>
+            <button ion-button
+                    clear>
+              <img src="assets/imgs/puan_tablosu_icon@3x.png">
+            </button>
+          </ion-col>
+          <ion-col>
+            <span class="menu-text">PUAN TABLOSU</span>
+          </ion-col>
+        </ion-row>
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
-        <button ion-button
-                clear
-                (click)="onLogout()"
-                >
-          <img style="max-width: 20%;margin-left: -28px" src="assets/imgs/logout_icon@3x.png">
-          <span class="menu-text">ÇIKIŞ YAP</span>
-        </button>
+        <ion-row align-items-center  (click)="onLogout()">
+          <ion-col col-3>
+            <button ion-button
+                    clear>
+              <img src="assets/imgs/logout_icon@3x.png">
+            </button>
+          </ion-col>
+          <ion-col>
+            <span class="menu-text">ÇIKIŞ YAP</span>
+          </ion-col>
+        </ion-row>
       </ion-item>
   </ion-content>
 </ion-menu>

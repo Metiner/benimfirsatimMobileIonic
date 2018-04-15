@@ -49,7 +49,6 @@ export class BenimfirsatimLib{
 
   public checkLogin(){
     let opt = this.setHeader();
-    console.log(opt);
     return this.http.get(this.api_address + '/users/login_check',opt);
   }
 
@@ -59,7 +58,6 @@ export class BenimfirsatimLib{
   }
 
   public signIn(email,password){
-    console.log(email,password);
     return this.http.post(this.api_address + '/users/sign_in.json',{"user":{"email":email,"password":password}});
   }
 
@@ -97,7 +95,7 @@ console.log(form.value);
     if(selectedImageUrl == 'photoTaken'){
       body = {starts_at:form.value.deal_date,
         price:form.value.deal_price,
-        categories: form.value.selectedCategory[0],
+        category_id: form.value.selectedCategory,
         image_64:imageBase64,
         link:form.value.deal_url,
         title:form.value.deal_title,
@@ -108,7 +106,7 @@ console.log(form.value);
     else{
       body = {starts_at:form.value.deal_date,
         price:form.value.deal_price,
-        categories: form.value.selectedCategory[0],
+        category_id: form.value.selectedCategory,
         link:form.value.deal_url,
         image_url:selectedImageUrl,
         title:form.value.deal_title,

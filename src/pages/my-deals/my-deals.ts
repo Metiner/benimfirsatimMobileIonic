@@ -3,6 +3,7 @@ import {InfiniteScroll, IonicPage, NavController} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {TabsPage} from "../tabs/tabs";
 
 /**
  * Generated class for the MyDealsPage page.
@@ -71,6 +72,10 @@ export class MyDealsPage {
       infiniteScroll.complete();
     });
 
+  }
+
+  toTabsPage(){
+    this.navCtrl.push(TabsPage);
   }
 
 

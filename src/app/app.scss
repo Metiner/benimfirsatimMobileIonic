@@ -70,7 +70,6 @@ ion-list{
   color: #F7E60F !important;
   font-family: MarkPro-Medium;
   font-size: 12px;
-  margin-left: 25px;
 }
 
 // App Global Sass
@@ -86,3 +85,30 @@ ion-list{
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+ion-icon {
+  &[class*="benimFirsatim-"] {
+    // Instead of using the font-based icons
+    // We're applying SVG masks
+    mask-size: contain;
+    mask-position: 50% 50%;
+    border: 0px;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    border-radius: 100%;
+    border-color: rgba(27, 0, 255, 0);
+    border-color: black;
+  }
+  // custom icons
+  &[class*="benimFirsatim-oneCikanlar"] {
+    mask-image: url('../assets/svgs/onecikanlar.svg');
+  }
+  &[class*="benimFirsatim-yukselenler"] {
+    mask-image: url('../assets/svgs/yukselenler.svg');
+  }
+  &[class*="benimFirsatim-yeniler"] {
+    mask-image: url('../assets/svgs/yeniler.svg');
+  }
+  &[class*="benimFirsatim-kategoriler"] {
+    mask-image: url('../assets/svgs/kategoriler.svg');
+  }
+}

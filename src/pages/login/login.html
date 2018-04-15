@@ -74,11 +74,10 @@
     </ion-row>
     <ion-row>
 
-      <ion-col text-center style="margin-top: -15px">
+      <ion-col (click)="onSignUpButton()" text-center style="margin-top: -15px">
         <button ion-button
                 clear
                 type="button"
-                (click)="onSignUpButton()"
                 class="createAccount_ContinueAsGuest"
         >HESAP OLUŞTUR</button>
       </ion-col>

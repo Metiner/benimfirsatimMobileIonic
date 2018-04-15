@@ -3,6 +3,7 @@ import {InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
+import {TabsPage} from "../tabs/tabs";
 
 /**
  * Generated class for the RisingPage page.
@@ -62,5 +63,10 @@ export class RisingPage {
     });
 
   }
+  toTabsPage(){
+    this.navCtrl.push(TabsPage);
+  }
+
+
 
 }

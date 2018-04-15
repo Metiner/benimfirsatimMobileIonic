@@ -21,7 +21,7 @@ export class SelectedCategoryPage {
     this.benimFirsatimLib.getCategoryDeals(this.category.id,SelectedCategoryPage.pagination).subscribe((data)=>{
 
       SelectedCategoryPage.pagination++;
-      data.json().forEach(element => {
+      data.json().entries.forEach(element => {
 
 
         let u:Opportunity = new Opportunity();
@@ -39,7 +39,7 @@ export class SelectedCategoryPage {
       console.log(data.json());
       if(data.json().length > 0) {
         SelectedCategoryPage.pagination++;
-        data.json().forEach(element => {
+        data.json().entries.forEach(element => {
           let u: Opportunity = new Opportunity();
           Object.assign(u, element);
           this.opportunities.push(u);

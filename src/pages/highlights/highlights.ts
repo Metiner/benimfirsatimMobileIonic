@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {InfiniteScroll, IonicPage} from 'ionic-angular';
+import {InfiniteScroll, IonicPage, NavController} from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
 import {ListDealComponent} from "../../components/list-deal/list-deal";
+import {TabsPage} from "../tabs/tabs";
 
 
 /**
@@ -23,7 +24,8 @@ export class HighlightsPage {
   opportunities: Opportunity[] = [];
   static pagination = 1;
 
-  constructor(private benimfirsatimLib:BenimfirsatimLib) {
+  constructor(private benimfirsatimLib:BenimfirsatimLib,
+              private navCtrl: NavController) {
     benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe((data)=>{
 
       HighlightsPage.pagination++;
@@ -66,6 +68,10 @@ export class HighlightsPage {
       infiniteScroll.complete();
     });
 
+  }
+
+  toTabsPage(){
+    this.navCtrl.push(TabsPage);
   }
 
 

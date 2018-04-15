@@ -16,7 +16,7 @@
                  type="url"
                  name="deal_url"
                  (ionChange)="onUrlChange($event)"
-                 placeholder="www.alisverissitem.com/urun.aspx?kod=1123"></ion-input>
+                 placeholder="Lütfen fırsat linkini buraya kopyala"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label class="staticText">FİYAT</ion-label>
@@ -29,16 +29,15 @@
       <ion-select required
                   [ngModel]
                   name="selectedCategory"
-                  multiple="true">
+                  multiple="false">
         <ion-option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label class="staticText">ŞEHİR *</ion-label>
-      <ion-select required
-                  [ngModel]
+      <ion-label class="staticText">ŞEHİR </ion-label>
+      <ion-select [ngModel]
                   name="selectedCity">
-        <ion-option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</ion-option>
+        <ion-option *ngFor="let city of states" value="{{city}}">{{city}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
