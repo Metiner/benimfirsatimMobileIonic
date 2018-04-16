@@ -12,5 +12,7 @@ export class Comment{
   user: User;
   comments: Comment[] = [];
   newlyAdded:string = '';
+  showUntil = 2;
+  dahaFazlaGetirText;
 
 }

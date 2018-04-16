@@ -27,6 +27,7 @@ export class OpportunityPage {
   comments: Comment[] = [];
   loginPage = LoginPage;
   onCommentReplyPage = OnCommentReplyPage;
+  commentLikeIndex = 0;
 
   thumbUpAnimations=[];
 
@@ -41,6 +42,8 @@ export class OpportunityPage {
   itemthree=true;
   itemfour=true;
 
+  newlyAddedComments = [];
+
   constructor(public navParams: NavParams,
               private benimFirsatimLib:BenimfirsatimLib,
               private navCtrl:NavController,
@@ -54,6 +57,9 @@ export class OpportunityPage {
       data.json().forEach(element=>{
         let u:Comment = new Comment();
         Object.assign(u,element);
+        u.showUntil = 2;
+        u.dahaFazlaGetirText = 'DAHA FAZLA GETİR';
+        console.log(u);
         this.comments.push(u);
       })
 
@@ -88,9 +94,11 @@ export class OpportunityPage {
           data.json().forEach(element => {
             let u: Comment = new Comment();
             Object.assign(u, element);
+            u.showUntil = 2;
+            u.dahaFazlaGetirText = 'DAHA FAZLA GETİR';
             this.comments.push(u);
           })
-
+          this.loadThumbsupAnimations();
         }else
         {
           infiniteScroll.enable(false);
@@ -123,17 +131,8 @@ export class OpportunityPage {
         newlyAdded.user_id = BenimfirsatimLib.user.id;
         newlyAdded.comment_votes_count = 0;
         this.benimFirsatimLib.createComment(this.opportunity.id,null,form.value.comment).subscribe(data=>{
-          newlyAdded.newlyAdded = 'newlyAdded';
-          const tempComments=this.comments;
-          this.comments = [];
-          this.comments.push(newlyAdded);
-          tempComments.forEach(element=>{
-            this.comments.push(element);
-          })
-          setTimeout(()=>{
-            this.scrollToNewlyAddedComment();
-          },200)
-
+          this.newlyAddedComments.push(newlyAdded);
+          this.scrollToNewlyAddedComment();
         },error2 =>{
           console.log(error2);
         });
@@ -160,9 +159,9 @@ export class OpportunityPage {
 
   scrollToNewlyAddedComment(){
 
-    let newlyAddedComment:any = document.getElementById('newlyAdded');
-    this.content.scrollTo(0,newlyAddedComment.offsetTop,1000);
 
+    this.content.scrollTo(0,400,1000);
+    this.loadSingleThumbsupAnimation();
 
   }
 
@@ -260,8 +259,9 @@ export class OpportunityPage {
   loadThumbsupAnimations(){
     $(document).ready(()=>{
       let animations = document.getElementsByClassName("lottieThumbUpButton");
-      if(animations.length > 0){
-        for(var i=0;i<animations.length;i++){
+      if(animations.length > 0)
+      {
+        for(var i=this.commentLikeIndex;i<animations.length;i++){
           this.thumbUpAnimations.push(
             lottie.loadAnimation({
               container:animations[i],
@@ -271,8 +271,31 @@ export class OpportunityPage {
               path:'assets/animations/thumb_up.json'
             })
           )
+          this.commentLikeIndex += 1;
         }
       }
     })
+  }
+  loadSingleThumbsupAnimation(){
+    $(document).ready(()=>{
+      let animations = document.getElementsByClassName("lottieThumbUpButton");
+
+          this.thumbUpAnimations.push(
+            lottie.loadAnimation({
+              container:animations[0],
+              renderer:'svg',
+              autoplay: false,
+              loop:false,
+              path:'assets/animations/thumb_up.json'
+            })
+          )
+    })
+  }
+  addSubcommentIndex(comment,index){
+    console.log(comment.comments.length + " " + index);
+    if(index  === comment.comments.length ){
+      comment.dahaFazlaGetirText = "HEPSİ BU KADAR :(";
+    }
+    comment.showUntil += 3;
   }
 }
