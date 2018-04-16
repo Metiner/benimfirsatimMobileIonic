@@ -21,7 +21,7 @@ import {LoginPage} from "../login/login";
                   class="fixed-button"><img src="assets/imgs/yeni_firsat_button@2x.png"></button>
         </ion-buttons>         
       </ion-footer>
-      <ion-tab  [tabsHideOnSubPages]="true" [root]="highlightsPage" tabIcon="oneCikanlar" tabTitle= "ÖNE ÇIKANLAR">
+      <ion-tab  [tabsHideOnSubPages]="true" [root]="highlightsPage" tabIcon="benimFirsatim-oneCikanlar" tabTitle= "ÖNE ÇIKANLAR">
       </ion-tab>
       <ion-tab   style="font-family: MarkPro-Book !important;font-size: 10px !important;"[tabsHideOnSubPages]="true" [root]="topPage" tabIcon="benimFirsatim-yeniler" tabTitle="YENİLER" >
       </ion-tab>

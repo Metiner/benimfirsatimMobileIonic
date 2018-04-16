@@ -10,33 +10,18 @@
 
 <ion-content padding>
 <ion-list>
-  <ion-item>
+  <ion-item *ngFor="let user of users;let i=index">
     <ion-grid>
       <ion-row>
-        <ion-col col-20>
-          <span style="font-family: MarkPro-Heavy;font-size: 20px;color:#234491">1</span>
+        <ion-col col-2>
+          <span style="font-family: MarkPro-Heavy;font-size: 20px;color:#234491">{{i+1}}</span>
         </ion-col>
-        <ion-col col-80>
-          <span style="font-family: MarkPro-Heavy;font-size: 20px;color:#234491">Kullanıcı 1</span>
+        <ion-col col-8>
+          <span style="font-family: MarkPro-Heavy;font-size: 20px;color:#234491">{{user.name}}</span>
         </ion-col>
-        <ion-col col-20>
+        <!--<ion-col col-20>
           <img src="assets/imgs/dropdown_up@3x.png">
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-item>
-  <ion-item>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-20>
-          <span style="font-family: MarkPro-Heavy;font-size: 20px;color:#234491">2</span>
-        </ion-col>
-        <ion-col col-80>
-          <span style="font-family: MarkPro-Heavy;font-size: 20px;color:#234491">Kullanıcı 2</span>
-        </ion-col>
-        <ion-col col-20>
-          <img src="assets/imgs/dropdown_down@3x.png">
-        </ion-col>
+        </ion-col>-->
       </ion-row>
     </ion-grid>
   </ion-item>

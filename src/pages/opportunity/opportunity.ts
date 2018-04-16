@@ -248,7 +248,6 @@ export class OpportunityPage {
 
   loadAnimations(){
     $(document).ready(()=>{
-
       this.likeButtonAnimation = lottie.loadAnimation({
         container: document.getElementById("lottieLikeButton"), // the dom element that will contain the animation
         renderer: 'svg',

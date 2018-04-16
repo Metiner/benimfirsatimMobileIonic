@@ -254,5 +254,10 @@ console.log(form.value);
   }
 
 
+  public getUsersTop(){
+    return this.http.get(this.api_address + '/users/top');
+  }
+
+
 }
 

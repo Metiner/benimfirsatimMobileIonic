@@ -17,7 +17,6 @@ export class SignupPage {
 
   onSignUp(form: NgForm){
 
-    console.log(form.value);
     //check if passwords are different
     if(form.value.password !== form.value.passwordTwo){
       this.benimFirsatimLib.showToast("Parolalar uyuşmamakta",3000,"bottom");

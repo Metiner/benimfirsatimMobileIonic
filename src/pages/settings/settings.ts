@@ -65,7 +65,7 @@ export class SettingsPage {
   onProfileChangesSave(f){
 
     this.benimFirsatimLib.updateUser(f.value.nickname,f.value.password).subscribe(response=>{
-      console.log(response);
+
     });
 
   }

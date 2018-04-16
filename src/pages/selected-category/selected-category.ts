@@ -36,7 +36,6 @@ export class SelectedCategoryPage {
 
     this.benimFirsatimLib.getCategoryDeals(this.category.id,SelectedCategoryPage.pagination).subscribe(data =>{
 
-      console.log(data.json());
       if(data.json().length > 0) {
         SelectedCategoryPage.pagination++;
         data.json().entries.forEach(element => {
