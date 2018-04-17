@@ -27,12 +27,12 @@
     width: 40px;" src="{{comment.user.avatar_url}}">
             </ion-avatar>
           </ion-col>
-          <ion-col style="padding: 0px !important;display: flex;align-items: center" col-8>
+          <ion-col style="padding: 0px !important;display: flex;align-items: center;text-align: initial" col-8>
             <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491">{{comment.user.name}}</span>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col style="margin: 5px">
+          <ion-col style="margin: 5px;text-align: initial">
         <span *ngIf="comment.showContent"
               [@onCommentExpand]="comment.showContent ? 'toExpand' : 'asd'">{{comment.text}}</span>
             <span  style="font-family: MarkPro-Book;font-size: 15px;color:#234491" (click)="comment.showContent = !comment.showContent" *ngIf="!comment.showContent">{{comment.text}}</span>
@@ -51,12 +51,12 @@
     width: 40px;" src="{{subComment.user.avatar_url}}">
                   </ion-avatar>
                 </ion-col>
-                <ion-col style="padding: 0px !important;display: flex;align-items: center" col-8>
+                <ion-col style="padding: 0px !important;display: flex;align-items: center;text-align: initial" col-8>
                   <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491">{{subComment.user.name}}</span>
                 </ion-col>
               </ion-row>
               <ion-row>
-                <ion-col style="margin: 5px">
+                <ion-col style="margin: 5px;text-align: initial">
               <span *ngIf="subComment.showContent"
                     [@onCommentExpand]="subComment.showContent ? 'toExpand' : 'asd'">{{subComment.text}}</span>
                   <span  style="font-family: MarkPro-Book;font-size: 15px;color:#234491" (click)="subComment.showContent = !subComment.showContent" *ngIf="!subComment.showContent">{{subComment.text}}</span>
@@ -78,9 +78,9 @@
             <ion-input required [ngModel] name="comment" style="padding:0 0 0 10px;font-size:15px;background-color: #f0ecec;border-radius: 64px" type="text" placeholder="Düşüncelerin neler ?"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col col-2 text-center align-self-center>
+        <ion-col col-2 text-center align-self-center style="background: white">
           <button type="submit"
-                  [disabled]="!f.valid">
+                  [disabled]="!f.valid" style="background: white">
             <img src="assets/imgs/dusuncelerin_neler_icon@3x.png">
           </button>
         </ion-col>

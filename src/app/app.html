@@ -11,7 +11,7 @@
   <ion-content>
       <ion-item *ngIf="!isAuthenticated" no-lines>
         <ion-row align-items-center (click)="onSignin()">
-          <ion-col col-3>
+          <ion-col col-4>
             <button ion-button
                     clear>
               <img src="assets/imgs/logout_icon@3x.png">
@@ -24,7 +24,7 @@
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
         <ion-row align-items-center (click) = "onSettings()">
-          <ion-col col-3>
+          <ion-col col-4>
             <button ion-button
                     clear>
               <img src="assets/imgs/profilim_icon@3x.png">
@@ -37,7 +37,7 @@
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
         <ion-row align-items-center (click) = "onMyDeals()">
-          <ion-col col-3>
+          <ion-col col-4>
             <button ion-button
                     clear>
               <img src="assets/imgs/firsatlarim_icon@3x.png">
@@ -50,7 +50,7 @@
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
         <ion-row align-items-center (click) = "onNotifications()">
-          <ion-col col-3>
+          <ion-col col-4>
             <button ion-button
                     clear>
               <img src="assets/imgs/puan_tablosu_icon@3x.png">
@@ -63,7 +63,7 @@
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
         <ion-row align-items-center  (click)="onLogout()">
-          <ion-col col-3>
+          <ion-col col-4>
             <button ion-button
                     clear>
               <img src="assets/imgs/logout_icon@3x.png">

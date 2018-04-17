@@ -19,6 +19,7 @@ export class Opportunity {
   votes_sum:number;
   location:Location;
   imagePath:string;
+  newlyCreated:boolean;
 
 
 

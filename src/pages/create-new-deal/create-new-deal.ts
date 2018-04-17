@@ -74,24 +74,23 @@ export class CreateNewDealPage {
 
   onSubmit(form:NgForm){
 
-    console.log(form.value.selectedCategory);
     form.value.selectedCategory = this.getCategoryId(form.value.selectedCategory);
     // Warn if user doesnt select any image for deal.
     if(this.selectedImageUrl == ''){
       this.benimFirsatimLib.showToast("Lütfen bir görsel seçiniz",3000,"bottom");
     }
     else{
+      const loading = this.loadingCtrl.create({
+        content: "Fırsat Yaratılıyor"
+      })
+      loading.present();
       this.benimFirsatimLib.createDeal(form,this.selectedImageUrl,this.base64ImageToUpload).subscribe(response=>{
-        console.log(response);
-        console.log(response.json());
         if(response.ok){
-            const loading = this.loadingCtrl.create({
-              content: "Fırsat Yaratılıyor"
-            })
-            loading.present();
+
 
             let u:Opportunity = new Opportunity();
             Object.assign(u,response.json());
+            u.newlyCreated = true;
             this.navCtrl.push(OpportunityPage,u);
 
 
@@ -99,9 +98,13 @@ export class CreateNewDealPage {
         }
         else{
           this.benimFirsatimLib.showToast(response.statusText,3000,'bottom');
+
+          loading.dismiss();
         }
       },error=>{
         this.benimFirsatimLib.showToast(error.toLocaleString(),3000,'bottom')})
+
+      loading.dismiss();
     }
   }
 

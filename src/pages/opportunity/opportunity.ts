@@ -51,15 +51,14 @@ export class OpportunityPage {
     this.loadAnimations();
     OpportunityPage.pageCount = 1;
     this.opportunity = navParams.data;
+
     benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
-      console.log(data.json());
       OpportunityPage.pageCount++;
       data.json().forEach(element=>{
         let u:Comment = new Comment();
         Object.assign(u,element);
         u.showUntil = 2;
         u.dahaFazlaGetirText = 'DAHA FAZLA GETİR';
-        console.log(u);
         this.comments.push(u);
       })
 
@@ -110,10 +109,14 @@ export class OpportunityPage {
 
   }
   isPriceToolong(){
-    return this.opportunity.price ? (this.opportunity.price.length > 5 ? '20px' : this.opportunity.price.length > 6 ? '19px' : '25px') : '25px';
+    return this.opportunity.price ? (this.opportunity.price.length > 5 ? '17px' : this.opportunity.price.length > 6 ? '15px' : '19px') : '22px';
   }
   whatIsPrice(){
-    return this.opportunity.price ? (this.opportunity.price + '₺') : '';
+    if(this.opportunity.price.indexOf(".0") === -1){
+      return this.opportunity.price ? (this.opportunity.price + '₺') : '';
+    }else{
+      return this.opportunity.price ? (this.opportunity.price.slice(0,this.opportunity.price.indexOf(".")) + '₺') : '';
+    }
   }
 
 
@@ -161,7 +164,9 @@ export class OpportunityPage {
 
 
     this.content.scrollTo(0,400,1000);
-    this.loadSingleThumbsupAnimation();
+    // setTimeout(()=>{
+    //   this.loadSingleThumbsupAnimation();
+    // },300)
 
   }
 
@@ -208,7 +213,14 @@ export class OpportunityPage {
   }
 
   goBack(){
-    this.navCtrl.pop();
+
+    console.log(this.navParams.data);
+    if(this.navParams.data.newlyCreated){
+      console.log("poped to root")
+      this.navCtrl.popToRoot();
+    }else{
+      this.navCtrl.pop();
+    }
   }
 
   onCommentReply(commentInfo){
