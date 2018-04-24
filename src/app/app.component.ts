@@ -20,6 +20,8 @@ export class MyApp {
   public isAuthenticated = false;
   settingsPage = SettingsPage;
   myDealsPage = MyDealsPage;
+  searchParam = "";
+
   @ViewChild('nav') nav: NavController;
 
 
@@ -135,6 +137,24 @@ export class MyApp {
       this.nav.push(this.myDealsPage);
       this.menuCtrl.close();
     }
+  onSearchEvent(event){
+
+    // if(event.key === 'Backspace'){
+    //   this.searchParam = this.searchParam.slice(0,-1);
+    //   if(event.srcElement.value.length === 0){
+    //     this.searchParam = "";
+    //   }
+    // }
+    // if(event.key.length < 2){
+    //   this.searchParam += event.key;
+      // if(this.searchParam.length > 2 && this.searchParam.length % 2 == 0){
+      //   this.benimFirsatimLibrary.search(this.searchParam).subscribe(response=>{
+      //     this.searchResponse = response.json().entries;
+      //   })
+      // }
+    // }
+    console.log(event.srcElement.value);
+  }
 
 }
 

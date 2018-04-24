@@ -54,6 +54,12 @@ ion-list{
   background-image: url('../assets/imgs/menu_bar_opened_bg@3x.png') !important;
 
 }
+.search{
+  outline: none;
+  background-color: unset;
+  color: #234491;
+  border: 0px solid;
+}
 
 .item-md .item-button{
   height: 60px;

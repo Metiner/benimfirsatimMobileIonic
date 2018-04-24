@@ -33,11 +33,15 @@ export class ListDealComponent {
     return this.opportunity.price ? (this.opportunity.price.length > 5 ? '20px' : this.opportunity.price.length > 6 ? '19px' : '25px') : '25px';
   }
   whatIsPrice(){
-    if(this.opportunity.price.indexOf(".0") === -1){
-      return this.opportunity.price ? (this.opportunity.price + '₺') : '';
-    }else{
-      return this.opportunity.price ? (this.opportunity.price.slice(0,this.opportunity.price.indexOf(".")) + '₺') : '';
+    try{
+      if(this.opportunity.price.indexOf(".0") === -1){
+        return this.opportunity.price ? (this.opportunity.price + '₺') : '';
+      }else{
+        return this.opportunity.price ? (this.opportunity.price.slice(0,this.opportunity.price.indexOf(".")) + '₺') : '';
+      }
+    }catch (error){
     }
+
   }
 
 }

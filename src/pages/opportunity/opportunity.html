@@ -85,6 +85,52 @@
         {{opportunity.comments_count}}
       </ion-label>
     </ion-col>
+    <ion-col>
+      <ion-row *ngIf="!dealReported">
+        <ion-col style="text-align: right;padding-bottom: 1%">
+          <img src="assets/svgs/problemli_line.svg" style="width: 60%">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col @commentState class="col text-center align-self-center" *ngIf="dealReported">
+          <span style="font-family: 'Mark Pro-Book';font-size: 15px;color:#234491">BİZİ BİLGİLENDİRDİĞİN İÇİN TEŞEKKÜRLER :)</span>
+        </ion-col>
+        <ion-col *ngIf="!dealReported">
+          <ion-row style="padding-top: 10px;">
+            <ion-col>
+              <ion-row class="align-items-center">
+                <ion-col col-2>
+                  <img src="assets/svgs/suresi_dolmus_icon.svg" class="imgClass">
+                </ion-col>
+                <ion-col (click)="deadOnDeadLine()">
+                  <span style="font-family: 'Mark Pro-Book';font-size: 10px;color:#234491;white-space: nowrap">SÜRESİ DOLMUŞ</span>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col>
+              <ion-row class="align-items-center">
+                <ion-col col-2>
+                  <img src="assets/svgs/tukenmis_icon.svg" class="imgClass">
+                </ion-col>
+                <ion-col (click)="dealOutOfStock()">
+                  <span style="font-family: 'Mark Pro-Book';font-size: 10px;color:#234491">TÜKENMİŞ</span>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col>
+              <ion-row class="nowrap align-items-center">
+                <ion-col col-2>
+                  <img src="assets/svgs/sikayet_et_icon.svg" class="imgClass">
+                </ion-col>
+                <ion-col (click)="onReportDeal()">
+                  <span style="font-family: 'Mark Pro-Book';font-size: 10px;color:#234491;white-space: nowrap">ŞİKAYET ET</span>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>

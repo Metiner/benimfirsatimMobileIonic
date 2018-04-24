@@ -257,7 +257,17 @@ console.log(form.value);
   public getUsersTop(){
     return this.http.get(this.api_address + '/users/top');
   }
+  public stockFinished(dealId){
+    return this.http.get(this.api_address+'/deals/'+dealId+'/stock_finished');
+  }
 
+  public ended(dealId){
+    return this.http.get(this.api_address+'/deals/'+dealId+'/ended');
+  }
+
+  public report(dealId){
+    return this.http.get(this.api_address+'/deals/'+dealId+'/report');
+  }
 
 }
 

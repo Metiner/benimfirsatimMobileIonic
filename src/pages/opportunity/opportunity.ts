@@ -31,6 +31,9 @@ export class OpportunityPage {
 
   thumbUpAnimations=[];
 
+  dealReported = false;
+
+
   likeButtonAnimation:any;
   comment = "ne düşünüyorsun";
 
@@ -309,5 +312,21 @@ export class OpportunityPage {
       comment.dahaFazlaGetirText = "HEPSİ BU KADAR :(";
     }
     comment.showUntil += 3;
+  }
+
+  deadOnDeadLine(){
+    this.benimFirsatimLib.ended(this.opportunity.id).subscribe((response)=>{
+    });
+    this.dealReported = true;
+  }
+  dealOutOfStock(){
+    this.benimFirsatimLib.stockFinished(this.opportunity.id).subscribe((response)=>{
+    });
+    this.dealReported = true;
+  }
+  onReportDeal(){
+    this.benimFirsatimLib.report(this.opportunity.id).subscribe((response)=>{
+    });
+    this.dealReported = true;
   }
 }
