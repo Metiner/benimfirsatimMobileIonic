@@ -1,0 +1,27 @@
+feedback {
+
+  .feedbackDiv{
+    width: 70%;
+    height: 55%;
+    top: 50%;
+    right: 50%;
+    border-radius: 45px;
+    border: 3px solid #234491;
+    transform: translate(50%,-50%);
+    position: fixed;
+    z-index: 12;
+    background-color: white;
+
+  }
+
+  .backgroundDiv{
+
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+    position: fixed;
+    opacity: .7;
+    z-index: 11;
+  }
+
+}

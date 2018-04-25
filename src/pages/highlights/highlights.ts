@@ -24,6 +24,8 @@ export class HighlightsPage {
   opportunities: Opportunity[] = [];
   static pagination = 1;
 
+  feedbackDivOpen = false;
+
   constructor(private benimfirsatimLib:BenimfirsatimLib,
               private navCtrl: NavController) {
     benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe((data)=>{
@@ -74,5 +76,7 @@ export class HighlightsPage {
     this.navCtrl.push(TabsPage);
   }
 
-
+  openFeedbackDiv(){
+    this.feedbackDivOpen = true;
+  }
 }

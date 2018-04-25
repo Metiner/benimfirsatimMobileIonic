@@ -38,6 +38,7 @@ import {File} from "@ionic-native/file";
 import {PointsPage} from "../pages/points/points";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FacebookModule} from "ngx-facebook";
+import {FeedbackComponent} from "../components/feedback/feedback";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {FacebookModule} from "ngx-facebook";
     MyDealsPage,
     ListDealComponent,
     FabCompenent,
-    PointsPage
+    PointsPage,
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,

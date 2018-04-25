@@ -31,6 +31,17 @@
 
 <ion-content padding>
 
+  <img src="../../assets/svgs/fikrini_soyle_button.svg" style=" position: fixed;
+    z-index: 10;
+    height: 50px;
+    width: 50px;
+    right: 10px;
+    top: 160px;
+    opacity: 0.8;"
+    (click)="openFeedbackDiv()">
+
+  <feedback *ngIf="feedbackDivOpen"></feedback>
+
   <list-deal *ngFor="let opportunity of opportunities" [opportunity]="opportunity">
 
   </list-deal>
