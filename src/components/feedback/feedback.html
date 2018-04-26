@@ -1,13 +1,38 @@
 
 <div class="feedbackDiv">
-  <ion-row>
-    <ion-col text-center col-12>
-      <span style="font-family: MarkPro-Black;color:#234491"> FİKRİNİ SÖYLE !</span>
-    </ion-col>
-    <ion-col>
-      <img src="../../assets/imgs/seperator_line@3x.png">
-    </ion-col>
-  </ion-row>
+  <form #f="ngForm">
+    <ion-row>
+      <ion-col text-center col-12 style="margin-top: 5px">
+        <span style="font-family: MarkPro-Black;color:#234491"> FİKRİNİ SÖYLE!</span>
+      </ion-col>
+      <ion-col>
+        <img src="../../assets/imgs/seperator_line@3x.png" style="vertical-align: text-top">
+      </ion-col>
+    </ion-row>
+    <ion-item no-lines>
+      <ion-label class="staticText">KONU</ion-label>
+      <ion-select required
+                  [ngModel]
+                  name="selectedKonu"
+                  multiple="false">
+        <ion-option *ngFor="let konu of konular" value="{{konu.id}}">{{konu.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item no-lines>
+      <ion-label class="staticText">DETAYLAR</ion-label>
+    </ion-item>
+    <ion-item no-lines>
+      <ion-textarea [ngModel]
+                    required
+                    name="feedback_details"
+      ></ion-textarea>
+    </ion-item>
+    <ion-row style="margin-top: 15px">
+      <ion-col style="text-align: center" (click) = onFeedbackSubmit(f)>
+        <img src="../../assets/svgs/fikirini_yolla_icon.svg" style="height: 35px;width: 35px">
+      </ion-col>
+    </ion-row>
+  </form>
 </div>
 
 <div class="backgroundDiv"></div>

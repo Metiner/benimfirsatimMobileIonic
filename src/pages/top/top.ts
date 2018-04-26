@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Events, InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {OpportunityPage} from "../opportunity/opportunity";
@@ -22,11 +22,17 @@ export class TopPage {
   opportunities: Opportunity[] = [];
   opportunityPage = OpportunityPage;
   static pagination = 1;
-
+  feedbackDivOpen = false;
 
   constructor(public navParams: NavParams,
               private benimfirsatimLib:BenimfirsatimLib,
-              private navCtrl:NavController) {
+              private navCtrl:NavController,
+              private eventCtrl: Events) {
+
+    this.eventCtrl.subscribe('closeFeedback',()=>{
+    this.feedbackDivOpen = false;
+    });
+
     benimfirsatimLib.getPage('newcomers',TopPage.pagination).subscribe((data)=>{
       data.json().entries.forEach(element => {
         let u:Opportunity = new Opportunity();
@@ -67,5 +73,8 @@ export class TopPage {
     this.navCtrl.push(TabsPage);
   }
 
+  openFeedbackDiv(){
+    this.feedbackDivOpen = true;
+  }
 
 }

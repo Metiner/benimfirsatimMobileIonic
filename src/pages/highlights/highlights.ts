@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {InfiniteScroll, IonicPage, NavController} from 'ionic-angular';
+import {Events, InfiniteScroll, IonicPage, NavController} from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
@@ -27,7 +27,13 @@ export class HighlightsPage {
   feedbackDivOpen = false;
 
   constructor(private benimfirsatimLib:BenimfirsatimLib,
-              private navCtrl: NavController) {
+              private navCtrl: NavController,
+              private eventCtrl: Events) {
+
+    this.eventCtrl.subscribe('closeFeedback',()=>{
+      this.feedbackDivOpen = false;
+    })
+
     benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe((data)=>{
 
       HighlightsPage.pagination++;

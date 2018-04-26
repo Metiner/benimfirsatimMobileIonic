@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Events, InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
@@ -21,8 +21,16 @@ export class RisingPage {
 
   opportunities: Opportunity[] = [];
   static pagination = 1;
+  feedbackDivOpen = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private benimfirsatimLib:BenimfirsatimLib) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private benimfirsatimLib:BenimfirsatimLib,
+              private eventCtrl: Events) {
+
+  this.eventCtrl.subscribe('closeFeedback',()=>{
+  this.feedbackDivOpen = false;
+})
     benimfirsatimLib.getPage('rising',RisingPage.pagination).subscribe((data)=>{
 
       RisingPage.pagination++;
@@ -68,5 +76,8 @@ export class RisingPage {
   }
 
 
+  openFeedbackDiv(){
+    this.feedbackDivOpen = true;
+  }
 
 }
