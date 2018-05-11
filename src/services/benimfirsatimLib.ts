@@ -7,6 +7,7 @@ import { Storage} from "@ionic/storage";
 import {Headers} from '@angular/http';
 import {User} from "../models/user";
 import {NgForm} from "@angular/forms";
+import {Angular2TokenService} from "angular2-token-ionic3";
 
 @Injectable()
 export class BenimfirsatimLib{
@@ -15,7 +16,7 @@ export class BenimfirsatimLib{
 
   //api_address = "https://benimfirsatim-gkaykck.c9users.io:8080";
 
-  api_address = "https://app-b7b3c182-2419-47ad-a597-caf24ce3f70c.cleverapps.io";
+  api_address = "https://api.benimfirsatim.com";
   static token:string ="";
   static user:User = new User;
   static isLoggedInWithFacebook = false;
@@ -26,7 +27,8 @@ export class BenimfirsatimLib{
               private alertCtrl:AlertController,
               private toastCtrl:ToastController,
               private storageCtrl:Storage,
-              private actionSheetCtrl:ActionSheetController
+              private actionSheetCtrl:ActionSheetController,
+              private _tokenService: Angular2TokenService
               ){}
 
   //Page code can be,
@@ -43,53 +45,45 @@ export class BenimfirsatimLib{
 
 
   public signUp(email,password){
-    console.log(email +' '+ password);
-    return this.http.post(this.api_address + '/users', {"user":{"email":email,"password":password}});
-  }
-
-  public checkLogin(){
-    let opt = this.setHeader();
-    return this.http.get(this.api_address + '/users/login_check',opt);
+    return this._tokenService.registerAccount({
+      email:                email,
+      password:             password,
+      passwordConfirmation: password
+    })
   }
 
   public signupOrLogin(email,name,avatar_url,uid,authResponse,provider_name){
-    let opt = this.setHeader();
-    return this.http.post(this.api_address+'/users/auto_oauth',{"email":email,"name":name,"avatar_url":avatar_url,"uid":uid,"provider":provider_name,login_data:authResponse},opt);
+    return this.http.post(this.api_address+'/users/auto_oauth',{"email":email,"name":name,"avatar_url":avatar_url,"uid":uid,"provider":provider_name,login_data:authResponse});
   }
 
   public signIn(email,password){
-    return this.http.post(this.api_address + '/users/sign_in.json',{"user":{"email":email,"password":password}});
+    return this._tokenService.signIn({
+      email:    email,
+      password: password
+    })
   }
 
   public getDeal(deal_id){
-    let opt = this.setHeader();
-    return this.http.get(this.api_address + '/deals/0/'+deal_id.toString() + '/',opt);
+    return this._tokenService.get( 'deals/0/'+deal_id.toString() + '/');
   }
 
   public updateUser(nickname,password){
-    let opt = this.setHeader();
-    console.log(opt);
-    return this.http.put(this.api_address + '/users.json',{"name":nickname,"password":password},opt);
+    return this._tokenService.put('users.json',{"name":nickname,"password":password});
   }
 
   public upvoteDeal(deal_id){
-    let opt = this.setHeader();
-    return this.http.get(this.api_address + '/deals/'+deal_id.toString() + '/upvote',opt);
+    return this._tokenService.get('deals/'+deal_id.toString() + '/upvote');
   }
 
   public downvoteDeal(deal_id){
-    let opt = this.setHeader();
-    return this.http.get(this.api_address + '/deals/'+deal_id.toString() + '/downvote',opt);
+    return this._tokenService.get( 'deals/'+deal_id.toString() + '/downvote');
   }
 
   public createComment(deal_id,parent_comment_id,comment){
-    let opt = this.setHeader();
-    return this.http.post(this.api_address + '/deals/' + deal_id +'/comments.json',{parent_comment_id:parent_comment_id,comment:comment},opt);
+    return this._tokenService.post( 'deals/' + deal_id +'/comments.json',{parent_comment_id:parent_comment_id,comment:comment});
   }
 
   public createDeal(form:NgForm,selectedImageUrl,imageBase64){
-    let opt = this.setHeader();
-    let categories = '';
     let body;
 console.log(form.value);
     if(selectedImageUrl == 'photoTaken'){
@@ -115,25 +109,21 @@ console.log(form.value);
         city:form.value.selectedCity};
     }
 
-    return this.http.post(this.api_address + '/deals/create.json',body,opt);
+    return this._tokenService.post(this.api_address + '/deals/create.json',body);
   }
 
   public commentVote(comment_id){
-    let opt = this.setHeader();
-    return this.http.post(this.api_address + '/comments/'+comment_id+'/vote',{},opt);
+    return this._tokenService.post('comments/'+comment_id+'/vote',{});
   }
   public getComments(deal_id,page){
-    let opt = this.setHeader();
-    return this.http.get(this.api_address + '/deals/'+deal_id+'/comments?page='+page+'&per_page=3',opt);
+    return this._tokenService.get('deals/'+deal_id+'/comments?page='+page+'&per_page=3');
   }
 
   public getCities(){
-    let opt = this.setHeader();
-    return this.http.get(this.api_address + '/data/cities',opt);
+    return this._tokenService.get('data/cities');
   }
   public getCategories(){
-    let opt = this.setHeader();
-    return this.http.get(this.api_address + '/deals/categories',opt);
+    return this._tokenService.get('deals/categories');
   }
 
   //Gets information from given deal link.
@@ -151,8 +141,7 @@ console.log(form.value);
   }
 
   public getCategoryDeals(categoryIndex,pagination){
-    let opt = this.setHeader();
-    return this.http.get(this.api_address+'/categories/'+categoryIndex+'/deals.json?page='+pagination+'&per_page=3',opt);
+    return this._tokenService.get('categories/'+categoryIndex+'/deals.json?page='+pagination+'&per_page=3');
   }
 
   public showToast(message: string,duration:number,position:string){
@@ -242,15 +231,13 @@ console.log(form.value);
 
   //Get user logs, notifications.
   public getUserLog(){
-    let opt = this.setHeader();
-    return this.http.get(this.api_address + '/user/logs', opt);
+    return this._tokenService.get(  'user/logs');
   }
 
 
   //Gets deals which created by current logged user.
   public getDealFromUser(pagination){
-    let opt = this.setHeader();
-    return this.http.get(this.api_address+'/user/'+BenimfirsatimLib.user.id+'/deals.json?page='+pagination+'&per_page=3',opt);
+    return this._tokenService.get('user/'+BenimfirsatimLib.user.id+'/deals.json?page='+pagination+'&per_page=3');
   }
 
 
@@ -268,6 +255,8 @@ console.log(form.value);
   public report(dealId){
     return this.http.get(this.api_address+'/deals/'+dealId+'/report');
   }
+
+
 
 }
 

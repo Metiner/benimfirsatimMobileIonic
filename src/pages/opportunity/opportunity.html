@@ -88,42 +88,42 @@
     <ion-col>
       <ion-row *ngIf="!dealReported">
         <ion-col style="text-align: right;padding-bottom: 1%">
-          <img src="assets/svgs/problemli_line.svg" style="width: 60%">
+          <img src="assets/svgs/problemli_line.svg">
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col @commentState class="col text-center align-self-center" *ngIf="dealReported">
+        <ion-col @commentState class="col" *ngIf="dealReported">
           <span style="font-family: 'Mark Pro-Book';font-size: 15px;color:#234491">BİZİ BİLGİLENDİRDİĞİN İÇİN TEŞEKKÜRLER :)</span>
         </ion-col>
         <ion-col *ngIf="!dealReported">
-          <ion-row style="padding-top: 10px;">
-            <ion-col>
-              <ion-row class="align-items-center">
-                <ion-col col-2>
+          <ion-row style="padding-top: 10px;flex-wrap: nowrap;">
+            <ion-col col-4>
+              <ion-row>
+                <ion-col col-12 text-center>
                   <img src="assets/svgs/suresi_dolmus_icon.svg" class="imgClass">
                 </ion-col>
-                <ion-col (click)="deadOnDeadLine()">
-                  <span style="font-family: 'Mark Pro-Book';font-size: 10px;color:#234491;white-space: nowrap">SÜRESİ DOLMUŞ</span>
+                <ion-col (click)="deadOnDeadLine()" text-center>
+                  <span style="font-family: 'MarkPro-Book';font-size: 8px;color:#234491;white-space: nowrap">SÜRESİ DOLMUŞ</span>
                 </ion-col>
               </ion-row>
             </ion-col>
-            <ion-col>
-              <ion-row class="align-items-center">
-                <ion-col col-2>
+            <ion-col col-4>
+              <ion-row>
+                <ion-col col-12 text-center>
                   <img src="assets/svgs/tukenmis_icon.svg" class="imgClass">
                 </ion-col>
-                <ion-col (click)="dealOutOfStock()">
-                  <span style="font-family: 'Mark Pro-Book';font-size: 10px;color:#234491">TÜKENMİŞ</span>
+                <ion-col (click)="dealOutOfStock()" text-center>
+                  <span style="font-family: 'MarkPro-Book';font-size: 8px;color:#234491">TÜKENMİŞ</span>
                 </ion-col>
               </ion-row>
             </ion-col>
-            <ion-col>
-              <ion-row class="nowrap align-items-center">
-                <ion-col col-2>
+            <ion-col col-4>
+              <ion-row>
+                <ion-col col-12 text-center>
                   <img src="assets/svgs/sikayet_et_icon.svg" class="imgClass">
                 </ion-col>
-                <ion-col (click)="onReportDeal()">
-                  <span style="font-family: 'Mark Pro-Book';font-size: 10px;color:#234491;white-space: nowrap">ŞİKAYET ET</span>
+                <ion-col (click)="onReportDeal()" text-center>
+                  <span style="font-family: 'MarkPro-Book';font-size: 8px;color:#234491;white-space: nowrap">ŞİKAYET ET</span>
                 </ion-col>
               </ion-row>
             </ion-col>

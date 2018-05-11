@@ -12,6 +12,7 @@ import {Facebook} from "@ionic-native/facebook";
 import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
 import {PointsPage} from "../pages/points/points";
+import {Angular2TokenService} from "angular2-token-ionic3";
 @Component({
   templateUrl: 'app.html'
 })
@@ -32,7 +33,48 @@ export class MyApp {
               private gA:GoogleAnalytics,
               private oneSignal:OneSignal,
               private googlePlusLogin:GooglePlus,
-              private facebookLogin:Facebook) {
+              private facebookLogin:Facebook,
+              private _tokenService: Angular2TokenService) {
+
+    this._tokenService.init({
+      apiBase:                    null,
+      apiPath:                    'https://api.benimfirsatim.com',
+
+      signInPath:                 'auth/sign_in',
+      signInRedirect:             null,
+      signInStoredUrlStorageKey:  null,
+
+      signOutPath:                'auth/sign_out',
+      validateTokenPath:          'auth/validate_token',
+      signOutFailedValidate:      false,
+
+      registerAccountPath:        'auth',
+      deleteAccountPath:          'auth',
+      registerAccountCallback:    window.location.href,
+
+      updatePasswordPath:         'auth',
+      resetPasswordPath:          'auth/password',
+      resetPasswordCallback:      window.location.href,
+
+      oAuthBase:                  window.location.origin,
+      oAuthPaths: {
+        github:                 'auth/github'
+      },
+      oAuthCallbackPath:          'oauth_callback',
+      oAuthWindowType:            'newWindow',
+      oAuthWindowOptions:         null,
+
+      userTypes:                  null,
+
+      globalOptions: {
+        headers: {
+          'Content-Type':     'application/json',
+          'Accept':           'application/json'
+        }
+      }
+    });
+
+
 
 
     this.eventCtrl.subscribe("user.login", () => { this.isAuthenticated = true});
@@ -57,7 +99,7 @@ export class MyApp {
     this.benimFirsatimLib.checkAuthFromStorage().then(response=>{
       if(response != null) {
         BenimfirsatimLib.user = response.user;
-        BenimfirsatimLib.token = response.token;
+        //BenimfirsatimLib.token = response.token;
       }
     })
 

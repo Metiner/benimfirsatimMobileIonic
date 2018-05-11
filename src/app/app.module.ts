@@ -11,7 +11,7 @@ import {RisingPage} from "../pages/rising/rising";
 import {CategoriesPage} from "../pages/categories/categories";
 import {TopPage} from "../pages/top/top";
 import {HttpModule} from "@angular/http";
-
+import {RouterModule} from "@angular/router";
 
 import {BenimfirsatimLib} from "../services/benimfirsatimLib";
 import {OpportunityPage} from "../pages/opportunity/opportunity";
@@ -39,6 +39,8 @@ import {PointsPage} from "../pages/points/points";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FacebookModule} from "ngx-facebook";
 import {FeedbackComponent} from "../components/feedback/feedback";
+import {A2tUiModule, Angular2TokenService} from "angular2-token-ionic3";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import {FeedbackComponent} from "../components/feedback/feedback";
   imports: [
     BrowserModule,
     HttpModule,
+    RouterModule,
     FacebookModule.forRoot(),
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp,{backButtonText: 'Geri'}),
@@ -73,7 +76,7 @@ import {FeedbackComponent} from "../components/feedback/feedback";
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyB4HjxYVe5iOu4dzGhaDfq1vtCzmiMCg1U'
     }),
-
+    A2tUiModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -106,6 +109,8 @@ import {FeedbackComponent} from "../components/feedback/feedback";
     BrowserTab,
     Camera,
     File,
+    InAppBrowser,
+    Angular2TokenService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
