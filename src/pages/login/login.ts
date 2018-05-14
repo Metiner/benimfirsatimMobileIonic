@@ -53,7 +53,7 @@ export class LoginPage {
 
         setTimeout(() => {
 
-            this.setStorageAndUserInfoAfterSuccessLogin(data.json());
+            this.setStorageAndUserInfoAfterSuccessLogin(data.json(),1);
 
           }
           , 1100);
@@ -78,191 +78,64 @@ export class LoginPage {
   }
 
   //sets the user info to benimfirsatimlib's static user variable and stores token in local storage
-  setStorageAndUserInfoAfterSuccessLogin(data) {
+  setStorageAndUserInfoAfterSuccessLogin(data,type) {
     const loading = this.loadingCtrl.create({
       content: "Giriş yapılıyor..."
     });
     loading.present();
 
-    this.benimFirsatimLib.setUserInfoAfterLogin(data.user);
-    this.eventCtrl.publish('user.login', ' ');
-    this.benimFirsatimLib.storageControl("user", data);
-    this.navCtrl.push(TabsPage);
-    loading.dismiss();
-    this.benimFirsatimLib.showToast("Giriş yapıldı", 1500, "bottom");
-  }
+    if(type === 2){
+      this.benimFirsatimLib.setUserInfoAfterLogin(data);
+      this.eventCtrl.publish('user.login', ' ');
+      this.benimFirsatimLib.storageControl("user", data);
+      this.navCtrl.push(TabsPage);
+      loading.dismiss();
+      this.benimFirsatimLib.showToast("Giriş yapıldı", 1500, "bottom");
+    } else{
+      this.benimFirsatimLib.setUserInfoAfterLogin(data.user);
+      this.eventCtrl.publish('user.login', ' ');
+      this.benimFirsatimLib.storageControl("user", data);
+      this.navCtrl.push(TabsPage);
+      loading.dismiss();
+      this.benimFirsatimLib.showToast("Giriş yapıldı", 1500, "bottom");
+
+    }
+
+    }
 
 
   onFacebookLogin() {
 
-    if (this.platform.is('cordova')) {
+    this.benimFirsatimLib.oAuth(1).subscribe(response => {
+      this.setItemsBooleanOpposite();
 
-      this.fb.login(['public_profile', 'user_friends', 'email'])
-        .then(res => {
+      setTimeout(() => {
 
-            var fbValues = "&fields=id,name,location,website,picture,email";
-            var fbPermission = ["public_profile"];
-            var authResponse = res.authResponse;
+          this.setStorageAndUserInfoAfterSuccessLogin(response,2);
+        }
+        , 1000);
 
-            this.fb.api("me?" + fbValues, fbPermission).then(response => {
-              let email = response.email;
-              let name = response.name;
-              let id = response.id;
-              let picture = response.picture.data.url;
-              this.benimFirsatimLib.signupOrLogin(email, name, picture, id, authResponse, "facebook").subscribe(response => {
-
-                // It means, email is already being used by another user.
-                if (!response.json().success) {
-                  this.benimFirsatimLib.showToast(response.json().message, 3000, "bottom");
-
-                }
-                if (response.json() != null && response.json().success == true) {
-
-
-                  this.setItemsBooleanOpposite();
-
-
-                  setTimeout(() => {
-
-                      this.setStorageAndUserInfoAfterSuccessLogin(response.json());
-                    }
-                    , 1000);
-
-                  BenimfirsatimLib.isLoggedInWithFacebook = true;
-                  this.navCtrl.push(TabsPage);
-
-                }
-              }, error => {
-                this.benimFirsatimLib.showToast("Bir hata oluştu", 1500, "bottom");
-              })
-            });
-          },
-        )
-        .catch(e => console.log('Error logging into Facebook', e));
-    } else {
-      this.fbService.init({
-        appId      : '113944349294618',
-        status     : true,
-        xfbml      : true,
-        version    : 'v2.7' // or v2.6, v2.5, v2.4, v2.3
-      });
-    this.fbService.login({scope:'email'})
-        .then(res =>{
-
-            var fbValues = "fields=id,name,picture,email";
-            var authResponse= res.authResponse;
-
-            this.fbService.api("me?"+ fbValues).then(response=>{
-              console.log(response);
-              let email = response.email
-              let name = response.name;
-              let id = response.id;
-              let picture = response.picture.data.url;
-              this.benimFirsatimLib.signupOrLogin(email,name,picture,id,authResponse,"facebook").subscribe(response=>{
-                console.log(response);
-                // It means, email is already being used by another user.
-                if(!response.json().success){
-                  this.benimFirsatimLib.showToast(response.json().message, 3000, "bottom");
-
-                }
-                if(response.json() != null && response.json().success == true ) {
-
-                  this.setItemsBooleanOpposite();
-
-
-                  setTimeout(() => {
-
-                      this.setStorageAndUserInfoAfterSuccessLogin(response.json());
-                    }
-                    , 1000);
-
-                  BenimfirsatimLib.isLoggedInWithFacebook = true;
-                  this.navCtrl.push(TabsPage);
-
-                }
-              }, error=>{
-                this.benimFirsatimLib.showToast("Bir hata oluştu", 1500, "bottom");
-              })
-            });
-          },
-
-        )
-        .catch(e => console.log('Error logging into Facebook', e));
-    }
+      BenimfirsatimLib.isLoggedInWithFacebook = true;
+      this.navCtrl.push(TabsPage);
+    })
   }
 
-  onGooglePlusLogin(){
-
-    if (this.platform.is('cordova')) {
-      this.googlePlus.login({}).then(response=>{
-        let email = response.email;
-        let name = response.displayName;
-        let id = response.userId;
-        let picture = response.imageUrl;
-
-
-        this.benimFirsatimLib.signupOrLogin(email,name,picture,id,response,"google").subscribe(response=>{
+  onGooglePlusLogin() {
 
 
 
-          // It means, email is already being used by another user.
-          if(!response.json().success){
-            this.benimFirsatimLib.showToast(response.json().message,3000,"bottom");
+      this.benimFirsatimLib.oAuth(2).subscribe(response => {
+        this.setItemsBooleanOpposite();
 
+        setTimeout(() => {
+
+            this.setStorageAndUserInfoAfterSuccessLogin(response,2);
           }
-          if(response.json() != null && response.json().success == true ) {
+          , 1000);
 
-
-
-            this.setItemsBooleanOpposite();
-
-            setTimeout( ()=>{
-
-                this.setStorageAndUserInfoAfterSuccessLogin(response.json());
-              }
-              ,1000);
-
-            BenimfirsatimLib.isLoggedInWihGoogle = true;
-            this.navCtrl.push(TabsPage);
-          }
-
-        }, error=>{
-          this.benimFirsatimLib.showToast("Bir hata oluştu",1500,"bottom");
-        })
-      }).catch(e=>{
-        console.log('Error logging into Google Plus', e)});
-    }
-    else{
-      let googleAuth = gapi.auth2.getAuthInstance();
-      googleAuth.then(() => {
-        googleAuth.signIn({scope: 'profile email'}).then(googleUser => {
-
-          console.log(googleUser);
-          var loginData = {accessToken:googleUser.getAuthResponse().access_token};
-          var email = googleUser.getBasicProfile().U3;
-          var name = googleUser.getBasicProfile().U3.split('@')[0];
-          var picture = googleUser.getBasicProfile().Paa;
-          var id = googleUser.getBasicProfile().Eea;
-
-          this.benimFirsatimLib.signupOrLogin(email,name,picture,id,loginData,"google").subscribe(response=>{
-
-            this.setItemsBooleanOpposite();
-
-            setTimeout( ()=>{
-
-              console.log(response.json());
-                this.setStorageAndUserInfoAfterSuccessLogin(response.json());
-              }
-              ,1000);
-
-            BenimfirsatimLib.isLoggedInWihGoogle = true;
-            this.navCtrl.push(TabsPage);
-
-          });
-
-        });
-      });
-    }
+        BenimfirsatimLib.isLoggedInWihGoogle = true;
+        this.navCtrl.push(TabsPage);
+      })
 
   }
 

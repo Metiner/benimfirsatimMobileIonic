@@ -158,7 +158,7 @@ console.log(form.value);
   public storageControl(key:string,value:string){
     this.storageCtrl.set(key,value)
       .then( success =>{
-        this.setTokenFromStorage();
+        //this.setTokenFromStorage();
         return success;
         }
       )
@@ -187,7 +187,7 @@ console.log(form.value);
     })
   }
 
-// sets token to static variable named token in this class after login.
+  // sets token to static variable named token in this class after login.
   public setTokenFromStorage():string{
     this.storageCtrl.get("user").then(data=>{
       BenimfirsatimLib.token= data.token;
@@ -215,6 +215,7 @@ console.log(form.value);
   }
   // sets user object to user static variable which locates in this class after login.
   public setUserInfoAfterLogin(user:any){
+    console.log(user);
     let u:User=new User();
     Object.assign(u,user);
     BenimfirsatimLib.user = u;
@@ -227,6 +228,15 @@ console.log(form.value);
         buttons: buttons
       });
       actionSheet.present();
+  }
+
+  public oAuth(type: number){
+    if(type === 1){
+      return this._tokenService.signInOAuth("facebook");
+    }else
+    {
+      return this._tokenService.signInOAuth("google_oauth2");
+    }
   }
 
   //Get user logs, notifications.

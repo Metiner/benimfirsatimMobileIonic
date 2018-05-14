@@ -56,10 +56,8 @@ export class MyApp {
       resetPasswordPath:          'auth/password',
       resetPasswordCallback:      window.location.href,
 
-      oAuthBase:                  window.location.origin,
-      oAuthPaths: {
-        github:                 'auth/github'
-      },
+      oAuthBase:                  'https://api.benimfirsatim.com',
+
       oAuthCallbackPath:          'oauth_callback',
       oAuthWindowType:            'newWindow',
       oAuthWindowOptions:         null,
@@ -137,7 +135,7 @@ export class MyApp {
 
   onLogout(){
 
-      // sign out if user signed in with google account
+      /*// sign out if user signed in with google account
       if(BenimfirsatimLib.isLoggedInWihGoogle){
         this.googlePlusLogin.logout();
       }
@@ -145,17 +143,16 @@ export class MyApp {
     // sign out if user signed in with Facebook account
     if(BenimfirsatimLib.isLoggedInWithFacebook){
         this.facebookLogin.logout();
-      }
+      }*/
 
       this.benimFirsatimLib.logOutFromStorageAndAuth();
       this.menuCtrl.close();
       this.nav.setRoot(TabsPage);
       this.benimFirsatimLib.showToast("Çıkış yapıldı",2000,"bottom");
 
-      //Executes the code after waiting a second.
-      setTimeout(()=>{
-        this.isAuthenticated = false;
-      },1000)
+
+      this.isAuthenticated = false;
+
 
     }
 
