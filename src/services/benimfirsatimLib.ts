@@ -11,10 +11,6 @@ import {Angular2TokenService} from "angular2-token-ionic3";
 
 @Injectable()
 export class BenimfirsatimLib{
-  //api_address = "https://benimfirsatim.com";
-  //api_address = "http://192.168.0.40:3000";
-
-  //api_address = "https://benimfirsatim-gkaykck.c9users.io:8080";
 
   api_address = "https://api.benimfirsatim.com";
   static token:string ="";
@@ -34,12 +30,7 @@ export class BenimfirsatimLib{
   //Page code can be,
   //'hot','rising' or 'newcomers'
   public getPage(page_code,pagination){
-      //let opt = this.setHeader();
-      let possible_page_codes = ['hot','rising','newcomers'];
-      /*if(possible_page_codes.indexOf(page_code)=== -1){
-        return;
 
-      }*/
       return this.http.get(this.api_address + '/'+page_code+'.json?page='+pagination+'&per_page=3');
   }
 
@@ -85,7 +76,6 @@ export class BenimfirsatimLib{
 
   public createDeal(form:NgForm,selectedImageUrl,imageBase64){
     let body;
-console.log(form.value);
     if(selectedImageUrl == 'photoTaken'){
       body = {starts_at:form.value.deal_date,
         price:form.value.deal_price,

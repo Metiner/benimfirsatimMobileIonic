@@ -67,21 +67,21 @@
                     displayFormat="DD MM, YYYY"
                     name="deal_date"></ion-datetime>
     </ion-item>
-      <ion-row>
-        <ion-col text-center>
-          <button ion-button
-                  (click)="onTakePhoto()"
-                  clear
-                  type="button">
-            <img style="width: 90%" src="assets/imgs/kamerayi_ac_button@3x.png">
-          </button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col style="text-align: center">
-            <img style="max-width: 250px;max-height: 250px" [src]="base64Image" *ngIf="base64Image"/>
-        </ion-col>
-      </ion-row>
+      <!--<ion-row>-->
+        <!--<ion-col text-center>-->
+          <!--<button ion-button-->
+                  <!--(click)="onTakePhoto()"-->
+                  <!--clear-->
+                  <!--type="button">-->
+            <!--<img style="width: 90%" src="assets/imgs/kamerayi_ac_button@3x.png">-->
+          <!--</button>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+      <!--<ion-row>-->
+        <!--<ion-col style="text-align: center">-->
+            <!--<img style="max-width: 250px;max-height: 250px" [src]="base64Image" *ngIf="base64Image"/>-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
     <ion-item *ngIf="!photoTaken">
       <ion-label class="staticText">LÜTFEN FIRSAT GÖRSELİ SEÇİN.</ion-label>
     </ion-item>

@@ -12,6 +12,7 @@ page-opportunity {
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
+    margin-top: 12% !important;
   }
 
   ion-col div{
@@ -133,9 +134,6 @@ page-opportunity {
   }
 
   .like-text{
-    position: fixed;
-    top: 87%;
-    left: 90%;
     font-family: MarkPro-Heavy;
     font-size: 10px;
     color: #234491;
@@ -144,10 +142,7 @@ page-opportunity {
 
   .like-button-text{
     font-family: MarkPro-Heavy;
-    font-size: 10px;
-    position: absolute;
-    left: 61%;
-    top: 27%;
+    font-size: 13px;
     color: #234491;
   }
 

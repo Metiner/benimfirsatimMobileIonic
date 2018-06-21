@@ -31,8 +31,6 @@ export class MyDealsPage {
     MyDealsPage.pagination = 1;
     this.benimfirsatimLib.getDealFromUser(MyDealsPage.pagination).subscribe((data)=>{
 
-      console.log(data);
-      console.log(data.json());
       MyDealsPage.pagination++;
       data.json().entries.forEach(element => {
 

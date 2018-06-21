@@ -34,7 +34,6 @@ export class LoginPage {
     gapi.load('auth2', function() {
       const googleAut = gapi.auth2.init({client_id :'57374298212-94cgvbkf14685g846vcq95trf50qt69v.apps.googleusercontent.com'});
 
-      console.log(googleAut);
     });
 
     this.setItemsBooleanOpposite();

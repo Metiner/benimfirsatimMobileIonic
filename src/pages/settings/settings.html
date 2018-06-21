@@ -26,19 +26,19 @@
       <ion-grid>
         <form #f="ngForm">
           <ion-row style="padding-top: 30px">
-            <ion-col col-2 push-3 style="display: flex;align-items: flex-end;z-index: 10;">
-              <img (click)="onTakePhoto()" src="assets/imgs/change_photo_icon@3x.png">
-            </ion-col>
-            <ion-col col-8>
+            <!--<ion-col col-2 push-3 style="display: flex;align-items: flex-end;z-index: 10;">-->
+              <!--<img (click)="onTakePhoto()" src="assets/imgs/change_photo_icon@3x.png">-->
+            <!--</ion-col>-->
+            <ion-col>
               <img class="profilePicture"  [src]="base64Image" *ngIf="base64Image">
               <img class="profilePicture" *ngIf="!base64Image" src="{{user.avatar_url}}">
             </ion-col>
-            <ion-col col-2 pull-3 style="display: flex;align-items: flex-end;z-index: 10">
-                  <img src="assets/imgs/activities_icon_empty@3x.png">
+            <!--<ion-col col-2 pull-3 style="display: flex;align-items: flex-end;z-index: 10">-->
+                  <!--<img src="assets/imgs/activities_icon_empty@3x.png">-->
 
-                  <span id="notNumber">999</span>
+                  <!--<span id="notNumber">999</span>-->
 
-            </ion-col>
+            <!--</ion-col>-->
           </ion-row>
           <ion-row>
             <ion-col>

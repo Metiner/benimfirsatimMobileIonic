@@ -120,7 +120,6 @@ export class MyApp {
 
       this.gA.startTrackerWithId('UA-44910726-2')
         .then(() => {
-          console.log('Google analytics is ready now');
           this.gA.trackView('test');
           // Tracker is ready
           // You can now track pages or set additional information such as AppVersion or UserId
@@ -192,7 +191,6 @@ export class MyApp {
       //   })
       // }
     // }
-    console.log(event.srcElement.value);
   }
 
 }

@@ -35,6 +35,7 @@ export class OpportunityPage {
 
 
   likeButtonAnimation:any;
+  likeCommentButton:any;
   comment = "ne düşünüyorsun";
 
   static pageCount = 1;
@@ -217,7 +218,6 @@ export class OpportunityPage {
 
   goBack(){
 
-    console.log(this.navParams.data);
     if(this.navParams.data.newlyCreated){
       console.log("poped to root")
       this.navCtrl.popToRoot();
@@ -269,6 +269,13 @@ export class OpportunityPage {
         autoplay: false,
         path: 'assets/animations/like_button.json' // the path to the animation json
       });
+      this.likeCommentButton = lottie.loadAnimation({
+        container: document.getElementById("lottieCommentButton"), // the dom element that will contain the animation
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+        path: 'assets/animations/comment_button.json' // the path to the animation json
+      });
     })
   }
   loadThumbsupAnimations(){
@@ -307,7 +314,6 @@ export class OpportunityPage {
     })
   }
   addSubcommentIndex(comment,index){
-    console.log(comment.comments.length + " " + index);
     if(index  === comment.comments.length ){
       comment.dahaFazlaGetirText = "HEPSİ BU KADAR :(";
     }

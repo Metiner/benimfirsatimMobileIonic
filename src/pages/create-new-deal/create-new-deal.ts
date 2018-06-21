@@ -155,7 +155,6 @@ export class CreateNewDealPage {
     {
       this.isLinkEmpty = false;
     }
-    console.log(this.isLinkEmpty);
   }
   // it fills the array with default images.
   fillImagesArrayWithDefaultImages(){

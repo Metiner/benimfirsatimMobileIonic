@@ -37,7 +37,6 @@ export class HighlightsPage {
     benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe((data)=>{
 
       HighlightsPage.pagination++;
-      console.log(data.json());
     data.json().entries.forEach(element => {
 
 
