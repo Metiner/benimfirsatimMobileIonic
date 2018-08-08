@@ -76,17 +76,14 @@ export class MyApp {
 
 
     this.eventCtrl.subscribe("user.login", () => { this.isAuthenticated = true});
-    benimFirsatimLib.checkAuthFromStorage().then( response=>{
+    let response = benimFirsatimLib.checkAuthFromStorage()
       if(response != null){
         this.isAuthenticated = true;
       }
       else{
         this.isAuthenticated = false;
       }
-      }).catch(error=>{
-        this.benimFirsatimLib.showToast(error.toLocaleString(),3000,'bottom');
-      }
-    )
+
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -94,30 +91,28 @@ export class MyApp {
       statusBar.hide();
 
     this.nav.setRoot(TabsPage);
-    this.benimFirsatimLib.checkAuthFromStorage().then(response=>{
+    let responseTwo = this.benimFirsatimLib.checkAuthFromStorage()
       if(response != null) {
-        BenimfirsatimLib.user = response.user;
+        BenimfirsatimLib.user = responseTwo;
         //BenimfirsatimLib.token = response.token;
+
+
+        /*// onesignal code start:
+        this.oneSignal.startInit('e3b6a1f6-1826-4015-a0c5-99665f5a9589', '57374298212');
+
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+
+        this.oneSignal.handleNotificationReceived().subscribe(() => {
+          // do something when notification is received
+        });
+
+        this.oneSignal.handleNotificationOpened().subscribe(() => {
+          // do something when a notification is opened
+        });
+
+        this.oneSignal.endInit()*/
+        //for starting google analytics
       }
-    })
-
-
-       /*// onesignal code start:
-       this.oneSignal.startInit('e3b6a1f6-1826-4015-a0c5-99665f5a9589', '57374298212');
-
-       this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
-
-       this.oneSignal.handleNotificationReceived().subscribe(() => {
-         // do something when notification is received
-       });
-
-       this.oneSignal.handleNotificationOpened().subscribe(() => {
-         // do something when a notification is opened
-       });
-
-       this.oneSignal.endInit()*/
-       //for starting google analytics
-
       this.gA.startTrackerWithId('UA-44910726-2')
         .then(() => {
           this.gA.trackView('test');
@@ -148,6 +143,7 @@ export class MyApp {
       this.menuCtrl.close();
       this.nav.setRoot(TabsPage);
       this.benimFirsatimLib.showToast("Çıkış yapıldı",2000,"bottom");
+      localStorage.clear()
 
 
       this.isAuthenticated = false;

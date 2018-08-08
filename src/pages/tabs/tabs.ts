@@ -46,23 +46,22 @@ export class TabsPage {
   loginPage = LoginPage;
 
   onCreateNewDeal() {
-    this.benimFirsatimLib.checkAuthFromStorage().then(response => {
-      if(response != null){
-        this.navCtrl.push(this.createNewDealPage);
-      }
-      else{
-        this.benimFirsatimLib.showAlert("Uyarı", "Fırsat yaratmak için giriş yapmalısınız.", [
-          {
-            text: 'Giriş Yap', handler: () => {
-            this.navCtrl.push(this.loginPage);
-          }
-          },
-          {
-            text: 'Vazgeç'
-          }])
-      }
-    }).catch(error => {
-      this.benimFirsatimLib.showToast(error.toLocaleString(),3000,'bottom')
-    })
+    let response = this.benimFirsatimLib.checkAuthFromStorage()
+
+    if(response != null){
+      this.navCtrl.push(this.createNewDealPage);
+    }
+    else{
+      this.benimFirsatimLib.showAlert("Uyarı", "Fırsat yaratmak için giriş yapmalısınız.", [
+        {
+          text: 'Giriş Yap', handler: () => {
+          this.navCtrl.push(this.loginPage);
+        }
+        },
+        {
+          text: 'Vazgeç'
+        }])
+    }
+
   }
 }

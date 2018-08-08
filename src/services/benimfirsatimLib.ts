@@ -14,7 +14,7 @@ export class BenimfirsatimLib{
 
   api_address = "https://api.benimfirsatim.com";
   static token:string ="";
-  static user:User = new User;
+  static user:any;
   static isLoggedInWithFacebook = false;
   static isLoggedInWihGoogle = false;
 
@@ -146,7 +146,9 @@ export class BenimfirsatimLib{
 
   // Function for setting key and value on devices storage.
   public storageControl(key:string,value:string){
-    this.storageCtrl.set(key,value)
+
+    localStorage.setItem(key,JSON.stringify(value));
+    /*this.storageCtrl.set(key,value)
       .then( success =>{
         //this.setTokenFromStorage();
         return success;
@@ -157,12 +159,12 @@ export class BenimfirsatimLib{
           this.showToast(err,3000,"bottom");
         }
       );
-
+*/
   }
 
   //It checks if any user is stored on devices local storage.
   public checkAuthFromStorage() {
-      return this.storageCtrl.get("user")
+      return localStorage.getItem("user")
   }
 
   //It removes all of users from device local storage.
@@ -205,9 +207,9 @@ export class BenimfirsatimLib{
   }
   // sets user object to user static variable which locates in this class after login.
   public setUserInfoAfterLogin(user:any){
-    console.log(user);
     let u:User=new User();
     Object.assign(u,user);
+
     BenimfirsatimLib.user = u;
   }
 

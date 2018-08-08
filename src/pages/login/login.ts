@@ -31,10 +31,10 @@ export class LoginPage {
               private platform: Platform,
               private fbService:FacebookService) {
 
-    gapi.load('auth2', function() {
+    /*gapi.load('auth2', function() {
       const googleAut = gapi.auth2.init({client_id :'57374298212-94cgvbkf14685g846vcq95trf50qt69v.apps.googleusercontent.com'});
 
-    });
+    });*/
 
     this.setItemsBooleanOpposite();
   }
@@ -44,7 +44,7 @@ export class LoginPage {
     this.benimFirsatimLib.signIn(form.value.email, form.value.password).subscribe(data => {
 
       this.onLoginLogo = true;
-      if (data.json() != null && data.json().success == true) {
+      if (data.json() != null) {
 
 
         this.setItemsBooleanOpposite();
@@ -83,17 +83,18 @@ export class LoginPage {
     });
     loading.present();
 
+    console.log(data)
     if(type === 2){
-      this.benimFirsatimLib.setUserInfoAfterLogin(data);
+      this.benimFirsatimLib.setUserInfoAfterLogin(data.data);
       this.eventCtrl.publish('user.login', ' ');
       this.benimFirsatimLib.storageControl("user", data);
       this.navCtrl.push(TabsPage);
       loading.dismiss();
       this.benimFirsatimLib.showToast("Giriş yapıldı", 1500, "bottom");
     } else{
-      this.benimFirsatimLib.setUserInfoAfterLogin(data.user);
+      this.benimFirsatimLib.setUserInfoAfterLogin(data);
       this.eventCtrl.publish('user.login', ' ');
-      this.benimFirsatimLib.storageControl("user", data);
+      this.benimFirsatimLib.storageControl("user", data.data);
       this.navCtrl.push(TabsPage);
       loading.dismiss();
       this.benimFirsatimLib.showToast("Giriş yapıldı", 1500, "bottom");

@@ -21,7 +21,7 @@ export class SettingsPage {
 
   base64Image;
   base64ImageToUpload = "";
-  user:User;
+  user:any;
   photoTaken = false;
   constructor(private benimFirsatimLib:BenimfirsatimLib,
               public navParams: NavParams,
@@ -34,11 +34,13 @@ export class SettingsPage {
   itemtwo;
 
   ionViewWillEnter(){
-      this.benimFirsatimLib.checkAuthFromStorage().then( response =>{
+      /*this.benimFirsatimLib.checkAuthFromStorage().then( response =>{
       this.user = response.user;
     }).catch(error=>{
       console.log(error);
-      })
+      })*/
+
+    this.user = JSON.parse(localStorage.getItem('user'))
 
     this.itemone = 'toLogoUp';
     this.itemtwo = 'toLogoUp';
