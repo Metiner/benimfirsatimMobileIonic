@@ -10,7 +10,7 @@
             <img src="assets/imgs/firsat_header@3x.png" style="margin-left: -13px">
           </ion-col>
           <ion-col col-2 offset-2>
-            <img style="width: 60%" src="assets/imgs/paylas_button@3x.png">
+            <img style="width: 60%" (click)="shareDeal()" src="assets/imgs/paylas_button@3x.png">
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -48,7 +48,7 @@
               <img style="border-radius: 50%;width: 40px;height: 40px;" src="{{opportunity.user.avatar_url}}">
             </ion-col>
             <ion-col style="padding: 0px !important;display: flex;align-items: center" col-8>
-              <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491;word-break: normal">{{opportunity.user.name.substr(0,19)}}</span>
+              <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491;word-break: normal">{{opportunity.user.name.substr(0,14)}}</span>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -107,7 +107,7 @@
     </ion-col>
 
   </ion-row>
-  <ion-row *ngIf="!dealReported">
+  <!--<ion-row *ngIf="!dealReported">
     <ion-col style="text-align: right;padding-bottom: 1%">
       <img src="assets/svgs/problemli_line.svg">
     </ion-col>
@@ -153,7 +153,7 @@
         </ion-col>
       </ion-row>
     </ion-col>
-  </ion-row>
+  </ion-row>-->
   <ion-row>
     <ion-col>
       <img style="transform: scale(0.9)" src="assets/imgs/yorumlar_header@3x.png">
@@ -212,14 +212,14 @@
         </ion-row>
         <ion-row style="    margin-top: 20px;">
           <ion-col col-2 push-7>
-            <img style="    position: absolute;
+            <!--<img style="    position: absolute;
     top: -220%;" (click)="onCommentReply({comment:comment,opportunity:opportunity})"
-                 src="assets/imgs/reply_icon@3x.png">
+                 src="assets/imgs/reply_icon@3x.png">-->
           </ion-col>
           <ion-col col-3 push-7>
-            <div class="lottieThumbUpButton" style="    position: absolute;
+            <!--<div class="lottieThumbUpButton" style="    position: absolute;
     top: -220%;" (click)="playAnim(i,'thumbsUp',comment)">
-            </div>
+            </div>-->
           </ion-col>
 
         </ion-row>
@@ -266,15 +266,15 @@
   </ion-infinite-scroll>
 </ion-content>
 
-<ion-footer>
+<!--<ion-footer>
   <form #f="ngForm" (submit)="onCommentSubmit(f)">
     <ion-grid>
       <ion-row>
-        <!--<ion-col col-2 style="text-align: center" align-self-center>
+        &lt;!&ndash;<ion-col col-2 style="text-align: center" align-self-center>
           <button>
             <ion-icon style="font-size: xx-large;font-weight: 900;color:#2FA4E7" name="add"></ion-icon>
           </button>
-        </ion-col>-->
+        </ion-col>&ndash;&gt;
         <ion-col col-8>
           <ion-item no-lines>
             <ion-input required [ngModel] name="comment"
@@ -292,4 +292,4 @@
       </ion-row>
     </ion-grid>
   </form>
-</ion-footer>
+</ion-footer>-->

@@ -13,6 +13,7 @@ import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
 import {PointsPage} from "../pages/points/points";
 import {Angular2TokenService} from "angular2-token-ionic3";
+declare const fb:any;
 @Component({
   templateUrl: 'app.html'
 })
@@ -71,9 +72,6 @@ export class MyApp {
         }
       }
     });
-
-
-
 
     this.eventCtrl.subscribe("user.login", () => { this.isAuthenticated = true});
     let response = benimFirsatimLib.checkAuthFromStorage()

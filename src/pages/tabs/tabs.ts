@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {HighlightsPage} from "../highlights/highlights";
 import {RisingPage} from "../rising/rising";
 import {TopPage} from "../top/top";
-import {NavController} from "ionic-angular";
+import {AlertController, NavController} from "ionic-angular";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {CategoriesPage} from "../categories/categories";
 import {CreateNewDealPage} from "../create-new-deal/create-new-deal";
@@ -35,6 +35,7 @@ import {LoginPage} from "../login/login";
 })
 export class TabsPage {
   constructor(private navCtrl: NavController,
+              private alertCtrl:AlertController,
               private benimFirsatimLib: BenimfirsatimLib) {
   }
 
@@ -46,7 +47,14 @@ export class TabsPage {
   loginPage = LoginPage;
 
   onCreateNewDeal() {
-    let response = this.benimFirsatimLib.checkAuthFromStorage()
+
+    let alert = this.alertCtrl.create({
+      title: "Fırsat ekleme özelliği çok yakında sizlerle !",
+      buttons: ['Tamam']
+    });
+    alert.present();
+  }
+    /*let response = this.benimFirsatimLib.checkAuthFromStorage()
 
     if(response != null){
       this.navCtrl.push(this.createNewDealPage);
@@ -63,5 +71,5 @@ export class TabsPage {
         }])
     }
 
-  }
+  }*/
 }

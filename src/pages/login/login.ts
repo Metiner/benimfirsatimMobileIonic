@@ -17,10 +17,9 @@ export class LoginPage {
 
 
   @ViewChildren('content') rows: QueryList<any>;
-  onLoginLogo = false;
+  onLoginLogo = true;
 
 
-  itemone = true;
 
   constructor(private benimFirsatimLib: BenimfirsatimLib,
               private navCtrl: NavController,
@@ -36,26 +35,18 @@ export class LoginPage {
 
     });*/
 
-    this.setItemsBooleanOpposite();
   }
 
   onLogIn(form: NgForm) {
 
     this.benimFirsatimLib.signIn(form.value.email, form.value.password).subscribe(data => {
 
+      console.log(data)
+      console.log(data.json)
       this.onLoginLogo = true;
       if (data.json() != null) {
 
-
-        this.setItemsBooleanOpposite();
-
-
-        setTimeout(() => {
-
-            this.setStorageAndUserInfoAfterSuccessLogin(data.json(),1);
-
-          }
-          , 1100);
+        this.setStorageAndUserInfoAfterSuccessLogin(data.json(),1);
 
       }
     }, error => {
@@ -66,14 +57,7 @@ export class LoginPage {
 
 
   onSignUpButton() {
-
-    this.setItemsBooleanOpposite();
-
-    setTimeout(() => {
-
-        this.navCtrl.push(SignupPage);
-      }
-      , 1100);
+      this.navCtrl.push(SignupPage);
   }
 
   //sets the user info to benimfirsatimlib's static user variable and stores token in local storage
@@ -107,13 +91,9 @@ export class LoginPage {
   onFacebookLogin() {
 
     this.benimFirsatimLib.oAuth(1).subscribe(response => {
-      this.setItemsBooleanOpposite();
 
-      setTimeout(() => {
 
-          this.setStorageAndUserInfoAfterSuccessLogin(response,2);
-        }
-        , 1000);
+      this.setStorageAndUserInfoAfterSuccessLogin(response,2);
 
       BenimfirsatimLib.isLoggedInWithFacebook = true;
       this.navCtrl.push(TabsPage);
@@ -125,13 +105,7 @@ export class LoginPage {
 
 
       this.benimFirsatimLib.oAuth(2).subscribe(response => {
-        this.setItemsBooleanOpposite();
-
-        setTimeout(() => {
-
-            this.setStorageAndUserInfoAfterSuccessLogin(response,2);
-          }
-          , 1000);
+        this.setStorageAndUserInfoAfterSuccessLogin(response,2);
 
         BenimfirsatimLib.isLoggedInWihGoogle = true;
         this.navCtrl.push(TabsPage);
@@ -141,18 +115,8 @@ export class LoginPage {
 
   toTabsPage(){
 
-    this.setItemsBooleanOpposite();
-
-    setTimeout( ()=>{
-
-        this.googlePlus.logout();
+       this.googlePlus.logout();
         this.navCtrl.push(TabsPage);
-      }
-      ,1000);
-  }
-  setItemsBooleanOpposite(){
+    }
 
-      setTimeout(()=>{
-        this.itemone=! this.itemone;
-      },0)}
 }

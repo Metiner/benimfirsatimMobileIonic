@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Content, InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {ActionSheetController, Content, InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
@@ -11,6 +11,8 @@ import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
 import * as $ from 'jquery'
 
 import * as lottie from 'lottie-web';
+
+declare var FB: any;
 
 @IonicPage()
 @Component({
@@ -51,7 +53,8 @@ export class OpportunityPage {
   constructor(public navParams: NavParams,
               private benimFirsatimLib:BenimfirsatimLib,
               private navCtrl:NavController,
-              private browserTab:BrowserTab) {
+              private browserTab:BrowserTab,
+              public actionSheetCtrl: ActionSheetController) {
     this.loadAnimations();
     OpportunityPage.pageCount = 1;
     this.opportunity = navParams.data;
@@ -74,16 +77,16 @@ export class OpportunityPage {
 
   upVoteDeal(dealId:number){
 
-    this.benimFirsatimLib.upvoteDeal(dealId).subscribe(data=>{
+    /*this.benimFirsatimLib.upvoteDeal(dealId).subscribe(data=>{
       this.opportunity.votes_sum = data.json().deal_score;
-    });
+    });*/
   }
 
   downVoteDeal(dealId:number){
-
+/*
     this.benimFirsatimLib.downvoteDeal(dealId).subscribe(data=>{
       this.opportunity.votes_sum = data.json().deal_score;
-    });
+    });*/
   }
 
   //Async calls new comments from database.
@@ -108,6 +111,7 @@ export class OpportunityPage {
           OpportunityPage.pageCount = 1;
         }
 
+        console.log(data)
         infiniteScroll.complete();
       });
 
@@ -127,7 +131,7 @@ export class OpportunityPage {
   onCommentSubmit(form:NgForm){
 
 
-    this.benimFirsatimLib.checkAuthFromStorage().then(response => {
+    let response = this.benimFirsatimLib.checkAuthFromStorage();
       if(response != null){
 
         let newlyAdded:Comment = new Comment();
@@ -156,10 +160,6 @@ export class OpportunityPage {
             text: 'Vazgeç'
           }])
       }
-    }).catch(error => {
-      this.benimFirsatimLib.showToast(error.toLocaleString(),3000,'bottom')
-    })
-
   }
 
 
@@ -231,7 +231,7 @@ export class OpportunityPage {
   }
 
   playAnim(index,type,comment) {
-    if(type === 'like'){
+    /*if(type === 'like'){
       this.likeButtonAnimation.play();
       if(this.likeButtonAnimation.liked){
         this.downVoteDeal(this.opportunity.id);
@@ -257,7 +257,7 @@ export class OpportunityPage {
         this.thumbUpAnimations[index].liked = true;
       }
     }
-
+*/
   }
 
   loadAnimations(){
@@ -334,5 +334,56 @@ export class OpportunityPage {
     this.benimFirsatimLib.report(this.opportunity.id).subscribe((response)=>{
     });
     this.dealReported = true;
+  }
+
+  shareDeal() {
+
+    const actionSheet = this.actionSheetCtrl.create({
+      title: 'Paylaş',
+      buttons: [
+        {
+          text: 'Facebook',
+          handler: () => {
+
+            let dealUrl = 'https://www.facebook.com/sharer/sharer.php?u=https%3A//benimfirsatim.com/deal/' + this.opportunity.id
+            window.open(dealUrl, '_blank');
+            /*const initParams = {
+              appId: '113944349294618',
+              xfbml: true,
+              version: 'v2.8'
+            };
+            try {
+              FB.init(initParams);
+            } catch (e) {
+              console.log(e);
+            }          FB.ui({
+              method: 'share',
+              mobile_iframe: true,
+              quote: this.opportunity.title,
+              href: "https://benimfirsatim.com/deal/" + this.opportunity.id,
+              hastag: '#benimfirsatim'
+            }, function (response) {
+            });*/
+          }
+        }, {
+          text: 'Twitter',
+          handler: () => {
+            // Opens a pop-up with twitter sharing dialog
+            var shareURL = "http://twitter.com/share?"; //url base
+            //params
+            var params = {
+              url: "https://benimfirsatim.com/deal/" + this.opportunity.id,
+              text: this.opportunity.title,
+              // via: "sometwitterusername",
+              hashtags: "benimfirsatim"
+            }
+            for (let prop in params) shareURL += '&' + prop + '=' + encodeURIComponent(params[prop]);
+            window.open(shareURL, '_blank', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }

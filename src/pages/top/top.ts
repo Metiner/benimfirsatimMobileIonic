@@ -33,8 +33,8 @@ export class TopPage {
     this.feedbackDivOpen = false;
     });
 
-    benimfirsatimLib.getPage('newcomers',TopPage.pagination).subscribe((data)=>{
-      data.json().entries.forEach(element => {
+    benimfirsatimLib.getPage('/fresh',TopPage.pagination).subscribe((data)=>{
+      data.json().forEach(element => {
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
         this.opportunities.push(u);
@@ -49,7 +49,9 @@ export class TopPage {
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 
-    this.benimfirsatimLib.getPage('newcomers',TopPage.pagination).subscribe(data =>{
+    this.benimfirsatimLib.getPage('/fresh',TopPage.pagination).subscribe(data =>{
+      if(TopPage.pagination === 1)
+        TopPage.pagination = 2
 
 
       if(data.json().length > 0) {

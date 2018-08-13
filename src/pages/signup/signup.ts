@@ -22,8 +22,10 @@ export class SignupPage {
       this.benimFirsatimLib.showToast("Parolalar uyuşmamakta",3000,"bottom");
     }else{
 
-      this.benimFirsatimLib.signUp(form.value.email, form.value.password).subscribe(data=>{
+      this.benimFirsatimLib.signUp(form.value.email, form.value.password, form.value.username).subscribe(data=>{
 
+        console.log(data)
+        console.log(data.json)
         if(data != null){
 
           if(data.status == 200 && data.ok){

@@ -1,4 +1,4 @@
-<ion-menu [content]="nav">
+<!--<ion-menu [content]="nav">
   <ion-header>
     <ion-toolbar>
       <button *ngIf="lol" style=" outline: none;
@@ -11,10 +11,8 @@
   <ion-content>
       <ion-item>
         <ion-row align-items-center>
-          <ion-col col-4>
-            <button ion-button clear>
-              <img src="../assets/imgs/search_icon@2x.png">
-            </button>
+          <ion-col col-2>
+            <img src="../assets/imgs/search_icon@2x.png">
           </ion-col>
           <ion-col style="margin-bottom: 25px;">
             <img src="../assets/imgs/search_box@2x.png" style="position:absolute;height: 25px">
@@ -24,11 +22,8 @@
       </ion-item>
       <ion-item *ngIf="!isAuthenticated" no-lines>
         <ion-row align-items-center (click)="onSignin()">
-          <ion-col col-4>
-            <button ion-button
-                    clear>
-              <img src="assets/imgs/logout_icon@3x.png">
-            </button>
+          <ion-col col-2>
+            <img src="assets/imgs/logout_icon@3x.png">
           </ion-col>
           <ion-col>
             <span class="menu-text">GİRİŞ YAP</span>
@@ -37,11 +32,8 @@
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
         <ion-row align-items-center (click) = "onSettings()">
-          <ion-col col-4>
-            <button ion-button
-                    clear>
-              <img src="assets/imgs/profilim_icon@3x.png">
-            </button>
+          <ion-col col-2>
+            <img src="assets/imgs/profilim_icon@3x.png">
           </ion-col>
           <ion-col>
             <span class="menu-text">PROFİLİM</span>
@@ -50,11 +42,8 @@
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
         <ion-row align-items-center (click) = "onMyDeals()">
-          <ion-col col-4>
-            <button ion-button
-                    clear>
-              <img src="assets/imgs/firsatlarim_icon@3x.png">
-            </button>
+          <ion-col col-2>
+            <img src="assets/imgs/firsatlarim_icon@3x.png">
           </ion-col>
           <ion-col>
             <span class="menu-text">FIRSATLARIM</span>
@@ -63,11 +52,8 @@
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
         <ion-row align-items-center (click) = "onNotifications()">
-          <ion-col col-4>
-            <button ion-button
-                    clear>
-              <img src="assets/imgs/puan_tablosu_icon@3x.png">
-            </button>
+          <ion-col col-2>
+            <img src="assets/imgs/puan_tablosu_icon@3x.png">
           </ion-col>
           <ion-col>
             <span class="menu-text">PUAN TABLOSU</span>
@@ -76,11 +62,8 @@
       </ion-item>
       <ion-item *ngIf="isAuthenticated">
         <ion-row align-items-center  (click)="onLogout()">
-          <ion-col col-4>
-            <button ion-button
-                    clear>
-              <img src="assets/imgs/logout_icon@3x.png">
-            </button>
+          <ion-col col-2>
+            <img src="assets/imgs/logout_icon@3x.png">
           </ion-col>
           <ion-col>
             <span class="menu-text">ÇIKIŞ YAP</span>
@@ -88,6 +71,6 @@
         </ion-row>
       </ion-item>
   </ion-content>
-</ion-menu>
+</ion-menu>-->
 
 <ion-nav [root]="rootPage" #nav></ion-nav>

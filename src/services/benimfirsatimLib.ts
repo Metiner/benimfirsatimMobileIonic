@@ -12,7 +12,7 @@ import {Angular2TokenService} from "angular2-token-ionic3";
 @Injectable()
 export class BenimfirsatimLib{
 
-  api_address = "https://api.benimfirsatim.com";
+  api_address = "https://benimfirsatim.com";
   static token:string ="";
   static user:any;
   static isLoggedInWithFacebook = false;
@@ -30,16 +30,15 @@ export class BenimfirsatimLib{
   //Page code can be,
   //'hot','rising' or 'newcomers'
   public getPage(page_code,pagination){
-
-      return this.http.get(this.api_address + '/'+page_code+'.json?page='+pagination+'&per_page=3');
+      return this.http.get(this.api_address + '/deals'+page_code+'.json?page='+pagination);
   }
 
 
-  public signUp(email,password){
-    return this._tokenService.registerAccount({
+  public signUp(email,password, name){
+    return this.http.post(this.api_address + '/users.json',{
       email:                email,
       password:             password,
-      passwordConfirmation: password
+      name:                 name
     })
   }
 
@@ -48,9 +47,9 @@ export class BenimfirsatimLib{
   }
 
   public signIn(email,password){
-    return this._tokenService.signIn({
-      email:    email,
-      password: password
+    return this.http.post(this.api_address + '/users/sign_in.json',{
+      email:                email,
+      password:             password
     })
   }
 
@@ -106,7 +105,7 @@ export class BenimfirsatimLib{
     return this._tokenService.post('comments/'+comment_id+'/vote',{});
   }
   public getComments(deal_id,page){
-    return this._tokenService.get('deals/'+deal_id+'/comments?page='+page+'&per_page=3');
+    return this.http.get(this.api_address + '/deals/'+deal_id+'/comments.json?page='+page);
   }
 
   public getCities(){

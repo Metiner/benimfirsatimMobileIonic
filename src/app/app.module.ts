@@ -41,6 +41,7 @@ import {FacebookModule} from "ngx-facebook";
 import {FeedbackComponent} from "../components/feedback/feedback";
 import {A2tUiModule, Angular2TokenService} from "angular2-token-ionic3";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {AdMobFree} from "@ionic-native/admob-free";
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
     File,
     InAppBrowser,
     Angular2TokenService,
+    AdMobFree,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

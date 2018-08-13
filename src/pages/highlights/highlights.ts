@@ -34,11 +34,9 @@ export class HighlightsPage {
       this.feedbackDivOpen = false;
     })
 
-    benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe((data)=>{
+    benimfirsatimLib.getPage('',HighlightsPage.pagination).subscribe((data)=>{
 
-      HighlightsPage.pagination++;
-    data.json().entries.forEach(element => {
-
+      data.json().forEach(element => {
 
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
@@ -56,11 +54,14 @@ export class HighlightsPage {
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 
-    this.benimfirsatimLib.getPage('hot',HighlightsPage.pagination).subscribe(data =>{
+    if(HighlightsPage.pagination === 1)
+      HighlightsPage.pagination = 2
+    this.benimfirsatimLib.getPage('',HighlightsPage.pagination).subscribe(data =>{
 
 
       if(data.json().length > 0) {
         HighlightsPage.pagination++;
+
         data.json().forEach(element => {
           let u: Opportunity = new Opportunity();
           Object.assign(u, element);

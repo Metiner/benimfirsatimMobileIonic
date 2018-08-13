@@ -73,27 +73,22 @@
 
     </ion-row>
     <ion-row>
-
-      <ion-col (click)="onSignUpButton()" text-center style="margin-top: -15px">
-        <button ion-button
-                clear
-                type="button"
-                class="createAccount_ContinueAsGuest"
-        >HESAP OLUŞTUR</button>
+      <ion-col (click)="onSignUpButton()" text-center >
+        <span class="createAccount_ContinueAsGuest">
+         HESAP OLUŞTUR
+        </span>
       </ion-col>
     </ion-row>
     <ion-row no-padding no-margin>
-      <ion-col class="createAccount_ContinueAsGuest" text-center style="margin-top: -35px">
-        <ion-label style="font-size: 14px">veya</ion-label>
+      <ion-col text-center>
+        <span class="createAccount_ContinueAsGuest" style="font-size: 14px">veya</span>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col text-center style="margin-top: -25px">
-        <button ion-button
-                clear
-                (click)="toTabsPage()"
-                class="createAccount_ContinueAsGuest"
-        >MİSAFİR OLARAK DEVAM ET</button>
+      <ion-col text-center>
+        <span (click)="toTabsPage()" class="createAccount_ContinueAsGuest">
+         MİSAFİR OLARAK DEVAM ET
+        </span>
       </ion-col>
     </ion-row>
   </ion-grid>

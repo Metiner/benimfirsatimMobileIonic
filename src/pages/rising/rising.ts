@@ -31,10 +31,9 @@ export class RisingPage {
   this.eventCtrl.subscribe('closeFeedback',()=>{
   this.feedbackDivOpen = false;
 })
-    benimfirsatimLib.getPage('rising',RisingPage.pagination).subscribe((data)=>{
+    benimfirsatimLib.getPage('/rising',RisingPage.pagination).subscribe((data)=>{
 
-      RisingPage.pagination++;
-      data.json().entries.forEach(element => {
+      data.json().forEach(element => {
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
         this.opportunities.push(u);
@@ -51,8 +50,9 @@ export class RisingPage {
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 
-    this.benimfirsatimLib.getPage('rising',RisingPage.pagination).subscribe(data =>{
-
+    this.benimfirsatimLib.getPage('/rising',RisingPage.pagination).subscribe(data =>{
+      if(RisingPage.pagination === 1)
+        RisingPage.pagination = 2
 
       if(data.json().length > 0) {
         RisingPage.pagination++;
