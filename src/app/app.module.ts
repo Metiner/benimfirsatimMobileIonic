@@ -42,6 +42,7 @@ import {FeedbackComponent} from "../components/feedback/feedback";
 import {A2tUiModule, Angular2TokenService} from "angular2-token-ionic3";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {AdMobFree} from "@ionic-native/admob-free";
+import {AdMobPro} from "@ionic-native/admob-pro";
 
 @NgModule({
   declarations: [
@@ -112,7 +113,7 @@ import {AdMobFree} from "@ionic-native/admob-free";
     File,
     InAppBrowser,
     Angular2TokenService,
-    AdMobFree,
+    AdMobPro,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

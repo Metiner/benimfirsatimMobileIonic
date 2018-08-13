@@ -14,7 +14,7 @@ import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
 import * as $ from 'jquery'
 
 import * as lottie from 'lottie-web';
-import {AdMobFree, AdMobFreeBannerConfig, AdMobFreeInterstitialConfig} from "@ionic-native/admob-free";
+import {AdMobPro} from "@ionic-native/admob-pro";
 
 @IonicPage()
 @Component({
@@ -58,41 +58,28 @@ export class OpportunityPage {
               private browserTab:BrowserTab,
               public actionSheetCtrl: ActionSheetController,
               public platform:Platform,
-              private admobFree: AdMobFree) {
+              private admob: AdMobPro) {
+
+
+
 
     BenimfirsatimLib.showAd++;
     if(BenimfirsatimLib.showAd % 3 === 0){
-        let admobConfig:AdMobFreeInterstitialConfig;
-        if(this.platform.is("ios")){
-          admobConfig = {
-
-            id: 'ca-app-pub-9661165663851840/7107343722',
-            autoShow: true,
-            isTesting: false,
-
-          }
-        }
-        else{
-
-          admobConfig = {
-            id: 'ca-app-pub-9661165663851840/8998993983',
-            autoShow: true,
-            isTesting: false,
-
-          }
-        }
-        this.admobFree.interstitial.config(admobConfig)
-        this.admobFree.interstitial.prepare()
-          .then(() => {
-            // banner Ad is ready
-            // if we set autoShow to false, then we will need to call the show method here
-          })
-          .catch(e => console.log(e));
+      let adId;
+      if(this.platform.is('android')) {
+        adId = 'ca-app-pub-9661165663851840/8998993983';
+      } else if (this.platform.is('ios')) {
+        adId = 'ca-app-pub-9661165663851840/7107343722';
+      }
+      this.admob.prepareInterstitial({
+        adId: adId,
+        autoShow: true,
+        isTesting: false
+      })
+        .then(() => { this.admob.showInterstitial(); });
 
 
     }
-
-
     this.loadAnimations();
     OpportunityPage.pageCount = 1;
     this.opportunity = navParams.data;
@@ -111,6 +98,10 @@ export class OpportunityPage {
     });
 
     this.setItemsBooleanOpposite()
+  }
+  ionViewDidLoad() {
+    this.admob.onAdDismiss()
+      .subscribe(() => { console.log('User dismissed ad'); });
   }
 
   upVoteDeal(dealId:number){
