@@ -82,7 +82,7 @@ export class OpportunityPage {
           }
         }
         this.admobFree.interstitial.config(admobConfig)
-        this.admobFree.banner.prepare()
+        this.admobFree.interstitial.prepare()
           .then(() => {
             // banner Ad is ready
             // if we set autoShow to false, then we will need to call the show method here
