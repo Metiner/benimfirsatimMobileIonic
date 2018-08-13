@@ -17,6 +17,7 @@ export class BenimfirsatimLib{
   static user:any;
   static isLoggedInWithFacebook = false;
   static isLoggedInWihGoogle = false;
+  static showAd = 0;
 
 
   constructor(private http:Http,

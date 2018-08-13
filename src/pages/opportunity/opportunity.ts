@@ -1,5 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {ActionSheetController, Content, InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {
+  ActionSheetController, Content, InfiniteScroll, IonicPage, NavController, NavParams,
+  Platform
+} from 'ionic-angular';
 import {Opportunity} from "../../models/opportunity";
 import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
@@ -11,8 +14,7 @@ import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
 import * as $ from 'jquery'
 
 import * as lottie from 'lottie-web';
-
-declare var FB: any;
+import {AdMobFree, AdMobFreeBannerConfig} from "@ionic-native/admob-free";
 
 @IonicPage()
 @Component({
@@ -54,7 +56,38 @@ export class OpportunityPage {
               private benimFirsatimLib:BenimfirsatimLib,
               private navCtrl:NavController,
               private browserTab:BrowserTab,
-              public actionSheetCtrl: ActionSheetController) {
+              public actionSheetCtrl: ActionSheetController,
+              public platform:Platform,
+              private admobFree: AdMobFree) {
+
+    BenimfirsatimLib.showAd++;
+    if(BenimfirsatimLib.showAd % 3 === 0){
+        let admobConfig:AdMobFreeBannerConfig;
+        if(this.platform.is("ios")){
+          admobConfig = {
+
+            id: 'ca-app-pub-9661165663851840/7107343722',
+            autoShow: true
+          }
+        }
+        else{
+          admobConfig = {
+            id: 'ca-app-pub-9661165663851840/8998993983',
+            autoShow: true
+          }
+        }
+        this.admobFree.interstitial.config(admobConfig)
+        this.admobFree.banner.prepare()
+          .then(() => {
+            // banner Ad is ready
+            // if we set autoShow to false, then we will need to call the show method here
+          })
+          .catch(e => console.log(e));
+
+
+    }
+
+
     this.loadAnimations();
     OpportunityPage.pageCount = 1;
     this.opportunity = navParams.data;
@@ -378,7 +411,7 @@ export class OpportunityPage {
               hashtags: "benimfirsatim"
             }
             for (let prop in params) shareURL += '&' + prop + '=' + encodeURIComponent(params[prop]);
-            window.open(shareURL, '_blank', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+            window.open(shareURL, '_blank');
 
           }
         }
