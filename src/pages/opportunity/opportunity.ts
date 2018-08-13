@@ -14,7 +14,7 @@ import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
 import * as $ from 'jquery'
 
 import * as lottie from 'lottie-web';
-import {AdMobFree, AdMobFreeBannerConfig} from "@ionic-native/admob-free";
+import {AdMobFree, AdMobFreeBannerConfig, AdMobFreeInterstitialConfig} from "@ionic-native/admob-free";
 
 @IonicPage()
 @Component({
@@ -62,18 +62,23 @@ export class OpportunityPage {
 
     BenimfirsatimLib.showAd++;
     if(BenimfirsatimLib.showAd % 3 === 0){
-        let admobConfig:AdMobFreeBannerConfig;
+        let admobConfig:AdMobFreeInterstitialConfig;
         if(this.platform.is("ios")){
           admobConfig = {
 
             id: 'ca-app-pub-9661165663851840/7107343722',
-            autoShow: true
+            autoShow: true,
+            isTesting: false,
+
           }
         }
         else{
+
           admobConfig = {
             id: 'ca-app-pub-9661165663851840/8998993983',
-            autoShow: true
+            autoShow: true,
+            isTesting: false,
+
           }
         }
         this.admobFree.interstitial.config(admobConfig)
