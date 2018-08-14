@@ -2,15 +2,15 @@
   <ion-toolbar>
     <ion-navbar text-center hideBackButton="true" style="padding: 0px !important">
       <ion-grid style="padding: 0px !important">
-        <ion-row align-items-center>
-          <ion-col col-2>
-            <img style="width: 60%" (click)="goBack()" src="assets/imgs/back_button@3x.png">
+        <ion-row align-items-center style="justify-content: space-between">
+          <ion-col col-auto="">
+            <img style="width: 60%;max-width: 50px;" (click)="goBack()" src="assets/imgs/back_button@3x.png">
           </ion-col>
-          <ion-col col-3 offset-3 style="display: flex;align-items: center">
-            <img src="assets/imgs/firsat_header@3x.png" style="margin-left: -13px">
+          <ion-col col-auto="">
+            <img src="assets/imgs/firsat_header@3x.png" style="margin-left: -13px;max-width: 80px;">
           </ion-col>
-          <ion-col col-2 offset-2>
-            <img style="width: 60%" (click)="shareDeal()" src="assets/imgs/paylas_button@3x.png">
+          <ion-col col-auto="">
+            <img style="width: 60%;max-width: 50px;" (click)="shareDeal()" src="assets/imgs/paylas_button@3x.png">
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -25,20 +25,25 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col col style=";text-align: center">
+    <ion-col col-auto style="    margin-left: auto;
+    margin-right: auto;">
       <img style="max-width: 200px;
     margin-top: 20px;
     margin-bottom: 20px" src="{{opportunity.image_url}}">
     </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col col-2 push-1 style="display: flex;align-items: center">
-      <img src="assets/svgs/price_tag.svg">
-    </ion-col>
-    <ion-col col-4 push-1 style="display: flex;align-items: center">
-      <ion-label [ngStyle]="{'font-size':isPriceToolong()}"
-                 style="font-family: MarkPro-Black;font-size: 18px;color:#234491">{{whatIsPrice()}}
-      </ion-label>
+  <ion-row style="justify-content: space-around">
+    <ion-col col-auto>
+      <ion-row>
+        <ion-col>
+          <img style="width: 50px" src="assets/svgs/price_tag.svg">
+        </ion-col>
+        <ion-col>
+          <ion-label [ngStyle]="{'font-size':isPriceToolong()}"
+                     style="font-family: MarkPro-Black;font-size: 18px;color:#234491">{{whatIsPrice()}}
+          </ion-label>
+        </ion-col>
+      </ion-row>
     </ion-col>
     <ion-col style="padding: 0px !important;display: flex;align-items: center;justify-content: center" col-5>
       <div style="background-color: #F7E60F;border-radius: 20px 20px 20px 20px;width: 100%">
@@ -70,9 +75,9 @@
       <img style="transform: scale(0.9)" src="assets/imgs/seperator_line@3x.png">
     </ion-col>
   </ion-row>
-  <ion-row align-items-center>
-    <ion-col col-3>
-      <ion-row style="    text-align: center;
+  <ion-row align-items-center style="justify-content: space-around;flex-wrap: nowrap">
+    <ion-col col-auto>
+      <ion-row style="max-width: 100px;    text-align: center;
     flex-wrap: nowrap;
     align-items: center;">
         <ion-col push-2>
@@ -85,11 +90,11 @@
         </ion-col>
       </ion-row>
     </ion-col>
-    <ion-col col-6>
-      <img (click)="onOutsideDealLink(opportunity)" src="assets/imgs/firsata_git_button@3x.png">
+    <ion-col col-auto>
+      <img style="max-width: 120px;    " (click)="onOutsideDealLink(opportunity)" src="assets/imgs/firsata_git_button@3x.png">
     </ion-col>
-    <ion-col col-3>
-      <ion-row style="    text-align: center;
+    <ion-col col-auto>
+      <ion-row style="max-width: 100px;        text-align: center;
     flex-wrap: nowrap;
     align-items: center;">
         <ion-col push-2>
@@ -154,13 +159,12 @@
       </ion-row>
     </ion-col>
   </ion-row>-->
-  <ion-row>
-    <ion-col>
-      <img style="transform: scale(0.9)" src="assets/imgs/yorumlar_header@3x.png">
+  <ion-row style="flex-wrap: nowrap;justify-content: center">
+    <ion-col col-6 text-center="">
+      <span style="font-family: MarkPro-Heavy;font-size: 16px;color:#234491">YORUMLAR</span>
     </ion-col>
   </ion-row>
   <ion-list [ngClass]="itemfour ? 'toLogoUp' : 'toLogoDown'">
-
     <div *ngFor="let comment of newlyAddedComments">
       <div *ngIf="newlyAddedComments.length > 0" id="newlyAdded" ngClass="highlighted">
         <div style="margin-top: 16px;background-color:#E5E5E5;border-radius: 20px 20px 20px 20px;transform: scale(0.9)">

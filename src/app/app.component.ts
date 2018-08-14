@@ -95,7 +95,7 @@ export class MyApp {
         //BenimfirsatimLib.token = response.token;
 
 
-        /*// onesignal code start:
+        // onesignal code start:
         this.oneSignal.startInit('e3b6a1f6-1826-4015-a0c5-99665f5a9589', '57374298212');
 
         this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
@@ -108,7 +108,7 @@ export class MyApp {
           // do something when a notification is opened
         });
 
-        this.oneSignal.endInit()*/
+        this.oneSignal.endInit()
         //for starting google analytics
       }
       this.gA.startTrackerWithId('UA-44910726-2')
