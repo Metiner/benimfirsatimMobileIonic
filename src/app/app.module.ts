@@ -43,6 +43,8 @@ import {A2tUiModule, Angular2TokenService} from "angular2-token-ionic3";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {AdMobFree} from "@ionic-native/admob-free";
 import {AdMobPro} from "@ionic-native/admob-pro";
+import {SelectShareTypePage} from "../pages/select-share-type/select-share-type";
+import {CreateNewDealWithPhotoPage} from "../pages/create-new-deal-with-photo/create-new-deal-with-photo";
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import {AdMobPro} from "@ionic-native/admob-pro";
     ListDealComponent,
     FabCompenent,
     PointsPage,
-    FeedbackComponent
+    FeedbackComponent,
+    SelectShareTypePage,
+    CreateNewDealWithPhotoPage
   ],
   imports: [
     BrowserModule,
@@ -98,7 +102,9 @@ import {AdMobPro} from "@ionic-native/admob-pro";
     OnCommentReplyPage,
     SettingsPage,
     MyDealsPage,
-    PointsPage
+    PointsPage,
+    SelectShareTypePage,
+    CreateNewDealWithPhotoPage
   ],
   providers: [
     StatusBar,

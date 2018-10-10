@@ -50,6 +50,23 @@
         <img style="padding: 10px;position: absolute;z-index: 10000;height: 100%;" src="assets/imgs/loginButton2x.png"></button>
     </form>
     <ion-row>
+      <ion-col (click)="onSignUpButton()" text-center>
+        <span class="createAccount_ContinueAsGuest">
+         HESAP OLUŞTUR
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding no-margin>
+      <ion-col text-center>
+        <span class="createAccount_ContinueAsGuest" style="font-size: 16px">YADA</span>
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding margin-bottom>
+      <ion-col text-center>
+        <span class="createAccount_ContinueAsGuest" style="font-size: 12px">SOSYAL MEDYA HESAPLARINDAN BİRİNİ SEÇ!</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col text-center no-padding>
         <button ion-button
                 clear
@@ -67,28 +84,6 @@
                 clear
                 text-center
         ><img style="padding: 7px" src="assets/imgs/G+Icon@2x.png"></button>
-      </ion-col>
-
-
-
-    </ion-row>
-    <ion-row>
-      <ion-col (click)="onSignUpButton()" text-center >
-        <span class="createAccount_ContinueAsGuest">
-         HESAP OLUŞTUR
-        </span>
-      </ion-col>
-    </ion-row>
-    <ion-row no-padding no-margin>
-      <ion-col text-center>
-        <span class="createAccount_ContinueAsGuest" style="font-size: 14px">veya</span>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <span (click)="toTabsPage()" class="createAccount_ContinueAsGuest">
-         MİSAFİR OLARAK DEVAM ET
-        </span>
       </ion-col>
     </ion-row>
   </ion-grid>

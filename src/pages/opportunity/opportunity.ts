@@ -45,11 +45,6 @@ export class OpportunityPage {
   static pageCount = 1;
   @ViewChild(Content) content:Content;
 
-  itemone=true;
-  itemtwo=true;
-  itemthree=true;
-  itemfour=true;
-
   newlyAddedComments = [];
 
   constructor(public navParams: NavParams,
@@ -97,7 +92,6 @@ export class OpportunityPage {
       this.loadThumbsupAnimations();
     });
 
-    this.setItemsBooleanOpposite()
   }
   ionViewDidLoad() {
     this.admob.onAdDismiss()
@@ -106,16 +100,15 @@ export class OpportunityPage {
 
   upVoteDeal(dealId:number){
 
-    /*this.benimFirsatimLib.upvoteDeal(dealId).subscribe(data=>{
+    this.benimFirsatimLib.upvoteDeal(dealId).subscribe(data=>{
       this.opportunity.votes_sum = data.json().deal_score;
-    });*/
+    });
   }
 
   downVoteDeal(dealId:number){
-/*
     this.benimFirsatimLib.downvoteDeal(dealId).subscribe(data=>{
       this.opportunity.votes_sum = data.json().deal_score;
-    });*/
+    });
   }
 
   //Async calls new comments from database.
@@ -160,7 +153,7 @@ export class OpportunityPage {
   onCommentSubmit(form:NgForm){
 
 
-    let response = this.benimFirsatimLib.checkAuthFromStorage();
+    let response = this.benimFirsatimLib.check_auth();
       if(response != null){
 
         let newlyAdded:Comment = new Comment();
@@ -205,7 +198,6 @@ export class OpportunityPage {
 
   onOutsideDealLink(opportunity){
 
-    this.setItemsBooleanOpposite();
 
     setTimeout(()=>{
 
@@ -229,22 +221,6 @@ export class OpportunityPage {
     },700)
   }
 
-  setItemsBooleanOpposite() {
-
-    setTimeout(() => {
-      this.itemone = !this.itemone;
-    }, 0)
-    setTimeout(() => {
-      this.itemtwo = !this.itemtwo;
-    }, 100)
-    setTimeout(() => {
-      this.itemthree = !this.itemthree;
-    }, 200)
-    setTimeout(() => {
-      this.itemfour = !this.itemfour;
-    }, 300)
-  }
-
   goBack(){
 
     if(this.navParams.data.newlyCreated){
@@ -260,7 +236,7 @@ export class OpportunityPage {
   }
 
   playAnim(index,type,comment) {
-    /*if(type === 'like'){
+    if(type === 'like'){
       this.likeButtonAnimation.play();
       if(this.likeButtonAnimation.liked){
         this.downVoteDeal(this.opportunity.id);
@@ -286,7 +262,6 @@ export class OpportunityPage {
         this.thumbUpAnimations[index].liked = true;
       }
     }
-*/
   }
 
   loadAnimations(){
@@ -319,7 +294,7 @@ export class OpportunityPage {
               renderer:'svg',
               autoplay: false,
               loop:false,
-              path:'assets/animations/thumb_up.json'
+              path:'assets/animations/thumb_up_icon_round.json'
             })
           )
           this.commentLikeIndex += 1;
@@ -414,5 +389,13 @@ export class OpportunityPage {
       ]
     });
     actionSheet.present();
+  }
+
+  discount(){
+    if(this.opportunity.original_price !== null && this.opportunity.price !== null){
+      if(parseFloat(this.opportunity.original_price) !== 0 && parseFloat(this.opportunity.price) !== 0){
+        return (((parseFloat(this.opportunity.original_price) - parseFloat(this.opportunity.price)) / parseFloat(this.opportunity.original_price)) * 100).toFixed()
+      }
+    }
   }
 }

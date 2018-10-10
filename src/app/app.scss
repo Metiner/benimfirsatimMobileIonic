@@ -52,7 +52,9 @@ ion-list{
     background: transparent;
 
   }
-  background-image: url('../assets/imgs/menu_bar_opened_bg@3x.png') !important;
+  .scroll-content{
+    background-image: url('../assets/imgs/menu_bar_opened_bg@3x.png') !important;
+  }
 
 }
 .search{
@@ -75,8 +77,12 @@ ion-list{
 
 .menu-text{
   color: #F7E60F !important;
-  font-family: MarkPro-Medium;
+  font-family: MarkPro-Book;
   font-size: 12px;
+}
+.scroll-content{
+  background-color: #e4e4e4;
+
 }
 
 // App Global Sass
@@ -118,4 +124,49 @@ ion-icon {
   &[class*="benimFirsatim-kategoriler"] {
     mask-image: url('../assets/svgs/kategoriler.svg');
   }
+}
+.bf-badge{
+  height: 30px;
+  width: 30px;
+  border-radius: 999px;
+  background-color: #f7e60f;
+  margin-right: 10px;
+}
+.mx-auto{
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+.share-button{
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+}
+.go_to_deal_button{
+  width: 165px;
+  height: 50px;
+}
+.detaylar-span{
+  position: absolute;
+  top: 19px;
+  left: 50px;
+  font-size: 17px;
+  font-family: MarkPro-Heavy;
+  color: #234491;
+}
+.font-4{
+  letter-spacing: 2px;
+  font-family: MarkPro-Book;
+  color: #234491;
+  font-weight: 600;
+  font-size: 12px;
+}
+.title{
+  font-family: MarkPro-Heavy;
+  font-size: 20px;
+  color:#234491;
+}
+.deal-image{
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
 }

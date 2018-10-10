@@ -29,9 +29,6 @@ export class ListDealComponent {
     this.navCont.push(OpportunityPage,this.opportunity);
   }
 
-  isPriceToolong(){
-    return this.opportunity.price ? (this.opportunity.price.length > 5 ? '20px' : this.opportunity.price.length > 6 ? '19px' : '25px') : '25px';
-  }
   whatIsPrice(){
     try{
       if(this.opportunity.price.indexOf(".0") === -1){
@@ -43,5 +40,11 @@ export class ListDealComponent {
     }
 
   }
-
+  discount(){
+    if(this.opportunity.original_price !== null && this.opportunity.price !== null){
+      if(parseFloat(this.opportunity.original_price) !== 0 && parseFloat(this.opportunity.price) !== 0){
+        return (((parseFloat(this.opportunity.original_price) - parseFloat(this.opportunity.price)) / parseFloat(this.opportunity.original_price)) * 100).toFixed()
+      }
+    }
+  }
 }

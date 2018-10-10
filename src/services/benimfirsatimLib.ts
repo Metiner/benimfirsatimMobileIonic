@@ -7,13 +7,13 @@ import { Storage} from "@ionic/storage";
 import {Headers} from '@angular/http';
 import {User} from "../models/user";
 import {NgForm} from "@angular/forms";
-import {Angular2TokenService} from "angular2-token-ionic3";
 
 @Injectable()
 export class BenimfirsatimLib{
 
-  api_address = "https://benimfirsatim.com";
-  static token:string ="";
+  //api_address = "https://benimfirsatim.com";
+  api_address = "http://localhost:3000";
+  token:string ="";
   static user:any;
   static isLoggedInWithFacebook = false;
   static isLoggedInWihGoogle = false;
@@ -23,9 +23,7 @@ export class BenimfirsatimLib{
   constructor(private http:Http,
               private alertCtrl:AlertController,
               private toastCtrl:ToastController,
-              private storageCtrl:Storage,
-              private actionSheetCtrl:ActionSheetController,
-              private _tokenService: Angular2TokenService
+              private actionSheetCtrl:ActionSheetController
               ){}
 
   //Page code can be,
@@ -35,43 +33,96 @@ export class BenimfirsatimLib{
   }
 
 
-  public signUp(email,password, name){
-    return this.http.post(this.api_address + '/users.json',{
-      email:                email,
-      password:             password,
-      name:                 name
+  public signUp(email,password, name) {
+    return this.http.post(this.api_address + '/users.json', {
+      user: {
+        email: email,
+        password: password,
+        password_confirmation: password,
+        name: name
+      }
     })
   }
 
-  public signupOrLogin(email,name,avatar_url,uid,authResponse,provider_name){
-    return this.http.post(this.api_address+'/users/auto_oauth',{"email":email,"name":name,"avatar_url":avatar_url,"uid":uid,"provider":provider_name,login_data:authResponse});
+  public check_auth():Promise<boolean> {
+    return new Promise( resolve => {
+      let bf_auth_obj = JSON.parse(localStorage.getItem("bf-auth"));
+      if(bf_auth_obj === null){
+        resolve(false);
+      }else{
+        this.token = bf_auth_obj.token;
+        BenimfirsatimLib.user = bf_auth_obj;
+        let opt = this.setHeader();
+        this.http.get(this.api_address + '/token/check_validation', opt).subscribe(data => {
+          try{
+            if(data.json().status == 'ok'){
+              resolve(true);
+            }
+          }catch (e){
+            resolve(false);
+          }
+        });
+      }
+    })
+
   }
 
+  /*public signupOrLogin(email,name,avatar_url,uid,authResponse,provider_name){
+    return this.http.post(this.api_address+'/users/auto_oauth',{"email":email,"name":name,"avatar_url":avatar_url,"uid":uid,"provider":provider_name,login_data:authResponse});
+  }*/
+
+  public facebook_login(){
+    let opt:RequestOptions;
+    let myHeaders: Headers = new Headers;
+
+    myHeaders.set('Access-Control-Allow-Origin','*');
+
+    opt = new RequestOptions({
+      headers:myHeaders
+    });
+
+    return this.http.get(this.api_address + '/users/auth/facebook',opt)
+  }
+  public google_login(){
+    let opt:RequestOptions;
+    let myHeaders: Headers = new Headers;
+
+    myHeaders.set('Access-Control-Allow-Origin','*');
+
+    opt = new RequestOptions({
+      headers:myHeaders
+    });
+
+    return this.http.get(this.api_address + '/users/auth/google_oauth2',opt)
+  }
   public signIn(email,password){
     return this.http.post(this.api_address + '/users/sign_in.json',{
-      email:                email,
-      password:             password
+      user: {
+        email: email,
+        password: password
+      }
     })
   }
 
   public getDeal(deal_id){
-    return this._tokenService.get( 'deals/0/'+deal_id.toString() + '/');
+    return this.http.get( 'deals/0/'+deal_id.toString() + '/');
   }
 
   public updateUser(nickname,password){
-    return this._tokenService.put('users.json',{"name":nickname,"password":password});
+    return this.http.put('users.json',{"name":nickname,"password":password});
   }
 
   public upvoteDeal(deal_id){
-    return this._tokenService.get('deals/'+deal_id.toString() + '/upvote');
+    return this.http.get('deals/'+deal_id.toString() + '/upvote');
   }
 
   public downvoteDeal(deal_id){
-    return this._tokenService.get( 'deals/'+deal_id.toString() + '/downvote');
+    return this.http.get( 'deals/'+deal_id.toString() + '/downvote');
   }
 
   public createComment(deal_id,parent_comment_id,comment){
-    return this._tokenService.post( 'deals/' + deal_id +'/comments.json',{parent_comment_id:parent_comment_id,comment:comment});
+    let opt = this.setHeader()
+    return this.http.post( this.api_address+'/deals/' + deal_id +'/comments.json',{parent_comment_id:parent_comment_id,comment:comment},opt);
   }
 
   public createDeal(form:NgForm,selectedImageUrl,imageBase64){
@@ -99,21 +150,21 @@ export class BenimfirsatimLib{
         city:form.value.selectedCity};
     }
 
-    return this._tokenService.post(this.api_address + '/deals/create.json',body);
+    return this.http.post(this.api_address + '/deals/create.json',body);
   }
 
   public commentVote(comment_id){
-    return this._tokenService.post('comments/'+comment_id+'/vote',{});
+    return this.http.post('comments/'+comment_id+'/vote',{});
   }
   public getComments(deal_id,page){
     return this.http.get(this.api_address + '/deals/'+deal_id+'/comments.json?page='+page);
   }
 
   public getCities(){
-    return this._tokenService.get('data/cities');
+    return this.http.get('data/cities');
   }
   public getCategories(){
-    return this._tokenService.get('deals/categories');
+    return this.http.get(this.api_address+ '/categories.json');
   }
 
   //Gets information from given deal link.
@@ -131,7 +182,7 @@ export class BenimfirsatimLib{
   }
 
   public getCategoryDeals(categoryIndex,pagination){
-    return this._tokenService.get('categories/'+categoryIndex+'/deals.json?page='+pagination+'&per_page=3');
+    return this.http.get(this.api_address+ '/categories/'+categoryIndex+'/deals.json?page='+pagination+'&per_page=3');
   }
 
   public showToast(message: string,duration:number,position:string){
@@ -146,58 +197,26 @@ export class BenimfirsatimLib{
 
   // Function for setting key and value on devices storage.
   public storageControl(key:string,value:string){
-
     localStorage.setItem(key,JSON.stringify(value));
-    /*this.storageCtrl.set(key,value)
-      .then( success =>{
-        //this.setTokenFromStorage();
-        return success;
-        }
-      )
-      .catch(
-        err => {
-          this.showToast(err,3000,"bottom");
-        }
-      );
-*/
   }
 
-  //It checks if any user is stored on devices local storage.
-  public checkAuthFromStorage() {
-      return localStorage.getItem("user")
-  }
+
 
   //It removes all of users from device local storage.
   public logOutFromStorageAndAuth(){
-    this.storageCtrl.clear().then(
-      data => {
-        return true;
-      }
-    ).catch(err =>{
-      this.showToast(err,3000,"bottom");
-      return false;
-    })
+    localStorage.removeItem("bf-auth");
   }
 
-  // sets token to static variable named token in this class after login.
-  public setTokenFromStorage():string{
-    this.storageCtrl.get("user").then(data=>{
-      BenimfirsatimLib.token= data.token;
-      return BenimfirsatimLib.token;
-      }
-    ).catch(err=> {
-     this.showToast(err,300,"bottom");
-    })
-    return '';
-  }
+  private set_token_to_storage(token){
 
+  }
   // to set request header for authentication
   private setHeader():RequestOptions{
 
     let opt:RequestOptions;
     let myHeaders: Headers = new Headers;
 
-    myHeaders.set('Authorization',BenimfirsatimLib.token);
+    myHeaders.set('Authorization', this.token);
 
     opt = new RequestOptions({
       headers:myHeaders
@@ -206,11 +225,9 @@ export class BenimfirsatimLib{
     return opt;
   }
   // sets user object to user static variable which locates in this class after login.
-  public setUserInfoAfterLogin(user:any){
-    let u:User=new User();
-    Object.assign(u,user);
+  public setUserInfoAfterLogin(data){
 
-    BenimfirsatimLib.user = u;
+    BenimfirsatimLib.user = data;
   }
 
   // displays a action sheet with given parameters
@@ -222,24 +239,16 @@ export class BenimfirsatimLib{
       actionSheet.present();
   }
 
-  public oAuth(type: number){
-    if(type === 1){
-      return this._tokenService.signInOAuth("facebook");
-    }else
-    {
-      return this._tokenService.signInOAuth("google_oauth2");
-    }
-  }
 
   //Get user logs, notifications.
   public getUserLog(){
-    return this._tokenService.get(  'user/logs');
+    return this.http.get(  'user/logs');
   }
 
 
   //Gets deals which created by current logged user.
   public getDealFromUser(pagination){
-    return this._tokenService.get('user/'+BenimfirsatimLib.user.id+'/deals.json?page='+pagination+'&per_page=3');
+    return this.http.get('user/'+BenimfirsatimLib.user.id+'/deals.json?page='+pagination+'&per_page=3');
   }
 
 

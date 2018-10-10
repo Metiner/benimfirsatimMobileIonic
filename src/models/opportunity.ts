@@ -4,6 +4,8 @@ export class Opportunity {
   comments_count: number;
   coupon_code: string;
   created_at: string;
+  category:{};
+  original_price:string;
   details: string;
   finished_at: string;
   image_url: string;

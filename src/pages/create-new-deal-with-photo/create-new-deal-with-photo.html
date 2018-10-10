@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-navbar text-center hideBackButton="true">
+      <img (click)="goBack()" style="max-width: 30px;position: fixed;left: 16px" src="assets/imgs/back_button@3x.png">
+      <img style="max-width: 40%" src="assets/imgs/yeni_firsat_ekle_text_18pt_markheavy@3x.png">
+    </ion-navbar>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-item>
+      <ion-label class="staticText">FİYAT</ion-label>
+      <ion-input [ngModel]
+                 type="number"
+                 name="deal_price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="staticText">KATEGORİ *</ion-label>
+      <ion-select required
+                  [ngModel]
+                  name="selectedCategory"
+                  multiple="false">
+        <ion-option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label class="staticText">ŞEHİR </ion-label>
+      <ion-select [ngModel]
+                  name="selectedCity">
+        <ion-option *ngFor="let city of states" value="{{city}}">{{city}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label class="staticText">KUPON KODU</ion-label>
+      <ion-input [ngModel] type="text"
+                 name="deal_coupon_code"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="staticText">BAŞLIK *</ion-label>
+      <ion-input [ngModel] = 'deal_title'
+                 type="text"
+                 required
+                 name="deal_title" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="staticText">DETAYLAR *</ion-label>
+      <ion-textarea [ngModel] ='deal_details'
+                    required
+                    name="deal_details" ></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="staticText">TARİH *</ion-label>
+      <ion-datetime [ngModel]
+                    required
+                    displayFormat="DD MM, YYYY"
+                    name="deal_date"></ion-datetime>
+    </ion-item>
+    <!--<ion-row>-->
+    <!--<ion-col text-center>-->
+    <!--<button ion-button-->
+    <!--(click)="onTakePhoto()"-->
+    <!--clear-->
+    <!--type="button">-->
+    <!--<img style="width: 90%" src="assets/imgs/kamerayi_ac_button@3x.png">-->
+    <!--</button>-->
+    <!--</ion-col>-->
+    <!--</ion-row>-->
+    <!--<ion-row>-->
+    <!--<ion-col style="text-align: center">-->
+    <!--<img style="max-width: 250px;max-height: 250px" [src]="base64Image" *ngIf="base64Image"/>-->
+    <!--</ion-col>-->
+    <!--</ion-row>-->
+    <ion-item *ngIf="!photoTaken">
+      <ion-label class="staticText">LÜTFEN FIRSAT GÖRSELİ SEÇİN.</ion-label>
+    </ion-item>
+    <ion-grid>
+      <ion-scroll *ngIf="!photoTaken" scrollX="true" direction="x">
+        <ion-row>
+          <ion-col>
+            <ion-card #picture *ngFor="let image of images" (click)="onPictureSelect(picture)" [@onPictureSelectAnimation]="picture.isSelected ? 'toSelected' : 'default'">
+              <img style="width: auto;height: inherit" src="{{image}}">
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-scroll>
+      <ion-row>
+        <ion-col col-10 style="margin-left: auto;margin-right: auto;">
+          <button ion-button
+                  type="submit"
+                  clear
+                  [disabled]="!f.valid">
+            <img src="assets/imgs/firsati_yarat_button@3x.png">
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

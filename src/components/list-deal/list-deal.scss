@@ -30,19 +30,18 @@ list-deal {
 
   ion-card {
     box-shadow: none !important;
-    border-bottom:1px solid #234491;
-  }
 
-  .title{
-    font-family: MarkPro-Heavy;
-    font-size: 20px;
-    color:#234491;
   }
-
   .like-comment-inspan{
     font-family: MarkPro-Heavy;
-    font-size: 15px;
     color: #234491;
+    font-size: 20px;
+  }
+
+  .share-buttons{
+    .col{
+      padding: 0;
+    }
   }
 
 

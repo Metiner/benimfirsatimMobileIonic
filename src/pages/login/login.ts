@@ -41,17 +41,14 @@ export class LoginPage {
 
     this.benimFirsatimLib.signIn(form.value.email, form.value.password).subscribe(data => {
 
-      console.log(data)
-      console.log(data.json)
       this.onLoginLogo = true;
-      if (data.json() != null) {
-
-        this.setStorageAndUserInfoAfterSuccessLogin(data.json(),1);
-
+      if(data.ok){
+        let responseData = data.json();
+        responseData.token = data.headers.get('Authorization');
+        this.setStorageAndUserInfoAfterSuccessLogin(responseData);
+      }else{
+        this.benimFirsatimLib.showAlert(" ", "Yanlış e-mail veya parola girdiniz.", ["Tamam"]);
       }
-    }, error => {
-
-      this.benimFirsatimLib.showAlert(" ", "Yanlış e-mail veya parola girdiniz.", ["Tamam"]);
     })
   }
 
@@ -61,42 +58,35 @@ export class LoginPage {
   }
 
   //sets the user info to benimfirsatimlib's static user variable and stores token in local storage
-  setStorageAndUserInfoAfterSuccessLogin(data,type) {
+  setStorageAndUserInfoAfterSuccessLogin(data) {
     const loading = this.loadingCtrl.create({
       content: "Giriş yapılıyor..."
     });
     loading.present();
 
-    console.log(data)
-    if(type === 2){
-      this.benimFirsatimLib.setUserInfoAfterLogin(data.data);
-      this.eventCtrl.publish('user.login', ' ');
-      this.benimFirsatimLib.storageControl("user", data);
-      this.navCtrl.push(TabsPage);
-      loading.dismiss();
-      this.benimFirsatimLib.showToast("Giriş yapıldı", 1500, "bottom");
-    } else{
+
       this.benimFirsatimLib.setUserInfoAfterLogin(data);
       this.eventCtrl.publish('user.login', ' ');
-      this.benimFirsatimLib.storageControl("user", data.data);
+
+      this.benimFirsatimLib.storageControl("bf-auth", data);
       this.navCtrl.push(TabsPage);
       loading.dismiss();
       this.benimFirsatimLib.showToast("Giriş yapıldı", 1500, "bottom");
 
-    }
 
     }
 
 
   onFacebookLogin() {
 
-    this.benimFirsatimLib.oAuth(1).subscribe(response => {
+    this.benimFirsatimLib.facebook_login().subscribe(response => {
 
-
+      console.log(response)
+      /*
       this.setStorageAndUserInfoAfterSuccessLogin(response,2);
 
       BenimfirsatimLib.isLoggedInWithFacebook = true;
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.push(TabsPage);*/
     })
   }
 
@@ -104,19 +94,13 @@ export class LoginPage {
 
 
 
-      this.benimFirsatimLib.oAuth(2).subscribe(response => {
-        this.setStorageAndUserInfoAfterSuccessLogin(response,2);
+      this.benimFirsatimLib.google_login().subscribe(response => {
+        console.log(response)
+        /*this.setStorageAndUserInfoAfterSuccessLogin(response,2);
 
         BenimfirsatimLib.isLoggedInWihGoogle = true;
-        this.navCtrl.push(TabsPage);
+        this.navCtrl.push(TabsPage);*/
       })
 
   }
-
-  toTabsPage(){
-
-       this.googlePlus.logout();
-        this.navCtrl.push(TabsPage);
-    }
-
 }

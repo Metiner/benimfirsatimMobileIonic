@@ -7,13 +7,6 @@ page-opportunity {
   //  border:  solid blue;
   //}
 
-  .scroll-content{
-    background-image: url('../assets/imgs/bg_pattern@3x.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    margin-top: 12% !important;
-  }
 
   ion-col div{
     padding: 0px;
@@ -147,9 +140,14 @@ page-opportunity {
   }
 
   .imgClass{
-    width: 40px;
     height: 40px;
   }
+  .like-comment-inspan{
+    font-family: MarkPro-Heavy;
+    color: #234491;
+    font-size: 20px;
+  }
+
 }
 
 

@@ -7,6 +7,7 @@ import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {CategoriesPage} from "../categories/categories";
 import {CreateNewDealPage} from "../create-new-deal/create-new-deal";
 import {LoginPage} from "../login/login";
+import {SelectShareTypePage} from "../select-share-type/select-share-type";
 @Component({
   selector: 'page-tabs',
   template: `
@@ -43,33 +44,26 @@ export class TabsPage {
   risingPage = RisingPage;
   topPage = TopPage;
   categoriesPage = CategoriesPage;
-  createNewDealPage = CreateNewDealPage;
   loginPage = LoginPage;
 
   onCreateNewDeal() {
 
-    let alert = this.alertCtrl.create({
-      title: "Fırsat ekleme özelliği çok yakında sizlerle !",
-      buttons: ['Tamam']
-    });
-    alert.present();
-  }
-    /*let response = this.benimFirsatimLib.checkAuthFromStorage()
+    this.benimFirsatimLib.check_auth().then(response => {
+      if(response){
+        this.navCtrl.push(SelectShareTypePage);
 
-    if(response != null){
-      this.navCtrl.push(this.createNewDealPage);
-    }
-    else{
-      this.benimFirsatimLib.showAlert("Uyarı", "Fırsat yaratmak için giriş yapmalısınız.", [
-        {
-          text: 'Giriş Yap', handler: () => {
-          this.navCtrl.push(this.loginPage);
-        }
-        },
-        {
-          text: 'Vazgeç'
-        }])
-    }
+      }else{
+        this.benimFirsatimLib.showAlert("Uyarı", "Fırsat yaratmak için giriş yapmalısınız.", [
+          {
+            text: 'Giriş Yap', handler: () => {
+            this.navCtrl.push(this.loginPage);
+          }
+          },
+          {
+            text: 'Vazgeç'
+          }])
 
-  }*/
+      }
+    })
+   }
 }

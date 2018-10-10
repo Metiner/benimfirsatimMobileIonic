@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import {Events, IonicPage, LoadingController, NavController} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {LoginPage} from "../login/login";
@@ -13,7 +13,10 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class SignupPage {
 
-  constructor(private benimFirsatimLib: BenimfirsatimLib,private navCtrl:NavController){}
+  constructor(private benimFirsatimLib: BenimfirsatimLib,
+              private navCtrl:NavController,
+              private loadingCtrl: LoadingController,
+              private eventCtrl: Events){}
 
   onSignUp(form: NgForm){
 
@@ -22,25 +25,43 @@ export class SignupPage {
       this.benimFirsatimLib.showToast("Parolalar uyuşmamakta",3000,"bottom");
     }else{
 
+
+      const loading = this.loadingCtrl.create({
+        content: "Lütfen bekleyiniz..."
+      });
+      loading.present();
       this.benimFirsatimLib.signUp(form.value.email, form.value.password, form.value.username).subscribe(data=>{
 
-        console.log(data)
-        console.log(data.json)
-        if(data != null){
+        if(data.ok){
 
-          if(data.status == 200 && data.ok){
-            this.benimFirsatimLib.showToast("Kullanıcı oluşturuldu",3000,"bottom");
-            this.navCtrl.push(LoginPage);
 
-          }else if (data.json().state.code == 1){
-            this.benimFirsatimLib.showToast(data.json().state.messages[0],3500,"bottom");
-            form.reset();
-          }
+          let responseData = data.json();
+          responseData.token = data.headers.get('Authorization');
+          this.setStorageAndUserInfoAfterSuccessLogin(responseData);
         }
-      },error =>{
-          this.benimFirsatimLib.showAlert("",error,["Tamam"]);
-      });
+        loading.dismiss();
+
+      },error => {
+        this.benimFirsatimLib.showAlert(" ", "Email veya kullanıcı adı kullanılmakta.", ["Tamam"]);
+        loading.dismiss();
+
+      })
       }
+  }
+
+  //sets the user info to benimfirsatimlib's static user variable and stores token in local storage
+  setStorageAndUserInfoAfterSuccessLogin(data) {
+
+
+
+    this.benimFirsatimLib.setUserInfoAfterLogin(data);
+    this.eventCtrl.publish('user.login', ' ');
+
+    this.benimFirsatimLib.storageControl("bf-auth", data);
+    this.navCtrl.push(TabsPage);
+    this.benimFirsatimLib.showToast("Kayıt yapıldı", 1500, "bottom");
+
+
   }
   toTabsPage(){
     this.navCtrl.push(TabsPage);

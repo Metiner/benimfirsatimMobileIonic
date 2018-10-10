@@ -43,7 +43,7 @@ $colors: (
   button: #0B90DF
 );
 
-
+$content-padding: 10px;
 //Css override variables
 .tab-button-text {
   //padding: 4px;
@@ -120,34 +120,21 @@ ion-navbar.toolbar{
 
 @font-face {
   font-family: MarkPro-Black;
-  src: url("../assets/fonts/MarkPro-Black.otf");
+  src: url("../assets/fonts/Montserrat-Black.ttf");
 }
 @font-face {
   font-family: MarkPro-Bold;
-  src: url("../assets/fonts/MarkPro-Bold.otf");
+  src: url("../assets/fonts/Montserrat-SemiBold.ttf");
 }
 
-@font-face {
-  font-family: MarkPro-Italic;
-  src: url("../assets/fonts/MarkPro-Italic.otf");
-}
 @font-face {
   font-family: MarkPro-Heavy;
-  src: url("../assets/fonts/MarkPro-Heavy.otf");
-}
-
-@font-face {
-  font-family: MarkPro-Medium;
-  src: url("../assets/fonts/MarkPro-Medium.otf");
+  src: url("../assets/fonts/Montserrat-ExtraBold.ttf");
 }
 
 @font-face {
   font-family: MarkPro-Book;
-  src: url("../assets/fonts/MarkPro-Book.otf");
-}
-@font-face {
-  font-family: MarkPro-Light;
-  src: url("../assets/fonts/MarkPro-Light.otf");
+  src: url("../assets/fonts/Montserrat-Regular.ttf");
 }
 
 

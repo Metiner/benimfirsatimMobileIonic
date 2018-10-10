@@ -30,23 +30,6 @@ export class SettingsPage {
     this.user = BenimfirsatimLib.user;
   }
 
-  itemone;
-  itemtwo;
-
-  ionViewWillEnter(){
-      /*this.benimFirsatimLib.checkAuthFromStorage().then( response =>{
-      this.user = response.user;
-    }).catch(error=>{
-      console.log(error);
-      })*/
-
-    this.user = JSON.parse(localStorage.getItem('user'))
-
-    this.itemone = 'toLogoUp';
-    this.itemtwo = 'toLogoUp';
-
-  }
-
   onChangeAvatar(){
       this.benimFirsatimLib.presentActionSheet("Profil Fotoğrafını Değiştir",[
         {

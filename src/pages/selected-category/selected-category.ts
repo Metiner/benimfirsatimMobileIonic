@@ -21,7 +21,7 @@ export class SelectedCategoryPage {
     this.benimFirsatimLib.getCategoryDeals(this.category.id,SelectedCategoryPage.pagination).subscribe((data)=>{
 
       SelectedCategoryPage.pagination++;
-      data.json().entries.forEach(element => {
+      data.json().forEach(element => {
 
 
         let u:Opportunity = new Opportunity();

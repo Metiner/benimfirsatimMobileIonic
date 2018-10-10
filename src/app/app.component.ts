@@ -1,7 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {MenuController, NavController, Platform,Events} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import {TabsPage} from "../pages/tabs/tabs";
 import {LoginPage} from "../pages/login/login";
 import {BenimfirsatimLib} from "../services/benimfirsatimLib";
@@ -12,13 +11,13 @@ import {Facebook} from "@ionic-native/facebook";
 import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
 import {PointsPage} from "../pages/points/points";
-import {Angular2TokenService} from "angular2-token-ionic3";
+import {SelectShareTypePage} from "../pages/select-share-type/select-share-type";
 declare const fb:any;
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any = SelectShareTypePage;
   public isAuthenticated = false;
   settingsPage = SettingsPage;
   myDealsPage = MyDealsPage;
@@ -27,98 +26,58 @@ export class MyApp {
   @ViewChild('nav') nav: NavController;
 
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+  constructor(platform: Platform, statusBar: StatusBar,
               private menuCtrl:MenuController,
               private benimFirsatimLib:BenimfirsatimLib,
               private eventCtrl:Events,
               private gA:GoogleAnalytics,
               private oneSignal:OneSignal,
               private googlePlusLogin:GooglePlus,
-              private facebookLogin:Facebook,
-              private _tokenService: Angular2TokenService) {
+              private facebookLogin:Facebook) {
 
-    this._tokenService.init({
-      apiBase:                    null,
-      apiPath:                    'https://api.benimfirsatim.com',
-
-      signInPath:                 'auth/sign_in',
-      signInRedirect:             null,
-      signInStoredUrlStorageKey:  null,
-
-      signOutPath:                'auth/sign_out',
-      validateTokenPath:          'auth/validate_token',
-      signOutFailedValidate:      false,
-
-      registerAccountPath:        'auth',
-      deleteAccountPath:          'auth',
-      registerAccountCallback:    window.location.href,
-
-      updatePasswordPath:         'auth',
-      resetPasswordPath:          'auth/password',
-      resetPasswordCallback:      window.location.href,
-
-      oAuthBase:                  'https://api.benimfirsatim.com',
-
-      oAuthCallbackPath:          'oauth_callback',
-      oAuthWindowType:            'newWindow',
-      oAuthWindowOptions:         null,
-
-      userTypes:                  null,
-
-      globalOptions: {
-        headers: {
-          'Content-Type':     'application/json',
-          'Accept':           'application/json'
-        }
-      }
-    });
 
     this.eventCtrl.subscribe("user.login", () => { this.isAuthenticated = true});
-    let response = benimFirsatimLib.checkAuthFromStorage()
-      if(response != null){
-        this.isAuthenticated = true;
-      }
-      else{
-        this.isAuthenticated = false;
-      }
-
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.hide();
 
-    this.nav.setRoot(TabsPage);
-    let responseTwo = this.benimFirsatimLib.checkAuthFromStorage()
-      if(response != null) {
-        BenimfirsatimLib.user = responseTwo;
-        //BenimfirsatimLib.token = response.token;
+      if(benimFirsatimLib.check_auth().then( response => {
+        if(response){
+          this.isAuthenticated = true;
+          this.nav.setRoot(TabsPage)
+          this.nav.push(TabsPage);
+        }else{
+          this.isAuthenticated = false;
+        }
+        }))
 
 
-        // onesignal code start:
-        this.oneSignal.startInit('e3b6a1f6-1826-4015-a0c5-99665f5a9589', '57374298212');
+      /*// onesignal code start:
+      this.oneSignal.startInit('e3b6a1f6-1826-4015-a0c5-99665f5a9589', '57374298212');
 
-        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
-        this.oneSignal.handleNotificationReceived().subscribe(() => {
-          // do something when notification is received
-        });
+      this.oneSignal.handleNotificationReceived().subscribe(() => {
+        // do something when notification is received
+      });
 
-        this.oneSignal.handleNotificationOpened().subscribe(() => {
-          // do something when a notification is opened
-        });
+      this.oneSignal.handleNotificationOpened().subscribe(() => {
+        // do something when a notification is opened
+      });
 
-        this.oneSignal.endInit()
-        //for starting google analytics
-      }
-      this.gA.startTrackerWithId('UA-44910726-2')
-        .then(() => {
-          this.gA.trackView('test');
-          // Tracker is ready
-          // You can now track pages or set additional information such as AppVersion or UserId
-        })
-        .catch(e => console.log('Error starting GoogleAnalytics', e));
-    });
+      this.oneSignal.endInit()
+      //for starting google analytics*/
+
+    this.gA.startTrackerWithId('UA-44910726-2')
+      .then(() => {
+        this.gA.trackView('test');
+        // Tracker is ready
+        // You can now track pages or set additional information such as AppVersion or UserId
+      })
+      .catch(e => console.log('Error starting GoogleAnalytics', e));
+  });
   }
   onSignin(){
     this.nav.push(LoginPage);
@@ -127,19 +86,10 @@ export class MyApp {
 
   onLogout(){
 
-      /*// sign out if user signed in with google account
-      if(BenimfirsatimLib.isLoggedInWihGoogle){
-        this.googlePlusLogin.logout();
-      }
-
-    // sign out if user signed in with Facebook account
-    if(BenimfirsatimLib.isLoggedInWithFacebook){
-        this.facebookLogin.logout();
-      }*/
 
       this.benimFirsatimLib.logOutFromStorageAndAuth();
       this.menuCtrl.close();
-      this.nav.setRoot(TabsPage);
+      this.nav.setRoot(LoginPage);
       this.benimFirsatimLib.showToast("Çıkış yapıldı",2000,"bottom");
       localStorage.clear()
 
