@@ -11,8 +11,8 @@ import {NgForm} from "@angular/forms";
 @Injectable()
 export class BenimfirsatimLib{
 
-  //api_address = "https://benimfirsatim.com";
-  api_address = "http://localhost:3000";
+  api_address = "https://benimfirsatim.com";
+  //api_address = "http://localhost:3000";
   token:string ="";
   static user:any;
   static isLoggedInWithFacebook = false;
