@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-navbar text-center hideBackButton="true">
-      <img (click)="goBack()" style="max-width: 30px;position: fixed;left: 16px" src="assets/imgs/back_button@3x.png">
+      <img navPop style="max-width: 30px;position: fixed;left: 16px" src="assets/imgs/back_button@3x.png">
       <img style="max-width: 40%" src="assets/imgs/yeni_firsat_ekle_text_18pt_markheavy@3x.png">
     </ion-navbar>
   </ion-toolbar>
@@ -10,13 +10,17 @@
 
 
 <ion-content padding>
+
+
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <ion-item>
-      <ion-label class="staticText">FİYAT</ion-label>
-      <ion-input [ngModel]
-                 type="number"
-                 name="deal_price"></ion-input>
-    </ion-item>
+    <ion-row style="border-bottom: 0.55px solid #c8c7cc" margin-top>
+      <ion-col col-auto style="padding-left: 16px">
+        <span class="staticText">FİYAT</span>
+      </ion-col>
+      <ion-col>
+        <input style="background: none;font-family: MarkPro-Heavy;font-size: 15px;color: #234491;border:none;width:100%" currencyMask [ngModel] name="deal_price" [options]="{ prefix: '₺', thousands: '.', decimal: ',' , align: 'left'}">
+      </ion-col>
+    </ion-row>
     <ion-item>
       <ion-label class="staticText">KATEGORİ *</ion-label>
       <ion-select required
@@ -60,34 +64,45 @@
                     displayFormat="DD MM, YYYY"
                     name="deal_date"></ion-datetime>
     </ion-item>
-    <!--<ion-row>-->
-    <!--<ion-col text-center>-->
-    <!--<button ion-button-->
-    <!--(click)="onTakePhoto()"-->
-    <!--clear-->
-    <!--type="button">-->
-    <!--<img style="width: 90%" src="assets/imgs/kamerayi_ac_button@3x.png">-->
-    <!--</button>-->
-    <!--</ion-col>-->
-    <!--</ion-row>-->
-    <!--<ion-row>-->
-    <!--<ion-col style="text-align: center">-->
-    <!--<img style="max-width: 250px;max-height: 250px" [src]="base64Image" *ngIf="base64Image"/>-->
-    <!--</ion-col>-->
-    <!--</ion-row>-->
-    <ion-item *ngIf="!photoTaken">
-      <ion-label class="staticText">LÜTFEN FIRSAT GÖRSELİ SEÇİN.</ion-label>
-    </ion-item>
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button
+        (click)="onTakePhoto()"
+        clear
+        type="button">
+          <img style="width: 70%" src="assets/imgs/kamerayi-ac-button.png">
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="text-align: center">
+        <img style="max-width: 250px;max-height: 250px" [src]="base64Image" *ngIf="base64Image"/>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button
+                (click)="onOpenMap()"
+                clear
+                type="button">
+          <img style="width: 70%" src="assets/imgs/konum-ekle-button.png">
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="isLocationSet">
+      <ion-col>
+        <sebm-google-map
+          [latitude]="location.ltt"
+          [longitude]="location.lng"
+          [zoom]="17">
+          <sebm-google-map-marker [longitude]="location.lng"
+                                  [latitude]="location.ltt">
+          </sebm-google-map-marker>
+
+        </sebm-google-map>
+      </ion-col>
+    </ion-row>
     <ion-grid>
-      <ion-scroll *ngIf="!photoTaken" scrollX="true" direction="x">
-        <ion-row>
-          <ion-col>
-            <ion-card #picture *ngFor="let image of images" (click)="onPictureSelect(picture)" [@onPictureSelectAnimation]="picture.isSelected ? 'toSelected' : 'default'">
-              <img style="width: auto;height: inherit" src="{{image}}">
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-scroll>
       <ion-row>
         <ion-col col-10 style="margin-left: auto;margin-right: auto;">
           <button ion-button

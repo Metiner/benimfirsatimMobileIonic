@@ -64,7 +64,7 @@ export class SignupPage {
 
   }
   toTabsPage(){
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.popToRoot();
   }
 
 

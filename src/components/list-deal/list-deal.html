@@ -1,6 +1,6 @@
 <ion-card [ngClass]="{'logoComesFromLeft':logoComesFromLeft}" padding-top>
   <ion-row align-self-center>
-    <ion-col col-auto class="mx-auto">
+    <ion-col col-auto class="mx-auto" (click)="onOpportunityPage(opportunity)">
       <img class="deal-image" src="{{opportunity.image_url}}">
     </ion-col>
     <!--<ion-col col-7>
@@ -26,7 +26,7 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col text-center>
+    <ion-col text-center (click)="onOpportunityPage(opportunity)">
       <span class="title">{{opportunity.title.substring(0,50)+'...'}}</span>
     </ion-col>
   </ion-row>

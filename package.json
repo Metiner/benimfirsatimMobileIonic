@@ -54,6 +54,7 @@
     "cordova-plugin-extension": "^1.5.4",
     "cordova-plugin-facebook4": "^1.9.1",
     "cordova-plugin-file": "^6.0.1",
+    "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-google-analytics": "^1.8.3",
     "cordova-plugin-googleplus": "^5.2.1",
     "cordova-plugin-inappbrowser": "^3.0.0",
@@ -70,6 +71,7 @@
     "is": "^3.2.1",
     "jquery": "^3.3.1",
     "lottie-web": "^5.1.10",
+    "ng2-currency-mask": "^5.3.1",
     "ngx-facebook": "^2.4.0",
     "node-sass": "^4.8.3",
     "onesignal-cordova-plugin": "^2.3.2",
@@ -111,7 +113,10 @@
       "cordova-plugin-file": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-admob-free": {},
-      "cordova-plugin-admobpro": {}
+      "cordova-plugin-admobpro": {},
+      "cordova-plugin-geolocation": {
+        "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
+      }
     },
     "platforms": [
       "browser",

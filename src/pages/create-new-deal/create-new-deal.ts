@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {IonicPage, LoadingController, ModalController, NavController, Platform} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
-import {SetLocationPage} from "../set-location/set-location";
 import {Location} from "../../models/location";
 import {Category} from "../../models/category";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
@@ -108,7 +107,7 @@ export class CreateNewDealPage {
     }
   }
 
-  onOpenMap(){
+  /*onOpenMap(){
 
     const modal = this.modalCtrl.create(SetLocationPage,{location:this.location,
                                                               isSet:this.isLocationSet});
@@ -119,7 +118,7 @@ export class CreateNewDealPage {
         this.isLocationSet = true;
       }
     })
-  }
+  }*/
   // it replaces title,images,description of deals with given link.
   onUrlChange(event){
     if(this.isLinkEmpty){
@@ -175,7 +174,7 @@ export class CreateNewDealPage {
 
   }
 
-  onTakePhoto(){
+  /*onTakePhoto(){
 
     if(this.platform.is('cordova')){
       this.camera.getPicture({
@@ -201,10 +200,7 @@ export class CreateNewDealPage {
 
     }
 
-  }
-  goBack(){
-    this.navCtrl.pop();
-  }
+  }*/
   getCategoryId(name) {
 
     switch (name) {

@@ -73,7 +73,7 @@ export class MyDealsPage {
   }
 
   toTabsPage(){
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.popToRoot();
   }
 
 

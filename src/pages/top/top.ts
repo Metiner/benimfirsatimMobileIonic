@@ -72,7 +72,7 @@ export class TopPage {
 
   }
   toTabsPage(){
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.popToRoot();
   }
 
   openFeedbackDiv(){

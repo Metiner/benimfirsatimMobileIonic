@@ -79,7 +79,7 @@ export class HighlightsPage {
   }
 
   toTabsPage(){
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.popToRoot();
   }
 
   openFeedbackDiv(){

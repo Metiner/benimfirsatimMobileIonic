@@ -72,7 +72,7 @@ export class RisingPage {
 
   }
   toTabsPage(){
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.popToRoot();
   }
 
 

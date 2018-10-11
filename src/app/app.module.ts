@@ -20,7 +20,6 @@ import {SignupPage} from "../pages/signup/signup";
 import {LoginPage} from "../pages/login/login";
 import {IonicStorageModule} from "@ionic/storage";
 import {CreateNewDealPage} from "../pages/create-new-deal/create-new-deal";
-import {SetLocationPage} from "../pages/set-location/set-location";
 import {AgmCoreModule} from "angular2-google-maps/core";
 import {SelectedCategoryPage} from "../pages/selected-category/selected-category";
 import {Facebook} from "@ionic-native/facebook";
@@ -41,10 +40,11 @@ import {FacebookModule} from "ngx-facebook";
 import {FeedbackComponent} from "../components/feedback/feedback";
 import {A2tUiModule, Angular2TokenService} from "angular2-token-ionic3";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
-import {AdMobFree} from "@ionic-native/admob-free";
 import {AdMobPro} from "@ionic-native/admob-pro";
 import {SelectShareTypePage} from "../pages/select-share-type/select-share-type";
 import {CreateNewDealWithPhotoPage} from "../pages/create-new-deal-with-photo/create-new-deal-with-photo";
+import {Geolocation} from "ionic-native";
+import {CurrencyMaskModule} from "ng2-currency-mask";
 
 @NgModule({
   declarations: [
@@ -59,7 +59,6 @@ import {CreateNewDealWithPhotoPage} from "../pages/create-new-deal-with-photo/cr
     SignupPage,
     LoginPage,
     CreateNewDealPage,
-    SetLocationPage,
     SelectedCategoryPage,
     OnCommentReplyPage,
     SettingsPage,
@@ -77,10 +76,11 @@ import {CreateNewDealWithPhotoPage} from "../pages/create-new-deal-with-photo/cr
     RouterModule,
     FacebookModule.forRoot(),
     BrowserAnimationsModule,
+    CurrencyMaskModule,
     IonicModule.forRoot(MyApp,{backButtonText: 'Geri'}),
     IonicStorageModule.forRoot({driverOrder: ['indexeddb', 'websql', 'sqlite']}),
     AgmCoreModule.forRoot({
-      apiKey:'AIzaSyB4HjxYVe5iOu4dzGhaDfq1vtCzmiMCg1U'
+      apiKey:'AIzaSyCXpRW3Ms9iZ6FfUslL_xLDZ40jfyI5E4Q'
     }),
     A2tUiModule
   ],
@@ -97,7 +97,6 @@ import {CreateNewDealWithPhotoPage} from "../pages/create-new-deal-with-photo/cr
     LoginPage,
     SignupPage,
     CreateNewDealPage,
-    SetLocationPage,
     SelectedCategoryPage,
     OnCommentReplyPage,
     SettingsPage,
@@ -120,6 +119,7 @@ import {CreateNewDealWithPhotoPage} from "../pages/create-new-deal-with-photo/cr
     InAppBrowser,
     Angular2TokenService,
     AdMobPro,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -11,13 +11,12 @@ import {Facebook} from "@ionic-native/facebook";
 import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
 import {PointsPage} from "../pages/points/points";
-import {SelectShareTypePage} from "../pages/select-share-type/select-share-type";
 declare const fb:any;
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = SelectShareTypePage;
+  rootPage:any = LoginPage;
   public isAuthenticated = false;
   settingsPage = SettingsPage;
   myDealsPage = MyDealsPage;

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-navbar text-center hideBackButton="true">
-      <img (click)="goBack()" style="max-width: 30px;position: fixed;left: 16px" src="assets/imgs/back_button@3x.png">
+      <img navPop style="max-width: 30px;position: fixed;left: 16px" src="assets/imgs/back_button@3x.png">
       <img style="max-width: 40%" src="assets/imgs/yeni_firsat_ekle_text_18pt_markheavy@3x.png">
     </ion-navbar>
   </ion-toolbar>
@@ -18,12 +18,14 @@
                  (ionChange)="onUrlChange($event)"
                  placeholder="Lütfen fırsat linkini buraya kopyala"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label class="staticText">FİYAT</ion-label>
-      <ion-input [ngModel]
-                 type="number"
-                 name="deal_price"></ion-input>
-    </ion-item>
+    <ion-row style="border-bottom: 0.55px solid #c8c7cc" margin-top>
+      <ion-col col-auto style="padding-left: 16px">
+        <span class="staticText">FİYAT</span>
+      </ion-col>
+      <ion-col>
+        <input style="background: none;font-family: MarkPro-Heavy;font-size: 15px;color: #234491;border:none;width:100%" currencyMask [ngModel] name="deal_price" [options]="{ prefix: '₺', thousands: '.', decimal: ',' , align: 'left'}">
+      </ion-col>
+    </ion-row>
     <ion-item>
       <ion-label class="staticText">KATEGORİ *</ion-label>
       <ion-select required

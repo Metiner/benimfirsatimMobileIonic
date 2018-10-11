@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {TabsPage} from "../tabs/tabs";
 
 /**
  * Generated class for the PointsPage page.
@@ -33,5 +34,8 @@ export class PointsPage {
 
   goBack(){
     this.navCtrl.pop();
+  }
+  toTabsPage(){
+    this.navCtrl.popToRoot();
   }
 }
