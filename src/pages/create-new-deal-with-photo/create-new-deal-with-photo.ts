@@ -3,6 +3,8 @@ import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angu
 import {Camera} from "@ionic-native/camera";
 import {Location} from "../../models/location";
 import {Geolocation} from "ionic-native";
+import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {Category} from "../../models/category";
 
 
 
@@ -20,6 +22,10 @@ import {Geolocation} from "ionic-native";
 })
 export class CreateNewDealWithPhotoPage {
 
+  cities = [];
+  categories: Category[] = [];
+
+
   base64Image: string;
   base64ImageToUpload: string;
   location:Location = {
@@ -30,9 +36,21 @@ export class CreateNewDealWithPhotoPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private camera:Camera,
-              private loadingCtrl: LoadingController
+              private loadingCtrl: LoadingController,
+              private benimFirsatimLib: BenimfirsatimLib
   ){
-
+    benimFirsatimLib.getCategories().subscribe(data=>{
+      data.json().forEach(element=>{
+        let u: Category = new Category();
+        Object.assign(u,element);
+        this.categories.push(u);
+      })
+    })
+    this.benimFirsatimLib.getCities().subscribe(response=>{
+      this.cities = response.json().cities;
+    },error2 => {
+      console.log(error2.toLocaleString());
+    })
   }
 
   ionViewDidLoad() {

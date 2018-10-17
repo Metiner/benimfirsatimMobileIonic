@@ -20,7 +20,6 @@ import {TabsPage} from "../tabs/tabs";
 export class TopPage {
 
   opportunities: Opportunity[] = [];
-  opportunityPage = OpportunityPage;
   static pagination = 1;
   feedbackDivOpen = false;
 
@@ -33,7 +32,7 @@ export class TopPage {
     this.feedbackDivOpen = false;
     });
 
-    benimfirsatimLib.getPage('/fresh',TopPage.pagination).subscribe((data)=>{
+    benimfirsatimLib.get_page('/fresh',TopPage.pagination).subscribe((data)=>{
       data.json().forEach(element => {
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
@@ -42,14 +41,10 @@ export class TopPage {
     })
   }
 
-  ionViewDidLoad(){
-    TopPage.pagination = 1;
-  }
-
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 
-    this.benimfirsatimLib.getPage('/fresh',TopPage.pagination).subscribe(data =>{
+    this.benimfirsatimLib.get_page('/fresh',TopPage.pagination).subscribe(data =>{
       if(TopPage.pagination === 1)
         TopPage.pagination = 2
 

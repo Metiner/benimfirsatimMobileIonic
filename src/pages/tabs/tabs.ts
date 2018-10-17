@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import {HighlightsPage} from "../highlights/highlights";
 import {RisingPage} from "../rising/rising";
 import {TopPage} from "../top/top";
-import {AlertController, NavController} from "ionic-angular";
+import { NavController} from "ionic-angular";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {CategoriesPage} from "../categories/categories";
-import {CreateNewDealPage} from "../create-new-deal/create-new-deal";
 import {LoginPage} from "../login/login";
 import {SelectShareTypePage} from "../select-share-type/select-share-type";
+import {MyApp} from "../../app/app.component";
 @Component({
   selector: 'page-tabs',
   template: `
 
     
-    <ion-tabs tabsPlacement ="bottom">
+    <ion-tabs tabsPlacement ="bottom" [selectedIndex]="2">
       <ion-footer>
         <ion-buttons>
           <button ion-button
@@ -36,7 +36,6 @@ import {SelectShareTypePage} from "../select-share-type/select-share-type";
 })
 export class TabsPage {
   constructor(private navCtrl: NavController,
-              private alertCtrl:AlertController,
               private benimFirsatimLib: BenimfirsatimLib) {
   }
 
@@ -48,22 +47,20 @@ export class TabsPage {
 
   onCreateNewDeal() {
 
-    this.benimFirsatimLib.check_auth().then(response => {
-      if(response){
-        this.navCtrl.push(SelectShareTypePage);
+    if(MyApp.isAuthenticated){
+      this.navCtrl.push(SelectShareTypePage);
+    }else{
+      this.benimFirsatimLib.showAlert("Uyarı", "Fırsat yaratmak için giriş yapmalısınız.", [
+        {
+          text: 'Giriş Yap', handler: () => {
+          this.navCtrl.setRoot(this.loginPage);
+        }
+        },
+        {
+          text: 'Vazgeç'
+        }
+      ])
+    }
+  }
 
-      }else{
-        this.benimFirsatimLib.showAlert("Uyarı", "Fırsat yaratmak için giriş yapmalısınız.", [
-          {
-            text: 'Giriş Yap', handler: () => {
-            this.navCtrl.push(this.loginPage);
-          }
-          },
-          {
-            text: 'Vazgeç'
-          }])
-
-      }
-    })
-   }
 }

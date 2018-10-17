@@ -13,7 +13,7 @@
 
 
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <ion-row style="border-bottom: 0.55px solid #c8c7cc" margin-top>
+    <ion-row margin-top>
       <ion-col col-auto style="padding-left: 16px">
         <span class="staticText">FİYAT</span>
       </ion-col>
@@ -27,20 +27,21 @@
                   [ngModel]
                   name="selectedCategory"
                   multiple="false">
-        <ion-option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</ion-option>
+        <ion-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label class="staticText">ŞEHİR </ion-label>
       <ion-select [ngModel]
                   name="selectedCity">
-        <ion-option *ngFor="let city of states" value="{{city}}">{{city}}</ion-option>
+        <ion-option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label class="staticText">KUPON KODU</ion-label>
       <ion-input [ngModel] type="text"
                  name="deal_coupon_code"
+                 [maxlength]="10"
       ></ion-input>
     </ion-item>
     <ion-item>
@@ -56,7 +57,6 @@
                     required
                     name="deal_details" ></ion-textarea>
     </ion-item>
-
     <ion-item>
       <ion-label class="staticText">TARİH *</ion-label>
       <ion-datetime [ngModel]

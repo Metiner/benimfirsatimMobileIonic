@@ -3,8 +3,7 @@ import {Events, InfiniteScroll, IonicPage, NavController} from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
-import {ListDealComponent} from "../../components/list-deal/list-deal";
-import {TabsPage} from "../tabs/tabs";
+import * as $ from 'jquery'
 
 
 /**
@@ -34,7 +33,7 @@ export class HighlightsPage {
       this.feedbackDivOpen = false;
     })
 
-    benimfirsatimLib.getPage('',HighlightsPage.pagination).subscribe((data)=>{
+    benimfirsatimLib.get_page('',HighlightsPage.pagination).subscribe((data)=>{
 
       data.json().forEach(element => {
 
@@ -47,16 +46,13 @@ export class HighlightsPage {
     })
   }
 
-  ionViewDidLoad(){
-    HighlightsPage.pagination = 1;
-  }
 
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 
     if(HighlightsPage.pagination === 1)
       HighlightsPage.pagination = 2
-    this.benimfirsatimLib.getPage('',HighlightsPage.pagination).subscribe(data =>{
+    this.benimfirsatimLib.get_page('',HighlightsPage.pagination).subscribe(data =>{
 
 
       if(data.json().length > 0) {

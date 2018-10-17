@@ -1,6 +1,6 @@
 {
   "name": "benimFirsatim",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
   "private": true,
@@ -40,6 +40,7 @@
     "@types/jquery": "^3.3.1",
     "angular-new-router": "github:angular/router",
     "angular2-google-maps": "^0.17.0",
+    "angular2-tag-input": "^1.2.3",
     "angular2-token-ionic3": "0.0.1",
     "cordova-admob-sdk": "^0.17.0",
     "cordova-android": "6.3.0",

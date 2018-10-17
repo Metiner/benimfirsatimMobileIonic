@@ -24,6 +24,8 @@ page-create-new-deal {
   }
   ion-item{
     background-color: transparent !important;
+    contain: strict;
+    border-bottom: 1px solid #dedede !important;
     }
 
 

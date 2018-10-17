@@ -18,7 +18,9 @@ export class LoginPage {
 
   @ViewChildren('content') rows: QueryList<any>;
   onLoginLogo = true;
-
+  email= "";
+  password="";
+  remember_me;
 
 
   constructor(private benimFirsatimLib: BenimfirsatimLib,
@@ -37,21 +39,51 @@ export class LoginPage {
 
   }
 
+  ionViewWillEnter(){
+    this.fill_input_due_remember_me();
+  }
+
+  fill_input_due_remember_me(){
+
+    if(localStorage.getItem("password") !== null){
+      this.email = localStorage.getItem("user_email");
+      this.password = localStorage.getItem("password");
+      this.remember_me = true;
+    }else{
+      this.remember_me = false;
+    }
+  }
+
   onLogIn(form: NgForm) {
 
-    this.benimFirsatimLib.signIn(form.value.email, form.value.password).subscribe(data => {
+    if(form.value.remember_me){
+      localStorage.setItem("user_email", form.value.email);
+      localStorage.setItem("password", form.value.password);
+      localStorage.setItem("remember_me", "true");
+    }else{
+      localStorage.removeItem("user_email");
+      localStorage.removeItem("password");
+      localStorage.removeItem("remember_me");
+    }
 
+    const loading = this.loadingCtrl.create({
+      content: "Giriş yapılıyor..."
+    });
+    this.benimFirsatimLib.signIn(form.value.email, form.value.password).subscribe(data => {
+      loading.present();
       this.onLoginLogo = true;
       if(data.ok){
         let responseData = data.json();
         responseData.token = data.headers.get('Authorization');
         this.setStorageAndUserInfoAfterSuccessLogin(responseData);
-      }else{
-        this.benimFirsatimLib.showAlert(" ", "Yanlış e-mail veya parola girdiniz.", ["Tamam"]);
+        this.benimFirsatimLib.showToast("Giriş yapıldı", 1500, "bottom");
+        loading.dismiss();
       }
+    },error => {
+      this.benimFirsatimLib.showAlert(" ", "Geçersiz e-mail veya parola girdiniz.", ["Tamam"]);
+      loading.dismiss();
     })
   }
-
 
   onSignUpButton() {
       this.navCtrl.push(SignupPage);
@@ -59,35 +91,27 @@ export class LoginPage {
 
   //sets the user info to benimfirsatimlib's static user variable and stores token in local storage
   setStorageAndUserInfoAfterSuccessLogin(data) {
-    const loading = this.loadingCtrl.create({
-      content: "Giriş yapılıyor..."
-    });
-    loading.present();
-
 
       this.benimFirsatimLib.setUserInfoAfterLogin(data);
       this.eventCtrl.publish('user.login', ' ');
 
       this.benimFirsatimLib.storageControl("bf-auth", data);
       this.navCtrl.push(TabsPage);
-      loading.dismiss();
-      this.benimFirsatimLib.showToast("Giriş yapıldı", 1500, "bottom");
-
 
     }
 
 
   onFacebookLogin() {
 
-    this.benimFirsatimLib.facebook_login().subscribe(response => {
+    this.benimFirsatimLib.facebook_login();
+    /*this.benimFirsatimLib.facebook_login().subscribe(response => {
 
-      console.log(response)
-      /*
+      /!*
       this.setStorageAndUserInfoAfterSuccessLogin(response,2);
 
       BenimfirsatimLib.isLoggedInWithFacebook = true;
-      this.navCtrl.push(TabsPage);*/
-    })
+      this.navCtrl.push(TabsPage);*!/
+    })*/
   }
 
   onGooglePlusLogin() {
@@ -95,7 +119,6 @@ export class LoginPage {
 
 
       this.benimFirsatimLib.google_login().subscribe(response => {
-        console.log(response)
         /*this.setStorageAndUserInfoAfterSuccessLogin(response,2);
 
         BenimfirsatimLib.isLoggedInWihGoogle = true;

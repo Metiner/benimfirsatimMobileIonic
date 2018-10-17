@@ -34,7 +34,7 @@
 
   <!--<feedback *ngIf="feedbackDivOpen"></feedback>-->
 
-  <list-deal *ngFor="let opportunity of opportunities" [opportunity]="opportunity">
+  <list-deal *ngFor="let opportunity of opportunities;let i=index" [opportunity]="opportunity">
 
   </list-deal>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">

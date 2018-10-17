@@ -45,6 +45,7 @@ import {SelectShareTypePage} from "../pages/select-share-type/select-share-type"
 import {CreateNewDealWithPhotoPage} from "../pages/create-new-deal-with-photo/create-new-deal-with-photo";
 import {Geolocation} from "ionic-native";
 import {CurrencyMaskModule} from "ng2-currency-mask";
+import {RlTagInputModule} from "angular2-tag-input/dist";
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import {CurrencyMaskModule} from "ng2-currency-mask";
     FacebookModule.forRoot(),
     BrowserAnimationsModule,
     CurrencyMaskModule,
+    RlTagInputModule,
     IonicModule.forRoot(MyApp,{backButtonText: 'Geri'}),
     IonicStorageModule.forRoot({driverOrder: ['indexeddb', 'websql', 'sqlite']}),
     AgmCoreModule.forRoot({

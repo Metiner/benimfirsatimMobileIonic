@@ -3,32 +3,31 @@ import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do'
 import {ActionSheetController, AlertController, ToastController} from "ionic-angular";
-import { Storage} from "@ionic/storage";
 import {Headers} from '@angular/http';
-import {User} from "../models/user";
 import {NgForm} from "@angular/forms";
+import {Facebook, FacebookLoginResponse} from "@ionic-native/facebook";
+declare const FB:any;
 
 @Injectable()
 export class BenimfirsatimLib{
 
-  api_address = "https://benimfirsatim.com";
-  //api_address = "http://localhost:3000";
+  //api_address = "https://benimfirsatim.com";
+  api_address = "http://localhost:3000";
   token:string ="";
   static user:any;
-  static isLoggedInWithFacebook = false;
-  static isLoggedInWihGoogle = false;
   static showAd = 0;
 
 
   constructor(private http:Http,
               private alertCtrl:AlertController,
               private toastCtrl:ToastController,
-              private actionSheetCtrl:ActionSheetController
+              private actionSheetCtrl:ActionSheetController,
+              private fb: Facebook
               ){}
 
   //Page code can be,
   //'hot','rising' or 'newcomers'
-  public getPage(page_code,pagination){
+  public get_page(page_code,pagination){
       return this.http.get(this.api_address + '/deals'+page_code+'.json?page='+pagination);
   }
 
@@ -72,16 +71,15 @@ export class BenimfirsatimLib{
   }*/
 
   public facebook_login(){
-    let opt:RequestOptions;
-    let myHeaders: Headers = new Headers;
-
-    myHeaders.set('Access-Control-Allow-Origin','*');
-
-    opt = new RequestOptions({
-      headers:myHeaders
-    });
-
-    return this.http.get(this.api_address + '/users/auth/facebook',opt)
+    FB.login( response =>{
+      this.http.post(this.api_address + '/users/auth/facebook/callback.json',response.authResponse).subscribe( api_response =>{
+        console.log(api_response);
+      })
+    })
+   /* this.fb.login(['public_profile', 'user_friends', 'email'])
+      .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
+      .catch(e => console.log('Error logging into Facebook', e));
+    this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);*/
   }
   public google_login(){
     let opt:RequestOptions;
@@ -104,6 +102,10 @@ export class BenimfirsatimLib{
     })
   }
 
+  public destroy_session(){
+    let opt = this.setHeader();
+    return this.http.delete(this.api_address + '/users/sign_out.json', opt )
+  }
   public getDeal(deal_id){
     return this.http.get( 'deals/0/'+deal_id.toString() + '/');
   }
@@ -113,20 +115,30 @@ export class BenimfirsatimLib{
   }
 
   public upvoteDeal(deal_id){
-    return this.http.get('deals/'+deal_id.toString() + '/upvote');
+    let opt= this.setHeader();
+    return this.http.get(this.api_address+'/deals/'+deal_id.toString() + '/upvote.json',opt);
   }
-
+/*
   public downvoteDeal(deal_id){
-    return this.http.get( 'deals/'+deal_id.toString() + '/downvote');
-  }
+    let opt= this.setHeader();
+    return this.http.get( this.api_address+'/deals/'+deal_id.toString() + '/downvote.json',opt);
+  }*/
 
   public createComment(deal_id,parent_comment_id,comment){
     let opt = this.setHeader()
     return this.http.post( this.api_address+'/deals/' + deal_id +'/comments.json',{parent_comment_id:parent_comment_id,comment:comment},opt);
   }
 
-  public createDeal(form:NgForm,selectedImageUrl,imageBase64){
+  public create_deal(form:NgForm,selectedImageUrl,imageBase64){
     let body;
+    let tags = "";
+    let tags_array = form.value.deal_tags;
+    if(tags_array.length > 0){
+      for(let i=0;i<tags_array.length;i++){
+        tags += tags_array[i] + ",";
+      }
+      tags.substring(0, tags.length-1);
+    }
     if(selectedImageUrl == 'photoTaken'){
       body = {starts_at:form.value.deal_date,
         price:form.value.deal_price,
@@ -139,29 +151,39 @@ export class BenimfirsatimLib{
         city:form.value.selectedCity};
     }
     else{
-      body = {starts_at:form.value.deal_date,
-        price:form.value.deal_price,
-        category_id: form.value.selectedCategory,
-        link:form.value.deal_url,
-        image_url:selectedImageUrl,
-        title:form.value.deal_title,
-        details:form.value.deal_details,
-        coupon_code:form.value.deal_coupon_code,
-        city:form.value.selectedCity};
+      body = {
+
+        deal:{
+          "starts_at":form.value.starts_at,
+          "finished_at":form.value.finished_at,
+          "price":form.value.deal_price,
+          "original_price": form.value.deal_original_price,
+          "category": form.value.selectedCategory,
+          "link":form.value.deal_url,
+          "image_url":selectedImageUrl,
+          "title":form.value.deal_title,
+          "details":form.value.deal_details,
+          "coupon_code":form.value.deal_coupon_code,
+          "city":form.value.selectedCity,
+          "tags": tags
+        }
+      };
     }
 
-    return this.http.post(this.api_address + '/deals/create.json',body);
+    let opt = this.setHeader();
+    return this.http.post(this.api_address + '/deals.json',body,opt);
   }
 
   public commentVote(comment_id){
-    return this.http.post('comments/'+comment_id+'/vote',{});
+    let opt = this.setHeader();
+    return this.http.get(this.api_address+'/comments/'+comment_id+'/upvote.json', opt);
   }
   public getComments(deal_id,page){
     return this.http.get(this.api_address + '/deals/'+deal_id+'/comments.json?page='+page);
   }
 
   public getCities(){
-    return this.http.get('data/cities');
+    return this.http.get(this.api_address+'/cities');
   }
   public getCategories(){
     return this.http.get(this.api_address+ '/categories.json');
@@ -200,16 +222,11 @@ export class BenimfirsatimLib{
     localStorage.setItem(key,JSON.stringify(value));
   }
 
-
-
   //It removes all of users from device local storage.
   public logOutFromStorageAndAuth(){
     localStorage.removeItem("bf-auth");
   }
 
-  private set_token_to_storage(token){
-
-  }
   // to set request header for authentication
   private setHeader():RequestOptions{
 
@@ -256,18 +273,18 @@ export class BenimfirsatimLib{
     return this.http.get(this.api_address + '/users/top');
   }
   public stockFinished(dealId){
-    return this.http.get(this.api_address+'/deals/'+dealId+'/stock_finished');
+    let opt = this.setHeader();
+    return this.http.post(this.api_address+'/deals/'+dealId+'/finished',opt);
   }
 
   public ended(dealId){
-    return this.http.get(this.api_address+'/deals/'+dealId+'/ended');
+    let opt = this.setHeader();
+    return this.http.post(this.api_address+'/deals/'+dealId+'/ended',opt);
   }
 
   public report(dealId){
-    return this.http.get(this.api_address+'/deals/'+dealId+'/report');
+    let opt = this.setHeader();
+    return this.http.post(this.api_address+'/deals/'+dealId+'/report',opt);
   }
-
-
-
 }
 

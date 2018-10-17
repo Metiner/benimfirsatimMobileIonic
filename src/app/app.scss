@@ -71,8 +71,8 @@ ion-list{
   height: 60px;
 }
 
-.item-md.item-block .item-inner{
-  border-bottom: 1px solid #F7E60F;
+.item-inner{
+  border-bottom: none !important;
 }
 
 .menu-text{
@@ -165,8 +165,54 @@ ion-icon {
   font-size: 20px;
   color:#234491;
 }
+.font-username{
+  font-family: MarkPro-Book;
+  color: #234491;
+  font-weight: 600;
+  font-size: 12px;
+}
 .deal-image{
   width: 200px;
   height: 200px;
   object-fit: contain;
+}
+
+.select-text{
+  font-family: MarkPro-Heavy !important;
+  font-size: 15px !important;
+  color: #234491 !important;
+}
+.datetime-text{
+  font-family: MarkPro-Heavy !important;
+  font-size: 15px;
+  color: #234491;
+}
+
+#tag {
+  rl-tag-input-item{
+    background-color: #bdbdbd;
+    font-family: MarkPro-Heavy !important;
+
+  }
+  font-family: MarkPro-Heavy !important;
+  font-size: 15px !important;
+  color: #234491 !important;
+  display: inline-block !important;
+  margin-right: 10px !important;
+  box-shadow: none !important;
+  padding:0 !important;
+  input{
+    background: none !important;
+    font-family: MarkPro-Heavy !important;
+    font-size: 15px !important;
+    color: #234491 !important;
+    border:none !important;
+    width:100% !important;
+    padding:0 !important;
+    box-shadow: none !important;
+  }
+  input:focus{
+    outline:none !important;
+    padding:0 !important;
+  }
 }

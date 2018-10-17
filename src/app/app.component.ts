@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, NgZone, ViewChild} from '@angular/core';
 import {MenuController, NavController, Platform,Events} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import {TabsPage} from "../pages/tabs/tabs";
@@ -11,13 +11,17 @@ import {Facebook} from "@ionic-native/facebook";
 import {OneSignal} from "@ionic-native/onesignal";
 import {MyDealsPage} from "../pages/my-deals/my-deals";
 import {PointsPage} from "../pages/points/points";
-declare const fb:any;
+import {HighlightsPage} from "../pages/highlights/highlights";
+import {TopPage} from "../pages/top/top";
+import {RisingPage} from "../pages/rising/rising";
+import {SelectedCategoryPage} from "../pages/selected-category/selected-category";
+declare const FB:any;
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any = LoginPage;
-  public isAuthenticated = false;
+  static isAuthenticated = false;
   settingsPage = SettingsPage;
   myDealsPage = MyDealsPage;
   searchParam = "";
@@ -32,27 +36,22 @@ export class MyApp {
               private gA:GoogleAnalytics,
               private oneSignal:OneSignal,
               private googlePlusLogin:GooglePlus,
-              private facebookLogin:Facebook) {
+              private facebookLogin:Facebook,
+              private zone: NgZone) {
 
 
-    this.eventCtrl.subscribe("user.login", () => { this.isAuthenticated = true});
+    this.eventCtrl.subscribe("user.login", () => { MyApp.isAuthenticated = true
+    console.log(MyApp.isAuthenticated)
+    });
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.hide();
 
-      if(benimFirsatimLib.check_auth().then( response => {
-        if(response){
-          this.isAuthenticated = true;
-          this.nav.setRoot(TabsPage)
-          this.nav.push(TabsPage);
-        }else{
-          this.isAuthenticated = false;
-        }
-        }))
+      this.fb_init();
 
-
+      this.check_auth();
       /*// onesignal code start:
       this.oneSignal.startInit('e3b6a1f6-1826-4015-a0c5-99665f5a9589', '57374298212');
 
@@ -83,21 +82,55 @@ export class MyApp {
     this.menuCtrl.close();
   }
 
+  fb_init(){
+    FB.init({
+      appId      : '1810311305688651',
+      cookie     : true,  // enable cookies to allow the server to access
+                          // the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v2.8' // use graph api version 2.8
+    });
+  }
+  public check_auth(){
+    this.benimFirsatimLib.check_auth().then( response => {
+      if(response){
+        MyApp.isAuthenticated = true;
+        this.zone.run(() => {
+          this.nav.setRoot(TabsPage)
+        });
+      }else{
+        this.nav.setRoot(LoginPage);
+        MyApp.isAuthenticated = false;
+      }
+    }).catch( e => {
+      this.nav.setRoot(LoginPage);
+      MyApp.isAuthenticated = false;
+    })
+  }
+
   onLogout(){
 
+      this.benimFirsatimLib.destroy_session().subscribe( response => {
+        this.benimFirsatimLib.logOutFromStorageAndAuth();
+        this.menuCtrl.close();
+        this.nav.setRoot(LoginPage);
+        this.benimFirsatimLib.showToast("Çıkış yapıldı",2000,"bottom");
+        localStorage.removeItem("bf-auth");
 
-      this.benimFirsatimLib.logOutFromStorageAndAuth();
-      this.menuCtrl.close();
-      this.nav.setRoot(LoginPage);
-      this.benimFirsatimLib.showToast("Çıkış yapıldı",2000,"bottom");
-      localStorage.clear()
+        this.set_paginations_default();
 
-
-      this.isAuthenticated = false;
-
-
+        MyApp.isAuthenticated = false;
+      }, error =>{
+        this.benimFirsatimLib.showToast("Çıkış yaparken, uygulama paket oldu", 3000, 'bottom');
+      })
     }
 
+    set_paginations_default(){
+      HighlightsPage.pagination = 1;
+      TopPage.pagination = 1;
+      RisingPage.pagination = 1;
+      SelectedCategoryPage.pagination = 1;
+    }
     onSettings(){
       this.nav.push(this.settingsPage);
       this.menuCtrl.close();
@@ -134,6 +167,9 @@ export class MyApp {
       //   })
       // }
     // }
+  }
+  get_autho_status(){
+    return MyApp.isAuthenticated;
   }
 
 }

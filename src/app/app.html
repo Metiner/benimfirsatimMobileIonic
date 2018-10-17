@@ -4,12 +4,12 @@
       <button style=" outline: none;
     border: none;
     background: none;">
-        <img style="width: 110px;position: fixed;right: 0px;z-index: 999;margin-top: -30px" src="assets/imgs/logo.png">
+        <img style="width: 110px;position: fixed;right: 0px;z-index: 999;margin-top: -30px" src="assets/svgs/main_logo.svg">
       </button>
     </ion-toolbar>
   </ion-header>
   <ion-content>
-      <ion-item>
+      <!--<ion-item>
         <ion-row align-items-center>
           <ion-col col-2>
             <img src="../assets/imgs/search_icon@2x.png">
@@ -19,8 +19,8 @@
             <input (keypress)= "onSearchEvent($event)" class="search" type="text" style="position: absolute;height: 25px;width: 120px;margin-left: 10px;">
           </ion-col>
         </ion-row>
-      </ion-item>
-      <ion-item *ngIf="!isAuthenticated" no-lines>
+      </ion-item>-->
+      <ion-item *ngIf="!get_autho_status()" no-lines>
         <ion-row align-items-center (click)="onSignin()">
           <ion-col col-2>
             <img src="assets/imgs/logout_icon@3x.png">
@@ -30,7 +30,7 @@
           </ion-col>
         </ion-row>
       </ion-item>
-      <ion-item *ngIf="isAuthenticated">
+      <ion-item *ngIf="get_autho_status()">
         <ion-row align-items-center (click) = "onSettings()">
           <ion-col col-2>
             <img src="assets/imgs/profilim_icon@3x.png">
@@ -40,7 +40,7 @@
           </ion-col>
         </ion-row>
       </ion-item>
-      <ion-item *ngIf="isAuthenticated">
+      <ion-item *ngIf="get_autho_status()">
         <ion-row align-items-center (click) = "onMyDeals()">
           <ion-col col-2>
             <img src="assets/imgs/firsatlarim_icon@3x.png">
@@ -50,7 +50,7 @@
           </ion-col>
         </ion-row>
       </ion-item>
-      <ion-item *ngIf="isAuthenticated">
+      <ion-item *ngIf="get_autho_status()">
         <ion-row align-items-center (click) = "onNotifications()">
           <ion-col col-2>
             <img src="assets/imgs/puan_tablosu_icon@3x.png">
@@ -60,7 +60,7 @@
           </ion-col>
         </ion-row>
       </ion-item>
-      <ion-item *ngIf="isAuthenticated">
+      <ion-item *ngIf="get_autho_status()">
         <ion-row align-items-center  (click)="onLogout()">
           <ion-col col-2>
             <img src="assets/imgs/logout_icon@3x.png">

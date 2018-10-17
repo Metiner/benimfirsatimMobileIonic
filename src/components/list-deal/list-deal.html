@@ -31,7 +31,7 @@
     </ion-col>
   </ion-row>
   <ion-row align-items-center justify-content-around class="share-buttons">
-    <ion-col col-auto>
+    <ion-col col-auto *ngIf="opportunity.price">
       <ion-row align-items-center justify-content-center>
         <ion-col col-auto>
           <img class="bf-badge" src="assets/svgs/price_tag.svg">
@@ -43,8 +43,8 @@
     </ion-col>
     <ion-col col-auto>
       <ion-row align-items-center justify-content-center>
-        <ion-col col-auto>
-          <img class="bf-badge" src="assets/svgs/like_button.svg">
+        <ion-col col-auto margin-right>
+          <div style="width: 30px" no-padding id="lottie_like_button_{{ unique_id}}" (click)="upVoteDeal(opportunity.id)"></div>
         </ion-col>
         <ion-col col-auto>
           <ion-label class="like-comment-inspan">{{opportunity.votes_sum}}</ion-label>
@@ -63,15 +63,23 @@
     </ion-col>
   </ion-row>
   <ion-row align-items-center justify-content-center padding-bottom>
-    <ion-col col-auto>
+    <ion-col col-auto (click)="shareDeal('fb')">
       <img class="share-button" src="assets/new_images/facebook.svg">
     </ion-col>
-    <ion-col col-auto>
+    <ion-col col-auto (click)="shareDeal('tw')">
       <img class="share-button" src="assets/new_images/twitter.svg">
     </ion-col>
     <ion-col col-auto (click)="onOpportunityPage(opportunity)">
       <img class="go_to_deal_button" src="assets/imgs/button-firsata-git-notext.svg">
       <span class="detaylar-span">DETAYLAR!</span>
+    </ion-col>
+  </ion-row>
+  <ion-row align-items-center justify-content-center>
+    <ion-col col-auto>
+      <img src="{{opportunity.user.avatar_url}}" style="border-radius: 30px;width: 30px">
+    </ion-col>
+    <ion-col col-auto>
+      <span class="font-username">{{opportunity.user.name.substring(0,40)}}</span>
     </ion-col>
   </ion-row>
 </ion-card>

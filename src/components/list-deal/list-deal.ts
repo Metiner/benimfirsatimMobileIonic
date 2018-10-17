@@ -1,7 +1,11 @@
 import {Component, Input} from '@angular/core';
-import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../../pages/opportunity/opportunity";
 import {NavController} from "ionic-angular";
+import * as lottie from 'lottie-web';
+import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import * as $ from 'jquery'
+
+
 
 
 /**
@@ -16,17 +20,27 @@ import {NavController} from "ionic-angular";
 })
 export class ListDealComponent {
 
-  @Input() opportunity : Opportunity;
+  @Input() opportunity : any = {};
+
   logoComesFromLeft: boolean = false;
-  constructor(private navCont:NavController) {
+  likeButtonAnimation:any;
+  unique_id = 0;
+
+  constructor(public navCont:NavController,
+              private benimFirsatimLib: BenimfirsatimLib) {
 
     this.logoComesFromLeft = true;
+    this.unique_id = Date.now()
+
   }
 
-
-
-  onOpportunityPage(opportunity: Opportunity){
+  onOpportunityPage(){
     this.navCont.push(OpportunityPage,this.opportunity);
+  }
+  ngAfterViewInit(){
+    let container_div = document.getElementById("lottie_like_button_" + this.unique_id)
+
+    this.loadAnimations(container_div)
   }
 
   whatIsPrice(){
@@ -47,4 +61,61 @@ export class ListDealComponent {
       }
     }
   }
+  loadAnimations(container_div){
+    $(document).ready(()=>{
+      this.likeButtonAnimation = lottie.loadAnimation({
+        container: container_div, // the dom element that will contain the animation
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+        path: 'assets/animations/like_button.json' // the path to the animation json
+      });
+    })
+  }
+  upVoteDeal(dealId:number){
+
+    this.benimFirsatimLib.upvoteDeal(dealId).subscribe(data=>{
+      if(data.json().deal_owner){
+        this.benimFirsatimLib.showToast("OOPS, KENDİ FİRSATİNİ BEĞENEMEZSİN.", 2000, "bottom");
+      }else{
+        this.opportunity.votes_sum = data.json().votes_sum;
+        this.likeButtonAnimation.play();
+        if (this.likeButtonAnimation.liked) {
+          this.upVoteDeal(this.opportunity.id);
+          this.likeButtonAnimation.setDirection(-1);
+          this.likeButtonAnimation.liked = false;
+
+        } else {
+          this.upVoteDeal(this.opportunity.id);
+          this.likeButtonAnimation.setDirection(1);
+          this.likeButtonAnimation.liked = true;
+        }
+      }
+    });
+  }
+  shareDeal(type) {
+
+    switch (type){
+      case 'fb':
+        let dealUrl = 'https://www.facebook.com/sharer/sharer.php?u=https%3A//benimfirsatim.com/deals/' + this.opportunity.slug;
+        window.open(dealUrl, '_blank');
+        break;
+      case 'tw':
+        // Opens a pop-up with twitter sharing dialog
+        let shareURL = "http://twitter.com/share?"; //url base
+        //params
+        let params = {
+          url: "https://benimfirsatim.com/deals/" + this.opportunity.slug,
+          text: this.opportunity.title,
+          // via: "sometwitterusername",
+          hashtags: "benimfirsatim"
+        }
+        for (let prop in params) shareURL += '&' + prop + '=' + encodeURIComponent(params[prop]);
+        window.open(shareURL, '_blank');
+        break;
+
+    }
+
+  }
+
 }

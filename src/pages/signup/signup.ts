@@ -30,6 +30,7 @@ export class SignupPage {
         content: "Lütfen bekleyiniz..."
       });
       loading.present();
+
       this.benimFirsatimLib.signUp(form.value.email, form.value.password, form.value.username).subscribe(data=>{
 
         if(data.ok){

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {CreateNewDealPage} from "../create-new-deal/create-new-deal";
 import {CreateNewDealWithPhotoPage} from "../create-new-deal-with-photo/create-new-deal-with-photo";
+import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
+import {MyApp} from "../../app/app.component";
 import {TabsPage} from "../tabs/tabs";
 
 /**
@@ -18,7 +20,10 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class SelectShareTypePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public benimFirsatimLib: BenimfirsatimLib) {
+
   }
 
   to_linked_deal_page(){

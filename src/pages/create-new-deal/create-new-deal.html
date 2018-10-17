@@ -11,19 +11,28 @@
 <ion-content padding>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-item>
-      <ion-label class="staticText">LINK </ion-label>
+      <ion-label class="staticText">LINK *</ion-label>
       <ion-input [ngModel]
                  type="url"
+                 required
                  name="deal_url"
                  (ionChange)="onUrlChange($event)"
                  placeholder="Lütfen fırsat linkini buraya kopyala"></ion-input>
     </ion-item>
-    <ion-row style="border-bottom: 0.55px solid #c8c7cc" margin-top>
+    <ion-row style="border-bottom: 0.55px solid #dedede" margin-top>
       <ion-col col-auto style="padding-left: 16px">
-        <span class="staticText">FİYAT</span>
+        <span class="staticText">FIRSAT FİYATI</span>
       </ion-col>
       <ion-col>
         <input style="background: none;font-family: MarkPro-Heavy;font-size: 15px;color: #234491;border:none;width:100%" currencyMask [ngModel] name="deal_price" [options]="{ prefix: '₺', thousands: '.', decimal: ',' , align: 'left'}">
+      </ion-col>
+    </ion-row>
+    <ion-row style="border-bottom: 0.55px solid #dedede" margin-top>
+      <ion-col col-auto style="padding-left: 16px">
+        <span class="staticText">NORMAL FİYATI</span>
+      </ion-col>
+      <ion-col>
+        <input style="background: none;font-family: MarkPro-Heavy;font-size: 15px;color: #234491;border:none;width:100%" currencyMask [ngModel] name="deal_original_price" [options]="{ prefix: '₺', thousands: '.', decimal: ',' , align: 'left'}">
       </ion-col>
     </ion-row>
     <ion-item>
@@ -32,20 +41,21 @@
                   [ngModel]
                   name="selectedCategory"
                   multiple="false">
-        <ion-option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</ion-option>
+        <ion-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label class="staticText">ŞEHİR </ion-label>
       <ion-select [ngModel]
                   name="selectedCity">
-        <ion-option *ngFor="let city of states" value="{{city}}">{{city}}</ion-option>
+        <ion-option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label class="staticText">KUPON KODU</ion-label>
       <ion-input [ngModel] type="text"
                  name="deal_coupon_code"
+                 [maxlength]="10"
       ></ion-input>
     </ion-item>
     <ion-item>
@@ -63,12 +73,31 @@
     </ion-item>
 
     <ion-item>
-      <ion-label class="staticText">TARİH *</ion-label>
+      <ion-label class="staticText">BAŞLANGIÇ TARİHİ</ion-label>
       <ion-datetime [ngModel]
-                    required
                     displayFormat="DD MM, YYYY"
-                    name="deal_date"></ion-datetime>
+                    min="{{get_today_date_as_string()}}"
+                    max="2022-10-31"
+                    name="starts_at"></ion-datetime>
     </ion-item>
+    <ion-item>
+      <ion-label class="staticText">BİTİŞ TARİHİ</ion-label>
+      <ion-datetime [ngModel]
+                    min="{{get_today_date_as_string()}}"
+                    max="2022-10-31"
+                    displayFormat="DD MM, YYYY"
+                    name="finished_at"></ion-datetime>
+    </ion-item>
+    <ion-row style="border-bottom: 0.55px solid #dedede" margin-top>
+      <ion-col col-auto style="padding-left: 16px">
+        <span class="staticText">ETİKETLER</span>
+      </ion-col>
+      <ion-col>
+        <rl-tag-input id="tag" [(ngModel)]="deal_tags" name="deal_tags" placeholder="# olmadan koy">
+
+        </rl-tag-input>
+      </ion-col>
+    </ion-row>
       <!--<ion-row>-->
         <!--<ion-col text-center>-->
           <!--<button ion-button-->
@@ -91,7 +120,7 @@
       <ion-scroll *ngIf="!photoTaken" scrollX="true" direction="x">
         <ion-row>
           <ion-col>
-            <ion-card #picture *ngFor="let image of images" (click)="onPictureSelect(picture)" [@onPictureSelectAnimation]="picture.isSelected ? 'toSelected' : 'default'">
+            <ion-card #picture *ngFor="let image of images" (click)="onPictureSelect(picture)" [@onPictureSelectAnimation]="picture.isSelected ? 'toSelected' : 'default'" style="background: none !important;box-shadow: none !important;">
               <img style="width: auto;height: inherit" src="{{image}}">
             </ion-card>
           </ion-col>

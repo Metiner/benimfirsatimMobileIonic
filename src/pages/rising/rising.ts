@@ -3,7 +3,6 @@ import {Events, InfiniteScroll, IonicPage, NavController, NavParams} from 'ionic
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Opportunity} from "../../models/opportunity";
 import {OpportunityPage} from "../opportunity/opportunity";
-import {TabsPage} from "../tabs/tabs";
 
 /**
  * Generated class for the RisingPage page.
@@ -25,13 +24,14 @@ export class RisingPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private benimfirsatimLib:BenimfirsatimLib,
+
+              public benimfirsatimLib:BenimfirsatimLib,
               private eventCtrl: Events) {
 
   this.eventCtrl.subscribe('closeFeedback',()=>{
   this.feedbackDivOpen = false;
 })
-    benimfirsatimLib.getPage('/rising',RisingPage.pagination).subscribe((data)=>{
+    benimfirsatimLib.get_page('/rising',RisingPage.pagination).subscribe((data)=>{
 
       data.json().forEach(element => {
         let u:Opportunity = new Opportunity();
@@ -41,19 +41,12 @@ export class RisingPage {
     })
   }
 
-  ionViewDidLoad(){
-    RisingPage.pagination = 1;
-  }
-
-
-
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
-
-    this.benimfirsatimLib.getPage('/rising',RisingPage.pagination).subscribe(data =>{
-      if(RisingPage.pagination === 1)
-        RisingPage.pagination = 2
-
+    if(RisingPage.pagination === 1){
+      RisingPage.pagination = 2;
+    }
+    this.benimfirsatimLib.get_page('/rising',RisingPage.pagination).subscribe(data =>{
       if(data.json().length > 0) {
         RisingPage.pagination++;
         data.json().forEach(element => {

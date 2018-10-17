@@ -22,8 +22,12 @@ page-create-new-deal-with-photo {
     }
   }
   ion-item{
-    background-color: transparent !important;
-  }
+      background-color: transparent !important;
+      contain: strict;
+      border-bottom: 1px solid #dedede !important;
+    }
+
+
 
 
 

@@ -14,20 +14,20 @@
     <form #f="ngForm" (submit)="onLogIn(f)" text-center>
       <ion-item class="emailPassword">
         <ion-label floating>Kullanıcı Adı veya E-posta</ion-label>
-        <ion-input [ngModel] name="email" type="text"></ion-input>
+        <ion-input [ngModel]="email" name="email" type="text"></ion-input>
       </ion-item>
       <!--<ion-item [ngClass]="itemtwo ? 'toLogoUp' : 'toLogoDown'"  no-lines class="inputBox">
         <ion-input [ngModel] name="email" type="text" placeholder="Kullanıcı Adı veya E-posta"></ion-input>
       </ion-item>-->
       <ion-item class="emailPassword">
         <ion-label floating>Parola</ion-label>
-        <ion-input [ngModel] name="password" type="password"></ion-input>
+        <ion-input [ngModel]="password" name="password" type="password"></ion-input>
       </ion-item>
       <ion-row nowrap  style="padding-left: 10px">
         <ion-col col-6 no-padding>
           <ion-item no-lines class="rememberMe_forgetPassword nopadding">
             <ion-label>Beni Hatırla</ion-label>
-            <ion-checkbox no-padding style="margin-right: -40px" [ngModel] name="rememberMe"></ion-checkbox>
+            <ion-checkbox no-padding style="margin-right: -40px" [ngModel]="remember_me" name="remember_me"></ion-checkbox>
           </ion-item>
         </ion-col>
         <ion-col col-5 offset-1 no-padding>

@@ -9,9 +9,6 @@
           <ion-col col-auto="">
             <img src="assets/imgs/firsat_header@3x.png" style="margin-left: -13px;max-width: 80px;">
           </ion-col>
-          <ion-col col-auto="">
-            <img style="width: 60%;max-width: 50px;" (click)="shareDeal()" src="assets/imgs/paylas_button@3x.png">
-          </ion-col>
         </ion-row>
       </ion-grid>
     </ion-navbar>
@@ -52,7 +49,7 @@
       </ion-col>
     </ion-row>
     <ion-row align-items-center justify-content-around class="share-buttons">
-      <ion-col col-auto>
+      <ion-col col-auto *ngIf="opportunity.price">
         <ion-row align-items-center justify-content-center>
           <ion-col col-auto>
             <img class="bf-badge" src="assets/svgs/price_tag.svg">
@@ -99,15 +96,23 @@
       </ion-col>
     </ion-row>
     <ion-row align-items-center justify-content-center padding-bottom>
-      <ion-col col-auto>
+      <ion-col col-auto (click)="shareDeal('fb')">
         <img class="share-button" src="assets/new_images/facebook.svg">
       </ion-col>
-      <ion-col col-auto>
+      <ion-col col-auto (click)="shareDeal('tw')">
         <img class="share-button" src="assets/new_images/twitter.svg">
       </ion-col>
       <ion-col col-auto (click)="onOutsideDealLink(opportunity)">
         <img class="go_to_deal_button" src="assets/imgs/button-firsata-git-notext.svg">
         <span class="detaylar-span">FIRSATA GİT!</span>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-center justify-content-center>
+      <ion-col col-auto>
+        <img src="{{opportunity.user.avatar_url}}" style="border-radius: 30px;width: 30px">
+      </ion-col>
+      <ion-col col-auto>
+        <span class="font-username">{{opportunity.user.name.substring(0,40)}}</span>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="!dealReported">
@@ -122,33 +127,33 @@
       </ion-col>
       <ion-col *ngIf="!dealReported">
         <ion-row style="padding-top: 10px;flex-wrap: nowrap;">
-          <ion-col col-4>
+          <ion-col col-4 (click)="deadOnDeadLine()">
             <ion-row>
               <ion-col col-12 text-center>
                 <img src="assets/svgs/suresi_dolmus_icon.svg" class="imgClass">
               </ion-col>
-              <ion-col (click)="deadOnDeadLine()" text-center>
+              <ion-col text-center>
               <span
                 style="font-family: 'MarkPro-Book';font-size: 8px;color:#234491;white-space: nowrap">SÜRESİ DOLMUŞ</span>
               </ion-col>
             </ion-row>
           </ion-col>
-          <ion-col col-4>
+          <ion-col col-4 (click)="dealOutOfStock()" >
             <ion-row>
               <ion-col col-12 text-center>
                 <img src="assets/svgs/tukenmis_icon.svg" class="imgClass">
               </ion-col>
-              <ion-col (click)="dealOutOfStock()" text-center>
+              <ion-col text-center>
                 <span style="font-family: 'MarkPro-Book';font-size: 8px;color:#234491">TÜKENMİŞ</span>
               </ion-col>
             </ion-row>
           </ion-col>
-          <ion-col col-4>
+          <ion-col col-4 (click)="onReportDeal()">
             <ion-row>
               <ion-col col-12 text-center>
                 <img src="assets/svgs/sikayet_et_icon.svg" class="imgClass">
               </ion-col>
-              <ion-col (click)="onReportDeal()" text-center>
+              <ion-col  text-center>
               <span
                 style="font-family: 'MarkPro-Book';font-size: 8px;color:#234491;white-space: nowrap">ŞİKAYET ET</span>
               </ion-col>
@@ -195,50 +200,50 @@
 
     <div *ngFor="let comment of comments;let i = index" id="{{comment.newlyAdded}}" ngClass="highlighted">
       <ion-card>
-        <div style="transform: scale(0.9)">
+        <ion-row align-items-center style="padding: 0 10px 0 10px">
+          <ion-col col-auto>
+            <ion-avatar>
+              <img style="border-radius: 20px;height: 30px;width: 30px;" src="{{comment.user.avatar_url}}">
+            </ion-avatar>
+          </ion-col>
+          <ion-col style="padding: 0px !important;display: flex;align-items: center" col-auto>
+            <span style="font-family: MarkPro-Heavy;font-size: 14px;color:#234491">{{comment.user.name.substr(0,15)}}</span>
+          </ion-col>
+          <ion-col>
+            <ion-row justify-content-end align-items-center>
+              <ion-col col-auto>
+                <img style="width:30px" (click)="onCommentReply({comment:comment,opportunity:opportunity})"
+                     src="assets/imgs/icon-reply.svg">
+              </ion-col>
+              <ion-col col-auto>
+                <div class="lottieThumbUpButton" style="width:30px" (click)="playAnim(i,'thumbsUp',comment)">
+                </div>
+              </ion-col>
+              <ion-col col-auto>
+                <span style="font-family: MarkPro-Heavy;font-size: 14px;color:#234491">{{comment.comment_votes_count}}</span>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col padding-left>
+        <span padding-left *ngIf="comment.showContent"
+              style="font-family: MarkPro-Book;font-size: 14px;color:#234491"
+              >{{comment.text}}</span>
+            <span padding-left style="font-family: MarkPro-Book;font-size: 14px;color:#234491"
+                  (click)="comment.showContent = !comment.showContent"
+                  *ngIf="!comment.showContent">{{comment.text}}</span>
+          </ion-col>
+        </ion-row>
+        <div *ngFor="let subComment of comment.comments;let i=index">
           <ion-row>
-            <ion-col col-2>
-              <ion-avatar>
-                <img style="border-radius: 20px;height: 40px;width: 40px;" src="{{comment.user.avatar_url}}">
-              </ion-avatar>
-            </ion-col>
-            <ion-col style="padding: 0px !important;display: flex;align-items: center" col-8>
-              <span style="font-family: MarkPro-Heavy;font-size: 15px;color:#234491">{{comment.user.name}}</span>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col style="margin: 5px">
-          <span *ngIf="comment.showContent"
-                [@onCommentExpand]="comment.showContent ? 'toExpand' : 'asd'">{{comment.text}}</span>
-              <span style="font-family: MarkPro-Book;font-size: 15px;color:#234491"
-                    (click)="comment.showContent = !comment.showContent"
-                    *ngIf="!comment.showContent">{{comment.text}}</span>
-            </ion-col>
-          </ion-row>
-          <ion-row style="margin-top: 20px" justify-content-end align-items-center>
-            <ion-col col-auto>
-              <img style="width:50px" (click)="onCommentReply({comment:comment,opportunity:opportunity})"
-                   src="assets/imgs/icon-reply.svg">
-            </ion-col>
-            <ion-col col-auto>
-              <div class="lottieThumbUpButton" style="width:50px" (click)="playAnim(i,'thumbsUp',comment)">
-              </div>
-            </ion-col>
-            <ion-col col-auto>
-              <span style="font-family: MarkPro-Heavy;font-size: 18px;color:#234491">{{comment.comment_votes_count}}</span>
-            </ion-col>
-          </ion-row>
-        </div>
-      </ion-card>
-      <div *ngFor="let subComment of comment.comments;let i=index">
-        <ion-card>
-          <ion-row style="padding-left: 15%">
+            <ion-col col-auto style="background-color: lightgray;margin-left: 24px;width: 5px;padding: 0;"></ion-col>
             <ion-col *ngIf="i<comment.showUntil"
-                     style="margin-top: 16px;transform: scale(0.9);padding: 0px">
+                     style="padding: 0px">
               <ion-row>
-                <ion-col col-2>
+                <ion-col col-auto>
                   <ion-avatar>
-                    <img style="border-radius: 20px;height: 40px;width: 40px;" src="{{subComment.user.avatar_url}}">
+                    <img style="border-radius: 20px;height: 30px;width: 30px;" src="{{subComment.user.avatar_url}}">
                   </ion-avatar>
                 </ion-col>
                 <ion-col style="padding: 0px !important;display: flex;align-items: center" col-8>
@@ -246,9 +251,12 @@
                 </ion-col>
               </ion-row>
               <ion-row>
-                <ion-col style="margin: 5px">
-                  <span *ngIf="subComment.showContent" [@onCommentExpand]="subComment.showContent ? 'toExpand' : 'asd'">{{subComment.text}}</span>
-                  <span style="font-family: MarkPro-Book;font-size: 15px;color:#234491"
+                <ion-col padding-left>
+                  <span
+                    style="font-family: MarkPro-Book;font-size: 14px;color:#234491"
+                    *ngIf="subComment.showContent" padding-left >{{subComment.text}}</span>
+                  <span padding-left
+                        style="font-family: MarkPro-Book;font-size: 14px;color:#234491"
                         (click)="subComment.showContent = !subComment.showContent"
                         *ngIf="!subComment.showContent">{{subComment.text}}</span>
                 </ion-col>
@@ -258,12 +266,12 @@
           <ion-row *ngIf="i === comment.comments.length-1"
                    style="margin-top: 2%;text-align: end;margin-top: 2%;margin-right: 20px;">
             <ion-col (click)="addSubcommentIndex(comment,i)">
-              <span
-                style="font-family: 'MarkPro-Book';font-size: 11px;color:#234491">{{comment.dahaFazlaGetirText}}</span>
+            <span
+              style="font-family: 'MarkPro-Book';font-size: 11px;color:#234491">{{comment.dahaFazlaGetirText}}</span>
             </ion-col>
           </ion-row>
-        </ion-card>
-      </div>
+        </div>
+      </ion-card>
     </div>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">

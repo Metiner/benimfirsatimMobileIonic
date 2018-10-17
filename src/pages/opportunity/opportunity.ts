@@ -27,7 +27,7 @@ import {AdMobPro} from "@ionic-native/admob-pro";
 })
 export class OpportunityPage {
 
-  opportunity: Opportunity;
+  opportunity:any = {};
   comments: Comment[] = [];
   loginPage = LoginPage;
   onCommentReplyPage = OnCommentReplyPage;
@@ -101,15 +101,19 @@ export class OpportunityPage {
   upVoteDeal(dealId:number){
 
     this.benimFirsatimLib.upvoteDeal(dealId).subscribe(data=>{
-      this.opportunity.votes_sum = data.json().deal_score;
+      if(data.json().deal_owner){
+        this.benimFirsatimLib.showToast("OOPS, KENDİ FİRSATİNİ BEĞENEMEZSİN.", 2000, "bottom");
+      }else{
+        this.opportunity.votes_sum = data.json().votes_sum;
+      }
     });
   }
 
-  downVoteDeal(dealId:number){
+  /*downVoteDeal(dealId:number){
     this.benimFirsatimLib.downvoteDeal(dealId).subscribe(data=>{
       this.opportunity.votes_sum = data.json().deal_score;
     });
-  }
+  }*/
 
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
@@ -133,7 +137,6 @@ export class OpportunityPage {
           OpportunityPage.pageCount = 1;
         }
 
-        console.log(data)
         infiniteScroll.complete();
       });
 
@@ -239,7 +242,7 @@ export class OpportunityPage {
     if(type === 'like'){
       this.likeButtonAnimation.play();
       if(this.likeButtonAnimation.liked){
-        this.downVoteDeal(this.opportunity.id);
+        this.upVoteDeal(this.opportunity.id);
         this.likeButtonAnimation.setDirection(-1);
         this.likeButtonAnimation.liked = false;
 
@@ -252,7 +255,7 @@ export class OpportunityPage {
 
       this.thumbUpAnimations[index].play();
       this.benimFirsatimLib.commentVote(comment.id).subscribe(response =>{
-        comment.comment_votes_count = response.json().vote_count;
+        comment.comment_votes_count = response.json().comment_vote_count;
       })
       if(this.thumbUpAnimations[index].liked){
         this.thumbUpAnimations[index].setDirection(-1);
@@ -327,68 +330,39 @@ export class OpportunityPage {
   deadOnDeadLine(){
     this.benimFirsatimLib.ended(this.opportunity.id).subscribe((response)=>{
     });
-    this.dealReported = true;
   }
   dealOutOfStock(){
     this.benimFirsatimLib.stockFinished(this.opportunity.id).subscribe((response)=>{
     });
-    this.dealReported = true;
   }
   onReportDeal(){
     this.benimFirsatimLib.report(this.opportunity.id).subscribe((response)=>{
     });
-    this.dealReported = true;
   }
 
-  shareDeal() {
+  shareDeal(type) {
 
-    const actionSheet = this.actionSheetCtrl.create({
-      title: 'Paylaş',
-      buttons: [
-        {
-          text: 'Facebook',
-          handler: () => {
-
-            let dealUrl = 'https://www.facebook.com/sharer/sharer.php?u=https%3A//benimfirsatim.com/deal/' + this.opportunity.id
-            window.open(dealUrl, '_blank');
-            /*const initParams = {
-              appId: '113944349294618',
-              xfbml: true,
-              version: 'v2.8'
-            };
-            try {
-              FB.init(initParams);
-            } catch (e) {
-              console.log(e);
-            }          FB.ui({
-              method: 'share',
-              mobile_iframe: true,
-              quote: this.opportunity.title,
-              href: "https://benimfirsatim.com/deal/" + this.opportunity.id,
-              hastag: '#benimfirsatim'
-            }, function (response) {
-            });*/
-          }
-        }, {
-          text: 'Twitter',
-          handler: () => {
-            // Opens a pop-up with twitter sharing dialog
-            var shareURL = "http://twitter.com/share?"; //url base
-            //params
-            var params = {
-              url: "https://benimfirsatim.com/deal/" + this.opportunity.id,
-              text: this.opportunity.title,
-              // via: "sometwitterusername",
-              hashtags: "benimfirsatim"
-            }
-            for (let prop in params) shareURL += '&' + prop + '=' + encodeURIComponent(params[prop]);
-            window.open(shareURL, '_blank');
-
-          }
+    switch (type){
+      case 'fb':
+        let dealUrl = 'https://www.facebook.com/sharer/sharer.php?u=https%3A//benimfirsatim.com/deals/' + this.opportunity.slug
+        window.open(dealUrl, '_blank');
+        break;
+      case 'tw':
+        // Opens a pop-up with twitter sharing dialog
+        let shareURL = "http://twitter.com/share?"; //url base
+        //params
+        let params = {
+          url: "https://benimfirsatim.com/deals/" + this.opportunity.slug,
+          text: this.opportunity.title,
+          // via: "sometwitterusername",
+          hashtags: "benimfirsatim"
         }
-      ]
-    });
-    actionSheet.present();
+        for (let prop in params) shareURL += '&' + prop + '=' + encodeURIComponent(params[prop]);
+        window.open(shareURL, '_blank');
+        break;
+
+    }
+
   }
 
   discount(){
