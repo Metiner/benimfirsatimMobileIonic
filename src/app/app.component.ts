@@ -84,11 +84,11 @@ export class MyApp {
 
   fb_init(){
     FB.init({
-      appId      : '1810311305688651',
+      appId      : '260770007832930',
       cookie     : true,  // enable cookies to allow the server to access
                           // the session
       xfbml      : true,  // parse social plugins on this page
-      version    : 'v2.8' // use graph api version 2.8
+      version    : 'v2.10' // use graph api version 2.8
     });
   }
   public check_auth(){

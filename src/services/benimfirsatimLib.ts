@@ -75,7 +75,7 @@ export class BenimfirsatimLib{
       this.http.post(this.api_address + '/users/auth/facebook/callback.json', {'accessToken':response.authResponse.accessToken}).subscribe( auth_response => {
         console.log(auth_response)
       })
-    })
+    },{scope: 'email'})
 
   }
   public google_login(){
