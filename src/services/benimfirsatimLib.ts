@@ -72,14 +72,11 @@ export class BenimfirsatimLib{
 
   public facebook_login(){
     FB.login( response =>{
-      this.http.post(this.api_address + '/users/auth/facebook/callback.json',response.authResponse).subscribe( api_response =>{
-        console.log(api_response);
+      this.http.post(this.api_address + '/users/auth/facebook/callback.json', {'accessToken':response.authResponse.accessToken}).subscribe( auth_response => {
+        console.log(auth_response)
       })
     })
-   /* this.fb.login(['public_profile', 'user_friends', 'email'])
-      .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
-      .catch(e => console.log('Error logging into Facebook', e));
-    this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);*/
+
   }
   public google_login(){
     let opt:RequestOptions;
@@ -140,15 +137,24 @@ export class BenimfirsatimLib{
       tags.substring(0, tags.length-1);
     }
     if(selectedImageUrl == 'photoTaken'){
-      body = {starts_at:form.value.deal_date,
-        price:form.value.deal_price,
-        category_id: form.value.selectedCategory,
-        image_64:imageBase64,
-        link:form.value.deal_url,
-        title:form.value.deal_title,
-        details:form.value.deal_details,
-        coupon_code:form.value.deal_coupon_code,
-        city:form.value.selectedCity};
+
+      body = {
+
+        deal:{
+          "starts_at":form.value.starts_at,
+          "finished_at":form.value.finished_at,
+          "price":form.value.deal_price,
+          "original_price": form.value.deal_original_price,
+          "category": form.value.selectedCategory,
+          "link":form.value.vendor,
+          "image":imageBase64,
+          "title":form.value.deal_title,
+          "details":form.value.deal_details,
+          "coupon_code":form.value.deal_coupon_code,
+          "city":form.value.selectedCity,
+          "tags": tags
+        }
+      };
     }
     else{
       body = {

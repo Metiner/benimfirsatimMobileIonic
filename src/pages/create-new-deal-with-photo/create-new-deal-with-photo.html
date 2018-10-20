@@ -13,12 +13,20 @@
 
 
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <ion-row margin-top>
+    <ion-row style="border-bottom: 0.55px solid #dedede" margin-top>
       <ion-col col-auto style="padding-left: 16px">
-        <span class="staticText">FİYAT</span>
+        <span class="staticText">FIRSAT FİYATI</span>
       </ion-col>
       <ion-col>
         <input style="background: none;font-family: MarkPro-Heavy;font-size: 15px;color: #234491;border:none;width:100%" currencyMask [ngModel] name="deal_price" [options]="{ prefix: '₺', thousands: '.', decimal: ',' , align: 'left'}">
+      </ion-col>
+    </ion-row>
+    <ion-row style="border-bottom: 0.55px solid #dedede" margin-top>
+      <ion-col col-auto style="padding-left: 16px">
+        <span class="staticText">NORMAL FİYATI</span>
+      </ion-col>
+      <ion-col>
+        <input style="background: none;font-family: MarkPro-Heavy;font-size: 15px;color: #234491;border:none;width:100%" currencyMask [ngModel] name="deal_original_price" [options]="{ prefix: '₺', thousands: '.', decimal: ',' , align: 'left'}">
       </ion-col>
     </ion-row>
     <ion-item>
@@ -58,11 +66,37 @@
                     name="deal_details" ></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-label class="staticText">TARİH *</ion-label>
+      <ion-label class="staticText">BAŞLANGIÇ TARİHİ</ion-label>
       <ion-datetime [ngModel]
-                    required
                     displayFormat="DD MM, YYYY"
-                    name="deal_date"></ion-datetime>
+                    min="{{get_today_date_as_string()}}"
+                    max="2022-10-31"
+                    name="starts_at"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label class="staticText">BİTİŞ TARİHİ</ion-label>
+      <ion-datetime [ngModel]
+                    min="{{get_today_date_as_string()}}"
+                    max="2022-10-31"
+                    displayFormat="DD MM, YYYY"
+                    name="finished_at"></ion-datetime>
+    </ion-item>
+    <ion-row style="border-bottom: 0.55px solid #dedede" margin-top>
+      <ion-col col-auto style="padding-left: 16px">
+        <span class="staticText">ETİKETLER</span>
+      </ion-col>
+      <ion-col>
+        <rl-tag-input id="tag" [(ngModel)]="deal_tags" name="deal_tags" placeholder="# olmadan koy">
+
+        </rl-tag-input>
+      </ion-col>
+    </ion-row>
+    <ion-item>
+      <ion-label class="staticText">MAĞAZA *</ion-label>
+      <ion-input [ngModel]
+                 type="text"
+                 required
+                 name="vendor" ></ion-input>
     </ion-item>
     <ion-row>
       <ion-col text-center>
@@ -94,6 +128,10 @@
         <sebm-google-map
           [latitude]="location.ltt"
           [longitude]="location.lng"
+          [mapDraggable]="false"
+          [streetViewControl]="false"
+          [scaleControl]="false"
+          [zoomControl]="false"
           [zoom]="17">
           <sebm-google-map-marker [longitude]="location.lng"
                                   [latitude]="location.ltt">

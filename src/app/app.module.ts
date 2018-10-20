@@ -46,6 +46,7 @@ import {CreateNewDealWithPhotoPage} from "../pages/create-new-deal-with-photo/cr
 import {Geolocation} from "ionic-native";
 import {CurrencyMaskModule} from "ng2-currency-mask";
 import {RlTagInputModule} from "angular2-tag-input/dist";
+import {LaunchNavigator} from "@ionic-native/launch-navigator";
 
 @NgModule({
   declarations: [
@@ -121,6 +122,7 @@ import {RlTagInputModule} from "angular2-tag-input/dist";
     InAppBrowser,
     Angular2TokenService,
     AdMobPro,
+    LaunchNavigator,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
