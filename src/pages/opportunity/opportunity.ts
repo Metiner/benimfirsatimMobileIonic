@@ -3,18 +3,19 @@ import {
   ActionSheetController, Content, InfiniteScroll, IonicPage, NavController, NavParams,
   Platform
 } from 'ionic-angular';
-import {Opportunity} from "../../models/opportunity";
 import {Comment} from "../../models/comment";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {NgForm} from "@angular/forms";
-import {onCommentExpand, onItemBump} from "../../app/animations";
+import {commentStateTrigger, onCommentExpand, onItemBump} from "../../app/animations";
 import {LoginPage} from "../login/login";
 import {BrowserTab} from "@ionic-native/browser-tab";
 import {OnCommentReplyPage} from "../on-comment-reply/on-comment-reply";
+import { Geolocation } from "ionic-native";
 import * as $ from 'jquery'
 
 import * as lottie from 'lottie-web';
 import {AdMobPro} from "@ionic-native/admob-pro";
+import {LaunchNavigator, LaunchNavigatorOptions} from "@ionic-native/launch-navigator";
 
 @IonicPage()
 @Component({
@@ -22,7 +23,8 @@ import {AdMobPro} from "@ionic-native/admob-pro";
   templateUrl: 'opportunity.html',
   animations:[
     onItemBump,
-    onCommentExpand
+    onCommentExpand,
+    commentStateTrigger
 ]
 })
 export class OpportunityPage {
@@ -37,6 +39,8 @@ export class OpportunityPage {
 
   dealReported = false;
 
+  lat:number = 0;
+  lng:number = 0;
 
   likeButtonAnimation:any;
   likeCommentButton:any;
@@ -53,7 +57,8 @@ export class OpportunityPage {
               private browserTab:BrowserTab,
               public actionSheetCtrl: ActionSheetController,
               public platform:Platform,
-              private admob: AdMobPro) {
+              private admob: AdMobPro,
+              private launch_navigator: LaunchNavigator) {
 
 
 
@@ -78,6 +83,10 @@ export class OpportunityPage {
     this.loadAnimations();
     OpportunityPage.pageCount = 1;
     this.opportunity = navParams.data;
+    if(!this.opportunity.lat){
+      this.lat = parseFloat(this.opportunity.lat);
+      this.lng = parseFloat(this.opportunity.lng);
+    }
 
     benimFirsatimLib.getComments(this.opportunity.id,1).subscribe(data =>{
       OpportunityPage.pageCount++;
@@ -329,14 +338,35 @@ export class OpportunityPage {
 
   deadOnDeadLine(){
     this.benimFirsatimLib.ended(this.opportunity.id).subscribe((response)=>{
+      if(response.json().status === 'ok'){
+        this.dealReported = true;
+      }else{
+        this.benimFirsatimLib.showToast("HATA", 3000, 'bottom');
+      }
+    },error2 => {
+      this.benimFirsatimLib.showToast("HATA", 3000, 'bottom');
     });
   }
   dealOutOfStock(){
     this.benimFirsatimLib.stockFinished(this.opportunity.id).subscribe((response)=>{
+      if(response.json().status === 'ok'){
+        this.dealReported = true;
+      }else{
+        this.benimFirsatimLib.showToast("HATA", 3000, 'bottom');
+      }
+    },error2 => {
+      this.benimFirsatimLib.showToast("HATA", 3000, 'bottom');
     });
   }
   onReportDeal(){
     this.benimFirsatimLib.report(this.opportunity.id).subscribe((response)=>{
+      if(response.json().status === 'ok'){
+        this.dealReported = true;
+      }else{
+        this.benimFirsatimLib.showToast("HATA", 3000, 'bottom');
+      }
+    },error2 => {
+      this.benimFirsatimLib.showToast("HATA", 3000, 'bottom');
     });
   }
 
@@ -371,5 +401,18 @@ export class OpportunityPage {
         return (((parseFloat(this.opportunity.original_price) - parseFloat(this.opportunity.price)) / parseFloat(this.opportunity.original_price)) * 100).toFixed()
       }
     }
+  }
+
+  on_directions() {
+    let lng: any;
+    let lat: any;
+    Geolocation.getCurrentPosition().then(position => {
+      lng = position.coords.longitude;
+      lat = position.coords.latitude;
+      let options: LaunchNavigatorOptions = {
+        start: [lat, lng],
+      };
+      this.launch_navigator.userSelect([this.lat, this.lng], options)
+    })
   }
 }

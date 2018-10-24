@@ -7,7 +7,9 @@ page-opportunity {
   //  border:  solid blue;
   //}
 
-
+  sebm-google-map{
+    height: 250px;
+  }
   ion-col div{
     padding: 0px;
   }
@@ -148,6 +150,14 @@ page-opportunity {
     font-size: 20px;
   }
 
+  .dealReportedText{
+    opacity:0;
+  }
+  .vendor-text{
+    font-family: MarkPro-Heavy;
+    color: #234491;
+    font-size: 16px;
+  }
 }
 
 

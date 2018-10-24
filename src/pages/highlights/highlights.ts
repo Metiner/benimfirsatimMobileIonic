@@ -32,21 +32,34 @@ export class HighlightsPage {
     this.eventCtrl.subscribe('closeFeedback',()=>{
       this.feedbackDivOpen = false;
     })
+  }
 
-    benimfirsatimLib.get_page('',HighlightsPage.pagination).subscribe((data)=>{
+  ionViewDidLoad(){
+
+    this.benimfirsatimLib.get_page('',HighlightsPage.pagination).subscribe((data)=>{
 
       data.json().forEach(element => {
 
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
         this.opportunities.push(u);
-    });
+      });
     },error=>{
       console.log(error);
     })
   }
-
-
+  doRefresh(refresher){
+    HighlightsPage.pagination = 1;
+    this.opportunities.length = 0;
+    this.benimfirsatimLib.get_page('',HighlightsPage.pagination).subscribe((data)=>{
+      data.json().forEach(element => {
+        let u:Opportunity = new Opportunity();
+        Object.assign(u,element);
+        this.opportunities.push(u);
+      });
+      refresher.complete();
+    })
+  }
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
-import {TabsPage} from "../tabs/tabs";
 
 /**
  * Generated class for the PointsPage page.
@@ -25,8 +24,8 @@ export class PointsPage {
 
   ionViewDidLoad() {
     this.benimFirsatimLib.getUsersTop().subscribe(response=>{
-      for(let i = 0 ;i<response.json().length;i++){
-        this.users.push(response.json()[i][0]);
+      for(let i = 0 ;i<response.json().users.length;i++){
+        this.users.push(response.json().users[i]);
       }
     })
   }

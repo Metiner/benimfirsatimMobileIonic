@@ -5,6 +5,7 @@ import {CreateNewDealWithPhotoPage} from "../create-new-deal-with-photo/create-n
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {MyApp} from "../../app/app.component";
 import {TabsPage} from "../tabs/tabs";
+import {LoginPage} from "../login/login";
 
 /**
  * Generated class for the SelectShareTypePage page.
@@ -24,6 +25,20 @@ export class SelectShareTypePage {
               public navParams: NavParams,
               public benimFirsatimLib: BenimfirsatimLib) {
 
+  }
+
+  ionViewWillEnter(){
+    this.benimFirsatimLib.check_auth().then( response => {
+      if(response){
+        MyApp.isAuthenticated = true;
+      }else{
+        this.navCtrl.setRoot(LoginPage);
+        MyApp.isAuthenticated = false;
+      }
+    }).catch( e => {
+      this.navCtrl.setRoot(LoginPage);
+      MyApp.isAuthenticated = false;
+    })
   }
 
   to_linked_deal_page(){

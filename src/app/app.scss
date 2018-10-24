@@ -216,3 +216,7 @@ ion-icon {
     padding:0 !important;
   }
 }
+
+ion-content.has-refresher > .scroll-content {
+  background-color: #e4e4e4 !important;
+}

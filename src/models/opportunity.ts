@@ -19,7 +19,8 @@ export class Opportunity {
   view_count:number;
   votes_count:number;
   votes_sum:number;
-  location:Location;
+  lat:string;
+  lng:string;
   imagePath:string;
   newlyCreated:boolean;
 

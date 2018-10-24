@@ -32,12 +32,8 @@ export class MyDealsPage {
     this.benimfirsatimLib.getDealFromUser(MyDealsPage.pagination).subscribe((data)=>{
 
       MyDealsPage.pagination++;
-      data.json().entries.forEach(element => {
-
-
-        let u:Opportunity = new Opportunity();
-        Object.assign(u,element);
-        this.opportunities.push(u);
+      data.json().forEach(element => {
+        this.opportunities.push(element);
       });
 
       this.logoComesFromLeft = true;
@@ -57,9 +53,7 @@ export class MyDealsPage {
       if(data.json().length > 0) {
         MyDealsPage.pagination++;
         data.json().forEach(element => {
-          let u: Opportunity = new Opportunity();
-          Object.assign(u, element);
-          this.opportunities.push(u);
+          this.opportunities.push(element);
         })
       }else
       {

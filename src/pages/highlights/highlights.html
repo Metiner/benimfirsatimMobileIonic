@@ -33,7 +33,9 @@
     <!--(click)="openFeedbackDiv()">-->
 
   <!--<feedback *ngIf="feedbackDivOpen"></feedback>-->
-
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <list-deal *ngFor="let opportunity of opportunities;let i=index" [opportunity]="opportunity">
 
   </list-deal>

@@ -3,8 +3,8 @@
     <ion-navbar text-center hideBackButton="true" style="padding: 0px !important">
       <ion-grid style="padding: 0px !important">
         <ion-row align-items-center justify-content-between>
-          <ion-col col-auto="">
-            <img style="width: 60%;max-width: 50px;" (click)="goBack()" src="assets/imgs/back_button@3x.png">
+          <ion-col col-auto  (click)="goBack()">
+            <img style="width: 60%;max-width: 50px" src="assets/imgs/back_button@3x.png">
           </ion-col>
           <ion-col col-auto>
             <img src="assets/imgs/firsat_header@3x.png" style="max-width: 80px;">
@@ -102,17 +102,45 @@
       <ion-col col-auto (click)="shareDeal('tw')">
         <img class="share-button" src="assets/new_images/twitter.svg">
       </ion-col>
-      <ion-col col-auto (click)="onOutsideDealLink(opportunity)">
+      <ion-col *ngIf="!opportunity.lat" col-auto (click)="onOutsideDealLink(opportunity)">
         <img class="go_to_deal_button" src="assets/imgs/button-firsata-git-notext.svg">
         <span class="detaylar-span">FIRSATA GİT!</span>
       </ion-col>
     </ion-row>
     <ion-row align-items-center justify-content-center>
       <ion-col col-auto>
-        <img src="{{opportunity.user.avatar_url}}" style="border-radius: 30px;width: 30px">
+        <ion-row align-items-center justify-content-center>
+          <ion-col col-auto>
+            <img src="{{opportunity.user.avatar_url}}" style="border-radius: 30px;width: 30px">
+          </ion-col>
+          <ion-col col-auto>
+            <span class="font-username">{{opportunity.user.name.substring(0,40)}}</span>
+          </ion-col>
+        </ion-row>
       </ion-col>
-      <ion-col col-auto>
-        <span class="font-username">{{opportunity.user.name.substring(0,40)}}</span>
+      <ion-col col-auto *ngIf="opportunity.city?.name.length > 0">
+        <ion-row align-items-center justify-content-center>
+          <ion-col col-auto>
+            <span class="font-username">{{opportunity.city?.name.toUpperCase()}}</span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="opportunity.lat" style="height:300px" (click)="on_directions()">
+      <ion-col>
+        <sebm-google-map
+          [latitude]="lat"
+          [longitude]="lng"
+          [mapDraggable]="false"
+          [streetViewControl]="false"
+          [scaleControl]="false"
+          [zoomControl]="false"
+          [zoom]="17">
+          <sebm-google-map-marker [longitude]="lng"
+                                  [latitude]="lat">
+          </sebm-google-map-marker>
+
+        </sebm-google-map>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="!dealReported">
@@ -120,10 +148,9 @@
         <img src="assets/svgs/problemli_line.svg">
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col @commentState class="col" *ngIf="dealReported">
-      <span
-        style="font-family: 'Mark Pro-Book';font-size: 15px;color:#234491">BİZİ BİLGİLENDİRDİĞİN İÇİN TEŞEKKÜRLER :)</span>
+    <ion-row justify-content-center>
+      <ion-col col-auto [@commentState]="dealReported ? 'appeared' : 'void'" class="dealReportedText" *ngIf="dealReported">
+        <span style="font-family: MarkPro-Heavy;font-size: 14px;color: #234491;">BİLGİLENDİRDİĞİN İÇİN TEŞEKKÜRLER :)</span>
       </ion-col>
       <ion-col *ngIf="!dealReported">
         <ion-row style="padding-top: 10px;flex-wrap: nowrap;">
@@ -163,7 +190,6 @@
       </ion-col>
     </ion-row>
   </ion-card>
-
   <ion-row style="flex-wrap: nowrap;justify-content: center">
     <ion-col col-6 text-center="">
       <span style="font-family: MarkPro-Heavy;font-size: 16px;color:#234491">YORUMLAR</span>

@@ -5,7 +5,8 @@ import 'rxjs/add/operator/do'
 import {ActionSheetController, AlertController, ToastController} from "ionic-angular";
 import {Headers} from '@angular/http';
 import {NgForm} from "@angular/forms";
-import {Facebook, FacebookLoginResponse} from "@ionic-native/facebook";
+import {Facebook} from "@ionic-native/facebook";
+import {GooglePlus} from "@ionic-native/google-plus";
 declare const FB:any;
 
 @Injectable()
@@ -17,12 +18,12 @@ export class BenimfirsatimLib{
   static user:any;
   static showAd = 0;
 
-
   constructor(private http:Http,
               private alertCtrl:AlertController,
               private toastCtrl:ToastController,
               private actionSheetCtrl:ActionSheetController,
-              private fb: Facebook
+              private fb: Facebook,
+              private gp: GooglePlus
               ){}
 
   //Page code can be,
@@ -71,24 +72,10 @@ export class BenimfirsatimLib{
   }*/
 
   public facebook_login(){
-    FB.login( response =>{
-      this.http.post(this.api_address + '/users/auth/facebook/callback.json', {'accessToken':response.authResponse.accessToken}).subscribe( auth_response => {
-        console.log(auth_response)
-      })
-    },{scope: 'email'})
-
+    return this.fb.login(['public_profile', 'user_friends', 'email'])
   }
   public google_login(){
-    let opt:RequestOptions;
-    let myHeaders: Headers = new Headers;
-
-    myHeaders.set('Access-Control-Allow-Origin','*');
-
-    opt = new RequestOptions({
-      headers:myHeaders
-    });
-
-    return this.http.get(this.api_address + '/users/auth/google_oauth2',opt)
+    return this.gp.login({});
   }
   public signIn(email,password){
     return this.http.post(this.api_address + '/users/sign_in.json',{
@@ -152,7 +139,9 @@ export class BenimfirsatimLib{
           "details":form.value.deal_details,
           "coupon_code":form.value.deal_coupon_code,
           "city":form.value.selectedCity,
-          "tags": tags
+          "tags": tags,
+          "lat": form.value.lat,
+          "lng": form.value.lng
         }
       };
     }
@@ -160,8 +149,8 @@ export class BenimfirsatimLib{
       body = {
 
         deal:{
-          "starts_at":form.value.starts_at,
-          "finished_at":form.value.finished_at,
+          "starts_at":form.value.starts_at.replace('-','/').replace('-','/'),
+          "finished_at":form.value.finished_at.replace('-','/').replace('-','/'),
           "price":form.value.deal_price,
           "original_price": form.value.deal_original_price,
           "category": form.value.selectedCategory,
@@ -271,26 +260,33 @@ export class BenimfirsatimLib{
 
   //Gets deals which created by current logged user.
   public getDealFromUser(pagination){
-    return this.http.get('user/'+BenimfirsatimLib.user.id+'/deals.json?page='+pagination+'&per_page=3');
+    return this.http.get(this.api_address+ '/user/'+BenimfirsatimLib.user.id+'/deals.json?page='+pagination);
   }
 
 
   public getUsersTop(){
-    return this.http.get(this.api_address + '/users/top');
+    return this.http.get(this.api_address + '/user/top.json');
   }
   public stockFinished(dealId){
     let opt = this.setHeader();
-    return this.http.post(this.api_address+'/deals/'+dealId+'/finished',opt);
+    return this.http.post(this.api_address+'/deals/'+dealId+'/finished.json',{'id': dealId},opt);
   }
 
   public ended(dealId){
     let opt = this.setHeader();
-    return this.http.post(this.api_address+'/deals/'+dealId+'/ended',opt);
+    return this.http.post(this.api_address+'/deals/'+dealId+'/ended.json',{'id': dealId},opt);
   }
 
   public report(dealId){
     let opt = this.setHeader();
-    return this.http.post(this.api_address+'/deals/'+dealId+'/report',opt);
+    return this.http.post(this.api_address+'/deals/'+dealId+'/report.json',{'id': dealId},opt);
+  }
+
+  public check_type(link:string){
+    if(!link.includes("http"))
+      return 'with_photo';
+    else
+      return 'without_photo';
   }
 }
 

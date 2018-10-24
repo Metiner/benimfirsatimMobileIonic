@@ -49,8 +49,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.hide();
 
-      this.fb_init();
-
       this.check_auth();
       /*// onesignal code start:
       this.oneSignal.startInit('e3b6a1f6-1826-4015-a0c5-99665f5a9589', '57374298212');
@@ -80,16 +78,6 @@ export class MyApp {
   onSignin(){
     this.nav.push(LoginPage);
     this.menuCtrl.close();
-  }
-
-  fb_init(){
-    FB.init({
-      appId      : '260770007832930',
-      cookie     : true,  // enable cookies to allow the server to access
-                          // the session
-      xfbml      : true,  // parse social plugins on this page
-      version    : 'v2.10' // use graph api version 2.8
-    });
   }
   public check_auth(){
     this.benimFirsatimLib.check_auth().then( response => {

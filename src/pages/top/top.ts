@@ -31,8 +31,10 @@ export class TopPage {
     this.eventCtrl.subscribe('closeFeedback',()=>{
     this.feedbackDivOpen = false;
     });
+  }
 
-    benimfirsatimLib.get_page('/fresh',TopPage.pagination).subscribe((data)=>{
+  ionViewDidLoad(){
+   this.benimfirsatimLib.get_page('/fresh',TopPage.pagination).subscribe((data)=>{
       data.json().forEach(element => {
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
@@ -41,13 +43,25 @@ export class TopPage {
     })
   }
 
+  doRefresh(refresher){
+    TopPage.pagination = 1;
+    this.opportunities.length = 0;
+    this.benimfirsatimLib.get_page('/fresh',TopPage.pagination).subscribe((data)=>{
+      data.json().forEach(element => {
+        let u:Opportunity = new Opportunity();
+        Object.assign(u,element);
+        this.opportunities.push(u);
+      });
+      refresher.complete();
+    })
+  }
   //Async calls new comments from database.
   doInfinite(infiniteScroll:InfiniteScroll){
 
+    TopPage.pagination++;
     this.benimfirsatimLib.get_page('/fresh',TopPage.pagination).subscribe(data =>{
       if(TopPage.pagination === 1)
         TopPage.pagination = 2
-
 
       if(data.json().length > 0) {
         TopPage.pagination++;

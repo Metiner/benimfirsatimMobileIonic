@@ -30,14 +30,31 @@ export class RisingPage {
 
   this.eventCtrl.subscribe('closeFeedback',()=>{
   this.feedbackDivOpen = false;
-})
-    benimfirsatimLib.get_page('/rising',RisingPage.pagination).subscribe((data)=>{
+    })
+  }
+
+
+  ionViewDidLoad(){
+    this.benimfirsatimLib.get_page('/rising',RisingPage.pagination).subscribe((data)=>{
 
       data.json().forEach(element => {
         let u:Opportunity = new Opportunity();
         Object.assign(u,element);
         this.opportunities.push(u);
       });
+    })
+  }
+
+  doRefresh(refresher){
+    RisingPage.pagination = 1;
+    this.opportunities.length = 0;
+    this.benimfirsatimLib.get_page('/rising',RisingPage.pagination).subscribe((data)=>{
+      data.json().forEach(element => {
+        let u:Opportunity = new Opportunity();
+        Object.assign(u,element);
+        this.opportunities.push(u);
+      });
+      refresher.complete();
     })
   }
 

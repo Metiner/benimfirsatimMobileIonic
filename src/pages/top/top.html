@@ -20,8 +20,6 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-
-
   <!--<img src="../../assets/svgs/fikrini_soyle_button.svg" style=" position: fixed;-->
     <!--z-index: 10;-->
     <!--height: 50px;-->
@@ -33,6 +31,9 @@
 
   <!--<feedback *ngIf="feedbackDivOpen"></feedback>-->
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <list-deal *ngFor="let opportunity of opportunities" [opportunity]="opportunity">
 
   </list-deal>

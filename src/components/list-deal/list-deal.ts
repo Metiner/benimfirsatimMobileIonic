@@ -30,13 +30,14 @@ export class ListDealComponent {
               private benimFirsatimLib: BenimfirsatimLib) {
 
     this.logoComesFromLeft = true;
-    this.unique_id = Date.now()
+    this.unique_id = Date.now()+((Math.random()*10000) +1);
 
   }
 
   onOpportunityPage(){
     this.navCont.push(OpportunityPage,this.opportunity);
   }
+
   ngAfterViewInit(){
     let container_div = document.getElementById("lottie_like_button_" + this.unique_id)
 
@@ -81,12 +82,10 @@ export class ListDealComponent {
         this.opportunity.votes_sum = data.json().votes_sum;
         this.likeButtonAnimation.play();
         if (this.likeButtonAnimation.liked) {
-          this.upVoteDeal(this.opportunity.id);
           this.likeButtonAnimation.setDirection(-1);
           this.likeButtonAnimation.liked = false;
 
         } else {
-          this.upVoteDeal(this.opportunity.id);
           this.likeButtonAnimation.setDirection(1);
           this.likeButtonAnimation.liked = true;
         }

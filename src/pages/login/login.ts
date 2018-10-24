@@ -4,9 +4,10 @@ import {NgForm} from "@angular/forms";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {SignupPage} from "../signup/signup";
 import {TabsPage} from "../tabs/tabs";
-import {Facebook} from "@ionic-native/facebook";
+import {Facebook, FacebookLoginResponse} from "@ionic-native/facebook";
 import {GooglePlus} from "@ionic-native/google-plus";
 import { FacebookService} from "ngx-facebook";
+import {Http} from "@angular/http";
 declare var gapi:any;
 @IonicPage()
 @Component({
@@ -27,10 +28,7 @@ export class LoginPage {
               private navCtrl: NavController,
               private loadingCtrl: LoadingController,
               private eventCtrl: Events,
-              private fb: Facebook,
-              private googlePlus: GooglePlus,
-              private platform: Platform,
-              private fbService:FacebookService) {
+              private http: Http) {
 
     /*gapi.load('auth2', function() {
       const googleAut = gapi.auth2.init({client_id :'57374298212-94cgvbkf14685g846vcq95trf50qt69v.apps.googleusercontent.com'});
@@ -102,28 +100,62 @@ export class LoginPage {
 
 
   onFacebookLogin() {
+    const loading = this.loadingCtrl.create({
+      content: "Giriş yapılıyor..."
+    });
+    loading.present();
+    this.benimFirsatimLib.facebook_login()
+      .then((res: FacebookLoginResponse) => {
+      console.log(res)
+      this.http.post(this.benimFirsatimLib.api_address + '/users/auth/facebook/callback.json', {'accessToken':res.authResponse.accessToken})
+      .subscribe( data => {
+          this.onLoginLogo = true;
+          if(data.ok){
+            let responseData = data.json();
+            responseData.token = data.headers.get('Authorization');
+            this.setStorageAndUserInfoAfterSuccessLogin(responseData);
+            this.benimFirsatimLib.showToast("Giriş yapıldı", 1500, "bottom");
+            loading.dismiss();
+          }else{
+            this.benimFirsatimLib.showToast('Hata',3000,'bottom');
+          }
+      }, error => {
+        loading.dismiss();
+        this.benimFirsatimLib.showToast(error.toString(),3000,'bottom');
+      })
+    })
+      .catch(e => console.log('Error logging into Facebook', e));
 
-    this.benimFirsatimLib.facebook_login();
-    /*this.benimFirsatimLib.facebook_login().subscribe(response => {
-
-      /!*
-      this.setStorageAndUserInfoAfterSuccessLogin(response,2);
-
-      BenimfirsatimLib.isLoggedInWithFacebook = true;
-      this.navCtrl.push(TabsPage);*!/
-    })*/
   }
 
   onGooglePlusLogin() {
-
-
-
-      this.benimFirsatimLib.google_login().subscribe(response => {
-        /*this.setStorageAndUserInfoAfterSuccessLogin(response,2);
-
-        BenimfirsatimLib.isLoggedInWihGoogle = true;
-        this.navCtrl.push(TabsPage);*/
-      })
-
+    const loading = this.loadingCtrl.create({
+      content: "Giriş yapılıyor..."
+    });
+    loading.present();
+    this.benimFirsatimLib.google_login()
+      .then(res => {
+      this.http.post(this.benimFirsatimLib.api_address+'/users/auth/google_oauth2/callback.json', {'accessToken':res.accessToken, 'uid': res.userId, 'image': res.imageUrl, 'name': res.displayName})
+        .subscribe( data => {
+          this.onLoginLogo = true;
+          if(data.ok){
+            let responseData = data.json();
+            responseData.token = data.headers.get('Authorization');
+            this.setStorageAndUserInfoAfterSuccessLogin(responseData);
+            this.benimFirsatimLib.showToast("Giriş yapıldı", 1500, "bottom");
+            loading.dismiss();
+          }else{
+            loading.dismiss();
+            this.benimFirsatimLib.showToast('Hata',3000,'bottom');
+          }
+        },error2 => {
+          loading.dismiss();
+          this.benimFirsatimLib.showToast(error2.toString(),3000,'bottom');
+        })
+    })
+      .catch(err => {
+        loading.dismiss();
+        console.error(err)
+      });
   }
 }

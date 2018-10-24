@@ -22,5 +22,13 @@ export const onPictureSelectAnimation = trigger('onPictureSelectAnimation',[
   transition('* <=> *', animate(500))
 ]);
 
+export const commentStateTrigger = trigger('commentState', [
+  state('appeared',
+    style({opacity: 1}),
+  ),
+  transition('void => appeared',
+    animate('500ms ease-in-out'))
+]);
+
 
 
