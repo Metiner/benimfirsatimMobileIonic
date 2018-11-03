@@ -47,28 +47,29 @@ import {Geolocation} from "ionic-native";
 import {CurrencyMaskModule} from "ng2-currency-mask";
 import {RlTagInputModule} from "angular2-tag-input/dist";
 import {LaunchNavigator} from "@ionic-native/launch-navigator";
+import {SignupPageModule} from "../pages/signup/signup.module";
+import {HighlightsPageModule} from "../pages/highlights/highlights.module";
+import {ComponentsModule} from "../components/components.module";
+import {SelectedCategoryPageModule} from "../pages/selected-category/selected-category.module";
+import {TopPageModule} from "../pages/top/top.module";
+import {CategoriesPageModule} from "../pages/categories/categories.module";
+import {RisingPageModule} from "../pages/rising/rising.module";
+import {MyDealsPageModule} from "../pages/my-deals/my-deals.module";
+import {LoginPageModule} from "../pages/login/login.module";
+import {ImagePicker} from "@ionic-native/image-picker";
 
 @NgModule({
   declarations: [
     MyApp,
     TabsPage,
-    HighlightsPage,
-    RisingPage,
-    CategoriesPage,
-    TopPage,
     OpportunityPage,
     DenemePage,
-    SignupPage,
-    LoginPage,
     CreateNewDealPage,
-    SelectedCategoryPage,
+
     OnCommentReplyPage,
     SettingsPage,
-    MyDealsPage,
-    ListDealComponent,
     FabCompenent,
     PointsPage,
-    FeedbackComponent,
     SelectShareTypePage,
     CreateNewDealWithPhotoPage
   ],
@@ -85,7 +86,16 @@ import {LaunchNavigator} from "@ionic-native/launch-navigator";
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyCXpRW3Ms9iZ6FfUslL_xLDZ40jfyI5E4Q'
     }),
-    A2tUiModule
+    A2tUiModule,
+    SignupPageModule,
+    HighlightsPageModule,
+    RisingPageModule,
+    CategoriesPageModule,
+    TopPageModule,
+    SelectedCategoryPageModule,
+    MyDealsPageModule,
+    LoginPageModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -124,6 +134,7 @@ import {LaunchNavigator} from "@ionic-native/launch-navigator";
     AdMobPro,
     LaunchNavigator,
     Geolocation,
+    ImagePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

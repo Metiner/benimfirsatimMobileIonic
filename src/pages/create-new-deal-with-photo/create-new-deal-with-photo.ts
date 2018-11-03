@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {Camera} from "@ionic-native/camera";
-import {Location} from "../../models/location";
 import {Geolocation} from "ionic-native";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Category} from "../../models/category";
 import {NgForm} from "@angular/forms";
 import {OpportunityPage} from "../opportunity/opportunity";
+import {ImagePicker} from "@ionic-native/image-picker";
 
 
 
@@ -38,7 +38,8 @@ export class CreateNewDealWithPhotoPage {
               public navParams: NavParams,
               private camera:Camera,
               private loadingCtrl: LoadingController,
-              private benimFirsatimLib: BenimfirsatimLib
+              private benimFirsatimLib: BenimfirsatimLib,
+              private image_picker: ImagePicker
   ){
     benimFirsatimLib.getCategories().subscribe(data=>{
       data.json().forEach(element=>{
@@ -58,21 +59,35 @@ export class CreateNewDealWithPhotoPage {
     this.isLocationSet = false;
 
   }
+
   onTakePhoto(){
+    this.benimFirsatimLib.presentActionSheet("Profil Fotoğrafını Değiştir",[
+      {
+        text:'Fotoğraf çek',
+        handler: ()=>{
+          this.camera.getPicture({
+            destinationType: this.camera.DestinationType.DATA_URL,
+            targetWidth: 1000,
+            targetHeight: 1000
+          }).then((imageData) => {
+            // imageData is a base64 encoded string
+            this.base64Image = "data:image/jpeg;base64," + imageData;
+            let base64 = this.base64Image.split(',');
+            this.base64ImageToUpload=base64[1].trim();
 
-      this.camera.getPicture({
-        destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 1000,
-        targetHeight: 1000
-      }).then((imageData) => {
-        // imageData is a base64 encoded string
-        this.base64Image = "data:image/jpeg;base64," + imageData;
-        let base64 = this.base64Image.split(',');
-        this.base64ImageToUpload=base64[1].trim();
+          }, (err) => {
+            console.log(err);
+          });
+        }
+      },
+      {
+        text:'Kütüphaneden seç',
+        handler: ()=>{
+          this.image_picker.getPictures({maximumImagesCount:1,outputType:1})
+        }
+      }
+    ])
 
-      }, (err) => {
-        console.log(err);
-      });
     }
   onOpenMap(){
 

@@ -76,7 +76,7 @@ export class MyApp {
   });
   }
   onSignin(){
-    this.nav.push(LoginPage);
+    this.nav.push('LoginPage');
     this.menuCtrl.close();
   }
   public check_auth(){
@@ -87,11 +87,11 @@ export class MyApp {
           this.nav.setRoot(TabsPage)
         });
       }else{
-        this.nav.setRoot(LoginPage);
+        this.nav.setRoot('LoginPage');
         MyApp.isAuthenticated = false;
       }
     }).catch( e => {
-      this.nav.setRoot(LoginPage);
+      this.nav.setRoot('LoginPage');
       MyApp.isAuthenticated = false;
     })
   }
@@ -101,7 +101,7 @@ export class MyApp {
       this.benimFirsatimLib.destroy_session().subscribe( response => {
         this.benimFirsatimLib.logOutFromStorageAndAuth();
         this.menuCtrl.close();
-        this.nav.setRoot(LoginPage);
+        this.nav.setRoot('LoginPage');
         this.benimFirsatimLib.showToast("Çıkış yapıldı",2000,"bottom");
         localStorage.removeItem("bf-auth");
 

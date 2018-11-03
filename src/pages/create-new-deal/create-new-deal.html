@@ -17,14 +17,14 @@
                  required
                  name="deal_url"
                  (ionChange)="onUrlChange($event)"
-                 placeholder="Lütfen fırsat linkini buraya kopyala"></ion-input>
+                 placeholder="Lütfen fırsat linkini buraya yapıştır"></ion-input>
     </ion-item>
     <ion-row style="border-bottom: 0.55px solid #dedede" margin-top>
       <ion-col col-auto style="padding-left: 16px">
         <span class="staticText">FIRSAT FİYATI</span>
       </ion-col>
       <ion-col>
-        <input style="background: none;font-family: MarkPro-Heavy;font-size: 15px;color: #234491;border:none;width:100%" currencyMask [ngModel] name="deal_price" [options]="{ prefix: '₺', thousands: '.', decimal: ',' , align: 'left'}">
+        <input class="deal-price-input" currencyMask [ngModel] name="deal_price" [options]="{ prefix: '₺', thousands: '.', decimal: ',' , align: 'left'}">
       </ion-col>
     </ion-row>
     <ion-row style="border-bottom: 0.55px solid #dedede" margin-top>
@@ -32,7 +32,7 @@
         <span class="staticText">NORMAL FİYATI</span>
       </ion-col>
       <ion-col>
-        <input style="background: none;font-family: MarkPro-Heavy;font-size: 15px;color: #234491;border:none;width:100%" currencyMask [ngModel] name="deal_original_price" [options]="{ prefix: '₺', thousands: '.', decimal: ',' , align: 'left'}">
+        <input class="deal-price-input" currencyMask [ngModel] name="deal_original_price" [options]="{ prefix: '₺', thousands: '.', decimal: ',' , align: 'left'}">
       </ion-col>
     </ion-row>
     <ion-item>
@@ -120,7 +120,7 @@
       <ion-scroll *ngIf="!photoTaken" scrollX="true" direction="x">
         <ion-row>
           <ion-col>
-            <ion-card #picture *ngFor="let image of images" (click)="onPictureSelect(picture)" [@onPictureSelectAnimation]="picture.isSelected ? 'toSelected' : 'default'" style="background: none !important;box-shadow: none !important;">
+            <ion-card class="create-linked-deal-picture" #picture *ngFor="let image of images" (click)="onPictureSelect(picture)" [@onPictureSelectAnimation]="picture.isSelected ? 'toSelected' : 'default'">
               <img style="width: auto;height: inherit" src="{{image}}">
             </ion-card>
           </ion-col>

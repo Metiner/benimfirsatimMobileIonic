@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {Events, IonicPage, LoadingController, NavController} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
-import {LoginPage} from "../login/login";
 import {TabsPage} from "../tabs/tabs";
 
 

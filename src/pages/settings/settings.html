@@ -19,7 +19,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <span style="font-family: MarkPro-Light;font-size: 12px;color:#F7E60F">PUAN TABLOSUNDA <span style="font-family: MarkPro-Heavy;font-size: 12px;color:#F7E60F">23.</span>SIRADA</span>
+            <span style="font-family: MarkPro-Light;font-size: 12px;color:#F7E60F">PUAN TABLOSUNDA <span style="font-family: MarkPro-Heavy;font-size: 12px;color:#F7E60F">{{user.score_placement}}.</span> SIRADA</span>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -45,10 +45,10 @@
               <span style="font-family: MarkPro-Heavy;font-size: 23px;color:#234491">{{user.email}}</span>
             </ion-col>
           </ion-row>
-          <ion-row style="margin-top: 12px;">
+          <ion-row>
             <ion-col class="profileStatic">
-              <ion-row style="border-bottom: 1px solid #234491;border-radius: 6px;">
-                <ion-col col-4>
+              <ion-row>
+                <ion-col col-3>
                   <ion-label  class="profileStatic" fixed>PAROLA</ion-label>
                 </ion-col>
                 <ion-col>
@@ -57,10 +57,11 @@
               </ion-row>
             </ion-col>
           </ion-row>
-          <ion-row style="border-bottom: 1px solid #234491;border-radius: 6px;">
+          <ion-row class="border"></ion-row>
+          <ion-row>
             <ion-col class="profileStatic">
               <ion-row>
-                <ion-col col-4>
+                <ion-col col-3>
                   <ion-label class="profileStatic" fixed>TEKRAR</ion-label>
                 </ion-col>
                 <ion-col>
@@ -69,10 +70,11 @@
               </ion-row>
             </ion-col>
           </ion-row>
-          <ion-row style="border-bottom: 1px solid #234491;border-radius: 6px;">
+          <ion-row class="border"></ion-row>
+          <ion-row>
             <ion-col class="profileStatic">
               <ion-row >
-                <ion-col col-4>
+                <ion-col col-3>
                   <ion-label   fixed>TAKMA AD</ion-label>
                 </ion-col>
                 <ion-col>
@@ -81,12 +83,23 @@
               </ion-row>
             </ion-col>
           </ion-row>
+          <ion-row class="border"></ion-row>
           <ion-row>
-            <ion-col col-8 push-2>
-              <img (click)="onProfileChangesSave(f)" style="transform: scale(.8)" src="assets/imgs/guncelle_button@3x.png">
+            <ion-col class="profileStatic">
+              <ion-row >
+                <ion-col col-3>
+                  <ion-label   fixed>ŞİMDİKİ PAROLANIZ</ion-label>
+                </ion-col>
+                <ion-col>
+                  <ion-input [ngModel] name="current_password" type="password"></ion-input>
+                </ion-col>
+              </ion-row>
             </ion-col>
-            <ion-col col-2 push-2>
-              <img src="assets/imgs/hesabi_sil_icon@3x.png">
+          </ion-row>
+          <ion-row class="border"></ion-row>
+          <ion-row justify-content-center>
+            <ion-col col-auto>
+              <img (click)="onProfileChangesSave(f)" class="guncelle-button" src="assets/imgs/guncelle_button@3x.png">
             </ion-col>
           </ion-row>
         </form>

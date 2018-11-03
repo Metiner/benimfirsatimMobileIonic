@@ -32,7 +32,6 @@ export class CreateNewDealPage {
   base64ImageToUpload: string;
   photoTaken = false;
   deal_tags = [];
-
   cities = [];
 
 

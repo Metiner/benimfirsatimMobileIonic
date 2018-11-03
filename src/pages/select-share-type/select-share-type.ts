@@ -48,6 +48,6 @@ export class SelectShareTypePage {
     this.navCtrl.push(CreateNewDealWithPhotoPage)
   }
   toTabsPage(){
-    this.navCtrl.popToRoot();
+    this.navCtrl.pop();
   }
 }

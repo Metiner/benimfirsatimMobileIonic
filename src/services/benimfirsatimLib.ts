@@ -94,8 +94,9 @@ export class BenimfirsatimLib{
     return this.http.get( 'deals/0/'+deal_id.toString() + '/');
   }
 
-  public updateUser(nickname,password){
-    return this.http.put('users.json',{"name":nickname,"password":password});
+  public updateUser(nickname,password,current_password){
+    let opt = this.setHeader();
+    return this.http.put(this.api_address+'/users.json',{user:{"name":nickname,"password":password,"email":BenimfirsatimLib.user.email,current_password:current_password}},opt);
   }
 
   public upvoteDeal(deal_id){
@@ -227,8 +228,7 @@ export class BenimfirsatimLib{
 
     let opt:RequestOptions;
     let myHeaders: Headers = new Headers;
-
-    myHeaders.set('Authorization', this.token);
+    myHeaders.set('Authorization', JSON.parse(localStorage.getItem("bf-auth")).token)
 
     opt = new RequestOptions({
       headers:myHeaders
@@ -287,6 +287,10 @@ export class BenimfirsatimLib{
       return 'with_photo';
     else
       return 'without_photo';
+  }
+
+  public update_user(user){
+
   }
 }
 

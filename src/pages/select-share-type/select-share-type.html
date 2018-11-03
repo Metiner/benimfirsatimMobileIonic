@@ -11,7 +11,7 @@
         <ion-col col-auto>
           <button ion-button
                   menuToggle
-                  style="margin:0px">
+                  class="menu-button">
             <img src="assets/svgs/menu_lines.svg">
           </button>
         </ion-col>
@@ -20,7 +20,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content padding style="background-color:  #e4e4e4">
 
   <ion-row align-items-center margin-top>
@@ -28,7 +27,7 @@
       <span class="title">FIRSATINIZI NASIL OLUŞTURMAK İSTERSİNİZ?</span>
     </ion-col>
   </ion-row>
-  <div (click)="to_linked_deal_page()">
+  <div class="to-linked-deal-page-button" (click)="to_linked_deal_page()">
     <ion-row align-items-center margin-top>
       <ion-col text-center>
         <img src="assets/imgs/img-internetfirsatlari.svg" class="slide-image"/>

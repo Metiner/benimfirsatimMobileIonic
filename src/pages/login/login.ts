@@ -84,7 +84,7 @@ export class LoginPage {
   }
 
   onSignUpButton() {
-      this.navCtrl.push(SignupPage);
+      this.navCtrl.push('SignupPage');
   }
 
   //sets the user info to benimfirsatimlib's static user variable and stores token in local storage

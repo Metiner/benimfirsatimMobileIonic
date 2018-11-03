@@ -1,8 +1,8 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {User} from "../../models/user";
 import {BenimfirsatimLib} from "../../services/benimfirsatimLib";
 import {Camera} from "@ionic-native/camera";
+import {forEach} from "@angular/router/src/utils/collection";
 
 
 /**
@@ -49,10 +49,31 @@ export class SettingsPage {
 
   onProfileChangesSave(f){
 
-    this.benimFirsatimLib.updateUser(f.value.nickname,f.value.password).subscribe(response=>{
+    if(f.value.password === null){
+      f.value.password = "";
+    }
 
-    });
+    if(f.value.passwordTwo === null){
+      f.value.passwordTwo = "";
+    }
+    if(f.value.password !== f.value.passwordTwo){
+      this.benimFirsatimLib.showToast("PAROLALAR FARKLI!",3000,'bottom');
+    }else{
+      this.benimFirsatimLib.updateUser(f.value.nickname,f.value.password,f.value.current_password).subscribe(response=>{
+        if(response.ok){
+          this.benimFirsatimLib.showToast('Başarıyla güncellendi.',3000,'bottom');
+          this.navCtrl.pop();
+        }
+      },error2 => {
+        let error_message = "";
+        for(let k in error2.json().errors){
+          error_message += k + ' ' + error2.json().errors[k] + ' ,';
+        }
 
+        this.benimFirsatimLib.showToast(error_message.toUpperCase(),3000,'bottom');
+
+      });
+    }
   }
 
   goBack(){

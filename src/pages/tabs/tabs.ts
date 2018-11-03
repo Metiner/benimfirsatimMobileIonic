@@ -16,10 +16,11 @@ import {MyApp} from "../../app/app.component";
     <ion-tabs tabsPlacement ="bottom" [selectedIndex]="2">
       <ion-footer>
         <ion-buttons>
-          <button ion-button
+          <button 
+                  class="deal-creation-selection-button"
+                  ion-button
                   clear
-                  (click)="onCreateNewDeal()"
-                  class="fixed-button"><img src="assets/imgs/yeni_firsat_button@2x.png"></button>
+                  (click)="onCreateNewDeal()"><img src="assets/imgs/yeni_firsat_button@2x.png"></button>
         </ion-buttons>         
       </ion-footer>
       <ion-tab  [tabsHideOnSubPages]="true" [root]="highlightsPage" tabIcon="benimFirsatim-oneCikanlar" tabTitle= "ÖNE ÇIKANLAR">
@@ -39,11 +40,11 @@ export class TabsPage {
               private benimFirsatimLib: BenimfirsatimLib) {
   }
 
-  highlightsPage = HighlightsPage;
-  risingPage = RisingPage;
-  topPage = TopPage;
-  categoriesPage = CategoriesPage;
-  loginPage = LoginPage;
+  highlightsPage = 'HighlightsPage';
+  risingPage = 'RisingPage';
+  topPage = 'TopPage';
+  categoriesPage = 'CategoriesPage';
+  loginPage = 'LoginPage';
 
   onCreateNewDeal() {
 

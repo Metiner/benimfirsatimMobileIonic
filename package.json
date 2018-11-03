@@ -9,7 +9,13 @@
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve",
+    "test": "karma start ./test-config/karma.conf.js",
+    "test-ci": "karma start ./test-config/karma.conf.js --single-run",
+    "test-coverage": "karma start ./test-config/karma.conf.js --coverage",
+    "e2e": "npm run e2e-update && npm run e2e-test",
+    "e2e-test": "protractor ./test-config/protractor.conf.js",
+    "e2e-update": "webdriver-manager update --standalone false --gecko false"
   },
   "dependencies": {
     "@angular/animations": "^5.2.9",
@@ -31,6 +37,7 @@
     "@ionic-native/file": "^4.6.0",
     "@ionic-native/google-analytics": "^4.6.0",
     "@ionic-native/google-plus": "^4.6.0",
+    "@ionic-native/image-picker": "^4.17.0",
     "@ionic-native/in-app-browser": "^4.7.0",
     "@ionic-native/launch-navigator": "^4.16.0",
     "@ionic-native/onesignal": "^4.6.0",
@@ -65,6 +72,7 @@
     "cordova-plugin-ionic-webview": "^1.1.16",
     "cordova-plugin-splashscreen": "^4.1.0",
     "cordova-plugin-statusbar": "^2.4.1",
+    "cordova-plugin-telerik-imagepicker": "^2.2.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-promise-polyfill": "0.0.2",
     "cordova-sqlite-storage": "^2.2.1",
@@ -89,6 +97,24 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.1",
+    "@types/jasmine": "^2.8.9",
+    "@types/node": "^10.12.0",
+    "angular2-template-loader": "^0.6.2",
+    "html-loader": "^0.5.5",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "jasmine": "^3.2.0",
+    "jasmine-spec-reporter": "^4.2.1",
+    "karma": "^3.1.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage-istanbul-reporter": "^2.0.4",
+    "karma-jasmine": "^1.1.2",
+    "karma-jasmine-html-reporter": "^1.3.1",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^3.0.5",
+    "null-loader": "^0.1.1",
+    "protractor": "^5.4.1",
+    "ts-loader": "^5.2.2",
+    "ts-node": "^7.0.1",
     "typescript": "2.3.4"
   },
   "description": "An Ionic project",
@@ -125,6 +151,9 @@
       "uk.co.workingedge.phonegap.plugin.launchnavigator": {
         "OKHTTP_VERSION": "3.+",
         "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
+      },
+      "cordova-plugin-telerik-imagepicker": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "to select image"
       }
     },
     "platforms": [

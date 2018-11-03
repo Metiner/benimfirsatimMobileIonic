@@ -77,7 +77,7 @@ export class ListDealComponent {
 
     this.benimFirsatimLib.upvoteDeal(dealId).subscribe(data=>{
       if(data.json().deal_owner){
-        this.benimFirsatimLib.showToast("OOPS, KENDİ FİRSATİNİ BEĞENEMEZSİN.", 2000, "bottom");
+        this.benimFirsatimLib.showToast("OOPS, KENDİ FIRSATINI BEĞENEMEZSİN.", 2000, "bottom");
       }else{
         this.opportunity.votes_sum = data.json().votes_sum;
         this.likeButtonAnimation.play();
