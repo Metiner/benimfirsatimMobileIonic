@@ -1,6 +1,6 @@
 import {$$, $, browser, by, element, protractor} from "protractor";
 
-/*describe('authentication', () => {
+describe('authentication', () => {
 
   browser.get('/');
 
@@ -62,7 +62,7 @@ import {$$, $, browser, by, element, protractor} from "protractor";
       })
     })
   })
-});*/
+});
 
 describe('creating deal', ()=>{
 
