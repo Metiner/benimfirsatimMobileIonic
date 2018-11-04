@@ -1,0 +1,16 @@
+image: gkaykck/bf-base
+stages:
+- test
+
+test:
+  stage: test
+  script:
+  - npm install
+  - npm test --ci
+  services:
+    - postgres:latest
+
+variables:
+  POSTGRES_DB: bf_test
+  POSTGRES_USER: bf_test
+  POSTGRES_PASSWORD: ""
