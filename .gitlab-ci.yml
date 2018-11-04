@@ -6,7 +6,7 @@ test:
   stage: test
   script:
   - npm install
-  - npm test --ci
+  - npm run e2e
   services:
     - postgres:latest
 
