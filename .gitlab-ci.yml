@@ -6,7 +6,7 @@ test:
   stage: test
   script:
   - npm install
-  - npm run e2e
+  - ionic serve & npm run e2e
   services:
     - postgres:latest
 
